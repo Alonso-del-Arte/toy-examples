@@ -1,4 +1,6 @@
-package bankaccounts;
+package bankaccounts.transactions;
+
+import bankaccounts.BankAccount;
 
 import java.time.LocalDateTime;
 
@@ -13,7 +15,7 @@ public class Comment extends Transaction {
     }
 
     public Comment(String message, LocalDateTime dateTime) {
-        super(BankAccount.INITIALIZATION_ACCOUNT_BALANCE, dateTime);
+        super(BankAccount.INITIALIZATION_ACCOUNT_BALANCE, dateTime, "Comment");
         if (message.length() > MAXIMUM_COMMENT_LENGTH) {
             this.commentMessage = message.substring(0, MAXIMUM_COMMENT_LENGTH);
         } else {

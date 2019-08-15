@@ -1,10 +1,12 @@
 package bankaccounts;
 
+import bankaccounts.transactions.Deposit;
+import bankaccounts.transactions.OverdraftTransferFee;
+import bankaccounts.transactions.Withdrawal;
 import currency.CurrencyAmount;
 import entities.Entity;
 
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.util.ArrayList;
 
 public class CheckingAccount extends BankAccount {
@@ -20,7 +22,7 @@ public class CheckingAccount extends BankAccount {
     @Override
     public boolean processWithdrawal(Withdrawal withdrawal) {
         CurrencyAmount projectedBalance = this.accountBalance.plus(withdrawal.getTransactionAmount());
-        if (projectedBalance.compareTo(INITIALIZATION_ACCOUNT_BALANCE) < 0) {
+        if (projectedBalance.compareTo(BankAccount.INITIALIZATION_ACCOUNT_BALANCE) < 0) {
             if (this.assocSav != null) {
                 LocalDateTime transferDateTime = withdrawal.getTransactionDate().minusMinutes(2);
                 Withdrawal transferWithdrawal = new Withdrawal(projectedBalance, transferDateTime);
@@ -31,6 +33,7 @@ public class CheckingAccount extends BankAccount {
                     CurrencyAmount deficitCompensation = projectedBalance.negate();
                     Deposit transferDeposit = new Deposit(deficitCompensation, transferDateTime);
                     this.processDeposit(transferDeposit);
+                    projectedBalance = BankAccount.INITIALIZATION_ACCOUNT_BALANCE;
                 } else {
                     return false;
                 }
@@ -54,6 +57,7 @@ public class CheckingAccount extends BankAccount {
         this.noSecondaryAccountHolderFlag = (secondary == null);
         this.secondaryAccountHolder = secondary;
         this.accountLabel = label;
+        this.accountHistory = new ArrayList<>();
         this.processDeposit(initialDeposit);
         this.accountBeneficiary = null;
         this.checksList = new ArrayList<>();

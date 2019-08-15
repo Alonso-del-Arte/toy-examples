@@ -1,6 +1,9 @@
 package bankaccounts;
 
+import bankaccounts.transactions.Deposit;
 import entities.Entity;
+
+import java.util.ArrayList;
 
 public class SavingsAccount extends BankAccount {
 
@@ -15,6 +18,7 @@ public class SavingsAccount extends BankAccount {
         this.noSecondaryAccountHolderFlag = (secondary == null);
         this.secondaryAccountHolder = secondary;
         this.accountLabel = label;
+        this.accountHistory = new ArrayList<>();
         this.processDeposit(initialDeposit);
         this.accountBeneficiary = null;
     }

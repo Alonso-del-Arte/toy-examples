@@ -1,5 +1,6 @@
 package bankaccounts;
 
+import bankaccounts.transactions.*;
 import currency.CurrencyAmount;
 import entities.Entity;
 
@@ -20,9 +21,22 @@ public abstract class BankAccount {
 
     public static final CurrencyAmount INITIALIZATION_ACCOUNT_BALANCE = new CurrencyAmount(0L);
 
+    /**
+     * Gives a new account number. In a program handling real life account
+     * data, this would probably involve some kind of database access.
+     * @return An account number not associated with any other account.
+     */
     public static long getNewAccountNumber() {
         nextAccountNumber++;
         return nextAccountNumber;
+    }
+
+    public void setAccountBeneficiary(Entity entity) {
+        this.accountBeneficiary = entity;
+    }
+
+    public CurrencyAmount getAccountBalance() {
+        return this.accountBalance;
     }
 
     public void processDeposit(Deposit deposit) {
@@ -50,6 +64,10 @@ public abstract class BankAccount {
     public void processFee(Fee fee) {
         this.accountBalance = this.accountBalance.plus(fee.getTransactionAmount());
         this.accountHistory.add(fee);
+    }
+
+    public void processComment(Comment comment) {
+        this.accountHistory.add(comment);
     }
 
 }
