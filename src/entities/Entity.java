@@ -1,4 +1,11 @@
 package entities;
 
-public class Entity {
+public abstract class Entity {
+
+    private String name;
+
+    public String getName() {
+        return this.name;
+    }
+
 }

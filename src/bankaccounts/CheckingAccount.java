@@ -21,29 +21,31 @@ public class CheckingAccount extends BankAccount {
 
     @Override
     public boolean processWithdrawal(Withdrawal withdrawal) {
-        CurrencyAmount projectedBalance = this.accountBalance.plus(withdrawal.getTransactionAmount());
-        if (projectedBalance.compareTo(BankAccount.INITIALIZATION_ACCOUNT_BALANCE) < 0) {
-            if (this.assocSav != null) {
-                LocalDateTime transferDateTime = withdrawal.getTransactionDate().minusMinutes(2);
-                Withdrawal transferWithdrawal = new Withdrawal(projectedBalance, transferDateTime);
-                if (this.assocSav.processWithdrawal(transferWithdrawal)) {
-                    OverdraftTransferFee transferFee = new OverdraftTransferFee(transferDateTime);
-                    this.assocSav.processFee(transferFee);
-                    transferDateTime = transferDateTime.plusMinutes(1);
-                    CurrencyAmount deficitCompensation = projectedBalance.negate();
-                    Deposit transferDeposit = new Deposit(deficitCompensation, transferDateTime);
-                    this.processDeposit(transferDeposit);
-                    projectedBalance = BankAccount.INITIALIZATION_ACCOUNT_BALANCE;
+        if (this.accountHistory.contains(withdrawal)) {return false;}else{
+            CurrencyAmount projectedBalance = this.accountBalance.plus(withdrawal.getTransactionAmount());
+            if (projectedBalance.compareTo(BankAccount.INITIALIZATION_ACCOUNT_BALANCE) < 0) {
+                if (this.assocSav != null) {
+                    LocalDateTime transferDateTime = withdrawal.getTransactionDate().minusMinutes(2);
+                    Withdrawal transferWithdrawal = new Withdrawal(projectedBalance, transferDateTime);
+                    if (this.assocSav.processWithdrawal(transferWithdrawal)) {
+                        OverdraftTransferFee transferFee = new OverdraftTransferFee(transferDateTime);
+                        this.assocSav.processFee(transferFee);
+                        transferDateTime = transferDateTime.plusMinutes(1);
+                        CurrencyAmount deficitCompensation = projectedBalance.negate();
+                        Deposit transferDeposit = new Deposit(deficitCompensation, transferDateTime);
+                        this.processDeposit(transferDeposit);
+                        projectedBalance = BankAccount.INITIALIZATION_ACCOUNT_BALANCE;
+                    } else {
+                        return false;
+                    }
                 } else {
                     return false;
                 }
-            } else {
-                return false;
             }
+            this.accountBalance = projectedBalance;
+            this.accountHistory.add(withdrawal);
+            return true;
         }
-        this.accountBalance = projectedBalance;
-        this.accountHistory.add(withdrawal);
-        return true;
     }
 
     public CheckingAccount(Entity primary, Deposit initialDeposit) {
@@ -51,15 +53,7 @@ public class CheckingAccount extends BankAccount {
     }
 
     public CheckingAccount(Entity primary, Entity secondary, String label, Deposit initialDeposit) {
-        this.accountBalance = BankAccount.INITIALIZATION_ACCOUNT_BALANCE;
-        this.accountNumber = BankAccount.getNewAccountNumber();
-        this.primaryAccountHolder = primary;
-        this.noSecondaryAccountHolderFlag = (secondary == null);
-        this.secondaryAccountHolder = secondary;
-        this.accountLabel = label;
-        this.accountHistory = new ArrayList<>();
-        this.processDeposit(initialDeposit);
-        this.accountBeneficiary = null;
+        super(primary, secondary, label, initialDeposit);
         this.checksList = new ArrayList<>();
         this.assocSav = null;
     }

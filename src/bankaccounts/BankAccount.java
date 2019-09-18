@@ -8,14 +8,14 @@ import java.util.ArrayList;
 
 public abstract class BankAccount {
 
-    protected Entity primaryAccountHolder;
-    protected Entity secondaryAccountHolder;
-    protected boolean noSecondaryAccountHolderFlag;
-    protected long accountNumber;
-    protected String accountLabel;
-    protected CurrencyAmount accountBalance;
-    protected ArrayList<Transaction> accountHistory;
-    protected Entity accountBeneficiary;
+    Entity primaryAccountHolder;
+    Entity secondaryAccountHolder;
+    boolean noSecondaryAccountHolderFlag;
+    long accountNumber;
+    String accountLabel;
+    CurrencyAmount accountBalance;
+    ArrayList<Transaction> accountHistory;
+    Entity accountBeneficiary;
 
     private static long nextAccountNumber = 5550000000000000L;
 
@@ -26,7 +26,7 @@ public abstract class BankAccount {
      * data, this would probably involve some kind of database access.
      * @return An account number not associated with any other account.
      */
-    public static long getNewAccountNumber() {
+    static long getNewAccountNumber() {
         nextAccountNumber++;
         return nextAccountNumber;
     }
@@ -35,13 +35,23 @@ public abstract class BankAccount {
         this.accountBeneficiary = entity;
     }
 
-    public CurrencyAmount getAccountBalance() {
+    public Entity getAccountBeneficiary() {
+        return this.accountBeneficiary;
+    }
+
+    public void removeAccountBeneficiary() {
+        this.accountBeneficiary = null;
+    }
+
+    CurrencyAmount getAccountBalance() {
         return this.accountBalance;
     }
 
     public void processDeposit(Deposit deposit) {
-        this.accountBalance = this.accountBalance.plus(deposit.getTransactionAmount());
-        this.accountHistory.add(deposit);
+        if (!this.accountHistory.contains(deposit)) {
+            this.accountBalance = this.accountBalance.plus(deposit.getTransactionAmount());
+            this.accountHistory.add(deposit);
+        }
     }
 
     /**
@@ -51,23 +61,39 @@ public abstract class BankAccount {
      * @throws currency.CurrencyConversionNeededException If the withdrawal amount is in a different currency.
      */
     public boolean processWithdrawal(Withdrawal withdrawal) {
-        CurrencyAmount projectedBalance = this.accountBalance.plus(withdrawal.getTransactionAmount());
-        if (projectedBalance.compareTo(INITIALIZATION_ACCOUNT_BALANCE) < 0) {
+        if (this.accountHistory.contains(withdrawal)) {
             return false;
         } else {
-            this.accountBalance = projectedBalance;
-            this.accountHistory.add(withdrawal);
-            return true;
+            CurrencyAmount projectedBalance = this.accountBalance.plus(withdrawal.getTransactionAmount());
+            if (projectedBalance.compareTo(INITIALIZATION_ACCOUNT_BALANCE) < 0) {
+                return false;
+            } else {
+                this.accountBalance = projectedBalance;
+                this.accountHistory.add(withdrawal);
+                return true;
+            }
         }
     }
 
-    public void processFee(Fee fee) {
+    void processFee(Fee fee) {
         this.accountBalance = this.accountBalance.plus(fee.getTransactionAmount());
         this.accountHistory.add(fee);
     }
 
     public void processComment(Comment comment) {
         this.accountHistory.add(comment);
+    }
+
+    public BankAccount(Entity primary, Entity secondary, String label, Deposit initialDeposit) {
+        this.accountBalance = INITIALIZATION_ACCOUNT_BALANCE;
+        this.accountNumber = getNewAccountNumber();
+        this.primaryAccountHolder = primary;
+        this.noSecondaryAccountHolderFlag = (secondary == null);
+        this.secondaryAccountHolder = secondary;
+        this.accountLabel = label;
+        this.accountHistory = new ArrayList<>();
+        this.processDeposit(initialDeposit);
+        this.accountBeneficiary = null;
     }
 
 }
