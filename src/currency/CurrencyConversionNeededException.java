@@ -13,8 +13,13 @@ public class CurrencyConversionNeededException extends RuntimeException {
         return this.amtB;
     }
 
-    // PLACEHOLDER FOR EXCHANGE RATE FUNCTION
-    // In a real life scenario, this exception would surely provide at least one way to convert one currency to another
+    public CurrencyAmount exchangeAToB() {
+        return CurrencyConverter.convert(this.amtA, this.amtB.getCurrency());
+    }
+
+    public CurrencyAmount exchangeBToA() {
+        return CurrencyConverter.convert(this.amtB, this.amtA.getCurrency());
+    }
 
     public CurrencyConversionNeededException(String message, CurrencyAmount amountA, CurrencyAmount amountB) {
         super(message);

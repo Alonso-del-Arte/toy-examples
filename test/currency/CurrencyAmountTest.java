@@ -18,22 +18,31 @@ public class CurrencyAmountTest {
     private static final Currency YEN_CURRENCY = Currency.getInstance("JPY");
 
     @Test
-    public void testGetDollarAmount() {
-        System.out.println("getDollarAmount");
-        long amount = 10341L;
-        long expected = (long) Math.floor(amount/100);
-        CurrencyAmount testAmount = new CurrencyAmount(amount, CANADA_DOLLAR_CURRENCY);
-        long actual = testAmount.getDollarAmount();
+    public void testGetAmountInCents() {
+        System.out.println("getAmountInCents");
+        long expected = 43075L;
+        CurrencyAmount testAmount = new CurrencyAmount(expected, US_DOLLAR_CURRENCY);
+        long actual = testAmount.getAmountInCents();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void testGetCentAmount() {
-        System.out.println("getCentAmount");
+    public void testGetUnitAmount() {
+        System.out.println("getUnitAmount");
+        long amount = 10341L;
+        long expected = (long) Math.floor(amount/100);
+        CurrencyAmount testAmount = new CurrencyAmount(amount, CANADA_DOLLAR_CURRENCY);
+        long actual = testAmount.getUnitAmount();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testGetChangeAmount() {
+        System.out.println("getChangeAmount");
         long amount = 10341L;
         long expected = amount % 100;
         CurrencyAmount testAmount = new CurrencyAmount(amount, CANADA_DOLLAR_CURRENCY);
-        long actual = testAmount.getCentAmount();
+        long actual = testAmount.getChangeAmount();
         assertEquals(expected, actual);
     }
 
@@ -151,17 +160,37 @@ public class CurrencyAmountTest {
         String expected = "$43.99";
         String actual = testAmount.toString();
         assertEquals(expected, actual);
-        testAmount = new CurrencyAmount(7L, US_DOLLAR_CURRENCY);
-        expected = "$0.03";
-        actual = testAmount.toString();
-        assertEquals(expected, actual);
-        testAmount = new CurrencyAmount(5800L, EURO_CURRENCY);
-        expected = "\u20AC58.00";
-        actual = testAmount.toString();
-        assertEquals(expected, actual);
-        testAmount = new CurrencyAmount(25650L, YEN_CURRENCY);
-        expected = "\uA00525650";
-        actual = testAmount.toString();
+    }
+
+    @Test
+    public void testToStringCentAmountsSingleDigit() {
+        CurrencyAmount testAmount;
+        String expected, actual;
+        for (int i = 0; i < 10; i++) {
+            testAmount = new CurrencyAmount(i, US_DOLLAR_CURRENCY);
+            expected = "$0.0" + i;
+            actual = testAmount.toString();
+            assertEquals(expected, actual);
+        }
+    }
+
+    @Test
+    public void testToStringCentAmountsTwoDigits() {
+        CurrencyAmount testAmount;
+        String expected, actual;
+        for (int i = 10; i < 100; i++) {
+            testAmount = new CurrencyAmount(i, US_DOLLAR_CURRENCY);
+            expected = "$0." + i;
+            actual = testAmount.toString();
+            assertEquals(expected, actual);
+        }
+    }
+
+    @Test
+    public void testToStringNegativeAmount() {
+        CurrencyAmount testAmount = new CurrencyAmount(-380, US_DOLLAR_CURRENCY);
+        String expected = "$-3.80";
+        String actual = testAmount.toString();
         assertEquals(expected, actual);
     }
 

@@ -7,7 +7,11 @@ public class CurrencyAmount implements Comparable<CurrencyAmount> {
     private long amountInCents;
     private Currency currencyID;
 
-    public long getDollarAmount() {
+    public long getAmountInCents() {
+        return this.amountInCents;
+    }
+
+    public long getUnitAmount() {
         long dollars = this.amountInCents;
         for (int i = 0; i < this.currencyID.getDefaultFractionDigits(); i++) {
             dollars /= 10;
@@ -15,7 +19,7 @@ public class CurrencyAmount implements Comparable<CurrencyAmount> {
         return dollars;
     }
 
-    public short getCentAmount() {
+    public short getChangeAmount() {
         long maxCents = 1;
         for (int i = 0; i < this.currencyID.getDefaultFractionDigits(); i++) {
             maxCents *= 10;
