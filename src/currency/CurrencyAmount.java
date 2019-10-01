@@ -65,7 +65,8 @@ public class CurrencyAmount implements Comparable<CurrencyAmount> {
         if (this.currencyID.getDefaultFractionDigits() > 0) {
             amtStr.insert(amtStr.length() - this.currencyID.getDefaultFractionDigits(), '.');
         }
-        return amtStr.toString();
+        if (amtStr.charAt(0) == '.') amtStr.insert(0, '0');
+	return amtStr.toString();
     }
 
     @Override
