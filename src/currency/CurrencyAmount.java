@@ -1,4 +1,4 @@
-package currency;
+package src.currency;
 
 import java.util.Currency;
 
@@ -61,9 +61,13 @@ public class CurrencyAmount implements Comparable<CurrencyAmount> {
 
     @Override
     public String toString() {
-        StringBuilder amtStr = new StringBuilder(this.currencyID.getSymbol() + this.amountInCents);
-        if (this.currencyID.getDefaultFractionDigits() > 0) {
-            amtStr.insert(amtStr.length() - this.currencyID.getDefaultFractionDigits(), '.');
+        StringBuilder amount = new StringBuilder(String.valueOf(this.amountInCents));
+        int defaultFracDigits = this.currencyID.getDefaultFractionDigits();
+        while (amount.length() <= defaultFracDigits)
+            amount = amount.insert(0, '0');
+        StringBuilder amtStr = new StringBuilder(this.currencyID.getSymbol() + amount);
+        if (defaultFracDigits > 0) {
+            amtStr.insert(amtStr.length() - defaultFracDigits, '.');
         }
         return amtStr.toString();
     }
