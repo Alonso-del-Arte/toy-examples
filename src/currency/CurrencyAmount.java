@@ -1,4 +1,4 @@
-package src.currency;
+package currency;
 
 import java.util.Currency;
 
