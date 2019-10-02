@@ -1,4 +1,4 @@
-package bankaccounts.transactions;
+package bankaccounts.transactions.fees;
 
 import currency.CurrencyAmount;
 

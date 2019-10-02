@@ -1,7 +1,7 @@
 package bankaccounts;
 
 import bankaccounts.transactions.Deposit;
-import bankaccounts.transactions.OverdraftTransferFee;
+import bankaccounts.transactions.fees.OverdraftTransferFee;
 import bankaccounts.transactions.Withdrawal;
 import currency.CurrencyAmount;
 import entities.Entity;

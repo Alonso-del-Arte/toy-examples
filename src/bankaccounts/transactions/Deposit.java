@@ -11,7 +11,7 @@ public class Deposit extends Transaction {
         this(amount, dateTime, "Deposit");
     }
 
-    Deposit(CurrencyAmount amount, LocalDateTime dateTime, String description) {
+    public Deposit(CurrencyAmount amount, LocalDateTime dateTime, String description) {
         super(amount, dateTime, description);
         if (amount.compareTo(BankAccount.INITIALIZATION_ACCOUNT_BALANCE) < 0) {
             String excMsg = "Negative deposit amount " + amount.toString() + " is not valid";
