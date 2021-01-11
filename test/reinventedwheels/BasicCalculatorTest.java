@@ -1,10 +1,10 @@
 package reinventedwheels;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BasicCalculatorTest {
 
@@ -12,13 +12,13 @@ public class BasicCalculatorTest {
 
     private BasicCalculator calculator;
 
-    @Before
+    @BeforeAll
     public void setUp() {
         System.out.println("Initializing calculator...");
         calculator = new BasicCalculator();
     }
 
-    @After
+    @AfterAll
     public void tearDown() {
         try {
             double value = calculator.getCurrVal();

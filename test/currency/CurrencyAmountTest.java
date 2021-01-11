@@ -6,9 +6,9 @@ import java.util.Currency;
 import java.util.HashSet;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CurrencyAmountTest {
 
@@ -199,15 +199,15 @@ public class CurrencyAmountTest {
         System.out.println("equals");
         CurrencyAmount testAmountA = new CurrencyAmount(3272500L, US_DOLLAR_CURRENCY);
         CurrencyAmount testAmountB = new CurrencyAmount(3272500L, US_DOLLAR_CURRENCY);
-        String assertionMessage = testAmountA.toString() + " should be found to be equal to " + testAmountB.toString();
-        assertEquals(assertionMessage, testAmountA, testAmountB);
-        assertEquals(assertionMessage, testAmountB, testAmountA);
+        String msg = testAmountA.toString() + " should be found to be equal to " + testAmountB.toString();
+        assertEquals(testAmountA, testAmountB, msg);
+        assertEquals(testAmountB, testAmountA, msg);
         testAmountB = new CurrencyAmount(3272500L, EURO_CURRENCY);
-        assertionMessage = testAmountA.toString() + " should not be found to be equal to " + testAmountB.toString();
-        assertNotEquals(assertionMessage, testAmountA, testAmountB);
+        msg = testAmountA.toString() + " should not be found to be equal to " + testAmountB.toString();
+        assertNotEquals(testAmountA, testAmountB, msg);
         testAmountB = new CurrencyAmount(3272499L, US_DOLLAR_CURRENCY);
-        assertionMessage = testAmountA.toString() + " should not be found to be equal to " + testAmountB.toString();
-        assertNotEquals(assertionMessage, testAmountA, testAmountB);
+        msg = testAmountA.toString() + " should not be found to be equal to " + testAmountB.toString();
+        assertNotEquals(testAmountA, testAmountB, msg);
     }
 
     @Test
@@ -230,8 +230,8 @@ public class CurrencyAmountTest {
             yenAmount = yenAmount.plus(oneYen);
             expectedSize += 3;
         }
-        String assertionMessage = "Set of hash codes should have " + expectedSize + " elements";
-        assertEquals(assertionMessage, expectedSize, hashSet.size());
+        String msg = "Set of hash codes should have " + expectedSize + " elements";
+        assertEquals(expectedSize, hashSet.size(), msg);
     }
 
     @Test

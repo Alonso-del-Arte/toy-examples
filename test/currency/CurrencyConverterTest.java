@@ -2,8 +2,9 @@ package currency;
 
 import java.util.Currency;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CurrencyConverterTest {
 
@@ -19,8 +20,8 @@ public class CurrencyConverterTest {
         CurrencyAmount minYen = new CurrencyAmount(1000000L, YEN);
         CurrencyAmount toYen = CurrencyConverter.convert(dollarAmount, YEN);
         System.out.println(dollarAmount.toString() + " is said to exchange to " + toYen.toString());
-        String assertionMessage = dollarAmount.toString() + " should be more than " + minYen.toString();
-        assertTrue(assertionMessage, toYen.compareTo(minYen) >= 0);
+        String msg = dollarAmount.toString() + " should be more than " + minYen.toString();
+        assertTrue(toYen.compareTo(minYen) >= 0, msg);
     }
 
     /**
@@ -32,8 +33,8 @@ public class CurrencyConverterTest {
         CurrencyAmount maxDollars = new CurrencyAmount(10000L, DOLLARS);
         CurrencyAmount toDollars = CurrencyConverter.convert(yenAmount, DOLLARS);
         System.out.println(yenAmount.toString() + " is said to exchange to " + toDollars.toString());
-        String assertionMessage = yenAmount.toString() + " should not be more than " + maxDollars.toString();
-        assertTrue(assertionMessage, toDollars.compareTo(maxDollars) <= 0);
+        String msg = yenAmount.toString() + " should not be more than " + maxDollars.toString();
+        assertTrue(toDollars.compareTo(maxDollars) <= 0, msg);
     }
 
     @Test
@@ -42,8 +43,8 @@ public class CurrencyConverterTest {
         CurrencyAmount zeroYen = new CurrencyAmount(0L, YEN);
         CurrencyAmount convertedAmount = CurrencyConverter.convert(negAmount, YEN);
         System.out.println(negAmount.toString() + " is said to exchange to " + convertedAmount.toString());
-        String assertionMessage = negAmount.toString() + " should convert to negative amount of yen";
-        assertTrue(assertionMessage, zeroYen.compareTo(convertedAmount) >= 1);
+        String msg = negAmount.toString() + " should convert to negative amount of yen";
+        assertTrue(zeroYen.compareTo(convertedAmount) >= 1, msg);
     }
 
     @Test
@@ -61,8 +62,8 @@ public class CurrencyConverterTest {
         CurrencyAmount zeroYen = new CurrencyAmount(0L, YEN);
         CurrencyAmount convertedAmount = CurrencyConverter.convert(posAmount, YEN);
         System.out.println(posAmount.toString() + " is said to exchange to " + convertedAmount.toString());
-        String assertionMessage = posAmount.toString() + " should convert to positive amount of yen";
-        assertTrue(assertionMessage, zeroYen.compareTo(convertedAmount) <= -1);
+        String msg = posAmount.toString() + " should convert to positive amount of yen";
+        assertTrue(zeroYen.compareTo(convertedAmount) <= -1, msg);
     }
 
     @Test

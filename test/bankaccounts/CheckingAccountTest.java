@@ -8,12 +8,12 @@ import entities.Person;
 
 import java.time.LocalDateTime;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CheckingAccountTest {
 
@@ -22,7 +22,7 @@ public class CheckingAccountTest {
 
     private static final CurrencyAmount ASSURED_MINIMUM_BALANCE = new CurrencyAmount(10000L);
 
-    @BeforeClass
+    @BeforeAll
     public static void setUpClass() {
         Address customerAddress = new Address("12345 Main Avenue", null, "Township Village", "Michigan", "United States", "48000-0555");
         Person customer = new Person("Joan Q. Public", customerAddress);
@@ -37,7 +37,7 @@ public class CheckingAccountTest {
         checking.associateSavingsAccount(savings);
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         System.out.println("Savings account balance: " + savings.getAccountBalance().toString() + " prior to test");
         System.out.println("Checking account balance: " + checking.getAccountBalance().toString() + " prior to test");
@@ -77,8 +77,8 @@ public class CheckingAccountTest {
         CurrencyAmount withdrawalAmount = new CurrencyAmount(-1024L);
         LocalDateTime withdrawalTime = LocalDateTime.now().minusDays(1);
         Withdrawal withdrawal = new Withdrawal(withdrawalAmount, withdrawalTime);
-        String assertionMessage = "Should be able to make withdrawal of " + withdrawalAmount.negate().toString();
-        assertTrue(assertionMessage, checking.processWithdrawal(withdrawal));
+        String msg = "Should be able to make withdrawal of " + withdrawalAmount.negate().toString();
+        assertTrue(checking.processWithdrawal(withdrawal), msg);
         CurrencyAmount expected = initBal.plus(withdrawalAmount);
         CurrencyAmount actual = checking.getAccountBalance();
         assertEquals(expected, actual);
@@ -91,11 +91,11 @@ public class CheckingAccountTest {
         CurrencyAmount withdrawalAmount = new CurrencyAmount(-2048L);
         LocalDateTime withdrawalTime = LocalDateTime.now().minusHours(4);
         Withdrawal withdrawal = new Withdrawal(withdrawalAmount, withdrawalTime);
-        String assertionMessage = "Should be able to make withdrawal of " + withdrawalAmount.negate().toString() + " on " + withdrawalTime.toString();
-        assertTrue(assertionMessage, checking.processWithdrawal(withdrawal));
+        String msg = "Should be able to make withdrawal of " + withdrawalAmount.negate().toString() + " on " + withdrawalTime.toString();
+        assertTrue(checking.processWithdrawal(withdrawal), msg);
         CurrencyAmount expected = initBal.plus(withdrawalAmount);
-        assertionMessage = "Should not be able to repeat withdrawal of " + withdrawalAmount.negate().toString() + " on " + withdrawalTime.toString();
-        assertFalse(assertionMessage, checking.processWithdrawal(withdrawal));
+        msg = "Should not be able to repeat withdrawal of " + withdrawalAmount.negate().toString() + " on " + withdrawalTime.toString();
+        assertFalse(checking.processWithdrawal(withdrawal), msg);
         CurrencyAmount actual = checking.getAccountBalance();
         assertEquals(expected, actual);
     }
@@ -107,14 +107,14 @@ public class CheckingAccountTest {
         CurrencyAmount excess = new CurrencyAmount(899L);
         CurrencyAmount overdraftAmount = checkingBalance.plus(excess).negate();
         Withdrawal withdrawal = new Withdrawal(overdraftAmount, LocalDateTime.now());
-        String assertionMessage = "Overdraft withdrawal should process by transferring from savings";
-        assertTrue(assertionMessage, checking.processWithdrawal(withdrawal));
+        String msg = "Overdraft withdrawal should process by transferring from savings";
+        assertTrue(checking.processWithdrawal(withdrawal), msg);
         checkingBalance = checking.getAccountBalance();
-        assertionMessage = "Checking account balance after overdraft transfer should be $0.00";
-        assertEquals(assertionMessage, BankAccount.INITIALIZATION_ACCOUNT_BALANCE, checkingBalance);
+        msg = "Checking account balance after overdraft transfer should be $0.00";
+        assertEquals(BankAccount.INITIALIZATION_ACCOUNT_BALANCE, checkingBalance, msg);
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         System.out.println("Savings account balance: " + savings.getAccountBalance().toString() + " after test");
         CurrencyAmount currBal = checking.getAccountBalance();

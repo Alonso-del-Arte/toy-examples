@@ -8,11 +8,12 @@ import entities.Person;
 
 import java.time.LocalDateTime;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SavingsAccountTest {
 
@@ -20,7 +21,7 @@ public class SavingsAccountTest {
 
     private static final CurrencyAmount ASSURED_MINIMUM_BALANCE = new CurrencyAmount(10000L);
 
-    @BeforeClass
+    @BeforeAll
     public static void setUpClass() {
         Address customerAddress = new Address("12345 Main Avenue", null, "Township Village", "Michigan", "United States", "48000-0555");
         Person customer = new Person("Joan Q. Public", customerAddress);
@@ -30,7 +31,7 @@ public class SavingsAccountTest {
         savings = new SavingsAccount(customer, initDep);
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         System.out.println("Savings account balance: " + savings.getAccountBalance().toString() + " prior to test");
     }
@@ -69,8 +70,8 @@ public class SavingsAccountTest {
         CurrencyAmount withdrawalAmount = new CurrencyAmount(-16384L);
         LocalDateTime withdrawalTime = LocalDateTime.now().minusDays(1);
         Withdrawal withdrawal = new Withdrawal(withdrawalAmount, withdrawalTime);
-        String assertionMessage = "Should be able to make withdrawal of " + withdrawalAmount.negate().toString();
-        assertTrue(assertionMessage, savings.processWithdrawal(withdrawal));
+        String msg = "Should be able to make withdrawal of " + withdrawalAmount.negate().toString();
+        assertTrue(savings.processWithdrawal(withdrawal), msg);
         CurrencyAmount expected = initBal.plus(withdrawalAmount);
         CurrencyAmount actual = savings.getAccountBalance();
         assertEquals(expected, actual);
@@ -83,16 +84,16 @@ public class SavingsAccountTest {
         CurrencyAmount withdrawalAmount = new CurrencyAmount(-8192L);
         LocalDateTime withdrawalTime = LocalDateTime.now().minusHours(4);
         Withdrawal withdrawal = new Withdrawal(withdrawalAmount, withdrawalTime);
-        String assertionMessage = "Should be able to make withdrawal of " + withdrawalAmount.negate().toString() + " on " + withdrawalTime.toString();
-        assertTrue(assertionMessage, savings.processWithdrawal(withdrawal));
+        String msg = "Should be able to make withdrawal of " + withdrawalAmount.negate().toString() + " on " + withdrawalTime.toString();
+        assertTrue(savings.processWithdrawal(withdrawal), msg);
         CurrencyAmount expected = initBal.plus(withdrawalAmount);
-        assertionMessage = "Should not be able to repeat withdrawal of " + withdrawalAmount.negate().toString() + " on " + withdrawalTime.toString();
-        assertFalse(assertionMessage, savings.processWithdrawal(withdrawal));
+        msg = "Should not be able to repeat withdrawal of " + withdrawalAmount.negate().toString() + " on " + withdrawalTime.toString();
+        assertFalse(savings.processWithdrawal(withdrawal), msg);
         CurrencyAmount actual = savings.getAccountBalance();
         assertEquals(expected, actual);
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         CurrencyAmount currBal = savings.getAccountBalance();
         System.out.println("Savings account balance: " + currBal.toString() + " after test");

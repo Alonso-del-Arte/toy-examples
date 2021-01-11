@@ -3,9 +3,9 @@ package currency;
 import java.time.LocalDateTime;
 import java.util.Currency;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CurrencyConversionNeededExceptionTest {
 
@@ -36,11 +36,11 @@ public class CurrencyConversionNeededExceptionTest {
         System.out.println("getOccurDateTime");
         String occurDateTimeStr = testExc.getOccurDateTime().toString();
         String nowDateTimeStr = LocalDateTime.now().toString();
-        String assertionMessage = "Exception occurrence date/time " + occurDateTimeStr + " should be before now, " + nowDateTimeStr;
-        assertTrue(assertionMessage, LocalDateTime.now().compareTo(testExc.getOccurDateTime()) >= 1);
+        String msg = "Exception occurrence date/time " + occurDateTimeStr + " should be before now, " + nowDateTimeStr;
+        assertTrue(LocalDateTime.now().compareTo(testExc.getOccurDateTime()) >= 1, msg);
         String testStartTimeStr = testBeginDateTime.toString();
-        assertionMessage = "Exception occurrence date/time " + occurDateTimeStr + " should be after start of tests time " + testStartTimeStr;
-        assertTrue(assertionMessage, testExc.getOccurDateTime().compareTo(testBeginDateTime) >= 1);
+        msg = "Exception occurrence date/time " + occurDateTimeStr + " should be after start of tests time " + testStartTimeStr;
+        assertTrue(testExc.getOccurDateTime().compareTo(testBeginDateTime) >= 1, msg);
     }
 
     /**
