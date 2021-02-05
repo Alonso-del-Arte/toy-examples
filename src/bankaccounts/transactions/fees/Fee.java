@@ -11,7 +11,8 @@ public class Fee extends Withdrawal {
         this(amount, dateTime, "Fee");
     }
 
-    public Fee(CurrencyAmount amount, LocalDateTime dateTime, String description) {
+    public Fee(CurrencyAmount amount, LocalDateTime dateTime,
+               String description) {
         super(amount, dateTime, description);
     }
 

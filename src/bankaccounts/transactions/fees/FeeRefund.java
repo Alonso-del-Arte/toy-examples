@@ -14,7 +14,8 @@ public class FeeRefund extends Deposit {
     }
 
     public FeeRefund(Fee reversedFee, LocalDateTime dateTime) {
-        super(reversedFee.getTransactionAmount().times((short) -1), dateTime, "Fee refund");
+        super(reversedFee.getTransactionAmount().times((short) -1), dateTime,
+                "Fee refund");
         this.undoneFee = reversedFee;
     }
 

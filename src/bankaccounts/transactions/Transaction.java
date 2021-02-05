@@ -24,10 +24,13 @@ public abstract class Transaction {
 
     @Override
     public String toString() {
-        return this.transactionDate.toString() + " " + this.transactionDescription + " " + this.transactionAmount.toString();
+        return this.transactionDate.toString() + " "
+                + this.transactionDescription + " "
+                + this.transactionAmount.toString();
     }
 
-    Transaction(CurrencyAmount amount, LocalDateTime dateTime, String description) {
+    Transaction(CurrencyAmount amount, LocalDateTime dateTime,
+                String description) {
         this.transactionAmount = amount;
         this.transactionDate = dateTime;
         this.transactionDescription = description;
