@@ -6,4 +6,5 @@ public class Tiger extends Feline {
     public String getTaxonomicClassification() {
         return "Panthera tigris";
     }
+
 }

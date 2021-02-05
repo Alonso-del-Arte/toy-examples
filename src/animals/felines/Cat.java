@@ -6,4 +6,5 @@ public class Cat extends Feline {
     public String getTaxonomicClassification() {
         return "Felis catus";
     }
+
 }

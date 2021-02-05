@@ -6,4 +6,5 @@ public class Wolf extends Canine {
     public String getTaxonomicClassification() {
         return "Canis lupus";
     }
+
 }

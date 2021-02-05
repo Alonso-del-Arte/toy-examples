@@ -6,4 +6,5 @@ public class Lion extends Feline {
     public String getTaxonomicClassification() {
         return "Panthera leo";
     }
+
 }

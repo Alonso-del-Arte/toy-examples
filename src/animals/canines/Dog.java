@@ -6,4 +6,5 @@ public class Dog extends Canine {
     public String getTaxonomicClassification() {
         return "Canis familiaris";
     }
+
 }
