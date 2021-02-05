@@ -2,6 +2,7 @@ package currency;
 
 import java.time.LocalDateTime;
 import java.util.Currency;
+import java.util.Locale;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,13 +12,16 @@ public class CurrencyConversionNeededExceptionTest {
 
     private static LocalDateTime testBeginDateTime = LocalDateTime.now();
 
-    private static final Currency DOLLARS = Currency.getInstance("USD");
+    private static final Currency DOLLARS = Currency.getInstance(Locale.US);
     private static final Currency EUROS = Currency.getInstance("EUR");
 
-    private static final CurrencyAmount dollarAmount = new CurrencyAmount(1899L, DOLLARS);
-    private static final CurrencyAmount euroAmount = new CurrencyAmount(2472L, EUROS);
+    private static final CurrencyAmount dollarAmount
+            = new CurrencyAmount(1899L, DOLLARS);
+    private static final CurrencyAmount euroAmount
+            = new CurrencyAmount(2472L, EUROS);
 
-    private static CurrencyConversionNeededException testExc = new CurrencyConversionNeededException("test", dollarAmount, euroAmount);
+    private static CurrencyConversionNeededException testExc
+            = new CurrencyConversionNeededException("test", dollarAmount, euroAmount);
 
     @Test
     public void testGetAmountA() {
@@ -36,16 +40,21 @@ public class CurrencyConversionNeededExceptionTest {
         System.out.println("getOccurDateTime");
         String occurDateTimeStr = testExc.getOccurDateTime().toString();
         String nowDateTimeStr = LocalDateTime.now().toString();
-        String msg = "Exception occurrence date/time " + occurDateTimeStr + " should be before now, " + nowDateTimeStr;
-        assertTrue(LocalDateTime.now().compareTo(testExc.getOccurDateTime()) >= 1, msg);
+        String msg = "Exception occurrence date/time " + occurDateTimeStr
+                + " should be before now, " + nowDateTimeStr;
+        assert LocalDateTime.now().compareTo(testExc.getOccurDateTime()) >= 1
+                : msg;
         String testStartTimeStr = testBeginDateTime.toString();
-        msg = "Exception occurrence date/time " + occurDateTimeStr + " should be after start of tests time " + testStartTimeStr;
-        assertTrue(testExc.getOccurDateTime().compareTo(testBeginDateTime) >= 1, msg);
+        msg = "Exception occurrence date/time " + occurDateTimeStr
+                + " should be after start of tests time " + testStartTimeStr;
+        assert testExc.getOccurDateTime().compareTo(testBeginDateTime) >= 1
+                : msg;
     }
 
     /**
-     * This only checks that the currency is correct, e.g., a dollar to euros exchange is in euros.
-     * Checking that the amount is correct belongs in CurrencyConverterTest.
+     * This only checks that the currency is correct, e.g., a dollar to euros
+     * exchange is in euros. Checking that the amount is correct belongs in
+     * CurrencyConverterTest.
      */
     @Test
     public void testExchangeAToB() {
@@ -55,8 +64,9 @@ public class CurrencyConversionNeededExceptionTest {
     }
 
     /**
-     * This only checks that the currency is correct, e.g., a euros to dollars exchange is in dollars.
-     * Checking that the amount is correct belongs in CurrencyConverterTest.
+     * This only checks that the currency is correct, e.g., a euros to dollars
+     * exchange is in dollars. Checking that the amount is correct belongs in
+     * CurrencyConverterTest.
      */
     @Test
     public void testExchangeBToA() {
@@ -72,17 +82,20 @@ public class CurrencyConversionNeededExceptionTest {
         CurrencyAmount amountB = new CurrencyAmount(5000L, dollarCurrency);
         try {
             String excMsg = "This exception should not have been constructed";
-            CurrencyConversionNeededException exc = new CurrencyConversionNeededException(excMsg, amountA, amountB);
-            String failMsg = "CurrencyConversionNeededException wrongly constructed when no conversion is needed (U. S. dollars to U. S. dollars)";
-            System.out.println(failMsg);
+            CurrencyConversionNeededException exc
+                    = new CurrencyConversionNeededException(excMsg, amountA,
+                    amountB);
+            String msg = "There should be no exception for USD to USD";
+            System.out.println(msg);
             System.out.println("\"" + exc.getMessage() + "\"");
-            fail(failMsg);
+            fail(msg);
         } catch (IllegalArgumentException iae) {
-            System.out.println("Trying to construct CurrencyConversionNeededException object when no conversion is needed correctly triggered IllegalArgumentException");
+            System.out.println("USD to USD correctly triggered IllegalArgumentException");
             System.out.println("\"" + iae.getMessage() + "\"");
         } catch (Exception e) {
-            String failMsg = e.getClass().getName() + " is the wrong exception to throw for trying to construct CurrencyConversionNeededException object when no conversion is needed";
-            fail(failMsg);
+            String msg = e.getClass().getName()
+                    + " is the wrong exception to throw for USD to USD";
+            fail(msg);
         }
     }
 

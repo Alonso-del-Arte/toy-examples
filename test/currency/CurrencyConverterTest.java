@@ -1,6 +1,7 @@
 package currency;
 
 import java.util.Currency;
+import java.util.Locale;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CurrencyConverterTest {
 
-    private static final Currency DOLLARS = Currency.getInstance("USD");
-    private static final Currency YEN = Currency.getInstance("JPY");
+    private static final Currency DOLLARS = Currency.getInstance(Locale.US);
+    private static final Currency YEN = Currency.getInstance(Locale.JAPAN);
 
     /**
      * This test assumes $1 is at least 100 yen.
@@ -19,9 +20,11 @@ public class CurrencyConverterTest {
         CurrencyAmount dollarAmount = new CurrencyAmount(10000L, DOLLARS);
         CurrencyAmount minYen = new CurrencyAmount(1000000L, YEN);
         CurrencyAmount toYen = CurrencyConverter.convert(dollarAmount, YEN);
-        System.out.println(dollarAmount.toString() + " is said to exchange to " + toYen.toString());
-        String msg = dollarAmount.toString() + " should be more than " + minYen.toString();
-        assertTrue(toYen.compareTo(minYen) >= 0, msg);
+        System.out.println(dollarAmount.toString() + " is said to exchange to "
+                + toYen.toString());
+        String msg = dollarAmount.toString() + " should be more than "
+                + minYen.toString();
+        assert toYen.compareTo(minYen) >= 0 : msg;
     }
 
     /**
@@ -32,27 +35,34 @@ public class CurrencyConverterTest {
         CurrencyAmount yenAmount = new CurrencyAmount(1000000L, YEN);
         CurrencyAmount maxDollars = new CurrencyAmount(10000L, DOLLARS);
         CurrencyAmount toDollars = CurrencyConverter.convert(yenAmount, DOLLARS);
-        System.out.println(yenAmount.toString() + " is said to exchange to " + toDollars.toString());
-        String msg = yenAmount.toString() + " should not be more than " + maxDollars.toString();
-        assertTrue(toDollars.compareTo(maxDollars) <= 0, msg);
+        System.out.println(yenAmount.toString() + " is said to exchange to "
+                + toDollars.toString());
+        String msg = yenAmount.toString() + " should not be more than "
+                + maxDollars.toString();
+        assert toDollars.compareTo(maxDollars) <= 0 : msg;
     }
 
     @Test
     public void testConvertNegativeAmountStaysNegative() {
         CurrencyAmount negAmount = new CurrencyAmount(-300L, DOLLARS);
         CurrencyAmount zeroYen = new CurrencyAmount(0L, YEN);
-        CurrencyAmount convertedAmount = CurrencyConverter.convert(negAmount, YEN);
-        System.out.println(negAmount.toString() + " is said to exchange to " + convertedAmount.toString());
-        String msg = negAmount.toString() + " should convert to negative amount of yen";
-        assertTrue(zeroYen.compareTo(convertedAmount) >= 1, msg);
+        CurrencyAmount convertedAmount = CurrencyConverter.convert(negAmount,
+                YEN);
+        System.out.println(negAmount.toString() + " is said to exchange to "
+                + convertedAmount.toString());
+        String msg = negAmount.toString()
+                + " should convert to negative amount of yen";
+        assert zeroYen.compareTo(convertedAmount) >= 1 : msg;
     }
 
     @Test
     public void testZeroAmountStaysZero() {
         CurrencyAmount zeroDollars = new CurrencyAmount(0L, DOLLARS);
         CurrencyAmount zeroYen = new CurrencyAmount(0L, YEN);
-        CurrencyAmount convertedAmount = CurrencyConverter.convert(zeroDollars, YEN);
-        System.out.println(zeroDollars.toString() + " is said to exchange to " + convertedAmount.toString());
+        CurrencyAmount convertedAmount = CurrencyConverter.convert(zeroDollars,
+                YEN);
+        System.out.println(zeroDollars.toString() + " is said to exchange to "
+                + convertedAmount.toString());
         assertEquals(zeroYen, convertedAmount);
     }
 
@@ -60,23 +70,28 @@ public class CurrencyConverterTest {
     public void testConvertPositiveAmountStaysPositive() {
         CurrencyAmount posAmount = new CurrencyAmount(5989, DOLLARS);
         CurrencyAmount zeroYen = new CurrencyAmount(0L, YEN);
-        CurrencyAmount convertedAmount = CurrencyConverter.convert(posAmount, YEN);
-        System.out.println(posAmount.toString() + " is said to exchange to " + convertedAmount.toString());
-        String msg = posAmount.toString() + " should convert to positive amount of yen";
-        assertTrue(zeroYen.compareTo(convertedAmount) <= -1, msg);
+        CurrencyAmount convertedAmount = CurrencyConverter.convert(posAmount,
+                YEN);
+        System.out.println(posAmount.toString() + " is said to exchange to "
+                + convertedAmount.toString());
+        String msg = posAmount.toString()
+                + " should convert to positive amount of yen";
+        assert zeroYen.compareTo(convertedAmount) <= -1 : msg;
     }
 
     @Test
     public void testNoChangeSameCurrencyDollars() {
         CurrencyAmount someAmount = new CurrencyAmount(81052, DOLLARS);
-        CurrencyAmount convertedAmount = CurrencyConverter.convert(someAmount, DOLLARS);
+        CurrencyAmount convertedAmount = CurrencyConverter.convert(someAmount,
+                DOLLARS);
         assertEquals(someAmount, convertedAmount);
     }
 
     @Test
     public void testNoChangeSameCurrencyYen() {
         CurrencyAmount someAmount = new CurrencyAmount(87698264, YEN);
-        CurrencyAmount convertedAmount = CurrencyConverter.convert(someAmount, YEN);
+        CurrencyAmount convertedAmount = CurrencyConverter.convert(someAmount,
+                YEN);
         assertEquals(someAmount, convertedAmount);
     }
 
