@@ -74,7 +74,7 @@ public class RomanNumeralsNumber implements Arithmeticable<RomanNumeralsNumber>,
         String unprocessed = Short.toString(this.value);
         int currLen = unprocessed.length();
         String numeral;
-        String processed = "";
+        StringBuilder processed = new StringBuilder();
         char digit;
         short multiplier = 1;
         int digitMult, fiveMult;
@@ -88,11 +88,11 @@ public class RomanNumeralsNumber implements Arithmeticable<RomanNumeralsNumber>,
                 digitMult -= fiveMult;
             }
             numeral = numeral + process(digitMult);
-            processed = numeral + processed;
+            processed.insert(0, numeral);
             unprocessed = unprocessed.substring(0, currLen);
             multiplier *= 10;
         }
-        return processed;
+        return processed.toString();
     }
 
     @Override
@@ -114,16 +114,14 @@ public class RomanNumeralsNumber implements Arithmeticable<RomanNumeralsNumber>,
         return this.value;
     }
 
-    // STUB TO FAIL THE FIRST TEST
     @Override
     public RomanNumeralsNumber plus(RomanNumeralsNumber addend) {
-        return new RomanNumeralsNumber(value);
+        return new RomanNumeralsNumber(this.value + addend.value);
     }
 
-    // STUB TO FAIL THE FIRST TEST
     @Override
     public RomanNumeralsNumber plus(int addend) {
-        return new RomanNumeralsNumber(value);
+        return new RomanNumeralsNumber(this.value + addend);
     }
 
     // STUB TO FAIL THE FIRST TEST
@@ -134,42 +132,38 @@ public class RomanNumeralsNumber implements Arithmeticable<RomanNumeralsNumber>,
 //        throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    // STUB TO FAIL THE FIRST TEST
     @Override
     public RomanNumeralsNumber minus(RomanNumeralsNumber subtrahend) {
-        return new RomanNumeralsNumber(value);
+        return new RomanNumeralsNumber(this.value - subtrahend.value);
     }
 
-    // STUB TO FAIL THE FIRST TEST
     @Override
     public RomanNumeralsNumber minus(int subtrahend) {
-        return new RomanNumeralsNumber(value);
+        return new RomanNumeralsNumber(this.value - subtrahend);
     }
 
-    // STUB TO FAIL THE FIRST TEST
     @Override
     public RomanNumeralsNumber times(RomanNumeralsNumber multiplicand) {
-        return new RomanNumeralsNumber(value);
+        return new RomanNumeralsNumber(this.value * multiplicand.value);
     }
 
-    // STUB TO FAIL THE FIRST TEST
     @Override
     public RomanNumeralsNumber times(int multiplicand) {
-        return new RomanNumeralsNumber(value);
+        return new RomanNumeralsNumber(this.value * multiplicand);
     }
 
     // STUB TO FAIL THE FIRST TEST
     @Override
     public RomanNumeralsNumber divides(RomanNumeralsNumber divisor)
             throws NotDivisibleException {
-        return new RomanNumeralsNumber(value);
+        return new RomanNumeralsNumber(this.value / divisor.value);
     }
 
     // STUB TO FAIL THE FIRST TEST
     @Override
     public RomanNumeralsNumber divides(int divisor)
             throws NotDivisibleException {
-        return new RomanNumeralsNumber(value);
+        return new RomanNumeralsNumber(this.value / divisor);
     }
 
     @Override
