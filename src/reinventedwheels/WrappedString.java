@@ -24,8 +24,12 @@ public class WrappedString {
 
     public WrappedString toAllCaps() {
         char[] letters = this.heldStr.toCharArray();
+        char curr;
         for (int i = 0; i < letters.length; i++) {
-            letters[i] = (char) (letters[i] - ' ');
+            curr = letters[i];
+            if (curr > '`' && curr < '{') {
+                letters[i] = (char) (curr - ' ');
+            }
         }
         return new WrappedString(new String(letters));
     }
