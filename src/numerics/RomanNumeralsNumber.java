@@ -171,6 +171,11 @@ public class RomanNumeralsNumber implements Arithmeticable<RomanNumeralsNumber>,
         return Short.compare(this.value, other.value);
     }
 
+    // STUB TO FAIL THE FIRST TEST
+    public static RomanNumeralsNumber parse(String s) {
+        return new RomanNumeralsNumber(3999);
+    }
+
     public RomanNumeralsNumber(int n) {
         // TODO: Add validation: no 0, no negative numbers
         // TODO: Determine maximum n and add validation
