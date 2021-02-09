@@ -544,7 +544,20 @@ class RomanNumeralsNumberTest {
 
     @Test
     void testNegate() {
-        fail("Haven't written test yet");
+        int n = RANDOM.nextInt(3999) + 1;
+        RomanNumeralsNumber number = new RomanNumeralsNumber(n);
+        Throwable throwable = assertThrows(RuntimeException.class, () -> {
+            RomanNumeralsNumber result = number.negate();
+            System.out.println(number.toString() + " is said to be "
+                    + result.toString());
+        });
+        assert (throwable instanceof ArithmeticException
+                || throwable instanceof UnsupportedOperationException);
+        String excMsg = throwable.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("Trying to negate " + number.toString()
+                + " correctly caused " + throwable.getClass().getName());
+        System.out.println("\"" + excMsg + "\"");
     }
 
     @Test
@@ -596,14 +609,13 @@ class RomanNumeralsNumberTest {
         RomanNumeralsNumber minuend = new RomanNumeralsNumber(a);
         Throwable throwable = assertThrows(ArithmeticException.class, () -> {
             RomanNumeralsNumber result = minuend.minus(b);
-            System.out.println(minuend.toString() + " minus "
-                    + b + " is said to be "
-                    + result.toString());
+            System.out.println(minuend.toString() + " minus " + b
+                    + " is said to be " + result.toString());
         });
         String excMsg = throwable.getMessage();
         assert excMsg != null : "Message should not be null";
-        System.out.println("Trying to subtract " + b
-                + " from " + minuend.toString()
+        System.out.println("Trying to subtract " + b + " from "
+                + minuend.toString()
                 + " correctly caused ArithmeticException");
         System.out.println("\"" + excMsg + "\"");
     }

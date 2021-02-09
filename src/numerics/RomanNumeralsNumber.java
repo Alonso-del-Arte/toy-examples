@@ -132,12 +132,10 @@ public class RomanNumeralsNumber implements Arithmeticable<RomanNumeralsNumber>,
         return new RomanNumeralsNumber(this.value + addend);
     }
 
-    // STUB TO FAIL THE FIRST TEST
     @Override
     public RomanNumeralsNumber negate() {
-        return new RomanNumeralsNumber(value);
-//        String excMsg = ""
-//        throw new UnsupportedOperationException("Not supported yet.");
+        String excMsg = "This class can't represent negative numbers";
+        throw new UnsupportedOperationException(excMsg);
     }
 
     @Override
@@ -152,6 +150,11 @@ public class RomanNumeralsNumber implements Arithmeticable<RomanNumeralsNumber>,
 
     @Override
     public RomanNumeralsNumber minus(int subtrahend) {
+        if (this.value - subtrahend < 1) {
+            String excMsg = "The number " + (this.value - subtrahend)
+                    + " is outside the range of this class";
+            throw new ArithmeticException(excMsg);
+        }
         return new RomanNumeralsNumber(this.value - subtrahend);
     }
 
