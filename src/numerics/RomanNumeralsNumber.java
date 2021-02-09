@@ -116,11 +116,19 @@ public class RomanNumeralsNumber implements Arithmeticable<RomanNumeralsNumber>,
 
     @Override
     public RomanNumeralsNumber plus(RomanNumeralsNumber addend) {
+        if (this.value + addend.value > 3999) {
+            throw new ArithmeticException("The number "
+                    + (this.value + addend.value) + " exceeds 3999");
+        }
         return new RomanNumeralsNumber(this.value + addend.value);
     }
 
     @Override
     public RomanNumeralsNumber plus(int addend) {
+        if (this.value + addend > 3999) {
+            throw new ArithmeticException("The number "
+                    + (this.value + addend) + " exceeds 3999");
+        }
         return new RomanNumeralsNumber(this.value + addend);
     }
 
@@ -134,6 +142,11 @@ public class RomanNumeralsNumber implements Arithmeticable<RomanNumeralsNumber>,
 
     @Override
     public RomanNumeralsNumber minus(RomanNumeralsNumber subtrahend) {
+        if (this.value - subtrahend.value < 1) {
+            String excMsg = "The number " + (this.value - subtrahend.value)
+                    + " is outside the range of this class";
+            throw new ArithmeticException(excMsg);
+        }
         return new RomanNumeralsNumber(this.value - subtrahend.value);
     }
 

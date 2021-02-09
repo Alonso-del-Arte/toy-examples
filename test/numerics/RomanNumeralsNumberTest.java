@@ -488,7 +488,7 @@ class RomanNumeralsNumberTest {
     void testPlus() {
         System.out.println("plus");
         int a = RANDOM.nextInt(1998) + 1;
-        int b = a + RANDOM.nextInt(a) + 1;
+        int b = RANDOM.nextInt(1998) + 1;
         RomanNumeralsNumber addendA = new RomanNumeralsNumber(a);
         RomanNumeralsNumber addendB = new RomanNumeralsNumber(b);
         RomanNumeralsNumber expected = new RomanNumeralsNumber(a + b);
@@ -499,7 +499,7 @@ class RomanNumeralsNumberTest {
     @Test
     void testPlusInt() {
         int a = RANDOM.nextInt(1998) + 1;
-        int b = a + RANDOM.nextInt(a) + 1;
+        int b = RANDOM.nextInt(1998) + 1;
         RomanNumeralsNumber addendA = new RomanNumeralsNumber(a);
         RomanNumeralsNumber expected = new RomanNumeralsNumber(a + b);
         RomanNumeralsNumber actual = addendA.plus(b);
@@ -508,7 +508,38 @@ class RomanNumeralsNumberTest {
 
     @Test
     void testPlusOverflow() {
-        fail("Haven't written test yet");
+        int a = RANDOM.nextInt(2000) + 2000;
+        int b = a + RANDOM.nextInt(4000 - a);
+        RomanNumeralsNumber addendA = new RomanNumeralsNumber(a);
+        RomanNumeralsNumber addendB = new RomanNumeralsNumber(b);
+        Throwable throwable = assertThrows(ArithmeticException.class, () -> {
+            RomanNumeralsNumber result = addendA.plus(addendB);
+            System.out.println(addendA.toString() + " + " + addendB.toString()
+                    + " is said to be " + result.toString());
+        });
+        String excMsg = throwable.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("Trying to add " + addendA.toString() + " to "
+                + addendB.toString()
+                + " correctly caused ArithmeticException");
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testPlusIntOverflow() {
+        int a = RANDOM.nextInt(2000) + 2000;
+        int b = a + RANDOM.nextInt(4000 - a);
+        RomanNumeralsNumber addendA = new RomanNumeralsNumber(a);
+        Throwable throwable = assertThrows(ArithmeticException.class, () -> {
+            RomanNumeralsNumber result = addendA.plus(b);
+            System.out.println(addendA.toString() + " + " + b
+                    + " is said to be " + result.toString());
+        });
+        String excMsg = throwable.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("Trying to add " + addendA.toString() + " to "
+                + b + " correctly caused ArithmeticException");
+        System.out.println("\"" + excMsg + "\"");
     }
 
     @Test
@@ -519,10 +550,10 @@ class RomanNumeralsNumberTest {
     @Test
     void testMinus() {
         System.out.println("minus");
-        int a = RANDOM.nextInt(1998) + 1;
-        int b = a + RANDOM.nextInt(a) + 1;
-        RomanNumeralsNumber minuend = new RomanNumeralsNumber(b);
-        RomanNumeralsNumber subtrahend = new RomanNumeralsNumber(a);
+        int a = RANDOM.nextInt(3988) + 10;
+        int b = RANDOM.nextInt(a - 3) + 1;
+        RomanNumeralsNumber minuend = new RomanNumeralsNumber(a);
+        RomanNumeralsNumber subtrahend = new RomanNumeralsNumber(b);
         RomanNumeralsNumber expected = new RomanNumeralsNumber(b - a);
         RomanNumeralsNumber actual = minuend.minus(subtrahend);
         assertEquals(expected, actual);
@@ -540,7 +571,41 @@ class RomanNumeralsNumberTest {
 
     @Test
     void testMinusOverflow() {
-        fail("Haven't written test yet");
+        int a = RANDOM.nextInt(2000) + 1;
+        int b = a + RANDOM.nextInt(2000);
+        RomanNumeralsNumber minuend = new RomanNumeralsNumber(a);
+        RomanNumeralsNumber subtrahend = new RomanNumeralsNumber(b);
+        Throwable throwable = assertThrows(ArithmeticException.class, () -> {
+            RomanNumeralsNumber result = minuend.minus(subtrahend);
+            System.out.println(minuend.toString() + " minus "
+                    + subtrahend.toString() + " is said to be "
+                    + result.toString());
+        });
+        String excMsg = throwable.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("Trying to subtract " + subtrahend.toString()
+                + " from " + minuend.toString()
+                + " correctly caused ArithmeticException");
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testMinusIntOverflow() {
+        int a = RANDOM.nextInt(2000) + 1;
+        int b = a + RANDOM.nextInt(2000);
+        RomanNumeralsNumber minuend = new RomanNumeralsNumber(a);
+        Throwable throwable = assertThrows(ArithmeticException.class, () -> {
+            RomanNumeralsNumber result = minuend.minus(b);
+            System.out.println(minuend.toString() + " minus "
+                    + b + " is said to be "
+                    + result.toString());
+        });
+        String excMsg = throwable.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("Trying to subtract " + b
+                + " from " + minuend.toString()
+                + " correctly caused ArithmeticException");
+        System.out.println("\"" + excMsg + "\"");
     }
 
     @Test
