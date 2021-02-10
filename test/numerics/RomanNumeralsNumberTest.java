@@ -644,7 +644,39 @@ class RomanNumeralsNumberTest {
 
     @Test
     void testTimesOverflow() {
-        fail("Haven't written test yet");
+        int a = RANDOM.nextInt(60) + 62;
+        int b = a + RANDOM.nextInt(58) + 1;
+        RomanNumeralsNumber multiplicandA = new RomanNumeralsNumber(a);
+        RomanNumeralsNumber multiplicandB = new RomanNumeralsNumber(b);
+        Throwable throwable = assertThrows(ArithmeticException.class, () -> {
+            RomanNumeralsNumber result = multiplicandA.times(multiplicandB);
+            System.out.println(multiplicandA.toString() + " times "
+                    + multiplicandB.toString() + " is said to be "
+                    + result.toString());
+        });
+        String excMsg = throwable.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("Trying to multiply " + multiplicandA.toString()
+                + " by " + multiplicandB.toString()
+                + " correctly caused ArithmeticException");
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testTimesIntOverflow() {
+        int a = RANDOM.nextInt(60) + 62;
+        int b = a + RANDOM.nextInt(58) + 1;
+        RomanNumeralsNumber multiplicandA = new RomanNumeralsNumber(a);
+        Throwable throwable = assertThrows(ArithmeticException.class, () -> {
+            RomanNumeralsNumber result = multiplicandA.times(b);
+            System.out.println(multiplicandA.toString() + " times " + b
+                    + " is said to be " + result.toString());
+        });
+        String excMsg = throwable.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("Trying to multiply " + multiplicandA.toString()
+                + " by " + b + " correctly caused ArithmeticException");
+        System.out.println("\"" + excMsg + "\"");
     }
 
     @Test
@@ -698,22 +730,43 @@ class RomanNumeralsNumberTest {
 
     @Test
     void testDivideByNotDivisible() {
-        int a = RANDOM.nextInt(60) + 1;
+        int a = RANDOM.nextInt(30) + 1;
         int b = a + RANDOM.nextInt(a) + 1;
         int c = a * b;
         RomanNumeralsNumber badDividend = new RomanNumeralsNumber(c);
         RomanNumeralsNumber badDivisor = new RomanNumeralsNumber(b + 1);
-        fail("Haven't finished writing test yet");
+        Throwable throwable = assertThrows(NotDivisibleException.class, () -> {
+            RomanNumeralsNumber result = badDividend.divides(badDivisor);
+            System.out.println(badDividend + " divided by "
+                    + badDivisor.toString() + " is said to be "
+                    + result.toString());
+        });
+        String excMsg = throwable.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("Trying to divide " + badDividend.toString()
+                + " by " + badDivisor.toString()
+                + " correctly caused NotDivisibleException");
+        System.out.println("\"" + excMsg + "\"");
     }
 
     @Test
     void testDivideByNotDivisibleInt() {
-        int a = RANDOM.nextInt(60) + 1;
+        int a = RANDOM.nextInt(30) + 1;
         int b = a + RANDOM.nextInt(a) + 1;
         int c = a * b;
         RomanNumeralsNumber badDividend = new RomanNumeralsNumber(c);
         int badDivisor = b + 1;
-        fail("Haven't finished writing test yet");
+        Throwable throwable = assertThrows(NotDivisibleException.class, () -> {
+            RomanNumeralsNumber result = badDividend.divides(badDivisor);
+            System.out.println(badDividend + " divided by " + badDivisor
+                    + " is said to be " + result.toString());
+        });
+        String excMsg = throwable.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("Trying to divide " + badDividend.toString()
+                + " by " + badDivisor
+                + " correctly caused NotDivisibleException");
+        System.out.println("\"" + excMsg + "\"");
     }
 
     @Test

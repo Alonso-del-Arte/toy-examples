@@ -160,19 +160,34 @@ public class RomanNumeralsNumber implements Arithmeticable<RomanNumeralsNumber>,
 
     @Override
     public RomanNumeralsNumber times(RomanNumeralsNumber multiplicand) {
+        if (this.value * multiplicand.value > 3999) {
+            throw new ArithmeticException("The number "
+                    + (this.value * multiplicand.value) + " exceeds 3999");
+        }
         return new RomanNumeralsNumber(this.value * multiplicand.value);
     }
 
     @Override
     public RomanNumeralsNumber times(int multiplicand) {
+        if (this.value * multiplicand > 3999) {
+            throw new ArithmeticException("The number "
+                    + (this.value * multiplicand) + " exceeds 3999");
+        }
         return new RomanNumeralsNumber(this.value * multiplicand);
     }
 
-    // STUB TO FAIL THE FIRST TEST
     @Override
     public RomanNumeralsNumber divides(RomanNumeralsNumber divisor)
             throws NotDivisibleException {
-        return new RomanNumeralsNumber(this.value / divisor.value);
+        int remainder = this.value % divisor.value;
+        if (remainder == 0) {
+            return new RomanNumeralsNumber(this.value / divisor.value);
+        } else {
+            String excMsg = this.toString() + " divided by "
+                    + divisor.toString() + " leaves a remainder of "
+                    + remainder;
+            throw new NotDivisibleException(excMsg, this, divisor);
+        }
     }
 
     // STUB TO FAIL THE FIRST TEST
