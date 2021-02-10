@@ -190,11 +190,23 @@ public class RomanNumeralsNumber implements Arithmeticable<RomanNumeralsNumber>,
         }
     }
 
-    // STUB TO FAIL THE FIRST TEST
     @Override
     public RomanNumeralsNumber divides(int divisor)
             throws NotDivisibleException {
-        return new RomanNumeralsNumber(this.value / divisor);
+        if (divisor < 0) {
+            String excMsg = "Divisor needs to be positive, not " + divisor;
+            throw new ArithmeticException(excMsg);
+        }
+        int remainder = this.value % divisor;
+        if (remainder == 0) {
+            return new RomanNumeralsNumber(this.value / divisor);
+        } else {
+            String excMsg = this.toString() + " divided by "
+                    + divisor+ " leaves a remainder of " + remainder;
+            RomanNumeralsNumber wrappedDivisor
+                    = new RomanNumeralsNumber(divisor);
+            throw new NotDivisibleException(excMsg, this, wrappedDivisor);
+        }
     }
 
     @Override

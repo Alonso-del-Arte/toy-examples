@@ -770,6 +770,24 @@ class RomanNumeralsNumberTest {
     }
 
     @Test
+    void testDividesIntOverflow() {
+        int a = -(RANDOM.nextInt(30) + 1);
+        int b = -(-a + RANDOM.nextInt(-a) + 1);
+        int c = a * b;
+        RomanNumeralsNumber dividend = new RomanNumeralsNumber(c);
+        Throwable throwable = assertThrows(ArithmeticException.class, () -> {
+            RomanNumeralsNumber result = dividend.divides(a);
+            System.out.println(dividend.toString() + " divided by " + a
+                    + " is said to be " + result.toString());
+        });
+        String excMsg = throwable.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("Trying to divide " + dividend.toString() + " by "
+                + a + " correctly caused ArithmeticException");
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
     void testHashCode() {
         System.out.println("hashCode");
         RomanNumeralsNumber number;
