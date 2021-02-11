@@ -456,6 +456,18 @@ class RomanNumeralsNumberTest {
     }
 
     @Test
+    void testHashCode() {
+        System.out.println("hashCode");
+        RomanNumeralsNumber number;
+        int actual;
+        for (int expected = 1; expected < 4000; expected++) {
+            number = new RomanNumeralsNumber(expected);
+            actual = number.hashCode();
+            assertEquals(expected, actual);
+        }
+    }
+
+    @Test
     void testCompareTo() {
         System.out.println("compareTo");
         int a = RANDOM.nextInt(795) + 1;
@@ -567,7 +579,7 @@ class RomanNumeralsNumberTest {
         int b = RANDOM.nextInt(a - 3) + 1;
         RomanNumeralsNumber minuend = new RomanNumeralsNumber(a);
         RomanNumeralsNumber subtrahend = new RomanNumeralsNumber(b);
-        RomanNumeralsNumber expected = new RomanNumeralsNumber(b - a);
+        RomanNumeralsNumber expected = new RomanNumeralsNumber(a - b);
         RomanNumeralsNumber actual = minuend.minus(subtrahend);
         assertEquals(expected, actual);
     }
@@ -788,21 +800,46 @@ class RomanNumeralsNumberTest {
     }
 
     @Test
-    void testHashCode() {
-        System.out.println("hashCode");
-        RomanNumeralsNumber number;
-        int actual;
-        for (int expected = 1; expected < 4000; expected++) {
-            number = new RomanNumeralsNumber(expected);
-            actual = number.hashCode();
-            assertEquals(expected, actual);
-        }
+    void testConstructorRejectsNegativeParameter() {
+        int n = -RANDOM.nextInt(3999) - 1;
+        Throwable throwable = assertThrows(ArithmeticException.class, () -> {
+            RomanNumeralsNumber badNumber = new RomanNumeralsNumber(n);
+            System.out.println("Should not have been able to create "
+                    + badNumber.toString());
+        });
+        String excMsg = throwable.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("Trying to use " + n
+                + " correctly caused ArithmeticException");
+        System.out.println("\"" + excMsg + "\"");
     }
 
-    // TODO: Test constructor rejects negative parameter
+    @Test
+    void testConstructorRejectsParameterZero() {
+        Throwable throwable = assertThrows(ArithmeticException.class, () -> {
+            RomanNumeralsNumber badNumber = new RomanNumeralsNumber(0);
+            System.out.println("Should not have been able to create "
+                    + badNumber.toString());
+        });
+        String excMsg = throwable.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("Trying to use 0 caused ArithmeticException");
+        System.out.println("\"" + excMsg + "\"");
+    }
 
-    // TODO: Test constructor rejects 0
+    @Test
+    void testConstructorRejectsParameter4000OrGreater() {
+        int n = RANDOM.nextInt(16384) + 4000;
+        Throwable throwable = assertThrows(ArithmeticException.class, () -> {
+            RomanNumeralsNumber badNumber = new RomanNumeralsNumber(n);
+            System.out.println("Should not have been able to create "
+                    + badNumber.toString());
+        });
+        String excMsg = throwable.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("Trying to use " + n
+                + " correctly caused ArithmeticException");
+        System.out.println("\"" + excMsg + "\"");
+    }
 
-    // TODO: Test constructor rejects parameter greater than 3999
-    
 }

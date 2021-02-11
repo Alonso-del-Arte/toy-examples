@@ -116,19 +116,11 @@ public class RomanNumeralsNumber implements Arithmeticable<RomanNumeralsNumber>,
 
     @Override
     public RomanNumeralsNumber plus(RomanNumeralsNumber addend) {
-        if (this.value + addend.value > 3999) {
-            throw new ArithmeticException("The number "
-                    + (this.value + addend.value) + " exceeds 3999");
-        }
         return new RomanNumeralsNumber(this.value + addend.value);
     }
 
     @Override
     public RomanNumeralsNumber plus(int addend) {
-        if (this.value + addend > 3999) {
-            throw new ArithmeticException("The number "
-                    + (this.value + addend) + " exceeds 3999");
-        }
         return new RomanNumeralsNumber(this.value + addend);
     }
 
@@ -140,39 +132,21 @@ public class RomanNumeralsNumber implements Arithmeticable<RomanNumeralsNumber>,
 
     @Override
     public RomanNumeralsNumber minus(RomanNumeralsNumber subtrahend) {
-        if (this.value - subtrahend.value < 1) {
-            String excMsg = "The number " + (this.value - subtrahend.value)
-                    + " is outside the range of this class";
-            throw new ArithmeticException(excMsg);
-        }
         return new RomanNumeralsNumber(this.value - subtrahend.value);
     }
 
     @Override
     public RomanNumeralsNumber minus(int subtrahend) {
-        if (this.value - subtrahend < 1) {
-            String excMsg = "The number " + (this.value - subtrahend)
-                    + " is outside the range of this class";
-            throw new ArithmeticException(excMsg);
-        }
         return new RomanNumeralsNumber(this.value - subtrahend);
     }
 
     @Override
     public RomanNumeralsNumber times(RomanNumeralsNumber multiplicand) {
-        if (this.value * multiplicand.value > 3999) {
-            throw new ArithmeticException("The number "
-                    + (this.value * multiplicand.value) + " exceeds 3999");
-        }
         return new RomanNumeralsNumber(this.value * multiplicand.value);
     }
 
     @Override
     public RomanNumeralsNumber times(int multiplicand) {
-        if (this.value * multiplicand > 3999) {
-            throw new ArithmeticException("The number "
-                    + (this.value * multiplicand) + " exceeds 3999");
-        }
         return new RomanNumeralsNumber(this.value * multiplicand);
     }
 
@@ -193,10 +167,6 @@ public class RomanNumeralsNumber implements Arithmeticable<RomanNumeralsNumber>,
     @Override
     public RomanNumeralsNumber divides(int divisor)
             throws NotDivisibleException {
-        if (divisor < 0) {
-            String excMsg = "Divisor needs to be positive, not " + divisor;
-            throw new ArithmeticException(excMsg);
-        }
         int remainder = this.value % divisor;
         if (remainder == 0) {
             return new RomanNumeralsNumber(this.value / divisor);
@@ -220,8 +190,11 @@ public class RomanNumeralsNumber implements Arithmeticable<RomanNumeralsNumber>,
     }
 
     public RomanNumeralsNumber(int n) {
-        // TODO: Add validation: no 0, no negative numbers
-        // TODO: Determine maximum n and add validation
+        if (n < 1 || n > 3999) {
+            String excMsg = "The number " + n
+                    + " is outside the range 1 to 3999";
+            throw new ArithmeticException(excMsg);
+        }
         this.value = (short) n;
     }
 
