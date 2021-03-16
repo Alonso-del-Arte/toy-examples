@@ -13,16 +13,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CurrencyAmountTest {
 
-    private static final Currency CANADA_DOLLAR_CURRENCY
+    static final Currency CANADA_DOLLAR_CURRENCY
             = Currency.getInstance(Locale.CANADA);
-    private static final Currency EURO_CURRENCY = Currency.getInstance("EUR");
-    private static final Currency US_DOLLAR_CURRENCY
-            = Currency.getInstance(Locale.US);
-    private static final Currency YEN_CURRENCY
-            = Currency.getInstance(Locale.JAPAN);
+    static final Currency EAST_CARIBBEAN_DOLLARS = Currency.getInstance("XCD");
+    static final Currency EURO_CURRENCY = Currency.getInstance("EUR");
+    static final Currency US_DOLLAR_CURRENCY = Currency.getInstance(Locale.US);
+    static final Currency YEN_CURRENCY = Currency.getInstance(Locale.JAPAN);
 
     @Test
-    public void testGetAmountInCents() {
+    void testGetAmountInCents() {
         System.out.println("getAmountInCents");
         long expected = 43075L;
         CurrencyAmount testAmount = new CurrencyAmount(expected, US_DOLLAR_CURRENCY);
@@ -31,7 +30,7 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    public void testGetUnitAmount() {
+    void testGetUnitAmount() {
         System.out.println("getUnitAmount");
         long amount = 10341L;
         long expected = amount / 100;
@@ -41,7 +40,7 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    public void testGetChangeAmount() {
+    void testGetChangeAmount() {
         System.out.println("getChangeAmount");
         long amount = 10341L;
         long expected = amount % 100;
@@ -51,7 +50,7 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    public void testGetCurrency() {
+    void testGetCurrency() {
         System.out.println("getCurrency");
         CurrencyAmount testAmount = new CurrencyAmount(1899L, EURO_CURRENCY);
         Currency actual = testAmount.getCurrency();
@@ -59,7 +58,7 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    public void testPlus() {
+    void testPlus() {
         System.out.println("plus");
         CurrencyAmount testAddendA = new CurrencyAmount(4890398L,
                 US_DOLLAR_CURRENCY);
@@ -72,7 +71,7 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    public void testPlusOnDiffCurrencies() {
+    void testPlusOnDiffCurrencies() {
         CurrencyAmount testAddendA = new CurrencyAmount(100000,
                 CANADA_DOLLAR_CURRENCY);
         CurrencyAmount testAddendB = new CurrencyAmount(25000000,
@@ -103,7 +102,7 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    public void testMinus() {
+    void testMinus() {
         System.out.println("minus");
         CurrencyAmount testMinuend = new CurrencyAmount(4890398L,
                 US_DOLLAR_CURRENCY);
@@ -116,7 +115,7 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    public void testMinusOnDiffCurrencies() {
+    void testMinusOnDiffCurrencies() {
         CurrencyAmount testMinuend = new CurrencyAmount(100000,
                 CANADA_DOLLAR_CURRENCY);
         CurrencyAmount testSubtrahend = new CurrencyAmount(25000000,
@@ -148,7 +147,7 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    public void testTimes() {
+    void testTimes() {
         System.out.println("times");
         CurrencyAmount testMultiplicand = new CurrencyAmount(5399L,
                 US_DOLLAR_CURRENCY);
@@ -160,7 +159,7 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    public void testDivides() {
+    void testDivides() {
         System.out.println("divides");
         CurrencyAmount testDividend = new CurrencyAmount(32200L,
                 CANADA_DOLLAR_CURRENCY);
@@ -171,7 +170,7 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    public void testDivideByZero() {
+    void testDivideByZero() {
         CurrencyAmount testDividend = new CurrencyAmount(58347L,
                 US_DOLLAR_CURRENCY);
         short testDivisor = 0;
@@ -198,7 +197,7 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         System.out.println("toString");
         CurrencyAmount testAmount = new CurrencyAmount(4399L,
                 US_DOLLAR_CURRENCY);
@@ -208,7 +207,7 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    public void testToStringCentAmountsSingleDigit() {
+    void testToStringCentAmountsSingleDigit() {
         CurrencyAmount testAmount;
         String expected, actual;
         for (int i = 0; i < 10; i++) {
@@ -220,7 +219,7 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    public void testToStringCentAmountsTwoDigits() {
+    void testToStringCentAmountsTwoDigits() {
         CurrencyAmount testAmount;
         String expected, actual;
         for (int i = 10; i < 100; i++) {
@@ -232,7 +231,7 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    public void testToStringNegativeAmount() {
+    void testToStringNegativeAmount() {
         CurrencyAmount testAmount = new CurrencyAmount(-380,
                 US_DOLLAR_CURRENCY);
         String expected = "$-3.80";
@@ -241,7 +240,7 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    public void testEquals() {
+    void testEquals() {
         System.out.println("equals");
         CurrencyAmount amountA = new CurrencyAmount(3272500L,
                 US_DOLLAR_CURRENCY);
@@ -262,7 +261,7 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    public void testHashCode() {
+    void testHashCode() {
         System.out.println("hashCode");
         CurrencyAmount dollarAmount = new CurrencyAmount(8987L,
                 US_DOLLAR_CURRENCY);
@@ -289,7 +288,7 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    public void testCompareTo() {
+    void testCompareTo() {
         System.out.println("compareTo");
         CurrencyAmount debtAmount = new CurrencyAmount(-400053L,
                 US_DOLLAR_CURRENCY);
@@ -320,7 +319,7 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    public void testCompareToThroughCollectionSort() {
+    void testCompareToThroughCollectionSort() {
         CurrencyAmount firstAmount = new CurrencyAmount(389L, EURO_CURRENCY);
         CurrencyAmount negativeAmount = new CurrencyAmount(-4500,
                 EURO_CURRENCY);
@@ -345,7 +344,7 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    public void testCompareToDiffCurrency() {
+    void testCompareToDiffCurrency() {
         CurrencyAmount dollarAmount = new CurrencyAmount(599L,
                 US_DOLLAR_CURRENCY);
         CurrencyAmount yenAmount = new CurrencyAmount(599L, YEN_CURRENCY);
@@ -370,7 +369,7 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    public void testConstructor() {
+    void testConstructor() {
         System.out.println("Constructor");
         long cents = 50389L;
         CurrencyAmount oneItemConstr = new CurrencyAmount(cents);

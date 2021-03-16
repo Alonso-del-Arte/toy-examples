@@ -21,34 +21,35 @@ public class CurrencyConversionNeededExceptionTest {
             = new CurrencyAmount(2472L, EUROS);
 
     private static CurrencyConversionNeededException testExc
-            = new CurrencyConversionNeededException("test", dollarAmount, euroAmount);
+            = new CurrencyConversionNeededException("test", dollarAmount,
+                    euroAmount);
 
     @Test
-    public void testGetAmountA() {
+    void testGetAmountA() {
         System.out.println("getAmountA");
         assertEquals(dollarAmount, testExc.getAmountA());
     }
 
     @Test
-    public void testGetAmountB() {
+    void testGetAmountB() {
         System.out.println("getAmountB");
         assertEquals(euroAmount, testExc.getAmountB());
     }
 
     @Test
-    public void testGetOccurDateTime() {
+    void testGetOccurDateTime() {
         System.out.println("getOccurDateTime");
         String occurDateTimeStr = testExc.getOccurDateTime().toString();
         String nowDateTimeStr = LocalDateTime.now().toString();
-        String msg = "Exception occurrence date/time " + occurDateTimeStr
+        String beforeMsg = "Exception occurrence date/time " + occurDateTimeStr
                 + " should be before now, " + nowDateTimeStr;
         assert LocalDateTime.now().compareTo(testExc.getOccurDateTime()) >= 1
-                : msg;
+                : beforeMsg;
         String testStartTimeStr = testBeginDateTime.toString();
-        msg = "Exception occurrence date/time " + occurDateTimeStr
+        String afterMsg = "Exception occurrence date/time " + occurDateTimeStr
                 + " should be after start of tests time " + testStartTimeStr;
         assert testExc.getOccurDateTime().compareTo(testBeginDateTime) >= 1
-                : msg;
+                : afterMsg;
     }
 
     /**
@@ -57,7 +58,7 @@ public class CurrencyConversionNeededExceptionTest {
      * CurrencyConverterTest.
      */
     @Test
-    public void testExchangeAToB() {
+    void testExchangeAToB() {
         System.out.println("exchangeAToB");
         Currency aToBCurrency = testExc.exchangeAToB().getCurrency();
         assertEquals(EUROS, aToBCurrency);
@@ -69,14 +70,14 @@ public class CurrencyConversionNeededExceptionTest {
      * CurrencyConverterTest.
      */
     @Test
-    public void testExchangeBToA() {
+    void testExchangeBToA() {
         System.out.println("exchangeBToA");
         Currency bToACurrency = testExc.exchangeBToA().getCurrency();
         assertEquals(DOLLARS, bToACurrency);
     }
 
     @Test
-    public void testConstructor() {
+    void testConstructor() {
         Currency dollarCurrency = Currency.getInstance("USD");
         CurrencyAmount amountA = new CurrencyAmount(100000L, dollarCurrency);
         CurrencyAmount amountB = new CurrencyAmount(5000L, dollarCurrency);

@@ -26,3 +26,7 @@ hs_err_pid*
 .idea/
 out/
 *.iml
+
+# Files and directories with API keys, IAM usernames and passwords, etc.
+src/secrets
+test/secrets
