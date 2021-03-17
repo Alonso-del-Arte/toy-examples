@@ -24,7 +24,8 @@ public class CurrencyAmountTest {
     void testGetAmountInCents() {
         System.out.println("getAmountInCents");
         long expected = 43075L;
-        CurrencyAmount testAmount = new CurrencyAmount(expected, US_DOLLAR_CURRENCY);
+        CurrencyAmount testAmount = new CurrencyAmount(expected,
+                US_DOLLAR_CURRENCY);
         long actual = testAmount.getAmountInCents();
         assertEquals(expected, actual);
     }
@@ -34,7 +35,8 @@ public class CurrencyAmountTest {
         System.out.println("getUnitAmount");
         long amount = 10341L;
         long expected = amount / 100;
-        CurrencyAmount testAmount = new CurrencyAmount(amount, CANADA_DOLLAR_CURRENCY);
+        CurrencyAmount testAmount = new CurrencyAmount(amount,
+                CANADA_DOLLAR_CURRENCY);
         long actual = testAmount.getUnitAmount();
         assertEquals(expected, actual);
     }
@@ -44,7 +46,8 @@ public class CurrencyAmountTest {
         System.out.println("getChangeAmount");
         long amount = 10341L;
         long expected = amount % 100;
-        CurrencyAmount testAmount = new CurrencyAmount(amount, CANADA_DOLLAR_CURRENCY);
+        CurrencyAmount testAmount = new CurrencyAmount(amount,
+                CANADA_DOLLAR_CURRENCY);
         long actual = testAmount.getChangeAmount();
         assertEquals(expected, actual);
     }
@@ -76,29 +79,18 @@ public class CurrencyAmountTest {
                 CANADA_DOLLAR_CURRENCY);
         CurrencyAmount testAddendB = new CurrencyAmount(25000000,
                 YEN_CURRENCY);
-        try {
+        System.out.print("Trying to add " + testAddendA.toString()
+                + " to " + testAddendB.toString() + "... ");
+        Exception exception
+                = assertThrows(CurrencyConversionNeededException.class, () -> {
             CurrencyAmount result = testAddendA.plus(testAddendB);
-            String msg = "Trying to add " + testAddendA.toString() + " to "
-                    + testAddendB.toString()
-                    + " should have caused an exception, not given result "
-                    + result.toString();
-            fail(msg);
-        } catch (CurrencyConversionNeededException currConvNeedExc) {
-            System.out.println("Trying to add " + testAddendA.toString()
-                    + " to " + testAddendB.toString()
-                    + " correctly caused CurrencyConversionNeededException");
-            System.out.println("\"" + currConvNeedExc.getMessage() + "\"");
-        } catch (UnsupportedOperationException unsupOperExc) {
-            System.out.println("UnsupportedOperationException is adequate for "
-                    + testAddendA.toString() + " added to "
-                    + testAddendB.toString());
-            System.out.println("\"" + unsupOperExc.getMessage() + "\"");
-        } catch (RuntimeException re) {
-            String msg = re.getClass().getName()
-                    + "is the wrong exception to throw for trying to add "
-                    + testAddendA.toString() + " to " + testAddendB.toString();
-            fail(msg);
-        }
+            System.out.println("should not have given result "
+                    + result.toString());
+        });
+        System.out.println("caused CurrencyConversionNeededException");
+        String excMsg = exception.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        System.out.println("\"" + excMsg + "\"");
     }
 
     @Test
@@ -120,30 +112,18 @@ public class CurrencyAmountTest {
                 CANADA_DOLLAR_CURRENCY);
         CurrencyAmount testSubtrahend = new CurrencyAmount(25000000,
                 YEN_CURRENCY);
-        try {
+        System.out.print("Trying to subtract " + testSubtrahend.toString()
+                + " from " + testMinuend.toString() + "... ");
+        Exception exception
+                = assertThrows(CurrencyConversionNeededException.class, () -> {
             CurrencyAmount result = testMinuend.minus(testSubtrahend);
-            String msg = "Trying to subtract " + testSubtrahend.toString()
-                    + " from " + testMinuend.toString()
-                    + " should have caused an exception, not given result "
-                    + result.toString();
-            fail(msg);
-        } catch (CurrencyConversionNeededException currConvNeedExc) {
-            System.out.println("Trying to subtract "
-                    + testSubtrahend.toString() + " from "
-                    + testMinuend.toString()
-                    + " correctly caused CurrencyConversionNeededException");
-            System.out.println("\"" + currConvNeedExc.getMessage() + "\"");
-        } catch (UnsupportedOperationException unsupOperExc) {
-            System.out.println("UnsupportedOperationException is adequate for "
-                    + testSubtrahend.toString() + " minus "
-                    + testMinuend.toString());
-            System.out.println("\"" + unsupOperExc.getMessage() + "\"");
-        } catch (RuntimeException re) {
-            String msg = re.getClass().getName()
-                    + "is the wrong exception to throw for trying to subtract "
-                    + testSubtrahend.toString() + " from " + testMinuend.toString();
-            fail(msg);
-        }
+            System.out.println("should not have given result "
+                    + result.toString());
+        });
+        System.out.println("caused CurrencyConversionNeededException");
+        String excMsg = exception.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        System.out.println("\"" + excMsg + "\"");
     }
 
     @Test
@@ -185,7 +165,7 @@ public class CurrencyAmountTest {
                     + " by 0 correctly triggered IllegalArgumentException");
             System.out.println("\"" + iae.getMessage() + "\"");
         } catch (ArithmeticException ae) {
-            System.out.println("ArithmeticException is adequate for "
+            System.out.println("ArithmeticException is adequate for dividing "
                     + testDividend.toString() + " by 0");
             System.out.println("\"" + ae.getMessage() + "\"");
         } catch (RuntimeException re) {
@@ -290,36 +270,6 @@ public class CurrencyAmountTest {
     @Test
     void testCompareTo() {
         System.out.println("compareTo");
-        CurrencyAmount debtAmount = new CurrencyAmount(-400053L,
-                US_DOLLAR_CURRENCY);
-        CurrencyAmount zeroAmount = new CurrencyAmount(0L, US_DOLLAR_CURRENCY);
-        CurrencyAmount goodAmount = new CurrencyAmount(598047325L,
-                US_DOLLAR_CURRENCY);
-        int expected = -1;
-        int actual = debtAmount.compareTo(zeroAmount);
-        assertEquals(expected, actual);
-        actual = zeroAmount.compareTo(goodAmount);
-        assertEquals(expected, actual);
-        expected = 0;
-        CurrencyAmount sameAmount = new CurrencyAmount(-400053L,
-                US_DOLLAR_CURRENCY);
-        actual = debtAmount.compareTo(sameAmount);
-        assertEquals(expected, actual);
-        sameAmount = new CurrencyAmount(0L, US_DOLLAR_CURRENCY);
-        actual = zeroAmount.compareTo(sameAmount);
-        assertEquals(expected, actual);
-        sameAmount = new CurrencyAmount(598047325L, US_DOLLAR_CURRENCY);
-        actual = goodAmount.compareTo(sameAmount);
-        assertEquals(expected, actual);
-        expected = 1;
-        actual = zeroAmount.compareTo(debtAmount);
-        assertEquals(expected, actual);
-        actual = goodAmount.compareTo(zeroAmount);
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void testCompareToThroughCollectionSort() {
         CurrencyAmount firstAmount = new CurrencyAmount(389L, EURO_CURRENCY);
         CurrencyAmount negativeAmount = new CurrencyAmount(-4500,
                 EURO_CURRENCY);
@@ -327,20 +277,21 @@ public class CurrencyAmountTest {
         CurrencyAmount thirdAmount = new CurrencyAmount(500044873L,
                 EURO_CURRENCY);
         CurrencyAmount zeroethAmount = new CurrencyAmount(0L, EURO_CURRENCY);
-        List<CurrencyAmount> toBeSortedList = new ArrayList<>();
-        toBeSortedList.add(firstAmount);
-        toBeSortedList.add(negativeAmount);
-        toBeSortedList.add(secondAmount);
-        toBeSortedList.add(thirdAmount);
-        toBeSortedList.add(zeroethAmount);
-        List<CurrencyAmount> expectedList = new ArrayList<>();
-        expectedList.add(negativeAmount);
-        expectedList.add(zeroethAmount);
-        expectedList.add(firstAmount);
-        expectedList.add(secondAmount);
-        expectedList.add(thirdAmount);
-        Collections.sort(toBeSortedList);
-        assertEquals(expectedList, toBeSortedList);
+        List<CurrencyAmount> toBeSorted = new ArrayList<>();
+        toBeSorted.add(firstAmount);
+        toBeSorted.add(negativeAmount);
+        toBeSorted.add(secondAmount);
+        toBeSorted.add(thirdAmount);
+        toBeSorted.add(zeroethAmount);
+        List<CurrencyAmount> expected = new ArrayList<>();
+        expected.add(negativeAmount);
+        expected.add(zeroethAmount);
+        expected.add(firstAmount);
+        expected.add(secondAmount);
+        expected.add(thirdAmount);
+        List<CurrencyAmount> actual = new ArrayList<>(toBeSorted);
+        Collections.sort(actual);
+        assertEquals(expected, actual);
     }
 
     @Test
