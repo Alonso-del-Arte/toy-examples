@@ -800,6 +800,16 @@ class RomanNumeralsNumberTest {
     }
 
     @Test
+    void testToStringParseCorrespondence() {
+        RomanNumeralsNumber expected, actual;
+        for (int i = 1; i < 4000; i++) {
+            expected = new RomanNumeralsNumber(i);
+            actual = RomanNumeralsNumber.parse(expected.toString());
+            assertEquals(expected, actual);
+        }
+    }
+
+    @Test
     void testConstructorRejectsNegativeParameter() {
         int n = -RANDOM.nextInt(3999) - 1;
         Throwable throwable = assertThrows(ArithmeticException.class, () -> {
