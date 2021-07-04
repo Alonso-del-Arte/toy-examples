@@ -36,7 +36,7 @@ public class BasicCalculatorTest {
      * right after setUp().
      */
     @Test
-    public void testGetCurrVal() {
+    void testGetCurrVal() {
         System.out.println("getCurrVal");
         double expected = 0.0;
         double actual = calculator.getCurrVal();
@@ -44,7 +44,7 @@ public class BasicCalculatorTest {
     }
 
     @Test
-    public void testClearError() {
+    void testClearError() {
         System.out.println("clearError");
         calculator.subtract(1.0);
         try {
@@ -69,7 +69,7 @@ public class BasicCalculatorTest {
     }
 
     @Test
-    public void testAdd() {
+    void testAdd() {
         System.out.println("add");
         double expected = 2.0;
         calculator.add(1.0);
@@ -79,7 +79,7 @@ public class BasicCalculatorTest {
     }
 
     @Test
-    public void testSubtract() {
+    void testSubtract() {
         System.out.println("subtract");
         double expected = -1.0;
         calculator.subtract(1.0);
@@ -88,7 +88,7 @@ public class BasicCalculatorTest {
     }
 
     @Test
-    public void testMultiply() {
+    void testMultiply() {
         System.out.println("multiply");
         calculator.add(9.659210963325183);
         calculator.multiply(1.0225);
@@ -98,7 +98,7 @@ public class BasicCalculatorTest {
     }
 
     @Test
-    public void testDivide() {
+    void testDivide() {
         System.out.println("divide");
         calculator.add(1.0);
         calculator.divide(7.0);
@@ -109,7 +109,7 @@ public class BasicCalculatorTest {
 
     // TODO: Change this test to use assertThrows()
     @Test
-    public void testDivideByZero() {
+    void testDivideByZero() {
         calculator.add(1.0);
         try {
             calculator.divide(0.0);
@@ -120,15 +120,15 @@ public class BasicCalculatorTest {
         } catch (ArithmeticException ae) {
             System.out.println("ArithmeticException adequate for divide by 0");
             System.out.println("\"" + ae.getMessage() + "\"");
-        } catch (Exception e) {
-            String msg = e.getClass().getName()
+        } catch (RuntimeException re) {
+            String msg = re.getClass().getName()
                     + " is wrong exception to throw for divide by zero";
             fail(msg);
         }
     }
 
     @Test
-    public void testSquareRoot() {
+    void testSquareRoot() {
         System.out.println("squareRoot");
         calculator.add(163.0);
         calculator.squareRoot();
@@ -139,7 +139,7 @@ public class BasicCalculatorTest {
 
     // TODO: Change this test to use assertThrows()
     @Test
-    public void testSquareRootOnNegative() {
+    void testSquareRootOnNegative() {
         calculator.subtract(163.0);
         try {
             calculator.squareRoot();

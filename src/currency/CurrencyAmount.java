@@ -1,6 +1,7 @@
 package currency;
 
 import java.util.Currency;
+import java.util.Locale;
 
 public class CurrencyAmount implements Comparable<CurrencyAmount> {
 
@@ -36,7 +37,8 @@ public class CurrencyAmount implements Comparable<CurrencyAmount> {
             long sumCents = this.amountInCents + summand.amountInCents;
             return new CurrencyAmount(sumCents, this.currencyID);
         } else {
-            String excMsg = "Currency conversion needed to add " + summand.toString() + " to " + this.toString();
+            String excMsg = "Currency conversion needed to add "
+                    + summand.toString() + " to " + this.toString();
             throw new CurrencyConversionNeededException(excMsg, this, summand);
         }
     }
@@ -63,9 +65,11 @@ public class CurrencyAmount implements Comparable<CurrencyAmount> {
     public String toString() {
         StringBuilder amount = new StringBuilder(String.valueOf(this.amountInCents));
         int defaultFracDigits = this.currencyID.getDefaultFractionDigits();
-        while (amount.length() <= defaultFracDigits)
-            amount = amount.insert(0, '0');
-        StringBuilder amtStr = new StringBuilder(this.currencyID.getSymbol() + amount);
+        while (amount.length() <= defaultFracDigits) {
+            amount.insert(0, '0');
+        }
+        StringBuilder amtStr = new StringBuilder(this.currencyID.getSymbol()
+                + amount);
         if (defaultFracDigits > 0) {
             amtStr.insert(amtStr.length() - defaultFracDigits, '.');
         }
@@ -82,28 +86,24 @@ public class CurrencyAmount implements Comparable<CurrencyAmount> {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         CurrencyAmount that = (CurrencyAmount) obj;
-        return this.amountInCents == that.amountInCents && this.currencyID.equals(that.currencyID);
+        return this.amountInCents == that.amountInCents
+                && this.currencyID.equals(that.currencyID);
     }
 
     @Override
     public int compareTo(CurrencyAmount other) {
-        if (this.currencyID.equals(other.currencyID)) {
-            CurrencyAmount diff = this.minus(other);
-            if (diff.amountInCents < 0) {
-                return -1;
-            }
-            if (diff.amountInCents > 0) {
-                return 1;
-            }
-            return 0;
-        } else {
-            String excMsg = "Currency conversion needed to compare " + this.toString() + " to " + other.toString();
-            throw new CurrencyConversionNeededException(excMsg, this, other);
+        CurrencyAmount diff = this.minus(other);
+        if (diff.amountInCents < 0) {
+            return -1;
         }
+        if (diff.amountInCents > 0) {
+            return 1;
+        }
+        return 0;
     }
 
     public CurrencyAmount(long centsAmount) {
-        this(centsAmount, Currency.getInstance("USD"));
+        this(centsAmount, Currency.getInstance(Locale.US));
     }
 
     public CurrencyAmount(long centsAmount, Currency currency) {

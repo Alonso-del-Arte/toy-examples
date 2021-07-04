@@ -76,7 +76,7 @@ public class CurrencyConversionNeededExceptionTest {
         assertEquals(DOLLARS, bToACurrency);
     }
 
-    @Test
+    @Test // TODO: Change to use assertThrows()
     void testConstructor() {
         Currency dollarCurrency = Currency.getInstance("USD");
         CurrencyAmount amountA = new CurrencyAmount(100000L, dollarCurrency);
@@ -91,10 +91,10 @@ public class CurrencyConversionNeededExceptionTest {
             System.out.println("\"" + exc.getMessage() + "\"");
             fail(msg);
         } catch (IllegalArgumentException iae) {
-            System.out.println("USD to USD correctly triggered IllegalArgumentException");
+            System.out.println("USD to USD caused IllegalArgumentException");
             System.out.println("\"" + iae.getMessage() + "\"");
-        } catch (Exception e) {
-            String msg = e.getClass().getName()
+        } catch (RuntimeException re) {
+            String msg = re.getClass().getName()
                     + " is the wrong exception to throw for USD to USD";
             fail(msg);
         }

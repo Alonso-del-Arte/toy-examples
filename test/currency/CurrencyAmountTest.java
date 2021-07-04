@@ -320,13 +320,27 @@ public class CurrencyAmountTest {
     }
 
     @Test
-    void testConstructor() {
-        System.out.println("Constructor");
+    void testConstructorRejectsPreciousMetals() {
+        Currency platinum = Currency.getInstance("XPT");
+        System.out.print("Trying to use " + platinum.getDisplayName() + "("
+                + platinum.getSymbol() + ") for currency amount... ");
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> {
+            CurrencyAmount badAmount = new CurrencyAmount(100, platinum);
+                    System.out.println("somehow created " + badAmount);
+        });
+        System.out.println("correctly caused IllegalArgumentException");
+        String excMsg = exception.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testConstructorInfersUnitedStatesDollars() {
         long cents = 50389L;
-        CurrencyAmount oneItemConstr = new CurrencyAmount(cents);
-        CurrencyAmount twoItemConstr = new CurrencyAmount(cents,
-                US_DOLLAR_CURRENCY);
-        assertEquals(oneItemConstr, twoItemConstr);
+        CurrencyAmount expected = new CurrencyAmount(cents);
+        CurrencyAmount actual = new CurrencyAmount(cents, US_DOLLAR_CURRENCY);
+        assertEquals(expected, actual);
     }
 
 }

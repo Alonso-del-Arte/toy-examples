@@ -13,7 +13,7 @@ public class WrappedStringTest {
      * Test of the toAllCaps function, of the WrappedString class.
      */
     @Test
-    public void toAllCaps() {
+    void toAllCaps() {
         System.out.println("toAllCaps");
         WrappedString s = new WrappedString("helloworld");
         WrappedString expected = new WrappedString("HELLOWORLD");
@@ -25,7 +25,7 @@ public class WrappedStringTest {
      * Another test of the toAllCaps function, of the WrappedString class.
      */
     @Test
-    public void toAllCapsWithSomeCaps() {
+    void toAllCapsWithSomeCaps() {
         WrappedString s = new WrappedString("Hello, World!");
         WrappedString expected = new WrappedString("HELLO, WORLD!");
         WrappedString actual = s.toAllCaps();
