@@ -2,7 +2,8 @@ package reinventedwheels;
 
 public class BasicCalculator {
 
-    public static final String CLEARABLE_ERROR_NOTIFICATION = "Calculator is locked up in error state, use clearError() to clear";
+    public static final String CLEARABLE_ERROR_NOTIFICATION
+            = "Calculator currently in error state, use clearError() to clear";
 
     private double currVal = 0.0;
     private boolean errorFlag = false;
@@ -10,14 +11,11 @@ public class BasicCalculator {
 
     public double getCurrVal() {
         if (this.errorFlag) {
-            throw new IllegalStateException(CLEARABLE_ERROR_NOTIFICATION, this.errorCause);
+            throw new IllegalStateException(CLEARABLE_ERROR_NOTIFICATION,
+                    this.errorCause);
         }
         return this.currVal;
     }
-
-//    private void checkVal() {
-//        // MAYBE CHECK FOR OVERFLOWS, UNDERFLOWS?
-//    }
 
     public void clearError() {
         this.currVal = 0.0;
@@ -37,7 +35,7 @@ public class BasicCalculator {
     }
 
     public void divide(double divisor) {
-        if (divisor == 0) {
+        if (divisor == 0.0) {
             String msg = "Can't divide " + this.currVal + " by zero";
             IllegalArgumentException iae = new IllegalArgumentException(msg);
             this.errorFlag = true;
@@ -48,9 +46,10 @@ public class BasicCalculator {
     }
 
     public void squareRoot() {
-        if (this.currVal < 0) {
-            String msg = "Square root of " + this.currVal + " is an imaginary number, which this calculator can't represent";
-            IllegalArgumentException iae = new IllegalArgumentException(msg);
+        if (this.currVal < 0.0) {
+            String excMsg = "Square root of " + this.currVal
+                    + " is an imaginary number";
+            IllegalArgumentException iae = new IllegalArgumentException(excMsg);
             this.errorFlag = true;
             this.errorCause = iae;
             throw iae;
