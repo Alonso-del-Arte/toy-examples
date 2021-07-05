@@ -1,7 +1,7 @@
 package reinventedwheels;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,22 +12,10 @@ public class BasicCalculatorTest {
 
     private static BasicCalculator calculator;
 
-    @BeforeAll
-    static void setUp() {
+    @BeforeEach
+    void setUp() {
         System.out.println("Initializing calculator...");
         calculator = new BasicCalculator();
-    }
-
-    @AfterAll
-    static void tearDown() {
-        try {
-            double value = calculator.getCurrVal();
-            System.out.println("Value for calculator to display is " + value);
-        } catch (IllegalStateException ise) {
-            System.out.println(ise.getMessage());
-            System.out.println(ise.getCause().getMessage());
-            System.out.println();
-        }
     }
 
     /**
@@ -155,6 +143,18 @@ public class BasicCalculatorTest {
             String msg = e.getClass().getName()
                     + " is wrong exception to throw for sqrt(-163)";
             fail(msg);
+        }
+    }
+
+    @AfterEach
+    void tearDown() {
+        try {
+            double value = calculator.getCurrVal();
+            System.out.println("Value for calculator to display is " + value);
+        } catch (IllegalStateException ise) {
+            System.out.println(ise.getMessage());
+            System.out.println(ise.getCause().getMessage());
+            System.out.println();
         }
     }
 
