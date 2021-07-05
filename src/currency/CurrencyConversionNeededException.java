@@ -40,16 +40,21 @@ public class CurrencyConversionNeededException extends RuntimeException {
         return this.amtBToCurrA;
     }
 
-    public CurrencyConversionNeededException(String message, CurrencyAmount amountA, CurrencyAmount amountB) {
+    public CurrencyConversionNeededException(String message,
+                                             CurrencyAmount amountA,
+                                             CurrencyAmount amountB) {
         super(message);
         if (amountA.getCurrency().equals(amountB.getCurrency())) {
-            String excMsg = "No conversion is needed for operation involving " + amountA.toString() + " and " + amountB.toString();
+            String excMsg = "No conversion is needed for operation involving "
+                    + amountA.toString() + " and " + amountB.toString();
             throw new IllegalArgumentException(excMsg);
         }
         this.amtA = amountA;
         this.amtB = amountB;
-        this.amtAToCurrB = CurrencyConverter.convert(this.amtA, this.amtB.getCurrency());
-        this.amtBToCurrA = CurrencyConverter.convert(this.amtB, this.amtA.getCurrency());
+        this.amtAToCurrB = CurrencyConverter.convert(this.amtA,
+                this.amtB.getCurrency());
+        this.amtBToCurrA = CurrencyConverter.convert(this.amtB,
+                this.amtA.getCurrency());
         this.occurDateTime = LocalDateTime.now();
     }
 

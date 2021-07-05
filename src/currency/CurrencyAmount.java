@@ -107,6 +107,11 @@ public class CurrencyAmount implements Comparable<CurrencyAmount> {
     }
 
     public CurrencyAmount(long centsAmount, Currency currency) {
+        if (currency.getDefaultFractionDigits() == -1) {
+            String excMsg = "Can't use currency " + currency.getDisplayName()
+                    + " (" + currency.getCurrencyCode() + ")";
+            throw new IllegalArgumentException(excMsg);
+        }
         this.amountInCents = centsAmount;
         this.currencyID = currency;
     }
