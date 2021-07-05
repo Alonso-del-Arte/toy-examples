@@ -322,7 +322,7 @@ public class CurrencyAmountTest {
     @Test
     void testConstructorRejectsPreciousMetals() {
         Currency platinum = Currency.getInstance("XPT");
-        System.out.print("Trying to use " + platinum.getDisplayName() + "("
+        System.out.print("Trying to use " + platinum.getDisplayName() + " ("
                 + platinum.getSymbol() + ") for currency amount... ");
         Exception exception = assertThrows(IllegalArgumentException.class,
                 () -> {
