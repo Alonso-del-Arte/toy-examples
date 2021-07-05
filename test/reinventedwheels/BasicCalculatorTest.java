@@ -95,24 +95,19 @@ public class BasicCalculatorTest {
         assertEquals(expected, actual, TEST_DELTA);
     }
 
-    // TODO: Change this test to use assertThrows()
     @Test
     void testDivideByZero() {
-        calculator.add(1.0);
-        try {
+        double someNumber = Math.random() + 1.0;
+        calculator.add(someNumber);
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
             calculator.divide(0.0);
-            fail("Trying to divide by zero should have caused an exception");
-        } catch (IllegalArgumentException iae) {
-            System.out.println("Divide by 0 caused IllegalArgumentException");
-            System.out.println("\"" + iae.getMessage() + "\"");
-        } catch (ArithmeticException ae) {
-            System.out.println("ArithmeticException adequate for divide by 0");
-            System.out.println("\"" + ae.getMessage() + "\"");
-        } catch (RuntimeException re) {
-            String msg = re.getClass().getName()
-                    + " is wrong exception to throw for divide by zero";
-            fail(msg);
-        }
+            double badResult = calculator.getCurrVal();
+            System.out.println(someNumber + " divided by 0 is said to be "
+                    + badResult);
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        System.out.println("\"" + excMsg + "\"");
     }
 
     @Test
@@ -125,25 +120,19 @@ public class BasicCalculatorTest {
         assertEquals(expected, actual, TEST_DELTA);
     }
 
-    // TODO: Change this test to use assertThrows()
     @Test
     void testSquareRootOnNegative() {
-        calculator.subtract(163.0);
-        try {
+        double someNumber = Math.random() * 100 + 1.0;
+        calculator.subtract(someNumber);
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
             calculator.squareRoot();
-            String msg = "Imaginary number sqrt(-163) should cause exception";
-            fail(msg);
-        } catch (IllegalArgumentException iae) {
-            System.out.println("sqrt(-163) caused IllegalArgumentException");
-            System.out.println("\"" + iae.getMessage() + "\"");
-        } catch (ArithmeticException ae) {
-            System.out.println("ArithmeticException adequate for sqrt(-163)");
-            System.out.println("\"" + ae.getMessage() + "\"");
-        } catch (Exception e) {
-            String msg = e.getClass().getName()
-                    + " is wrong exception to throw for sqrt(-163)";
-            fail(msg);
-        }
+            double badResult = calculator.getCurrVal();
+            System.out.println("sqrt(-" + someNumber + ") is said to be "
+                    + badResult);
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        System.out.println("\"" + excMsg + "\"");
     }
 
     @AfterEach
@@ -153,7 +142,7 @@ public class BasicCalculatorTest {
             System.out.println("Value for calculator to display is " + value);
         } catch (IllegalStateException ise) {
             System.out.println(ise.getMessage());
-            System.out.println(ise.getCause().getMessage());
+            System.out.println("\"" + ise.getCause().getMessage() + "\"");
             System.out.println();
         }
     }
