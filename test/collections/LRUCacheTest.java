@@ -44,6 +44,27 @@ class LRUCacheTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testHas() {
+        System.out.println("has");
+        LRUCacheImpl cache = new LRUCacheImpl(DEFAULT_SIZE);
+        String ssnName = "\\d{3}-\\d{2}-\\d{4}";
+        Pattern pattern = cache.retrieve(ssnName);
+        String msg = "After adding pattern " + pattern.toString()
+                + " to cache, cache should acknowledge having that pattern";
+        assert cache.has(pattern) : msg;
+    }
+
+    @Test
+    void testDoesNotHave() {
+        LRUCacheImpl cache = new LRUCacheImpl(DEFAULT_SIZE);
+        String numberName = "([-+]?\\d*)";
+        Pattern pattern = Pattern.compile(numberName);
+        String msg = "Nothing has been added to cache, so it should not have "
+                + pattern.toString();
+        assert !cache.has(pattern) : msg;
+    }
+
     private static class LRUCacheImpl extends LRUCache<String, Pattern> {
 
         int createCallCount = 0;
