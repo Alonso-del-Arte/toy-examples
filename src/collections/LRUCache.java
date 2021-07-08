@@ -52,9 +52,8 @@ public abstract class LRUCache<N, V> {
         return Integer.MAX_VALUE;
     }
 
-    // TODO: Write a test for this
     boolean has(V value) {
-        return false;
+        return indexOf(value, this.values, this.capacity) > -1;
     }
 
     private static void moveToFront(Object[] objects, int position) {

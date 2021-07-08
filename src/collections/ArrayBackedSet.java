@@ -6,14 +6,22 @@ public class ArrayBackedSet<E> {
 
     private Object[] elements;
 
-    // TODO: Write test for this
+    private int nextUp = 0;
+
     public boolean add(E element) {
-        return false;
+        this.elements[this.nextUp] = element;
+        this.nextUp++;
+        return true;
     }
 
-    // TODO: Write test for this
     public boolean contains(E element) {
-        return false;
+        boolean flag = false;
+        int index = 0;
+        while (!flag && index < this.nextUp) {
+            flag = element.equals(this.elements[index]);
+            index++;
+        }
+        return flag;
     }
 
     // TODO: Write test for this
@@ -37,7 +45,12 @@ public class ArrayBackedSet<E> {
     }
 
     public ArrayBackedSet() {
-        this.elements = new Object[DEFAULT_INITIAL_CAPACITY];
+        this(DEFAULT_INITIAL_CAPACITY);
+    }
+
+    public ArrayBackedSet(int initialCapacity) {
+        // TODO: Check initialCapacity > 0
+        this.elements = new Object[initialCapacity];
     }
 
 }
