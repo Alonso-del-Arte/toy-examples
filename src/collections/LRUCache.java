@@ -56,13 +56,24 @@ public abstract class LRUCache<N, V> {
         return indexOf(value, this.values, this.capacity) > -1;
     }
 
+    /**
+     * Moves an object in an array to index 0. The other objects are shifted
+     * accordingly, e.g., the object at index 0 is moved to index 1, the object
+     * at index 1 is moved to index 2, etc.
+     * @param objects The array of objects.
+     * @param position A nonnegative integer, preferably positive.
+     * @throws ArrayIndexOutOfBoundsException If <code>position</code> is
+     * negative, equal to or greater than <code>objects.length</code>.
+     */
     private static void moveToFront(Object[] objects, int position) {
-        // TODO: Implement this
+        Object mostRecent = objects[position];
+        System.arraycopy(objects, 0, objects, 1, position);
+        objects[0] = mostRecent;
     }
 
     public V retrieve(N name) {
         V value;
-        int index = indexOf(name, this.names, this.nextUp);
+        int index = indexOf(name, this.names, this.capacity);
         if (index > -1) {
             value = (V) this.values[index];
         } else {
@@ -71,7 +82,7 @@ public abstract class LRUCache<N, V> {
             this.values[this.nextUp] = value;
             this.nextUp++;
             if (this.nextUp == this.capacity) {
-                this.nextUp--;
+                this.nextUp = 0;
             }
         }
         return value;

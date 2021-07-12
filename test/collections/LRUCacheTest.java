@@ -65,6 +65,38 @@ class LRUCacheTest {
         assert !cache.has(pattern) : msg;
     }
 
+    @Test
+    void testValueEventuallyForgotten() {
+        LRUCacheImpl cache = new LRUCacheImpl(DEFAULT_SIZE);
+        String romanName = "^(?=[MDCLXVI])M*(C[MD]|D?C{0,3})(X[CL]|L?X{0,3})"
+                + "(I[XV]|V?I{0,3})$";
+        Pattern romanValue = cache.retrieve(romanName);
+        for (int i = 0; i < DEFAULT_SIZE; i++) {
+            assert cache.has(romanValue);
+            String fillerName = "^" + (i + 1) + "*$";
+            cache.retrieve(fillerName);
+        }
+        String msg = "After filling in " + DEFAULT_SIZE
+                + " other values, Roman numerals pattern should be off cache";
+        assert !cache.has(romanValue) : msg;
+    }
+
+    @Test
+    void testFrequentlyUsedStaysCached() {
+        LRUCacheImpl cache = new LRUCacheImpl(DEFAULT_SIZE);
+        String dollarAmountName = "\\$\\d*\\.\\d{2}";
+        Pattern expected = cache.retrieve(dollarAmountName);
+        for (int i = 0; i < DEFAULT_SIZE; i++) {
+            Pattern actual = cache.retrieve(dollarAmountName);
+            assertEquals(expected, actual);
+            String fillerName = "^" + (i + 1) + "*$";
+            cache.retrieve(fillerName);
+        }
+        String msg = "Cache should still have " + expected.toString()
+                + " because it was retrieved repeatedly";
+        assert cache.has(expected) : msg;
+    }
+
     private static class LRUCacheImpl extends LRUCache<String, Pattern> {
 
         int createCallCount = 0;

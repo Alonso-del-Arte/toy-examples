@@ -16,7 +16,8 @@ class ArrayBackedSetTest {
         LocalDateTime dateTime = LocalDateTime.now();
         String msg ="Should be able to add " + dateTime.toString()
                 + " to set of times";
-        assert set.add(dateTime) : msg;
+        boolean opResult = set.add(dateTime);
+        assert opResult : msg;
     }
 
     @Test
@@ -42,10 +43,8 @@ class ArrayBackedSetTest {
         ArrayBackedSet<LocalDateTime> set = new ArrayBackedSet<>();
         int size = RANDOM.nextInt(13) + 2;
         LocalDateTime dateTime = LocalDateTime.now();
-        LocalDateTime[] dateTimes = new LocalDateTime[size];
         for (int i = 0; i < size; i++) {
             dateTime = dateTime.plusDays(i);
-            dateTimes[i] = dateTime;
             set.add(dateTime);
         }
         String msg = "Set of upcoming times should not contain "
