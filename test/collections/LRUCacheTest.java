@@ -1,6 +1,5 @@
 package collections;
 
-import java.util.Random;
 import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.Test;
@@ -9,8 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class LRUCacheTest {
 
     private static final int DEFAULT_SIZE = 7;
-
-    private static final Random RANDOM = new Random();
 
     @Test
     void testAddToCache() {
@@ -97,13 +94,38 @@ class LRUCacheTest {
         assert cache.has(expected) : msg;
     }
 
-    private static class LRUCacheImpl extends LRUCache<String, Pattern> {
+    @Test
+    void testConstructorRejectsSizeBelowMinimum() {
+        int badSize = LRUCache.MINIMUM_CAPACITY - 1;
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            LRUCacheImpl badCache = new LRUCacheImpl(badSize);
+            System.out.println("Should not have been able to create "
+                    + badCache.toString() + " of size " + badSize
+                    + ", one less than minimum capacity");
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
 
-        int createCallCount = 0;
+    @Test
+    void testConstructorRejectsSizeAboveMaximum() {
+        int badSize = LRUCache.MAXIMUM_CAPACITY + 1;
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            LRUCacheImpl badCache = new LRUCacheImpl(badSize);
+            System.out.println("Should not have been able to create "
+                    + badCache.toString() + " of size " + badSize
+                    + ", one more than maximum capacity");
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    private static class LRUCacheImpl extends LRUCache<String, Pattern> {
 
         @Override
         protected Pattern create(String name) {
-            createCallCount++;
             return Pattern.compile(name);
         }
 
