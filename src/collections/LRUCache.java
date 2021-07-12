@@ -80,10 +80,15 @@ public abstract class LRUCache<N, V> {
             value = this.create(name);
             this.names[this.nextUp] = name;
             this.values[this.nextUp] = value;
+            index = this.nextUp;
             this.nextUp++;
             if (this.nextUp == this.capacity) {
-                this.nextUp = 0;
+                this.nextUp--;
             }
+        }
+        if (index > 0) {
+            moveToFront(this.names, index);
+            moveToFront(this.values, index);
         }
         return value;
     }
