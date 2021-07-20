@@ -70,7 +70,7 @@ class LRUCacheTest {
         Pattern romanValue = cache.retrieve(romanName);
         for (int i = 0; i < DEFAULT_SIZE; i++) {
             assert cache.has(romanValue);
-            String fillerName = "^" + (i + 1) + "*$";
+            String fillerName = "^" + i + "*$";
             cache.retrieve(fillerName);
         }
         String msg = "After filling in " + DEFAULT_SIZE
@@ -86,7 +86,7 @@ class LRUCacheTest {
         for (int i = 0; i < DEFAULT_SIZE; i++) {
             Pattern actual = cache.retrieve(dollarAmountName);
             assertEquals(expected, actual);
-            String fillerName = "^" + (i + 1) + "*$";
+            String fillerName = "^" + i + "*$";
             cache.retrieve(fillerName);
         }
         String msg = "Cache should still have " + expected.toString()
