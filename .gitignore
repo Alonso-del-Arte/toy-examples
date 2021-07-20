@@ -30,3 +30,7 @@ out/
 # Files and directories with API keys, IAM usernames and passwords, etc.
 src/secrets
 test/secrets
+
+# Strictly for drafting
+src/draft
+test/draft
