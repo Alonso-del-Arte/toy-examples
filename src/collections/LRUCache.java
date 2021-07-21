@@ -21,8 +21,6 @@ public abstract class LRUCache<N, V> {
 
     private final int capacity;
 
-    private final int lastIndex;
-
     private int nextUp = 0;
 
     /**
@@ -48,10 +46,6 @@ public abstract class LRUCache<N, V> {
         }
     }
 
-    private int indexOf(V value) {
-        return Integer.MAX_VALUE;
-    }
-
     boolean has(V value) {
         return indexOf(value, this.values, this.capacity) > -1;
     }
@@ -71,20 +65,25 @@ public abstract class LRUCache<N, V> {
         objects[0] = mostRecent;
     }
 
+    private V add(N name) {
+        V value = this.create(name);
+        this.names[this.nextUp] = name;
+        this.values[this.nextUp] = value;
+        this.nextUp++;
+        if (this.nextUp == this.capacity) {
+            this.nextUp--;
+        }
+        return value;
+    }
+
     public V retrieve(N name) {
         V value;
         int index = indexOf(name, this.names, this.capacity);
         if (index > -1) {
             value = (V) this.values[index];
         } else {
-            value = this.create(name);
-            this.names[this.nextUp] = name;
-            this.values[this.nextUp] = value;
             index = this.nextUp;
-            this.nextUp++;
-            if (this.nextUp == this.capacity) {
-                this.nextUp--;
-            }
+            value = this.add(name);
         }
         if (index > 0) {
             moveToFront(this.names, index);
@@ -94,12 +93,19 @@ public abstract class LRUCache<N, V> {
     }
 
     public LRUCache(int size) {
-        // TODO: Throw exception if size < MINIMUM_CAPACITY
-        // TODO: Throw exception if size > MAXIMUM_CAPACITY
+        if (size < MINIMUM_CAPACITY) {
+            String excMsg = "Size " + size + " is less than minimum "
+                    + MINIMUM_CAPACITY;
+            throw new IllegalArgumentException(excMsg);
+        }
+        if (size > MAXIMUM_CAPACITY) {
+            String excMsg = "Size " + size + " is more than maximum "
+                    + MAXIMUM_CAPACITY;
+            throw new IllegalArgumentException(excMsg);
+        }
         this.capacity = size;
         this.names = new Object[this.capacity];
         this.values = new Object[this.capacity];
-        this.lastIndex = this.capacity - 1;
     }
 
 }
