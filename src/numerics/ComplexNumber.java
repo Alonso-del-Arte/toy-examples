@@ -41,10 +41,22 @@ public class ComplexNumber implements Arithmeticable<ComplexNumber>  {
         return this.imagPart;
     }
 
-    // TODO: Write test for this
     @Override
     public boolean equals(Object obj) {
-        return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!obj.getClass().equals(this.getClass())) {
+            return false;
+        }
+        final ComplexNumber other = (ComplexNumber) obj;
+        if (this.realPart != other.realPart) {
+            return false;
+        }
+        return this.imagPart == other.imagPart;
     }
 
     // TODO: Write test for this
@@ -76,10 +88,13 @@ public class ComplexNumber implements Arithmeticable<ComplexNumber>  {
         return new ComplexNumber(0.0, 0.0);
     }
 
-    // STUB TO FAIL THE FIRST TEST
     @Override
     public ComplexNumber times(ComplexNumber multiplicand) {
-        return new ComplexNumber(0.0, 0.0);
+        double re = this.realPart * multiplicand.realPart
+                - this.imagPart * multiplicand.imagPart;
+        double im = this.realPart * multiplicand.imagPart
+                + this.imagPart * multiplicand.realPart;
+        return new ComplexNumber(re, im);
     }
 
     // STUB TO FAIL THE FIRST TEST
@@ -98,6 +113,11 @@ public class ComplexNumber implements Arithmeticable<ComplexNumber>  {
     @Override
     public ComplexNumber divides(int divisor) {
         return new ComplexNumber(0.0, 0.0);
+    }
+
+    // TODO: Write test for this
+    public double abs() {
+        return Double.NEGATIVE_INFINITY;
     }
 
     public ComplexNumber(double re, double im) {
