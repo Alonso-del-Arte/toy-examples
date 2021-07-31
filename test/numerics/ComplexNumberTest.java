@@ -16,10 +16,16 @@
  */
 package numerics;
 
+import java.util.Random;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ComplexNumberTest {
+
+    private static final double TEST_DELTA = 0.00000001;
+
+    private static final Random RANDOM = new Random();
 
     @Test
     void testToString() {
@@ -33,19 +39,93 @@ class ComplexNumberTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testGetRealPart() {
+        System.out.println("getRealPart");
+        double expected = RANDOM.nextDouble();
+        double imag = RANDOM.nextDouble();
+        ComplexNumber number = new ComplexNumber(expected, imag);
+        double actual = number.getRealPart();
+        assertEquals(expected, actual, TEST_DELTA);
+    }
+
+    @Test
+    void testGetImagPart() {
+        System.out.println("getImagPart");
+        double real = RANDOM.nextDouble();
+        double expected = RANDOM.nextDouble();
+        ComplexNumber number = new ComplexNumber(real, expected);
+        double actual = number.getImagPart();
+        assertEquals(expected, actual, TEST_DELTA);
+    }
+
+    @Test
+    void testReferentialEquality() {
+        double real = RANDOM.nextDouble();
+        double imag = RANDOM.nextDouble();
+        ComplexNumber number = new ComplexNumber(real, imag);
+        assertEquals(number, number);
+    }
+
+    @Test
+    void testNotEqualsNull() {
+        double real = RANDOM.nextDouble();
+        double imag = RANDOM.nextDouble();
+        ComplexNumber number = new ComplexNumber(real, imag);
+        assertNotEquals(number, null);
+    }
+
+    @Test
+    void testNotEqualsOtherClass() {
+        ComplexNumber complexNumber = new ComplexNumber(1.0, 0.0);
+        RomanNumeralsNumber romanNumeralsNumber = new RomanNumeralsNumber(1);
+        assertNotEquals(complexNumber, romanNumeralsNumber);
+    }
+
+    @Test
+    void testNotEqualsDiffRe() {
+        double real = RANDOM.nextDouble();
+        double imag = RANDOM.nextDouble();
+        ComplexNumber number = new ComplexNumber(real, imag);
+        ComplexNumber numberTimesI = new ComplexNumber(-imag, real);
+        assertNotEquals(number, numberTimesI);
+    }
+
+    @Test
+    void testNotEqualsDiffIm() {
+        double real = RANDOM.nextDouble();
+        double imag = RANDOM.nextDouble();
+        ComplexNumber number = new ComplexNumber(real, imag);
+        ComplexNumber conjugate = new ComplexNumber(real, -imag);
+        assertNotEquals(number, conjugate);
+    }
+
+    @Test
+    void testEquals() {
+        System.out.println("equals");
+        double real = RANDOM.nextDouble();
+        double imag = RANDOM.nextDouble();
+        ComplexNumber someNumber = new ComplexNumber(real, imag);
+        ComplexNumber sameNumber = new ComplexNumber(real, imag);
+        assertEquals(someNumber, sameNumber);
+    }
+
     /**
      * Test of plus method, of class ComplexNumber.
      */
     @Test
-    void testPlus_ComplexNumber() {
+    void testPlus() {
         System.out.println("plus");
-        ComplexNumber addend = null;
-        ComplexNumber instance = null;
-        ComplexNumber expResult = null;
-//        ComplexNumber result = instance.plus(addend);
-//        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        double addendARe = RANDOM.nextDouble();
+        double addendAIm = RANDOM.nextDouble();
+        ComplexNumber addendA = new ComplexNumber(addendARe, addendAIm);
+        double addendBRe = RANDOM.nextDouble();
+        double addendBIm = RANDOM.nextDouble();
+        ComplexNumber addendB = new ComplexNumber(addendBRe, addendBIm);
+        ComplexNumber expected = new ComplexNumber(addendARe + addendBRe,
+                addendAIm + addendBIm);
+        ComplexNumber actual = addendA.plus(addendB);
+        assertEquals(expected, actual);
     }
 
     /**
@@ -53,7 +133,6 @@ class ComplexNumberTest {
      */
     @Test
     void testPlus_int() {
-        System.out.println("plus");
         int addend = 0;
         ComplexNumber instance = null;
         ComplexNumber expResult = null;
@@ -78,18 +157,28 @@ class ComplexNumberTest {
     }
 
     /**
-     * Test of times method, of class ComplexNumber.
+     * Test of times method, of class ComplexNumber. For this test I chose to go
+     * with integers rather than floating point numbers to sidestep issues
+     * pertaining to the loss of machine precision.
      */
     @Test
-    void testTimes_ComplexNumber() {
+    void testTimes() {
         System.out.println("times");
-        ComplexNumber multiplicand = null;
-        ComplexNumber instance = null;
-        ComplexNumber expResult = null;
-//        ComplexNumber result = instance.times(multiplicand);
-//        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int multiplicandARe = RANDOM.nextInt(128) - 64;
+        int multiplicandAIm = RANDOM.nextInt(128) - 64;
+        ComplexNumber multiplicandA = new ComplexNumber(multiplicandARe,
+                multiplicandAIm);
+        int multiplicandBRe = RANDOM.nextInt(128) - 64;
+        int multiplicandBIm = RANDOM.nextInt(128) - 64;
+        ComplexNumber multiplicandB = new ComplexNumber(multiplicandBRe,
+                multiplicandBIm);
+        int expRe = multiplicandARe * multiplicandBRe
+                - multiplicandAIm * multiplicandBIm;
+        int expIm = multiplicandARe * multiplicandBIm
+                + multiplicandAIm * multiplicandBRe;
+        ComplexNumber expected = new ComplexNumber(expRe, expIm);
+        ComplexNumber actual = multiplicandA.times(multiplicandB);
+        assertEquals(expected, actual);
     }
 
     /**
@@ -97,7 +186,6 @@ class ComplexNumberTest {
      */
     @Test
     void testTimes_int() {
-        System.out.println("times");
         int multiplicand = 0;
         ComplexNumber instance = null;
         ComplexNumber expResult = null;
