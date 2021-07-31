@@ -30,8 +30,17 @@ public class ComplexNumber implements Arithmeticable<ComplexNumber>  {
 
     @Override
     public String toString() {
-        return Double.toString(this.realPart) + " + "
-                + Double.toString(this.imagPart) + "i";
+        return this.realPart + " + " + this.imagPart + "i";
+    }
+
+    // TODO: Write test for this
+    public double getRealPart() {
+        return Double.NaN;
+    }
+
+    // TODO: Write test for this
+    public double getImagPart() {
+        return Double.NaN;
     }
 
     @Override
