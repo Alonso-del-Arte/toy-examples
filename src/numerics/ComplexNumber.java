@@ -33,14 +33,24 @@ public class ComplexNumber implements Arithmeticable<ComplexNumber>  {
         return this.realPart + " + " + this.imagPart + "i";
     }
 
-    // TODO: Write test for this
     public double getRealPart() {
-        return Double.NaN;
+        return this.realPart;
+    }
+
+    public double getImagPart() {
+        return this.imagPart;
     }
 
     // TODO: Write test for this
-    public double getImagPart() {
-        return Double.NaN;
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+
+    // TODO: Write test for this
+    @Override
+    public int hashCode() {
+        return Integer.MIN_VALUE;
     }
 
     @Override
