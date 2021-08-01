@@ -21,22 +21,33 @@ import arithmetic.Arithmeticable;
 /**
  * Represents a complex number. A complex number has a real part and an
  * imaginary part. In this class, both parts are represented as floating point
- * numbers.
+ * numbers with 64-bit IEEE precision.
  * @author Alonso del Arte
  */
 public class ComplexNumber implements Arithmeticable<ComplexNumber>  {
 
     private final double realPart, imagPart;
 
-    // TODO: Write test for this
+    /**
+     * Gives a textual representation of this complex number using the proper
+     * minus sign when needed.
+     * @return A text representation. For example, for &minus;0.5 +
+     * 0.87<i>i</i>, this would return "&minus;0.5 + 0.87i".
+     */
     @Override
     public String toString() {
-        return this.realPart + " + " + this.imagPart + "i";
+        return this.toASCIIString().replace("-", "\u2212");
     }
 
-    // TODO: Write test for this
+    /**
+     * Gives a textual representation of this complex number using ASCII
+     * characters only.
+     * @return A text representation. For example, for &minus;0.5 +
+     * 0.87<i>i</i>, this would return "-0.5 + 0.87i".
+     */
     public String toASCIIString() {
-        return "Sorry, not implemented yet";
+        String intermediate = this.realPart + " + " + this.imagPart + "i";
+        return intermediate.replace(" + -", " - ");
     }
 
     public double getRealPart() {
