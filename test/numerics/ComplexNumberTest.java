@@ -33,8 +33,38 @@ class ComplexNumberTest {
         double re = Math.random();
         double im = Math.random();
         ComplexNumber z = new ComplexNumber(re, im);
-        String expected = Double.toString(re) + "+" + Double.toString(im)
-                + "i";
+        String expected = re + "+" + im + "i";
+        String actual = z.toString().replace(" ", "");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testToASCIIString() {
+        System.out.println("toASCIIString");
+        double re = 1.0 + Math.random();
+        double im = -1.0 + Math.random();
+        ComplexNumber z = new ComplexNumber(re, im);
+        String expected = re + "" + im + "i";
+        String actual = z.toASCIIString().replace(" ", "");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testToStringNegativeRealPart() {
+        double re = -1.0 + Math.random();
+        double im = 1.0 + Math.random();
+        ComplexNumber z = new ComplexNumber(re, im);
+        String expected = "\u2212" + Math.abs(re) + "+" + im + "i";
+        String actual = z.toString().replace(" ", "");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testToStringNegativeImaginaryPart() {
+        double re = 1.0 + Math.random();
+        double im = -1.0 + Math.random();
+        ComplexNumber z = new ComplexNumber(re, im);
+        String expected = re + "\u2212" + Math.abs(im) + "i";
         String actual = z.toString().replace(" ", "");
         assertEquals(expected, actual);
     }
