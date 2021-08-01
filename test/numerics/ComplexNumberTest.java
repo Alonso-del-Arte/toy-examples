@@ -225,4 +225,15 @@ class ComplexNumberTest {
         fail("The test case is a prototype.");
     }
 
+    @Test
+    void testAbs() {
+        System.out.println("abs");
+        double real = RANDOM.nextDouble() - RANDOM.nextInt(16);
+        double imag = RANDOM.nextDouble() - RANDOM.nextInt(16);
+        ComplexNumber number = new ComplexNumber(real, imag);
+        double expected = Math.sqrt(real * real + imag * imag);
+        double actual = number.abs();
+        assertEquals(expected, actual, TEST_DELTA);
+    }
+
 }
