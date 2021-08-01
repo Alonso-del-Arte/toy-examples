@@ -28,9 +28,15 @@ public class ComplexNumber implements Arithmeticable<ComplexNumber>  {
 
     private final double realPart, imagPart;
 
+    // TODO: Write test for this
     @Override
     public String toString() {
         return this.realPart + " + " + this.imagPart + "i";
+    }
+
+    // TODO: Write test for this
+    public String toASCIIString() {
+        return "Sorry, not implemented yet";
     }
 
     public double getRealPart() {
@@ -115,9 +121,10 @@ public class ComplexNumber implements Arithmeticable<ComplexNumber>  {
         return new ComplexNumber(0.0, 0.0);
     }
 
-    // TODO: Write test for this
     public double abs() {
-        return Double.NEGATIVE_INFINITY;
+        double aSquared = this.realPart * this.realPart;
+        double bSquared = this.imagPart * this.imagPart;
+        return Math.sqrt(aSquared + bSquared);
     }
 
     public ComplexNumber(double re, double im) {
