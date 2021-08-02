@@ -1,5 +1,7 @@
 package collections;
 
+import java.util.Arrays;
+
 public class ArrayBackedSet<E> {
 
     private static final int DEFAULT_INITIAL_CAPACITY = 16;
@@ -28,33 +30,99 @@ public class ArrayBackedSet<E> {
         return true;
     }
 
-    public boolean contains(E element) {
+    private int indexOf(E element) {
         boolean flag = false;
         int index = 0;
         while (!flag && index < this.nextUp) {
             flag = element.equals(this.elements[index]);
             index++;
         }
-        return flag;
+        if (flag) {
+            return index - 1;
+        } else {
+            return -1;
+        }
     }
 
-    // TODO: Write test for this
+    public boolean contains(E element) {
+        return this.indexOf(element) > -1;
+    }
+
     public boolean remove(E element) {
-        return false;
+        int index = this.indexOf(element);
+        if (index == -1) {
+            return false;
+        } else {
+            int lastIndex = --this.nextUp;
+            if (index < lastIndex) {
+                this.elements[index] = this.elements[lastIndex];
+            }
+            this.elements[lastIndex] = null;
+            return true;
+        }
     }
 
     public int size() {
         return this.nextUp;
     }
 
-    // TODO: Write test for this
     public boolean isEmpty() {
-        return false;
+        return this.nextUp == 0;
     }
 
-    // TODO: Write test for this
     public void clear() {
-        //
+        for (int i = 0; i < this.nextUp; i++) {
+            this.elements[i] = null;
+        }
+        this.nextUp = 0;
+    }
+
+    private boolean backingArrayMatches(ArrayBackedSet<?> other) {
+        int index = 0;
+        boolean foundInBoth = true;
+        while (foundInBoth && index < this.nextUp) {
+            int otherIndex = 0;
+            boolean foundInOther = false;
+            while (!foundInOther && otherIndex < other.nextUp) {
+                foundInOther = this.elements[index]
+                        .equals(other.elements[otherIndex]);
+                otherIndex++;
+            }
+            foundInBoth = foundInOther;
+            index++;
+        }
+        return foundInBoth;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public String toString() {
+        return "ArrayBackedSet{" +
+                "elements=" + Arrays.toString(elements) +
+                ", nextUp=" + nextUp +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (!this.getClass().equals(obj.getClass())) return false;
+        final ArrayBackedSet<?> other = (ArrayBackedSet<?>) obj;
+        if (this.nextUp == other.nextUp) {
+            return this.backingArrayMatches(other);
+        } else {
+            return false;
+        }
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public int hashCode() {
+        return 0;
+//        int result = Arrays.hashCode(elements);
+//        result = 31 * result + nextUp;
+//        return result;
     }
 
     public ArrayBackedSet() {
@@ -62,7 +130,11 @@ public class ArrayBackedSet<E> {
     }
 
     public ArrayBackedSet(int initialCapacity) {
-        // TODO: Check initialCapacity > 0
+        if (initialCapacity < 0) {
+            String excMsg = "Initial capacity " + initialCapacity
+                    + " is invalid, needs to be greater than 0";
+            throw new IllegalArgumentException(excMsg);
+        }
         this.elements = new Object[initialCapacity];
     }
 
