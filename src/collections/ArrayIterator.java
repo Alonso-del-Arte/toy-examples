@@ -1,6 +1,7 @@
 package collections;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 class ArrayIterator<E> implements Iterator<E> {
 
@@ -17,14 +18,15 @@ class ArrayIterator<E> implements Iterator<E> {
     public E next() {
         if (this.ranOut) {
             String excMsg = "There are no more elements to iterate through";
-            throw new RuntimeException(excMsg);
+            throw new NoSuchElementException(excMsg);
         }
+        E element = this.current.element;
         if (this.current.nextElement == null) {
             this.ranOut = true;
         } else {
             this.current = this.current.nextElement;
         }
-        return null;
+        return element;
     }
 
     private E ascertainNotNull(Object obj, int index) {

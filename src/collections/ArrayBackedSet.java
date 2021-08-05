@@ -1,8 +1,9 @@
 package collections;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
-public class ArrayBackedSet<E> {
+public class ArrayBackedSet<E> implements Iterable<E> {
 
     private static final int DEFAULT_INITIAL_CAPACITY = 16;
 
@@ -75,6 +76,11 @@ public class ArrayBackedSet<E> {
             this.elements[i] = null;
         }
         this.nextUp = 0;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new ArrayIterator<>(this.elements, this.nextUp);
     }
 
     private boolean backingArrayMatches(ArrayBackedSet<?> other) {

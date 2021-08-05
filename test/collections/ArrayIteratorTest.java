@@ -1,5 +1,6 @@
 package collections;
 
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.NoSuchElementException;
 import java.util.Random;
@@ -30,6 +31,41 @@ class ArrayIteratorTest {
         String msg = "Even though passed array has " + size
                 + " slots, zero-capped iterator should not have next element";
         assert !iterator.hasNext() : msg;
+    }
+
+    @Test
+    void testNext() {
+        System.out.println("next");
+        int size = RANDOM.nextInt(32) + 1;
+        BigInteger[] array = new BigInteger[size];
+        BigInteger number;
+        for (int i = 0; i < size; i++) {
+            number = new BigInteger(64 + i, RANDOM);
+            array[i] = number;
+        }
+        ArrayIterator<BigInteger> iterator = new ArrayIterator<>(array, size);
+        int counter = 0;
+        while (iterator.hasNext()) {
+            number = iterator.next();
+            assertEquals(array[counter], number);
+            counter++;
+        }
+    }
+
+    @Test
+    void testNextThrowsExceptionAfterRunningOut() {
+        int size = RANDOM.nextInt(32) + 1;
+        Rdn[] array = new Rdn[size];
+        ArrayIterator<Rdn> iterator = new ArrayIterator<>(array, 0);
+        assert !iterator.hasNext() : "Empty iterator should not have next";
+        Throwable t = assertThrows(NoSuchElementException.class, () -> {
+            Rdn badRDN = iterator.next();
+            System.out.println("Empty iterator should not have given "
+                    + badRDN.toString());
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
     }
 
     @Test

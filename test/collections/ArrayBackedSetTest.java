@@ -1,5 +1,6 @@
 package collections;
 
+import java.math.BigInteger;
 import java.sql.Clob;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -238,6 +239,23 @@ class ArrayBackedSetTest {
             pangramSet.add(gram);
         }
         assertEquals(alphabetSet, pangramSet);
+    }
+
+    @Test
+    void testIterator() {
+        System.out.println("iterator");
+        int size = RANDOM.nextInt(48) + 16;
+        ArrayBackedSet<BigInteger> expected = new ArrayBackedSet<>(size);
+        BigInteger number;
+        for (int i = 0; i < size; i++) {
+            number = new BigInteger(i + 32, RANDOM);
+            expected.add(number);
+        }
+        ArrayBackedSet<BigInteger> actual = new ArrayBackedSet<>(size);
+        for (BigInteger n : expected) {
+            actual.add(n);
+        }
+        assertEquals(expected, actual);
     }
 
     @Test
