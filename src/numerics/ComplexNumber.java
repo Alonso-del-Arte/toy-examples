@@ -99,10 +99,15 @@ public class ComplexNumber implements Arithmeticable<ComplexNumber>  {
         return new ComplexNumber(0.0, 0.0);
     }
 
-    // STUB TO FAIL THE FIRST TEST
     @Override
     public ComplexNumber negate() {
-        return new ComplexNumber(0.0, 0.0);
+        return new ComplexNumber(-this.realPart, -this.imagPart);
+    }
+
+    // TODO: Write test for this
+    @Override
+    public ComplexNumber minus(ComplexNumber subtrahend) {
+        return this;
     }
 
     @Override
