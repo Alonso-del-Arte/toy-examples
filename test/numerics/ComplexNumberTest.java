@@ -173,17 +173,36 @@ class ComplexNumberTest {
     }
 
     /**
-     * Test of negate method, of class ComplexNumber.
+     * Test of the negate function, of the ComplexNumber class.
      */
     @Test
     void testNegate() {
         System.out.println("negate");
-        ComplexNumber instance = null;
-        ComplexNumber expResult = null;
-//        ComplexNumber result = instance.negate();
-//        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        double re = RANDOM.nextDouble();
+        double im = RANDOM.nextDouble();
+        ComplexNumber number = new ComplexNumber(re, im);
+        ComplexNumber expected = new ComplexNumber(-re, -im);
+        ComplexNumber actual = number.negate();
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Test of the minus function, of the ComplexNumber class.
+     */
+    @Test
+    void testMinus() {
+        System.out.println("minus");
+        double minuendRe = RANDOM.nextDouble();
+        double minuendIm = RANDOM.nextDouble();
+        ComplexNumber minuend = new ComplexNumber(minuendRe, minuendIm);
+        double subtrahendRe = RANDOM.nextDouble();
+        double subtrahendIm = RANDOM.nextDouble();
+        ComplexNumber subtrahend = new ComplexNumber(subtrahendRe,
+                subtrahendIm);
+        ComplexNumber expected = new ComplexNumber(minuendRe - subtrahendRe,
+                minuendIm - subtrahendIm);
+        ComplexNumber actual = minuend.minus(subtrahend);
+        assertEquals(expected, actual);
     }
 
     /**

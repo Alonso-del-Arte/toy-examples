@@ -104,10 +104,16 @@ public class ComplexNumber implements Arithmeticable<ComplexNumber>  {
         return new ComplexNumber(-this.realPart, -this.imagPart);
     }
 
-    // TODO: Write test for this
     @Override
     public ComplexNumber minus(ComplexNumber subtrahend) {
-        return this;
+        double subtractionRe = this.realPart - subtrahend.realPart;
+        double subtractionIm = this.imagPart - subtrahend.imagPart;
+        if (Double.isInfinite(subtractionRe)
+                || Double.isInfinite(subtractionIm)) {
+            String excMsg = "Overflow occurred";
+            throw new ArithmeticException(excMsg);
+        }
+        return new ComplexNumber(subtractionRe, subtractionIm);
     }
 
     @Override
