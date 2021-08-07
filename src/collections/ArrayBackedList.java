@@ -19,14 +19,23 @@ public class ArrayBackedList<E> implements Iterable<E> {
         this.elements = largerArray;
     }
 
-    // TODO: Write tests for this
     public boolean add(E element) {
-        return false;
+        if (this.nextUp == this.elements.length) {
+            this.expandCapacity();
+        }
+        this.elements[this.nextUp] = element;
+        this.nextUp++;
+        return true;
     }
 
     // TODO: Write tests for this
     public boolean add(E element, int index) {
-        return false;
+        return this.add(element);
+    }
+
+    // TODO: Write tests for this
+    public E get(int index) {
+        return null;
     }
 
     private int indexOf(E element) {
@@ -43,9 +52,8 @@ public class ArrayBackedList<E> implements Iterable<E> {
         }
     }
 
-    // TODO: Write tests for this
     public boolean contains(E element) {
-        return false;// this.indexOf(element) > -1;
+        return this.indexOf(element) > -1;
     }
 
     // TODO: Write tests for this
@@ -53,9 +61,8 @@ public class ArrayBackedList<E> implements Iterable<E> {
         return false;
     }
 
-    // TODO: Write tests for this
     public int size() {
-        return Integer.MIN_VALUE;
+        return this.nextUp;
     }
 
     // TODO: Write tests for this
@@ -100,6 +107,11 @@ public class ArrayBackedList<E> implements Iterable<E> {
     }
 
     public ArrayBackedList(int initialCapacity) {
+        if (initialCapacity < 0) {
+            String excMsg = "Negative initial capacity " + initialCapacity
+                    + " is invalid";
+            throw new IllegalArgumentException(excMsg);
+        }
         this.elements = new Object[initialCapacity];
     }
 
