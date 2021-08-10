@@ -101,7 +101,7 @@ class ArrayBackedSetTest {
             String msg = "Set failed to expand to add after first " + size
                     + " elements";
             System.out.println(msg);
-            System.out.println("\"" + aioobe + "\"");
+            System.out.println("\"" + aioobe.getMessage() + "\"");
             fail(msg);
         }
     }
@@ -194,14 +194,14 @@ class ArrayBackedSetTest {
     }
 
     @Test
-    void testNotEqualsDifferentClass() {
+    void testNotEqualsDiffClass() {
         ArrayBackedSet<LocalDateTime> arrayBackedSet = new ArrayBackedSet<>();
         HashSet<LocalDateTime> hashSet = new HashSet<>();
         assertNotEquals(arrayBackedSet, hashSet);
     }
 
     @Test
-    void testNotEqualsDifferentSize() {
+    void testNotEqualsDiffSize() {
         ArrayBackedSet<LocalDateTime> someSet = new ArrayBackedSet<>();
         ArrayBackedSet<LocalDateTime> diffSet = new ArrayBackedSet<>();
         LocalDateTime now = LocalDateTime.now();
@@ -209,6 +209,7 @@ class ArrayBackedSetTest {
         diffSet.add(now);
         diffSet.add(LocalDateTime.MIN);
         diffSet.add(LocalDateTime.MAX);
+        assertNotEquals(someSet.size(), diffSet.size());
         assertNotEquals(someSet, diffSet);
     }
 

@@ -33,9 +33,12 @@ public class ArrayBackedList<E> implements Iterable<E> {
         return this.add(element);
     }
 
-    // TODO: Write tests for this
     public E get(int index) {
-        return null;
+        if (index < 0 || index >= this.nextUp) {
+            String excMsg = "Index " + index + " is out of bounds";
+            throw new IndexOutOfBoundsException(excMsg);
+        }
+        return (E) this.elements[index];
     }
 
     private int indexOf(E element) {
@@ -56,23 +59,49 @@ public class ArrayBackedList<E> implements Iterable<E> {
         return this.indexOf(element) > -1;
     }
 
-    // TODO: Write tests for this
+    private void shiftElementsLeft(int index) {
+        int lastIndex = this.nextUp - 1;
+        if (lastIndex - index >= 0) {
+            System.arraycopy(this.elements, index + 1, this.elements, index,
+                    lastIndex - index);
+        }
+        this.elements[lastIndex] = null;
+        this.nextUp--;
+    }
+
+    public E remove(int index) {
+        if (index < 0 || index >= this.nextUp) {
+            String excMsg = "Index " + index + " is out of bounds";
+            throw new IndexOutOfBoundsException(excMsg);
+        }
+        Object holder = this.elements[index];
+        this.shiftElementsLeft(index);
+        return (E) holder;
+    }
+
     public boolean remove(E element) {
-        return false;
+        int index = this.indexOf(element);
+        if (index == -1) {
+            return false;
+        } else {
+            this.shiftElementsLeft(index);
+            return true;
+        }
     }
 
     public int size() {
         return this.nextUp;
     }
 
-    // TODO: Write tests for this
     public boolean isEmpty() {
-        return false;
+        return this.nextUp == 0;
     }
 
-    // TODO: Write tests for this
     public void clear() {
-        //
+        for (int i = 0; i < this.nextUp; i++) {
+            this.elements[i] = null;
+        }
+        this.nextUp = 0;
     }
 
     // TODO: Write tests for this
@@ -90,10 +119,12 @@ public class ArrayBackedList<E> implements Iterable<E> {
                 '}';
     }
 
-    // TODO: Write tests for this
     @Override
     public boolean equals(Object obj) {
-        return false;
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (!obj.getClass().equals(this.getClass())) return false;
+        return ((ArrayBackedList) obj).nextUp == this.nextUp;
     }
 
     // TODO: Write tests for this
