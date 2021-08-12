@@ -129,10 +129,14 @@ public class ArrayBackedList<E> implements Iterable<E> {
         return Arrays.equals(this.elements, other.elements);
     }
 
-    // TODO: Write tests for this
     @Override
     public int hashCode() {
-        return 0;
+        int hash = Integer.MIN_VALUE;
+        for (int i = 0; i < this.nextUp; i++) {
+            hash <<= 1;
+            hash += this.elements[i].hashCode();
+        }
+        return hash;
     }
 
     public ArrayBackedList() {

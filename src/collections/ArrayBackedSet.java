@@ -1,5 +1,7 @@
 package collections;
 
+import collections.comparators.HashCodeComparator;
+
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -122,13 +124,17 @@ public class ArrayBackedSet<E> implements Iterable<E> {
         }
     }
 
-    // TODO: Write tests for this
     @Override
     public int hashCode() {
-        return 0;
-//        int result = Arrays.hashCode(elements);
-//        result = 31 * result + nextUp;
-//        return result;
+        Object[] sortedArray = new Object[this.nextUp];
+        System.arraycopy(this.elements, 0, sortedArray, 0, this.nextUp);
+        Arrays.sort(sortedArray, new HashCodeComparator());
+        int hash = Integer.MIN_VALUE;
+        for (int i = 0; i < this.nextUp; i++) {
+            hash <<= 1;
+            hash += sortedArray[i].hashCode();
+        }
+        return hash;
     }
 
     public ArrayBackedSet() {

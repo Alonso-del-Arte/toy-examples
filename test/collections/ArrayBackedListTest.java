@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.sql.CallableStatement;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Random;
 
@@ -354,6 +355,22 @@ class ArrayBackedListTest {
             sameList.add(number);
         }
         assertEquals(someList, sameList);
+    }
+
+    @Test
+    void testHashCode() {
+        System.out.println("hashCode");
+        HashSet<Integer> hashes = new HashSet<>();
+        int expected = RANDOM.nextInt(24);
+        LocalDateTime dateTime;
+        ArrayBackedList<LocalDateTime> list = new ArrayBackedList<>();
+        for (int i = 0; i < expected; i++) {
+            hashes.add(list.hashCode());
+            dateTime = LocalDateTime.now().plusSeconds(i);
+            list.add(dateTime);
+        }
+        int actual = hashes.size();
+        assertEquals(expected, actual);
     }
 
     @Test

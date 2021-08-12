@@ -243,6 +243,40 @@ class ArrayBackedSetTest {
     }
 
     @Test
+    void testHashCode() {
+        System.out.println("hashCode");
+        HashSet<Integer> hashes = new HashSet<>();
+        int expected = RANDOM.nextInt(24);
+        LocalDateTime dateTime;
+        ArrayBackedSet<LocalDateTime> set = new ArrayBackedSet<>();
+        for (int i = 0; i < expected; i++) {
+            hashes.add(set.hashCode());
+            dateTime = LocalDateTime.now().plusHours(i);
+            set.add(dateTime);
+        }
+        int actual = hashes.size();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testHashCodeUnaffectedByElementAddOrder() {
+        String first = "First Element";
+        String second = "Second Element";
+        String third = "Third Element";
+        ArrayBackedSet<String> someSet = new ArrayBackedSet<>();
+        someSet.add(first);
+        someSet.add(second);
+        someSet.add(third);
+        ArrayBackedSet<String> sameSet = new ArrayBackedSet<>();
+        sameSet.add(third);
+        sameSet.add(first);
+        sameSet.add(second);
+        int expected = someSet.hashCode();
+        int actual = sameSet.hashCode();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testIterator() {
         System.out.println("iterator");
         int size = RANDOM.nextInt(48) + 16;
