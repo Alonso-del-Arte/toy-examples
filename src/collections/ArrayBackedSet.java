@@ -126,13 +126,9 @@ public class ArrayBackedSet<E> implements Iterable<E> {
 
     @Override
     public int hashCode() {
-        Object[] sortedArray = new Object[this.nextUp];
-        System.arraycopy(this.elements, 0, sortedArray, 0, this.nextUp);
-        Arrays.sort(sortedArray, new HashCodeComparator());
-        int hash = Integer.MIN_VALUE;
+        int hash = 0;
         for (int i = 0; i < this.nextUp; i++) {
-            hash <<= 1;
-            hash += sortedArray[i].hashCode();
+            hash += this.elements[i].hashCode();
         }
         return hash;
     }
