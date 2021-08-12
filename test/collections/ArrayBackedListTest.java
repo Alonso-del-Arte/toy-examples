@@ -374,6 +374,23 @@ class ArrayBackedListTest {
     }
 
     @Test
+    void testIterator() {
+        System.out.println("iterator");
+        int size = RANDOM.nextInt(48) + 16;
+        ArrayBackedList<BigInteger> expected = new ArrayBackedList<>(size);
+        BigInteger number;
+        for (int i = 0; i < size; i++) {
+            number = new BigInteger(i + 32, RANDOM);
+            expected.add(number);
+        }
+        ArrayBackedList<BigInteger> actual = new ArrayBackedList<>(size);
+        for (BigInteger n : expected) {
+            actual.add(n);
+        }
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testConstructorRejectsNegativeCapacity() {
         int badSize = -RANDOM.nextInt(128) - 1;
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {

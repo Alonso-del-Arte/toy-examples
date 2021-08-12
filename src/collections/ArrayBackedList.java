@@ -104,10 +104,9 @@ public class ArrayBackedList<E> implements Iterable<E> {
         this.nextUp = 0;
     }
 
-    // TODO: Write tests for this
     @Override
     public Iterator<E> iterator() {
-        return new ArrayIterator<>(this.elements, 0);
+        return new ArrayIterator<>(this.elements, this.nextUp);
     }
 
     // TODO: Write tests for this
