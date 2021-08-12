@@ -113,7 +113,7 @@ public class ArrayBackedList<E> implements Iterable<E> {
     // TODO: Write tests for this
     @Override
     public String toString() {
-        return "ArrayBackedSet{" +
+        return "ArrayBackedList{" +
                 "elements=" + Arrays.toString(this.elements) +
                 ", nextUp=" + this.nextUp +
                 '}';
@@ -124,7 +124,9 @@ public class ArrayBackedList<E> implements Iterable<E> {
         if (this == obj) return true;
         if (obj == null) return false;
         if (!obj.getClass().equals(this.getClass())) return false;
-        return ((ArrayBackedList) obj).nextUp == this.nextUp;
+        ArrayBackedList<?> other = (ArrayBackedList<?>) obj;
+        if (this.nextUp != other.nextUp) return false;
+        return Arrays.equals(this.elements, other.elements);
     }
 
     // TODO: Write tests for this

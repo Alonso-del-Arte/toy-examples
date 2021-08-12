@@ -334,6 +334,29 @@ class ArrayBackedListTest {
     }
 
     @Test
+    void testNotEqualsDiffElems() {
+        int size = RANDOM.nextInt(40);
+        ArrayBackedList<BigInteger> listA = this.makeBigIntList(size);
+        ArrayBackedList<BigInteger> listB = this.makeBigIntList(size);
+        assertNotEquals(listA, listB);
+    }
+
+    @Test
+    void testEquals() {
+        System.out.println("equals");
+        int size = RANDOM.nextInt(128);
+        ArrayBackedList<BigInteger> someList = new ArrayBackedList<>(size);
+        ArrayBackedList<BigInteger> sameList = new ArrayBackedList<>(size);
+        BigInteger number;
+        for (int i = 0; i < size; i++) {
+            number = new BigInteger(32 + i, RANDOM);
+            someList.add(number);
+            sameList.add(number);
+        }
+        assertEquals(someList, sameList);
+    }
+
+    @Test
     void testConstructorRejectsNegativeCapacity() {
         int badSize = -RANDOM.nextInt(128) - 1;
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {

@@ -214,7 +214,7 @@ class ArrayBackedSetTest {
     }
 
     @Test
-    void testNotEqualsDifferentElements() {
+    void testNotEqualsDiffElems() {
         int size = RANDOM.nextInt(20) + 16;
         ArrayBackedSet<Integer> someSet = new ArrayBackedSet<>(size);
         ArrayBackedSet<Integer> diffSet = new ArrayBackedSet<>(size);
