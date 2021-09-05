@@ -15,6 +15,8 @@ class ArrayBackedListTest {
 
     private static final Random RANDOM = new Random();
 
+    private static final int DEFAULT_PADDING = 4;
+
     @Test
     void testAdd() {
         System.out.println("add");
@@ -44,7 +46,8 @@ class ArrayBackedListTest {
 
     private ArrayBackedList<BigInteger> makeBigIntList(int size) {
         BigInteger number;
-        ArrayBackedList<BigInteger> list = new ArrayBackedList<>(size);
+        ArrayBackedList<BigInteger> list = new ArrayBackedList<>(size
+                + DEFAULT_PADDING);
         for (int i = 0; i < size; i++) {
             number = new BigInteger(64 + i, RANDOM);
             list.add(number);
@@ -299,6 +302,94 @@ class ArrayBackedListTest {
         list.clear();
         String msg = "List should be empty after calling cleear()";
         assert list.isEmpty() : msg;
+    }
+
+    @Test
+    void testAddRejectsNegativeIndex() {
+        int size = RANDOM.nextInt(32) + 8;
+        ArrayBackedList<BigInteger> list = this.makeBigIntList(size);
+        int badIndex = -RANDOM.nextInt(128) - 1;
+        BigInteger someNumber = new BigInteger(size, RANDOM);
+        Throwable t = assertThrows(IndexOutOfBoundsException.class, () -> {
+            list.add(someNumber, badIndex);
+            System.out.println("Should not have been able to add "
+                    + someNumber.toString() + " at bad index " + badIndex);
+        });
+        System.out.println("Trying to add " + someNumber.toString()
+                + " at index " + badIndex
+                + " correctly caused IndexOutOfBoundsException");
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testAddRejectsExcessiveIndex() {
+        int size = RANDOM.nextInt(32) + 8;
+        ArrayBackedList<BigInteger> list = this.makeBigIntList(size);
+        int badIndex = size + RANDOM.nextInt(size) + 2 * DEFAULT_PADDING;
+        BigInteger someNumber = new BigInteger(size, RANDOM);
+        Throwable t = assertThrows(IndexOutOfBoundsException.class, () -> {
+            list.add(someNumber, badIndex);
+            System.out.println("Should not have been able to add "
+                    + someNumber.toString() + " at bad index " + badIndex
+                    + " (list had " + size + " elements before add operation)");
+        });
+        System.out.println("Trying to add " + someNumber.toString()
+                + " at index " + badIndex + " (for list with " + size
+                + " elements) correctly caused IndexOutOfBoundsException");
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testAddAtSpecificIndex() {
+        int size = RANDOM.nextInt(48) + 16;
+        ArrayBackedList<BigInteger> list = this.makeBigIntList(size + 1);
+        int index = RANDOM.nextInt(size);
+        int displacedLength = size - index;
+        BigInteger[] expected = new BigInteger[displacedLength];
+        for (int i = 0; i < displacedLength; i++) {
+            expected[i] = list.get(index + i);
+        }
+        BigInteger number = new BigInteger(40, RANDOM);
+        list.add(number, index);
+        BigInteger actual;
+        for (int j = 0; j < displacedLength; j++) {
+            actual = list.get(index + j + 1);
+            assertEquals(expected[j], actual);
+        }
+    }
+
+    @Test
+    void testAddAtLastIndexCanExpandCapacity() {
+        int size = RANDOM.nextInt(32) + 16;
+        ArrayBackedList<String> list = new ArrayBackedList<>(size);
+        int number;
+        String element;
+        for (int i = 0; i < size; i++) {
+            number = i + RANDOM.nextInt();
+            element = "Element at position " + i + " is " + number;
+            list.add(element);
+        }
+        number = size + RANDOM.nextInt();
+        int position = size - 1;
+        element = "Element " + number + " will be inserted at position " + position;
+        try {
+            list.add(element, position);
+            System.out.println(element.replace("will be", "was"));
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
+            String msg = "Capacity should have expanded for "
+                    + (size + 1) + " elements";
+            System.out.println(msg);
+            System.out.println("\"" + aioobe.getMessage() + "\"");
+            fail(msg);
+        } catch (RuntimeException re) {
+            String msg = re.getClass().getName()
+                    + " wrong for failure to expand capacity";
+            fail(msg);
+        }
     }
 
     @Test

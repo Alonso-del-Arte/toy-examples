@@ -19,6 +19,23 @@ public class ArrayBackedList<E> implements Iterable<E> {
         this.elements = largerArray;
     }
 
+    private void shiftElementsLeft(int index) {
+        int lastIndex = this.nextUp - 1;
+        if (lastIndex - index >= 0) {
+            System.arraycopy(this.elements, index + 1, this.elements, index,
+                    lastIndex - index);
+        }
+        this.elements[lastIndex] = null;
+        this.nextUp--;
+    }
+
+    private void shiftElementsRight(int index) {
+        for (int i = this.nextUp - 1; i >= index; i--) {
+            this.elements[i + 1] = this.elements[i];
+        }
+        this.nextUp++;
+    }
+
     public boolean add(E element) {
         if (this.nextUp == this.elements.length) {
             this.expandCapacity();
@@ -28,9 +45,13 @@ public class ArrayBackedList<E> implements Iterable<E> {
         return true;
     }
 
-    // TODO: Write tests for this
     public boolean add(E element, int index) {
-        return this.add(element);
+        if (this.nextUp == this.elements.length) {
+            this.expandCapacity();
+        }
+        this.shiftElementsRight(index);
+        this.elements[index] = element;
+        return true;
     }
 
     public E get(int index) {
@@ -57,16 +78,6 @@ public class ArrayBackedList<E> implements Iterable<E> {
 
     public boolean contains(E element) {
         return this.indexOf(element) > -1;
-    }
-
-    private void shiftElementsLeft(int index) {
-        int lastIndex = this.nextUp - 1;
-        if (lastIndex - index >= 0) {
-            System.arraycopy(this.elements, index + 1, this.elements, index,
-                    lastIndex - index);
-        }
-        this.elements[lastIndex] = null;
-        this.nextUp--;
     }
 
     public E remove(int index) {
