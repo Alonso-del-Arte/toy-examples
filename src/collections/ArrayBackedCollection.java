@@ -10,7 +10,7 @@ abstract class ArrayBackedCollection<E> implements Iterable<E> {
 
     private int nextUp = 0;
 
-    void expandCapacity() {
+    final void expandCapacity() {
         int largerSize = 3 * this.elements.length / 2;
         Object[] largerArray = new Object[largerSize];
         System.arraycopy(this.elements, 0, largerArray, 0,
@@ -66,14 +66,17 @@ abstract class ArrayBackedCollection<E> implements Iterable<E> {
     private class ArrayBackedIterator<E> implements Iterator<E> {
 
         // TODO: Write tests for this
+        @Override
         public boolean hasNext() {
-            return true;
+            return false;
         }
 
         // TODO: Write tests for this
+        @Override
         public E next() {
             return null;
         }
+
     }
 
 }

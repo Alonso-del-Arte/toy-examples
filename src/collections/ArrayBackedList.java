@@ -21,18 +21,17 @@ public class ArrayBackedList<E> implements Iterable<E> {
 
     private void shiftElementsLeft(int index) {
         int lastIndex = this.nextUp - 1;
-        if (lastIndex - index >= 0) {
-            System.arraycopy(this.elements, index + 1, this.elements, index,
-                    lastIndex - index);
-        }
+        int length = lastIndex - index;
+        System.arraycopy(this.elements, index + 1, this.elements, index,
+                length);
         this.elements[lastIndex] = null;
         this.nextUp--;
     }
 
     private void shiftElementsRight(int index) {
-        for (int i = this.nextUp - 1; i >= index; i--) {
-            this.elements[i + 1] = this.elements[i];
-        }
+        int length = this.nextUp - index;
+        System.arraycopy(this.elements, index, this.elements, index + 1,
+                length);
         this.nextUp++;
     }
 
@@ -46,8 +45,15 @@ public class ArrayBackedList<E> implements Iterable<E> {
     }
 
     public boolean add(E element, int index) {
+        if (index < 0 || index > this.nextUp) {
+            String excMsg = "Index " + index + " is out of bounds";
+            throw new IndexOutOfBoundsException(excMsg);
+        }
         if (this.nextUp == this.elements.length) {
             this.expandCapacity();
+        }
+        if (index == this.nextUp) {
+            return this.add(element);
         }
         this.shiftElementsRight(index);
         this.elements[index] = element;
