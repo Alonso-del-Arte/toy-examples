@@ -6,9 +6,9 @@ abstract class ArrayBackedCollection<E> implements Iterable<E> {
 
     public static final int DEFAULT_INITIAL_CAPACITY = 16;
 
-    private Object[] elements;
+    Object[] elements;
 
-    private int nextUp = 0;
+    int nextUp = 0;
 
     final void expandCapacity() {
         int largerSize = 3 * this.elements.length / 2;
@@ -18,14 +18,35 @@ abstract class ArrayBackedCollection<E> implements Iterable<E> {
         this.elements = largerArray;
     }
 
-    // TODO: Write tests for this
     public boolean add(E element) {
-        return false;
+        if (element == null) {
+            return false;
+        }
+        if (this.nextUp == this.elements.length) {
+            this.expandCapacity();
+        }
+        this.elements[this.nextUp] = element;
+        this.nextUp++;
+        return true;
     }
 
-    // TODO: Write tests for this
+    int indexOf(E element) {
+        boolean found = false;
+        int counter = 0;
+        while (!found && counter < this.nextUp) {
+            found = element.equals(this.elements[counter]);
+            counter++;
+        }
+        if (found) {
+            return counter - 1;
+        } else {
+            return -1;
+        }
+    }
+
     public boolean contains(E element) {
-        return false;// this.indexOf(element) > -1;
+        if (element == null) return false;
+        return this.indexOf(element) > -1;
     }
 
     // TODO: Write tests for this
@@ -54,12 +75,18 @@ abstract class ArrayBackedCollection<E> implements Iterable<E> {
         return new ArrayIterator<>(this.elements, 0);
     }
 
+    // TODO: Write tests for this
+    public ArrayBackedCollection(ArrayBackedCollection<?
+            extends E> collection) {
+        this(20);
+    }
+
     public ArrayBackedCollection(int initialCapacity) {
-//        if (initialCapacity < 0) {
-//            String excMsg = "Initial capacity " + initialCapacity
-//                    + " is invalid, needs to be greater than 0";
-//            throw new IllegalArgumentException(excMsg);
-//        }
+        if (initialCapacity < 0) {
+            String excMsg = "Initial capacity " + initialCapacity
+                    + " is invalid, needs to be greater than 0";
+            throw new IllegalArgumentException(excMsg);
+        }
         this.elements = new Object[initialCapacity];
     }
 
