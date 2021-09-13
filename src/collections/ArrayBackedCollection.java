@@ -49,30 +49,36 @@ abstract class ArrayBackedCollection<E> implements Iterable<E> {
         return this.indexOf(element) > -1;
     }
 
-    // TODO: Write tests for this
     public boolean remove(E element) {
-        return false;
+        int index = this.indexOf(element);
+        if (index < 0) {
+            return false;
+        } else {
+            this.nextUp--;
+            if (index < this.nextUp) {
+                this.elements[index] = this.elements[this.nextUp];
+            }
+            this.elements[this.nextUp] = null;
+            return true;
+        }
     }
 
-    // TODO: Write tests for this
     public int size() {
-        return Integer.MIN_VALUE;
+        return this.nextUp;
     }
 
-    // TODO: Write tests for this
     public boolean isEmpty() {
-        return false;
+        return this.nextUp == 0;
     }
 
-    // TODO: Write tests for this
     public void clear() {
-        //
+        this.elements = new Object[this.elements.length];
+        this.nextUp = 0;
     }
 
-    // TODO: Write tests for this
     @Override
     public Iterator<E> iterator() {
-        return new ArrayIterator<>(this.elements, 0);
+        return new ArrayBackedIterator<>();
     }
 
     // TODO: Write tests for this

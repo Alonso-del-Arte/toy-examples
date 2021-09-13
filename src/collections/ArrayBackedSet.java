@@ -1,7 +1,5 @@
 package collections;
 
-import collections.comparators.HashCodeComparator;
-
 import java.util.Arrays;
 import java.util.Iterator;
 

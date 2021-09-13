@@ -137,6 +137,8 @@ class ArrayBackedSetTest {
         String msg = "Should have been able to remove \"" + element
                 + "\" from set";
         assert opResult : msg;
+        msg = "Set should no longer contain removed element";
+        assert !set.contains(element) : msg;
         int expected = originalSize - 1;
         int actual = set.size();
         assertEquals(expected, actual);
