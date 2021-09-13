@@ -3,6 +3,13 @@ package collections;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * Iterator.
+ * @param <E> The element type.
+ * @deprecated This class will be removed as soon as the better alternative is
+ * tested and ready to go.
+ */
+@Deprecated
 class ArrayIterator<E> implements Iterator<E> {
 
     private Node<E> current;
