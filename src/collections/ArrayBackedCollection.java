@@ -77,6 +77,17 @@ abstract class ArrayBackedCollection<E> implements Iterable<E> {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        return obj != null;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+
+    @Override
     public Iterator<E> iterator() {
         return new ArrayBackedIterator<>();
     }
