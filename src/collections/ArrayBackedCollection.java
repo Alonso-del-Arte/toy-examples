@@ -78,13 +78,35 @@ abstract class ArrayBackedCollection<E> implements Iterable<E> {
 
     @Override
     public boolean equals(Object obj) {
-        return obj != null;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!this.getClass().equals(obj.getClass())) {
+            return false;
+        }
+        ArrayBackedCollection<?> other = (ArrayBackedCollection<?>) obj;
+        if (this.nextUp != other.nextUp) {
+            return false;
+        }
+        boolean matchesSoFar = true;
+        int index = 0;
+        while (matchesSoFar && index < this.nextUp) {
+            matchesSoFar = this.elements[index].equals(other.elements[index]);
+            index++;
+        }
+        return matchesSoFar;
     }
 
-    // TODO: Write tests for this
     @Override
     public int hashCode() {
-        return 0;
+        int hash = 0;
+        for (int i = 0; i < this.nextUp; i++) {
+            hash += (i + 1) * this.elements[i].hashCode();
+        }
+        return hash;
     }
 
     @Override

@@ -5,6 +5,8 @@ import java.sql.Clob;
 import java.time.LocalDateTime;
 import java.util.Random;
 
+import javax.naming.ldap.Rdn;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -228,6 +230,103 @@ class ArrayBackedCollectionTest {
         for (int j = 0; j < collection.elements.length; j++) {
             String msg = "Backing array slot " + j + " should be null";
             assert collection.elements[j] == null : msg;
+        }
+    }
+
+    @Test
+    void testReferentialEquality() {
+        ArrayBackedCollection<Rdn> collection
+                = new ArrayBackedCollectionImpl<>();
+        assertEquals(collection, collection);
+    }
+
+    @Test
+    void testNotEqualsNull() {
+        ArrayBackedCollection<Rdn> collection
+                = new ArrayBackedCollectionImpl<>();
+        assertNotEquals(collection, null);
+    }
+
+    @Test
+    void testNotEqualsDiffClass() {
+        String element = "Just for testing purposes";
+        ArrayBackedCollection<String> collectionA
+                = new ArrayBackedCollectionImpl<>();
+        ArrayBackedCollection<String> collectionB
+                = new ArrayBackedCollection<String>(ArrayBackedCollection
+                        .DEFAULT_INITIAL_CAPACITY) {};
+        collectionA.add(element);
+        collectionB.add(element);
+        assertNotEquals(collectionA, collectionB);
+    }
+
+    @Test
+    void testNotEqualsDiffSize() {
+        BigInteger element = new BigInteger(72, RANDOM);
+        ArrayBackedCollection<BigInteger> collectionA
+                = new ArrayBackedCollectionImpl<>();
+        ArrayBackedCollection<BigInteger> collectionB
+                = new ArrayBackedCollectionImpl<>();
+        do {
+            element = element.add(BigInteger.ONE);
+            collectionA.add(element);
+            collectionB.add(element);
+        } while (RANDOM.nextBoolean());
+        collectionA.add(element.add(BigInteger.ONE));
+        String msg = "Since collection A has " + collectionA.size()
+                + " elements and collection B has " + collectionB.size()
+                + " elements, they should not be equal";
+        assertNotEquals(collectionA, collectionB, msg);
+    }
+
+    @Test
+    void testNotEqualsDiffOrder() {
+        ArrayBackedCollection<Integer> collectionA
+                = new ArrayBackedCollectionImpl<>();
+        ArrayBackedCollection<Integer> collectionB
+                = new ArrayBackedCollectionImpl<>();
+        collectionA.add(1);
+        collectionA.add(2);
+        collectionA.add(3);
+        collectionB.add(3);
+        collectionB.add(1);
+        collectionB.add(2);
+        assertNotEquals(collectionA, collectionB);
+    }
+
+    @Test
+    void testEquals() {
+        System.out.println("equals");
+        int size = RANDOM.nextInt(64) + 32;
+        ArrayBackedCollection<LocalDateTime> someCollection
+                = new ArrayBackedCollectionImpl<>(size);
+        ArrayBackedCollection<LocalDateTime> sameCollection
+                = new ArrayBackedCollectionImpl<>(size);
+        LocalDateTime curr = LocalDateTime.now();
+        for (int i = 0; i < size; i++) {
+            curr = curr.plusMinutes(i);
+            someCollection.add(curr);
+            sameCollection.add(curr);
+        }
+        assertEquals(someCollection, sameCollection);
+    }
+
+    @Test
+    void testHashCode() {
+        System.out.println("hashCode");
+        int size = RANDOM.nextInt(128) + 32;
+        ArrayBackedCollection<LocalDateTime> collection
+                = new ArrayBackedCollectionImpl<>(size);
+        LocalDateTime curr = LocalDateTime.now();
+        collection.add(curr);
+        int prevHash = collection.hashCode();
+        int currHash;
+        for (int i = 1; i < size; i++) {
+            curr = curr.plusHours(1);
+            collection.add(curr);
+            currHash = collection.hashCode();
+            assertNotEquals(currHash, prevHash);
+            prevHash = currHash;
         }
     }
 
