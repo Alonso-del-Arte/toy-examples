@@ -17,6 +17,17 @@ class ArrayBackedListTest {
 
     private static final int DEFAULT_PADDING = 4;
 
+    private ArrayBackedList<BigInteger> makeBigIntList(int size) {
+        BigInteger number;
+        ArrayBackedList<BigInteger> list = new ArrayBackedList<>(size
+                + DEFAULT_PADDING);
+        for (int i = 0; i < size; i++) {
+            number = new BigInteger(64 + i, RANDOM);
+            list.add(number);
+        }
+        return list;
+    }
+
     @Test
     void testAdd() {
         System.out.println("add");
@@ -42,17 +53,6 @@ class ArrayBackedListTest {
         ArrayBackedList<String> list = new ArrayBackedList<>();
         String msg = "Since this message wasn't added, list shouldn't have it";
         assert !list.contains(msg) : msg;
-    }
-
-    private ArrayBackedList<BigInteger> makeBigIntList(int size) {
-        BigInteger number;
-        ArrayBackedList<BigInteger> list = new ArrayBackedList<>(size
-                + DEFAULT_PADDING);
-        for (int i = 0; i < size; i++) {
-            number = new BigInteger(64 + i, RANDOM);
-            list.add(number);
-        }
-        return list;
     }
 
     @Test
@@ -390,6 +390,31 @@ class ArrayBackedListTest {
                     + " wrong for failure to expand capacity";
             fail(msg);
         }
+    }
+
+    @Test
+    void testAddRejectsNull() {
+        ArrayBackedList<CallableStatement> list = new ArrayBackedList<>();
+        int expected = list.size();
+        String msg = "List add should reject null";
+        boolean opResult = list.add(null);
+        int actual = list.size();
+        assert !opResult : msg;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testAddAtIndexRejectsNull() {
+        int size = RANDOM.nextInt(32) + 8;
+        ArrayBackedList<BigInteger> list = this.makeBigIntList(size);
+        int expected = list.size();
+        int index = RANDOM.nextInt(size - 1);
+        String msg = "List add at index " + index + " out of " + size
+                + " should reject null";
+        boolean opResult = list.add(null, index);
+        int actual = list.size();
+        assert !opResult : msg;
+        assertEquals(expected, actual);
     }
 
     @Test

@@ -1,6 +1,7 @@
 package collections;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 abstract class ArrayBackedCollection<E> implements Iterable<E> {
 
@@ -111,13 +112,14 @@ abstract class ArrayBackedCollection<E> implements Iterable<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new ArrayBackedIterator<>();
+        return new ArrayBackedIterator();
     }
 
-    // TODO: Write tests for this
     public ArrayBackedCollection(ArrayBackedCollection<?
             extends E> collection) {
-        this(20);
+        this.elements = new Object[collection.elements.length];
+        this.nextUp = collection.nextUp;
+        System.arraycopy(collection.elements, 0, this.elements, 0, this.nextUp);
     }
 
     public ArrayBackedCollection(int initialCapacity) {
@@ -129,18 +131,22 @@ abstract class ArrayBackedCollection<E> implements Iterable<E> {
         this.elements = new Object[initialCapacity];
     }
 
-    private class ArrayBackedIterator<E> implements Iterator<E> {
+    private class ArrayBackedIterator implements Iterator<E> {
 
-        // TODO: Write tests for this
+        private int index = 0;
+
         @Override
         public boolean hasNext() {
-            return false;
+            return this.index < ArrayBackedCollection.this.nextUp;
         }
 
-        // TODO: Write tests for this
         @Override
         public E next() {
-            return null;
+            if (this.index == ArrayBackedCollection.this.nextUp) {
+                String excMsg = "Collection has no more elements";
+                throw new NoSuchElementException(excMsg);
+            }
+            return (E) ArrayBackedCollection.this.elements[this.index++];
         }
 
     }

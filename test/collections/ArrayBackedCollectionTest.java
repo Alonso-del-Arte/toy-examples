@@ -3,6 +3,8 @@ package collections;
 import java.math.BigInteger;
 import java.sql.Clob;
 import java.time.LocalDateTime;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 import javax.naming.ldap.Rdn;
@@ -331,6 +333,78 @@ class ArrayBackedCollectionTest {
     }
 
     @Test
+    void testIteratorHasNext() {
+        ArrayBackedCollection<LocalDateTime> collection
+                = new ArrayBackedCollectionImpl<>();
+        collection.add(LocalDateTime.now());
+        Iterator<LocalDateTime> iterator = collection.iterator();
+        String msg = "Iterator for non-empty collection should have next";
+        assert iterator.hasNext() : msg;
+    }
+
+    @Test
+    void testIteratorDoesNotHaveNext() {
+        ArrayBackedCollection<Rdn> collection
+                = new ArrayBackedCollectionImpl<>();
+        Iterator<Rdn> iterator = collection.iterator();
+        String msg = "Iterator for empty collection should not have next";
+        assert !iterator.hasNext() : msg;
+    }
+
+    @Test
+    void testIteratorNextJustOneElement() {
+        ArrayBackedCollection<LocalDateTime> collection
+                = new ArrayBackedCollectionImpl<>();
+        LocalDateTime expected = LocalDateTime.now();
+        collection.add(expected);
+        Iterator<LocalDateTime> iterator = collection.iterator();
+        LocalDateTime actual = iterator.next();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testIteratorNext() {
+        int size = RANDOM.nextInt(128) + 2;
+        BigInteger[] expected = new BigInteger[size];
+        ArrayBackedCollection<BigInteger> collection
+                = new ArrayBackedCollectionImpl<>(size);
+        for (int i = 0; i < size; i++) {
+            BigInteger number = new BigInteger(64 + i, RANDOM);
+            expected[i] = number;
+            collection.add(number);
+        }
+        Iterator<BigInteger> iterator = collection.iterator();
+        for (int j = 0; j < size; j++) {
+            BigInteger actual = iterator.next();
+            assertEquals(expected[j], actual);
+        }
+    }
+
+    @Test
+    void testIteratorNextThrowsExceptionAfterRunningOut() {
+        ArrayBackedCollection<LocalDateTime> collection
+                = new ArrayBackedCollectionImpl<>();
+        collection.add(LocalDateTime.now());
+        Iterator<LocalDateTime> iterator = collection.iterator();
+        LocalDateTime element = iterator.next();
+        System.out.println("Iterator has element " + element.toString()
+                + " and no others");
+        String msg = "Iterator should not have next";
+        assert !iterator.hasNext() : msg;
+        Throwable t = assertThrows(NoSuchElementException.class, () -> {
+            LocalDateTime badElement = iterator.next();
+            System.out.println("After giving its only element, "
+                    + element.toString() + " iterator should not have given "
+                    + badElement);
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("After running out, " + iterator.toString()
+                + " correctly threw " + t.getClass().getName());
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
     void testConstructorRejectsNegativeCapacity() {
         int badCapacity = -RANDOM.nextInt(128) - 1;
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
@@ -352,6 +426,19 @@ class ArrayBackedCollectionTest {
         ArrayBackedCollection<Clob> collection
                 = new ArrayBackedCollectionImpl<>(expected);
         int actual = collection.elements.length;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testCopyConstructor() {
+        int size = RANDOM.nextInt(256) + 4;
+        ArrayBackedCollection<LocalDateTime> expected
+                = new ArrayBackedCollectionImpl<>(size);
+        for (int i = 0; i < size; i++) {
+            expected.add(LocalDateTime.now());
+        }
+        ArrayBackedCollection<LocalDateTime> actual
+                = new ArrayBackedCollectionImpl<>(expected);
         assertEquals(expected, actual);
     }
 

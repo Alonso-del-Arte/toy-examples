@@ -1,25 +1,14 @@
 package collections;
 
 import java.util.Arrays;
-import java.util.Iterator;
 
-public class ArrayBackedSet<E> implements Iterable<E> {
+public class ArrayBackedSet<E> extends ArrayBackedCollection<E> {
 
-    private static final int DEFAULT_INITIAL_CAPACITY = 16;
-
-    private Object[] elements;
-
-    private int nextUp = 0;
-
-    private void expandCapacity() {
-        int largerSize = 3 * this.elements.length / 2;
-        Object[] largerArray = new Object[largerSize];
-        System.arraycopy(this.elements, 0, largerArray, 0,
-                this.elements.length);
-        this.elements = largerArray;
-    }
-
+    @Override
     public boolean add(E element) {
+        if (element == null) {
+            return false;
+        }
         if (this.contains(element)) {
             return false;
         }
@@ -29,58 +18,6 @@ public class ArrayBackedSet<E> implements Iterable<E> {
         this.elements[this.nextUp] = element;
         this.nextUp++;
         return true;
-    }
-
-    private int indexOf(E element) {
-        boolean flag = false;
-        int index = 0;
-        while (!flag && index < this.nextUp) {
-            flag = element.equals(this.elements[index]);
-            index++;
-        }
-        if (flag) {
-            return index - 1;
-        } else {
-            return -1;
-        }
-    }
-
-    public boolean contains(E element) {
-        return this.indexOf(element) > -1;
-    }
-
-    public boolean remove(E element) {
-        int index = this.indexOf(element);
-        if (index == -1) {
-            return false;
-        } else {
-            int lastIndex = --this.nextUp;
-            if (index < lastIndex) {
-                this.elements[index] = this.elements[lastIndex];
-            }
-            this.elements[lastIndex] = null;
-            return true;
-        }
-    }
-
-    public int size() {
-        return this.nextUp;
-    }
-
-    public boolean isEmpty() {
-        return this.nextUp == 0;
-    }
-
-    public void clear() {
-        for (int i = 0; i < this.nextUp; i++) {
-            this.elements[i] = null;
-        }
-        this.nextUp = 0;
-    }
-
-    @Override
-    public Iterator<E> iterator() {
-        return new ArrayIterator<>(this.elements, this.nextUp);
     }
 
     private boolean backingArrayMatches(ArrayBackedSet<?> other) {
@@ -132,16 +69,11 @@ public class ArrayBackedSet<E> implements Iterable<E> {
     }
 
     public ArrayBackedSet() {
-        this(DEFAULT_INITIAL_CAPACITY);
+        this(ArrayBackedCollection.DEFAULT_INITIAL_CAPACITY);
     }
 
     public ArrayBackedSet(int initialCapacity) {
-        if (initialCapacity < 0) {
-            String excMsg = "Initial capacity " + initialCapacity
-                    + " is invalid, needs to be greater than 0";
-            throw new IllegalArgumentException(excMsg);
-        }
-        this.elements = new Object[initialCapacity];
+        super(initialCapacity);
     }
 
 }

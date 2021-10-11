@@ -25,6 +25,14 @@ class ArrayBackedSetTest {
     }
 
     @Test
+    void testAddRejectsNull() {
+        ArrayBackedSet<Clob> set = new ArrayBackedSet<>();
+        String msg = "Should not be able to add null to a set";
+        boolean opResult = set.add(null);
+        assert !opResult : msg;
+    }
+
+    @Test
     void testContains() {
         System.out.println("contains");
         ArrayBackedSet<LocalDateTime> set = new ArrayBackedSet<>();
