@@ -1,4 +1,4 @@
-package collections;
+package collections.mutable;
 
 import java.util.Arrays;
 

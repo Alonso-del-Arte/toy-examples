@@ -1,4 +1,4 @@
-package collections;
+package collections.mutable;
 
 public class ArrayBackedQueue<E> extends ArrayBackedCollection<E> {
 

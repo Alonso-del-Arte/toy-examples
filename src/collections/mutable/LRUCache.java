@@ -1,4 +1,4 @@
-package collections;
+package collections.mutable;
 
 public abstract class LRUCache<N, V> {
 
