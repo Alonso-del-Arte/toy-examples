@@ -2,7 +2,13 @@ package retail;
 
 import java.io.Serializable;
 
-public abstract class BarcodeNumberWithCheckDigit implements Serializable {
+/**
+ * Represents a number for a barcode that has a check digit appended at the end.
+ * Examples of such numbers include UPCs (such as GTIN-12 and GTIN-13) and ISBNs
+ * (such as ISBN-10 and ISBN-13).
+ * @author Alonso del Arte
+ */
+abstract class BarcodeNumberWithCheckDigit implements Serializable {
 
     public static final long serialVersionUID = 4553372319738301440L;
 
@@ -11,19 +17,43 @@ public abstract class BarcodeNumberWithCheckDigit implements Serializable {
     final byte checkDigit;
 
     static byte calculateCheckDigit(long num) {
-        switch ((int) (num % 10)) {//0, 7, 4, 1, 8, 5, 2, 9, 6, 3
-            case 0: return 0;
-            case 1: return 7;
-            case 2: return 4;
-            case 3: return 1;
-            case 4: return 8;
-            case 5: return 5;
-            case 6: return 2;
-            case 7: return 9;
-            case 8: return 6;
-            case 9: return 3;
-            default: return -1;
+        boolean needsTripling = true;
+        long sum = 0;
+        long digit;
+        while (num > 0) {
+            digit = num % 10;
+            if (needsTripling) digit *= 3;
+            sum += digit;
+            needsTripling = !needsTripling;
+            num /= 10;
         }
+        sum *= -1;
+        sum %= 10;
+        if (sum < 0) sum += 10;
+        return (byte) sum;
+    }
+
+    public byte getCheckDigit() {
+        return this.checkDigit;
+    }
+
+    @Override
+    public String toString() {
+        return this.digits + "-" + this.checkDigit;
+    }
+
+    // TODO: Write toBarcodeString()
+
+    // TODO: Write tests for this
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public int hashCode() {
+        return 0;
     }
 
     BarcodeNumberWithCheckDigit(long num) {
