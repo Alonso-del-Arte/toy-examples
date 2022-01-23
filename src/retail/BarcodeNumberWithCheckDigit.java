@@ -5,7 +5,9 @@ import java.io.Serializable;
 /**
  * Represents a number for a barcode that has a check digit appended at the end.
  * Examples of such numbers include UPCs (such as GTIN-12 and GTIN-13) and ISBNs
- * (such as ISBN-10 and ISBN-13).
+ * (such as ISBN-10 and ISBN-13). This abstract class provides check digit
+ * calculation but no validation of the rest of the number. That's up to the
+ * subclasses.
  * @author Alonso del Arte
  */
 abstract class BarcodeNumberWithCheckDigit implements Serializable {
@@ -44,10 +46,12 @@ abstract class BarcodeNumberWithCheckDigit implements Serializable {
 
     // TODO: Write toBarcodeString()
 
-    // TODO: Write tests for this
     @Override
     public boolean equals(Object obj) {
-        return false;
+        if (this == obj) {
+            return true;
+        }
+        return obj instanceof BarcodeNumberWithCheckDigit;
     }
 
     // TODO: Write tests for this

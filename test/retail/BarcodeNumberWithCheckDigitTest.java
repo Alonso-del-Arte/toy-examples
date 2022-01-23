@@ -1,5 +1,6 @@
 package retail;
 
+import java.math.BigInteger;
 import java.util.Random;
 
 import org.junit.jupiter.api.Test;
@@ -72,6 +73,32 @@ class BarcodeNumberWithCheckDigitTest {
         String expected = num + "-" + barcodeNumber.getCheckDigit();
         String actual = barcodeNumber.toString();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void testReferentialEquality() {
+        int num = RANDOM.nextInt(Short.MAX_VALUE);
+        BarcodeNumberWithCheckDigit someNumber
+                = new BarcodeNumberWithCheckDigitImpl(num);
+        assertEquals(someNumber, someNumber);
+    }
+
+    @Test
+    void testNotEqualsNull() {
+        int num = RANDOM.nextInt(Short.MAX_VALUE);
+        BarcodeNumberWithCheckDigit someNumber
+                = new BarcodeNumberWithCheckDigitImpl(num);
+        assertNotEquals(someNumber, null);
+    }
+
+    @Test
+    void testNotEqualsUnrelatedClass() {
+        int num = RANDOM.nextInt(Short.MAX_VALUE);
+        BarcodeNumberWithCheckDigit barcodeNumber
+                = new BarcodeNumberWithCheckDigitImpl(num);
+        BigInteger integer = BigInteger.valueOf(num);
+        String msg = barcodeNumber + " should not equal BigInteger " + integer;
+        assert !barcodeNumber.equals(integer) : msg;
     }
 
     private static class BarcodeNumberWithCheckDigitImpl
