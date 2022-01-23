@@ -16,6 +16,18 @@ public class FishBinNumber extends BarcodeNumberWithCheckDigit {
         return 978_555_0_00000_000L + num;
     }
 
+    @Override
+    public String toString() {
+        String digits = Long.toString(this.digits) + this.checkDigit;
+        StringBuilder intermediate = new StringBuilder(digits);
+        intermediate.insert(15, '-');
+        intermediate.insert(12, '-');
+        intermediate.insert(7, '-');
+        intermediate.insert(6, '-');
+        intermediate.insert(3, '-');
+        return intermediate.toString();
+    }
+
     public FishBinNumber(long num) {
         super(validateNumber(num));
     }
