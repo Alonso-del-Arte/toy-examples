@@ -26,19 +26,29 @@ class FishBinNumberTest {
     }
 
     @Test
-    void testISBNAndFishBinCheckDigitsDiffer() {
-        long prefix = 978_00000_000L;
-        int someDigits = 59327_000;
-        ISBN isbn;
-        FishBinNumber fishBin;
-        long num;
-        for (int i = 0; i < 1000; i++) {
-            num = someDigits + i;
-            fishBin = new FishBinNumber(num);
-            num += prefix;
-            isbn = new ISBN(num);
-            assertNotEquals(fishBin.getCheckDigit(), isbn.getCheckDigit());
-        }
+    void testConstructorRejectsNegativeNumber() {
+        int badNum = -RANDOM.nextInt(Integer.MAX_VALUE) - 1;
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            FishBinNumber badFishBin = new FishBinNumber(badNum);
+            System.out.println("Should not have been able to create "
+                    + badFishBin + " with negative parameter " + badNum);
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testConstructorRejectsExcessiveNumber() {
+        int badNum = 10_00000_000 + RANDOM.nextInt(Short.MAX_VALUE);
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            FishBinNumber badFishBin = new FishBinNumber(badNum);
+            System.out.println("Should not have been able to create "
+                    + badFishBin + " with excessive parameter " + badNum);
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
     }
 
 }
