@@ -51,13 +51,20 @@ abstract class BarcodeNumberWithCheckDigit implements Serializable {
         if (this == obj) {
             return true;
         }
-        return obj instanceof BarcodeNumberWithCheckDigit;
+        if (obj == null) {
+            return false;
+        }
+        if (!this.getClass().equals(obj.getClass())) {
+            return false;
+        }
+        return this.digits == ((BarcodeNumberWithCheckDigit) obj).digits;
     }
 
-    // TODO: Write tests for this
     @Override
     public int hashCode() {
-        return 0;
+        int hash = this.getClass().getSimpleName().hashCode();
+        hash += this.digits;
+        return (this.checkDigit + 1) * hash;
     }
 
     BarcodeNumberWithCheckDigit(long num) {

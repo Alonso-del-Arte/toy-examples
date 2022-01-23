@@ -27,11 +27,6 @@ public class ISBN extends BarcodeNumberWithCheckDigit {
         return intermediate.toString();
     }
 
-    // TODO: Write tests for this
-    public ISBN(long num, boolean is13) {
-        this(num);
-    }
-
     /**
      * Primary constructor.
      * @param num The number for the ISBN, <em>without</em> the check digit. For

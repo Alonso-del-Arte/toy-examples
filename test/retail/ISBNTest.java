@@ -1,14 +1,12 @@
 package retail;
 
-import java.util.Random;
-
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ISBNTest {
+import static retail.BarcodeNumberWithCheckDigitTest.RANDOM;
 
-    public static final Random RANDOM = new Random();
+class ISBNTest {
 
     @Test
     void testToString() {

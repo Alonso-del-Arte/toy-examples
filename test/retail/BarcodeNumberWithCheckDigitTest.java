@@ -1,6 +1,7 @@
 package retail;
 
 import java.math.BigInteger;
+import java.util.HashSet;
 import java.util.Random;
 
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class BarcodeNumberWithCheckDigitTest {
 
-    public static final Random RANDOM = new Random();
+    static final Random RANDOM = new Random();
 
     @Test
     void testCalculateCheckDigit() {
@@ -97,8 +98,76 @@ class BarcodeNumberWithCheckDigitTest {
         BarcodeNumberWithCheckDigit barcodeNumber
                 = new BarcodeNumberWithCheckDigitImpl(num);
         BigInteger integer = BigInteger.valueOf(num);
-        String msg = barcodeNumber + " should not equal BigInteger " + integer;
-        assert !barcodeNumber.equals(integer) : msg;
+        assertNotEquals(barcodeNumber, integer);
+    }
+
+    @Test
+    void testNotEqualsDiffSubClass() {
+        int num = RANDOM.nextInt(Short.MAX_VALUE);
+        BarcodeNumberWithCheckDigit barcodeNumberTypeImpl
+                = new BarcodeNumberWithCheckDigitImpl(num);
+        BarcodeNumberWithCheckDigit barcodeNumberTypeAnon
+                = new BarcodeNumberWithCheckDigit(num) {
+
+            public static final long serialVersionUID = 4553372319738301441L;
+
+        };
+        assertNotEquals(barcodeNumberTypeImpl, barcodeNumberTypeAnon);
+    }
+
+    @Test
+    void testNotEquals() {
+        int numberA = RANDOM.nextInt(Byte.MAX_VALUE) + 1;
+        int numberB = RANDOM.nextInt(Short.MAX_VALUE) + numberA;
+        BarcodeNumberWithCheckDigit someNumber
+                = new BarcodeNumberWithCheckDigitImpl(numberA);
+        BarcodeNumberWithCheckDigit diffNumber
+                = new BarcodeNumberWithCheckDigitImpl(numberB);
+        assertNotEquals(someNumber, diffNumber);
+    }
+
+    @Test
+    void testEquals() {
+        System.out.println("equals");
+        int num = RANDOM.nextInt(Short.MAX_VALUE);
+        BarcodeNumberWithCheckDigit someNumber
+                = new BarcodeNumberWithCheckDigitImpl(num);
+        BarcodeNumberWithCheckDigit sameNumber
+                = new BarcodeNumberWithCheckDigitImpl(num);
+        assertEquals(someNumber, sameNumber);
+    }
+
+    @Test
+    void testDiffHashCodeForDiffClass() {
+        int num = RANDOM.nextInt(Short.MAX_VALUE);
+        BarcodeNumberWithCheckDigit barcodeNumberTypeImpl
+                = new BarcodeNumberWithCheckDigitImpl(num);
+        BarcodeNumberWithCheckDigit barcodeNumberTypeAnon
+                = new BarcodeNumberWithCheckDigit(num) {
+
+            public static final long serialVersionUID = 4553372319738301442L;
+
+        };
+        assertNotEquals(barcodeNumberTypeImpl.hashCode(),
+                barcodeNumberTypeAnon.hashCode());
+    }
+
+    @Test
+    void testHashCode() {
+        System.out.println("hashCode");
+        HashSet<BarcodeNumberWithCheckDigit> barcodeNumbers = new HashSet<>();
+        HashSet<Integer> hashes = new HashSet<>();
+        int start = RANDOM.nextInt(Short.MAX_VALUE);
+        int end = start + RANDOM.nextInt(Byte.MAX_VALUE) + 1000;
+        BarcodeNumberWithCheckDigit barcodeNumber;
+        for (int i = start; i < end; i++) {
+            barcodeNumber = new BarcodeNumberWithCheckDigitImpl(i);
+            barcodeNumbers.add(barcodeNumber);
+            hashes.add(barcodeNumber.hashCode());
+        }
+        int expected = barcodeNumbers.size();
+        int actual = hashes.size();
+        assertEquals(expected, actual);
     }
 
     private static class BarcodeNumberWithCheckDigitImpl
