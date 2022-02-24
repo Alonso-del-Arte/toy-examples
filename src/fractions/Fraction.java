@@ -2,19 +2,19 @@ package fractions;
 
 public class Fraction {
 
-    // TODO: Write tests for this
+    private final long numerator, denominator;
+
     public long getNumerator() {
-        return -1L;
+        return this.numerator;
     }
 
-    // TODO: Write tests for this
     public long getDenominator() {
-        return Long.MIN_VALUE;
+        return this.denominator;
     }
 
     // TODO: Write tests for this
-    public Fraction(long numer) {
-        this(1, numer);
+    public double getNumericApproximation() {
+        return -1.0;
     }
 
     // TODO: Write tests for this
@@ -47,10 +47,34 @@ public class Fraction {
         return this;
     }
 
+    @Override
+    public String toString() {
+        if (this.denominator == 1L) {
+            return Long.toString(this.numerator);
+        } else {
+            return this.numerator + "/" + this.denominator;
+        }
+    }
+
     // TODO: Write tests for this
+    public String toHTMLString() {
+        return this.toString();
+    }
+
+    // TODO: Write tests for this
+    public String toTeXString() {
+        return this.toString();
+    }
+
     @Override
     public boolean equals(Object obj) {
-        return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        return obj.getClass().equals(this.getClass());
     }
 
     // TODO: Write tests for this
@@ -60,8 +84,14 @@ public class Fraction {
     }
 
     // TODO: Write tests for this
+    public Fraction(long numer) {
+        this(1, numer);
+    }
+
+    // TODO: Write tests for this
     public Fraction(long numer, long denom) {
-        //
+        this.numerator = numer;
+        this.denominator = denom;
     }
 
 }
