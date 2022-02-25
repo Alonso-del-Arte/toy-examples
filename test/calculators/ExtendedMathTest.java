@@ -5,4 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ExtendedMathTest {
 
+    void testSqrtFractions() {
+        fail("Haven't written test yet");
+    }
+
 }
