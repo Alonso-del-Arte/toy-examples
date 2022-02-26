@@ -23,8 +23,8 @@ public class EratosthenesSieve {
         }
     }
 
-    static int cacheSize() {
-        return PRIMES.size();
+    static int getLargestPrimeReturnedSoFar() {
+        return PRIMES.get(PRIMES.size() - 1);
     }
 
     public static List<Integer> listPrimes(int bound) {
