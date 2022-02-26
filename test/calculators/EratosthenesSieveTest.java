@@ -86,13 +86,34 @@ class EratosthenesSieveTest {
         for (int p : primes) checkPrimality(p);
     }
 
+    @Test
+    void testEratosthenesSieveCanExpandCacheToPrimeThreshold() {
+        int threshold = EratosthenesSieve.getLargestPrimeReturnedSoFar();
+        boolean foundNextPrime;
+        do {
+            threshold += 2;
+            boolean foundPrimeDivisor = false;
+            int p = 3;
+            double squareRoot = Math.sqrt(threshold);
+            while (!foundPrimeDivisor && p <= squareRoot) {
+                foundPrimeDivisor = (threshold % p == 0);
+                p += 2;
+            }
+            foundNextPrime = !foundPrimeDivisor;
+        } while (!foundNextPrime);
+        List<Integer> primes = EratosthenesSieve.listPrimes(threshold);
+        String msg = "List of primes between 2 and " + threshold
+                + " should include " + threshold;
+        assert primes.contains(threshold) : msg;
+    }
+
     /**
      * Another test of the listPrimes function, of the EratosthenesSieve class.
      * Modifications to a received list of primes should not affect the list of
      * primes held by EratosthenesSieve.
      */
     @Test
-    void testModifyPrimeSubset() {
+    void testModifyPrimeSubsetCopyNotOriginal() {
         int firstThreshold = 20;
         List<Integer> subset = EratosthenesSieve.listPrimes(firstThreshold);
         for (int i = 0; i < subset.size(); i++) {
@@ -117,7 +138,7 @@ class EratosthenesSieveTest {
     void testEratosthenesSieveCanTrim() {
         int smallThreshold = 20;
         int largerThreshold = 4 * smallThreshold + 25;
-        List<Integer> list = EratosthenesSieve.listPrimes(largerThreshold);
+        EratosthenesSieve.listPrimes(largerThreshold);
         Integer[] smallPrimes = {2, 3, 5, 7, 11, 13, 17, 19};
         ArrayList<Integer> expected
                 = new ArrayList<>(Arrays.asList(smallPrimes));
