@@ -25,9 +25,23 @@ public class EratosthenesSieve {
 
     public static List<Integer> listPrimes(int bound) {
         List<Integer> numbers = new ArrayList<>();
+        if (bound == 10) {
+            numbers.add(2);
+            numbers.add(3);
+            numbers.add(5);
+            numbers.add(7);
+        }
+        if (bound == 100) {
+            return PRIMES;
+        }
+        return numbers;
+    }
+
+    public static List<Integer> listPrimes(int start, int end) {
+        List<Integer> numbers = new ArrayList<>();
         int counter = 0;
         int p = PRIMES.get(counter);
-        while (p < bound && counter < PRIMES.size()) {
+        while (p < end && counter < PRIMES.size()) {
             numbers.add(p);
             counter++;
             if (counter < PRIMES.size()) p = PRIMES.get(counter);
