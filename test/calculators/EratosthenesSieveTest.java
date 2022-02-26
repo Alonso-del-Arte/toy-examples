@@ -88,6 +88,27 @@ class EratosthenesSieveTest {
 
     /**
      * Another test of the listPrimes function, of the EratosthenesSieve class.
+     * Modifications to a received list of primes should not affect the list of
+     * primes held by EratosthenesSieve.
+     */
+    @Test
+    void testModifyPrimeSubset() {
+        int firstThreshold = 20;
+        List<Integer> subset = EratosthenesSieve.listPrimes(firstThreshold);
+        for (int i = 0; i < subset.size(); i++) {
+            int p = -subset.get(i);
+            subset.set(i, p);
+        }
+        int secondThreshold = 40;
+        Integer[] smallPrimes = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
+        ArrayList<Integer> expected
+                = new ArrayList<>(Arrays.asList(smallPrimes));
+        List<Integer> actual = EratosthenesSieve.listPrimes(secondThreshold);
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Another test of the listPrimes function, of the EratosthenesSieve class.
      * The primes cache should be updated after a query that requires raising
      * the threshold, but then a query for primes with a lower threshold should
      * not give primes in excess of the threshold.
@@ -97,8 +118,6 @@ class EratosthenesSieveTest {
         int smallThreshold = 20;
         int largerThreshold = 4 * smallThreshold + 25;
         List<Integer> list = EratosthenesSieve.listPrimes(largerThreshold);
-        System.out.println("EratosthenesSieve reports " + list.size()
-                + " primes between 1 and " + largerThreshold);
         Integer[] smallPrimes = {2, 3, 5, 7, 11, 13, 17, 19};
         ArrayList<Integer> expected
                 = new ArrayList<>(Arrays.asList(smallPrimes));
