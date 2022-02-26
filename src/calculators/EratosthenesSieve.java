@@ -27,6 +27,21 @@ public class EratosthenesSieve {
         return PRIMES.get(PRIMES.size() - 1);
     }
 
+    private static void expandPrimeCache(int raisedThreshold) {
+        for (int n = currThresh + 1; n < raisedThreshold; n++) {
+            double root = Math.sqrt(n);
+            boolean noDivisorFound = true;
+            int index = 0;
+            int p;
+            do {
+                p = PRIMES.get(index);
+                noDivisorFound = (n % p != 0);
+                index++;
+            } while (p <= root && noDivisorFound);
+            if (noDivisorFound) PRIMES.add(n);
+        }
+    }
+
     public static List<Integer> listPrimes(int bound) {
         if (bound < 2) {
             return new ArrayList<>();
@@ -40,6 +55,7 @@ public class EratosthenesSieve {
             } while (p > bound);
             return PRIMES.subList(0, trimIndex + 1);
         } else {
+            expandPrimeCache(bound);
             return PRIMES;
         }
     }

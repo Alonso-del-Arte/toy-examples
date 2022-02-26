@@ -74,6 +74,18 @@ class EratosthenesSieveTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testEratosthenesSieveCanExpandCache() {
+        int prevLargestPrime = EratosthenesSieve.getLargestPrimeReturnedSoFar();
+        int threshold = prevLargestPrime * prevLargestPrime;
+        List<Integer> primes = EratosthenesSieve.listPrimes(threshold);
+        String msg = "There should be more primes between " + prevLargestPrime
+                + " and " + threshold;
+        int currLargestPrime = EratosthenesSieve.getLargestPrimeReturnedSoFar();
+        assert currLargestPrime > prevLargestPrime : msg;
+        for (int p : primes) checkPrimality(p);
+    }
+
     /**
      * Another test of the listPrimes function, of the EratosthenesSieve class.
      * The primes cache should be updated after a query that requires raising
@@ -81,7 +93,7 @@ class EratosthenesSieveTest {
      * not give primes in excess of the threshold.
      */
     @Test
-    public void testEratosthenesSieveCanTrim() {
+    void testEratosthenesSieveCanTrim() {
         int smallThreshold = 20;
         int largerThreshold = 4 * smallThreshold + 25;
         List<Integer> list = EratosthenesSieve.listPrimes(largerThreshold);
