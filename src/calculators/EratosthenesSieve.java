@@ -40,6 +40,7 @@ public class EratosthenesSieve {
             } while (p <= root && noDivisorFound);
             if (noDivisorFound) PRIMES.add(n);
         }
+        currThresh = raisedThreshold;
     }
 
     public static List<Integer> listPrimes(int bound) {
