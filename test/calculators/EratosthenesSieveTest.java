@@ -1,12 +1,17 @@
 package calculators;
 
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests of the EratosthenesSieve class.
+ * @author Alonso del Arte
+ */
 class EratosthenesSieveTest {
 
     /**
@@ -28,6 +33,10 @@ class EratosthenesSieveTest {
         }
     }
 
+    /**
+     * Another test of the listPrimes function, of the EratosthenesSieve class.
+     * If the bound is 0, the returned list should be empty.
+     */
     @Test
     void testEmptyPrimeList() {
         List<Integer> expected = new ArrayList<>();
@@ -35,6 +44,10 @@ class EratosthenesSieveTest {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Another test of the listPrimes function, of the EratosthenesSieve class.
+     * The first four positive primes should be given in order.
+     */
     @Test
     void testListFirstFourPositivePrimes() {
         List<Integer> expected = new ArrayList<>();
@@ -46,6 +59,10 @@ class EratosthenesSieveTest {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Test of the listPrimes function, of the EratosthenesSieve class. The
+     * first 25 positive primes should be given in order.
+     */
     @Test
     void testListPrimes() {
         System.out.println("listPrimes");
@@ -54,6 +71,26 @@ class EratosthenesSieveTest {
         List<Integer> expected = new ArrayList<>();
         for (int p : primes) expected.add(p);
         List<Integer> actual = EratosthenesSieve.listPrimes(100);
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Another test of the listPrimes function, of the EratosthenesSieve class.
+     * The primes cache should be updated after a query that requires raising
+     * the threshold, but then a query for primes with a lower threshold should
+     * not give primes in excess of the threshold.
+     */
+    @Test
+    public void testEratosthenesSieveCanTrim() {
+        int smallThreshold = 20;
+        int largerThreshold = 4 * smallThreshold + 25;
+        List<Integer> list = EratosthenesSieve.listPrimes(largerThreshold);
+        System.out.println("EratosthenesSieve reports " + list.size()
+                + " primes between 1 and " + largerThreshold);
+        Integer[] smallPrimes = {2, 3, 5, 7, 11, 13, 17, 19};
+        ArrayList<Integer> expected
+                = new ArrayList<>(Arrays.asList(smallPrimes));
+        List<Integer> actual = EratosthenesSieve.listPrimes(smallThreshold);
         assertEquals(expected, actual);
     }
 

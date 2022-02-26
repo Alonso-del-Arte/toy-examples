@@ -24,17 +24,20 @@ public class EratosthenesSieve {
     }
 
     public static List<Integer> listPrimes(int bound) {
-        List<Integer> numbers = new ArrayList<>();
-        if (bound == 10) {
-            numbers.add(2);
-            numbers.add(3);
-            numbers.add(5);
-            numbers.add(7);
+        if (bound < 2) {
+            return new ArrayList<>();
         }
-        if (bound == 100) {
+        if (bound < currThresh) {
+            int trimIndex = PRIMES.size();
+            int p;
+            do {
+                trimIndex--;
+                p = PRIMES.get(trimIndex);
+            } while (p > bound);
+            return PRIMES.subList(0, trimIndex + 1);
+        } else {
             return PRIMES;
         }
-        return numbers;
     }
 
     public static List<Integer> listPrimes(int start, int end) {
