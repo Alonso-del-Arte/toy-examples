@@ -23,6 +23,10 @@ public class EratosthenesSieve {
         }
     }
 
+    static int cacheSize() {
+        return PRIMES.size();
+    }
+
     public static List<Integer> listPrimes(int bound) {
         if (bound < 2) {
             return new ArrayList<>();
