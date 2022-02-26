@@ -74,6 +74,13 @@ class EratosthenesSieveTest {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Another test of the listPrimes function, of the EratosthenesSieve class.
+     * The cache of prime numbers should be expanded when called upon with
+     * larger thresholds. For example, if it's been called upon to give primes
+     * up to 500, and then it's called upon to give primes up to 1000, the cache
+     * should expand accordingly.
+     */
     @Test
     void testEratosthenesSieveCanExpandCache() {
         int prevLargestPrime = EratosthenesSieve.getLargestPrimeReturnedSoFar();
@@ -86,6 +93,12 @@ class EratosthenesSieveTest {
         for (int p : primes) checkPrimality(p);
     }
 
+    /**
+     * Another test of the listPrimes function, of the EratosthenesSieve class.
+     * The cache of prime numbers should be expanded when called upon with
+     * larger thresholds. And if the new threshold happens to be a prime number
+     * itself,
+     */
     @Test
     void testEratosthenesSieveCanExpandCacheToPrimeThreshold() {
         int threshold = EratosthenesSieve.getLargestPrimeReturnedSoFar();
@@ -143,6 +156,62 @@ class EratosthenesSieveTest {
         ArrayList<Integer> expected
                 = new ArrayList<>(Arrays.asList(smallPrimes));
         List<Integer> actual = EratosthenesSieve.listPrimes(smallThreshold);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListPrimesCanTakeNegativeBound() {
+        int bound = -20;
+        Integer[] primes = {-19, -17, -13, -11, -7, -5, -3, -2};
+        List<Integer> expected
+                = new ArrayList<>(Arrays.asList(primes));
+        List<Integer> actual = EratosthenesSieve.listPrimes(bound);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListPrimesNegativeRange() {
+        int start = -110;
+        int end = -100;
+        Integer[] primeQuadruplet = {-109, -107, -103, -101};
+        List<Integer> expected
+                = new ArrayList<>(Arrays.asList(primeQuadruplet));
+        List<Integer> actual = EratosthenesSieve.listPrimes(start, end);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListPrimesPositiveRange() {
+        int start = 100;
+        int end = 110;
+        Integer[] primeQuadruplet = {101, 103, 107, 109};
+        List<Integer> expected
+                = new ArrayList<>(Arrays.asList(primeQuadruplet));
+        List<Integer> actual = EratosthenesSieve.listPrimes(start, end);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListPrimesNegativeToPositiveRange() {
+        int start = -20;
+        int end = 20;
+        Integer[] primes = {-19, -17, -13, -11, -7, -5, -3, -2, 2, 3, 5, 7, 11,
+                13, 17, 19};
+        List<Integer> expected
+                = new ArrayList<>(Arrays.asList(primes));
+        List<Integer> actual = EratosthenesSieve.listPrimes(start, end);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListPrimesCanAssureRangeGoesSmallToLarge() {
+        int start = 20;
+        int end = -20;
+        Integer[] primes = {-19, -17, -13, -11, -7, -5, -3, -2, 2, 3, 5, 7, 11,
+                13, 17, 19};
+        List<Integer> expected
+                = new ArrayList<>(Arrays.asList(primes));
+        List<Integer> actual = EratosthenesSieve.listPrimes(start, end);
         assertEquals(expected, actual);
     }
 
