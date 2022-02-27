@@ -170,6 +170,24 @@ class EratosthenesSieveTest {
     }
 
     @Test
+    void testListPrimesEmptyRangeNegative() {
+        int start = -540;
+        int end = -524;
+        List<Integer> expected = new ArrayList<>();
+        List<Integer> actual = EratosthenesSieve.listPrimes(start, end);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListPrimesEmptyPositiveRange() {
+        int start = 524;
+        int end = 540;
+        List<Integer> expected = new ArrayList<>();
+        List<Integer> actual = EratosthenesSieve.listPrimes(start, end);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testListPrimesNegativeRange() {
         int start = -110;
         int end = -100;
@@ -204,11 +222,11 @@ class EratosthenesSieveTest {
     }
 
     @Test
-    void testListPrimesCanAssureRangeGoesSmallToLarge() {
+    void testListPrimesCanFlipRange() {
         int start = 20;
         int end = -20;
-        Integer[] primes = {-19, -17, -13, -11, -7, -5, -3, -2, 2, 3, 5, 7, 11,
-                13, 17, 19};
+        Integer[] primes = {19, 17, 13, 11, 7, 5, 3, 2, -2, -3, -5, -7, -11,
+                -13, -17, -19};
         List<Integer> expected
                 = new ArrayList<>(Arrays.asList(primes));
         List<Integer> actual = EratosthenesSieve.listPrimes(start, end);

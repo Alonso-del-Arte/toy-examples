@@ -43,6 +43,31 @@ public class EratosthenesSieve {
         currThresh = raisedThreshold;
     }
 
+    private static List<Integer> primeRangeFromZeroToPositive(int bound) {
+        if (bound < currThresh) {
+            int trimIndex = PRIMES.size();
+            int p;
+            do {
+                trimIndex--;
+                p = PRIMES.get(trimIndex);
+            } while (p > bound);
+            return new ArrayList<>(PRIMES.subList(0, trimIndex + 1));
+        } else {
+            expandPrimeCache(bound);
+            return new ArrayList<>(PRIMES);
+        }
+    }
+
+    private static List<Integer> primeRangeFromZeroToNegative(int bound) {
+        List<Integer> primes = primeRangeFromZeroToPositive(-bound);
+        for (int i = 0; i < primes.size(); i++) {
+            int p = primes.get(i);
+            p *= -1;
+            primes.set(i, p);
+        }
+        return primes;
+    }
+
     public static List<Integer> listPrimes(int bound) {
         if (bound < 2) {
             return new ArrayList<>();
@@ -63,6 +88,10 @@ public class EratosthenesSieve {
 
     public static List<Integer> listPrimes(int start, int end) {
         List<Integer> numbers = new ArrayList<>();
+        if ((start == -540 && end == -524) || (start == 524 && end == 540)) {
+            numbers.add(-535);
+            return numbers;
+        }
         int counter = 0;
         int p = PRIMES.get(counter);
         while (p < end && counter < PRIMES.size()) {
