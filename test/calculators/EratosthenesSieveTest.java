@@ -255,4 +255,44 @@ class EratosthenesSieveTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testListPrimesRangeFromExplicitZeroStartToNegativeEnd() {
+        int end = -20;
+        Integer[] primes = {-2, -3, -5, -7, -11, -13, -17, -19};
+        List<Integer> expected
+                = new ArrayList<>(Arrays.asList(primes));
+        List<Integer> actual = EratosthenesSieve.listPrimes(0, end);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListPrimesRangeFromExplicitZeroStartToPositiveEnd() {
+        int end = 20;
+        Integer[] primes = {2, 3, 5, 7, 11, 13, 17, 19};
+        List<Integer> expected
+                = new ArrayList<>(Arrays.asList(primes));
+        List<Integer> actual = EratosthenesSieve.listPrimes(0, end);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListPrimesRangeFromNegativeStartToExplicitZeroEnd() {
+        int start = -20;
+        Integer[] primes = {-19, -17, -13, -11, -7, -5, -3, -2};
+        List<Integer> expected
+                = new ArrayList<>(Arrays.asList(primes));
+        List<Integer> actual = EratosthenesSieve.listPrimes(start, 0);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListPrimesRangeFromPositiveStartToExplicitZeroEnd() {
+        int start = 20;
+        Integer[] primes = {19, 17, 13, 11, 7, 5, 3, 2};
+        List<Integer> expected
+                = new ArrayList<>(Arrays.asList(primes));
+        List<Integer> actual = EratosthenesSieve.listPrimes(start, 0);
+        assertEquals(expected, actual);
+    }
+
 }
