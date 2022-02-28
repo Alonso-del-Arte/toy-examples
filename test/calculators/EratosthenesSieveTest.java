@@ -222,11 +222,33 @@ class EratosthenesSieveTest {
     }
 
     @Test
-    void testListPrimesCanFlipRange() {
+    void testListPrimesCanFlipRangeCrossingZero() {
         int start = 20;
         int end = -20;
         Integer[] primes = {19, 17, 13, 11, 7, 5, 3, 2, -2, -3, -5, -7, -11,
                 -13, -17, -19};
+        List<Integer> expected
+                = new ArrayList<>(Arrays.asList(primes));
+        List<Integer> actual = EratosthenesSieve.listPrimes(start, end);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListPrimesCanFlipNegativeRange() {
+        int start = -10;
+        int end = -20;
+        Integer[] primes = {-11, -13, -17, -19};
+        List<Integer> expected
+                = new ArrayList<>(Arrays.asList(primes));
+        List<Integer> actual = EratosthenesSieve.listPrimes(start, end);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListPrimesCanFlipPositiveRange() {
+        int start = 20;
+        int end = 10;
+        Integer[] primes = {19, 17, 13, 11};
         List<Integer> expected
                 = new ArrayList<>(Arrays.asList(primes));
         List<Integer> actual = EratosthenesSieve.listPrimes(start, end);
