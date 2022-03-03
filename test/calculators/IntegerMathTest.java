@@ -1,8 +1,10 @@
 package calculators;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,6 +12,21 @@ import static org.junit.jupiter.api.Assertions.*;
 class IntegerMathTest {
 
     private static final Random RANDOM = new Random();
+
+    private static final List<Long> FIBONACCI_NUMBERS = new ArrayList<>();
+
+    static {
+        FIBONACCI_NUMBERS.add(0L);
+        FIBONACCI_NUMBERS.add(1L);
+        long nextFibonacci = 1L;
+        int currIndex = 2;
+        while (nextFibonacci > 0) {
+            FIBONACCI_NUMBERS.add(nextFibonacci);
+            nextFibonacci = FIBONACCI_NUMBERS.get(currIndex - 1)
+                    + FIBONACCI_NUMBERS.get(currIndex);
+            currIndex++;
+        }
+    }
 
     @Test
     void testNeitherPrimeNorComposite() {
@@ -73,6 +90,23 @@ class IntegerMathTest {
     }
 
     @Test
+    void testBadBoundForRandomPrime() {
+        int[] badBounds = {-1, 0, 1};
+        for (int badBound : badBounds) {
+            String msg = "Bad bound " + badBound
+                    + " should have caused IllegalArgumentException";
+            Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+                int badResult = IntegerMath.randomPrime(badBound);
+                System.out.println("Bad bound " + badBound
+                        + " somehow gave result " + badResult);
+            }, msg);
+            String excMsg = t.getMessage();
+            assert excMsg != null : "Exception message should not be null";
+            System.out.println("\"" + excMsg + "\"");
+        }
+    }
+
+    @Test
     void testRandomPrimeCanGiveNegativePrime() {
         int p = IntegerMath.randomPrime(-128);
         assert IntegerMath.isPrime(p)
@@ -84,7 +118,7 @@ class IntegerMathTest {
     void testRandomPrime() {
         System.out.println("randomPrime");
         int size = RANDOM.nextInt(128) + 32;
-        HashSet<Integer> set = new HashSet<>(size);
+        Set<Integer> set = new HashSet<>(size);
         int start = size * size;
         int end = start + size;
         for (int bound = start; bound < end; bound++) {
@@ -101,6 +135,81 @@ class IntegerMathTest {
         String msg = "Expected at least " + expected + " distinct primes, got "
                 + actual;
         assert actual >= expected : msg;
+    }
+
+    @Test
+    void testEuclideanGCDSamePositiveNumber() {
+        int expected = RANDOM.nextInt(1024) + 256;
+        long actual = IntegerMath.euclideanGCD(expected, expected);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testEuclideanGCDSameNegativeNumber() {
+        int a = -RANDOM.nextInt(1024) - 256;
+        int expected = -a;
+        long actual = IntegerMath.euclideanGCD(a, a);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testEuclideanGCD() {
+        System.out.println("euclideanGCD");
+        int expected = RANDOM.nextInt(4096) + 4;
+        for (long i = -256; i < 256; i++) {
+            long a = i * expected;
+            long b = a + expected;
+            long actual = IntegerMath.euclideanGCD(a, b);
+            assertEquals(expected, actual);
+        }
+    }
+
+    @Test
+    void testEuclideanGCDTwoConsecutiveFibonacciNumbers() {
+        int lastIndex = FIBONACCI_NUMBERS.size() - 1;
+        for (int i = 0; i < lastIndex; i++) {
+            long a = FIBONACCI_NUMBERS.get(i);
+            long b = FIBONACCI_NUMBERS.get(i + 1);
+            String msg = "gcd(" + a + ", " + b + ") should be 1";
+            assertEquals(1, IntegerMath.euclideanGCD(a, b), msg);
+        }
+    }
+
+    private List<Long> sumsOfConsecutiveFibonacciNumbers(int n) {
+        int capacity = FIBONACCI_NUMBERS.size() - n;
+        List<Long> sums = new ArrayList<>(capacity);
+        int index = 0;
+        long sum = 1L;
+        while (sum > 0) {
+            sums.add(sum);
+            sum = 0L;
+            int stop = index + n;
+            for (int i = index; i < stop; i++) {
+                sum += FIBONACCI_NUMBERS.get(i);
+            }
+            index++;
+        }
+        sums.remove(0);
+        return sums;
+    }
+
+    @Test
+    void testEuclideanGCDConsecutiveSumsOfFibonacciNumbers() {
+        int n = RANDOM.nextInt(7) + 3;
+        List<Long> sums = sumsOfConsecutiveFibonacciNumbers(n);
+        int lastIndex = sums.size() - 1;
+        Set<Long> sumGCDs = new HashSet<>();
+        long gcd = 1L;
+        for (int i = 0; i < lastIndex; i++) {
+            long a = sums.get(i);
+            long b = sums.get(i + 1);
+            gcd = IntegerMath.euclideanGCD(a, b);
+            sumGCDs.add(gcd);
+        }
+        String msg = "GCD of two consecutive sums of " + n
+                + " consecutive Fibonacci numbers is expected to be " + gcd
+                + "?";
+        assertEquals(1, sumGCDs.size(), msg);
     }
 
 }

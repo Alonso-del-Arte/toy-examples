@@ -6,6 +6,16 @@ import java.util.List;
 /**
  * Calculates a list of prime numbers according to the sieve of Eratosthenes
  * algorithm.
+ * <p>Although it's perhaps not "authentic," this class recognizes certain
+ * negative numbers as being prime, such as &minus;163 and &minus;521. This is a
+ * consequence of using a definition of prime numbers that does not require
+ * arbitrary means to exclude 1 from the list of primes.</p>
+ * <p>In a given domain of numbers, such as <b>Z</b> (of which the range of
+ * Java's <code>long</code> is a tiny subset), a prime number <i>p</i> is a
+ * divisor of some numbers in the domain but not others such that whenever
+ * <i>p</i> is a divisor of <i>ab</i> it is also a divisor of <i>a</i> or
+ * <i>b</i>. Neither &minus;1 nor 1 are prime because every number in the
+ * domain, including 0, is divisible by both &minus;1 and 1.</p>
  * @author Alonso del Arte
  */
 public class EratosthenesSieve {
@@ -48,6 +58,15 @@ public class EratosthenesSieve {
         currThresh = raisedThreshold;
     }
 
+    private static List<Integer> reverseAndNegateList(List<Integer> numbers) {
+        int size = numbers.size();
+        List<Integer> reversed = new ArrayList<>(size);
+        for (int i = size - 1; i > -1; i--) {
+            reversed.add(-numbers.get(i));
+        }
+        return reversed;
+    }
+
     private static List<Integer> primeRangeFromZeroToPositive(int bound) {
         if (bound < currThresh) {
             int trimIndex = PRIMES.size();
@@ -65,11 +84,7 @@ public class EratosthenesSieve {
 
     private static List<Integer> primeRangeFromNegativeToZero(int bound) {
         List<Integer> positivePrimes = primeRangeFromZeroToPositive(-bound);
-        List<Integer> negativePrimes = new ArrayList<>();
-        for (int i = positivePrimes.size() - 1; i > -1; i--) {
-            negativePrimes.add(-positivePrimes.get(i));
-        }
-        return negativePrimes;
+        return reverseAndNegateList(positivePrimes);
     }
 
     private static List<Integer> primeRangeCrossingZero(int start, int end) {
@@ -99,11 +114,7 @@ public class EratosthenesSieve {
 
     private static List<Integer> primeRangeNegative(int start, int end) {
         List<Integer> positivePrimes = primeRangePositive(-end, -start);
-        List<Integer> primes = new ArrayList<>(positivePrimes.size());
-        for (int i = positivePrimes.size() - 1; i > -1; i--) {
-            primes.add(-positivePrimes.get(i));
-        }
-        return primes;
+        return reverseAndNegateList(positivePrimes);
     }
 
     /**
@@ -139,9 +150,6 @@ public class EratosthenesSieve {
      * and <code>end</code> is 20, the result would be {11, 13, 17, 19}.
      */
     public static List<Integer> listPrimes(int start, int end) {
-        if (start == 0 || end == 0) {
-            return new ArrayList<>();
-        }
         if (start > end) {
             List<Integer> primes = listPrimes(end, start);
             List<Integer> reversed = new ArrayList<>(primes.size());
@@ -156,13 +164,13 @@ public class EratosthenesSieve {
             } else {
                 if (end > 0) {
                     return primeRangeCrossingZero(start, end);
-                } // else return primeRangeFromNegativeToZero(start);
+                } else return primeRangeFromNegativeToZero(start);
             }
         }
         if (start > 0) {
             return primeRangePositive(start, end);
         }
-        return new ArrayList<>(); // primeRangeFromZeroToPositive(end);
+        return primeRangeFromZeroToPositive(end);
     }
 
 }
