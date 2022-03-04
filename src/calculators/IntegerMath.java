@@ -1,5 +1,6 @@
 package calculators;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -61,8 +62,33 @@ public class IntegerMath {
         return primes.get(index);
     }
 
+    /**
+     * Calculates the greatest common divisor (GCD) of two integers using the
+     * Euclidean algorithm. The algorithm is implemented through recursion.
+     * @param a One of the two integers. Need not be greater than or less than
+     *          <code>b</code> in any sense. For example, 42.
+     * @param b One of the two integers. Need not be greater than or less than
+     *          <code>a</code> in any sense. For example, &minus;49.
+     * @return The GCD. For example, 7. However, rather than throw an exception,
+     * this function gives the wrong answer for certain pairs involving
+     * <code>Long.MIN_VALUE</code>, e.g., gcd(&minus;9223372036854775808, 0) is
+     * incorrectly given as &minus;9223372036854775808 &mdash; the correct
+     * answer, 9223372036854775808, is just outside the range of
+     * <code>long</code>.
+     */
     public static long euclideanGCD(long a, long b) {
-        return Math.abs(a);
+        if (b == 0) {
+            return Math.abs(a);
+        } else {
+            return euclideanGCD(b, a % b);
+        }
+    }
+
+    // TODO: Write tests for this
+    public List<Integer> divisors(int n) {
+        List<Integer> numbers = new ArrayList<>();
+        numbers.add(Integer.MIN_VALUE);
+        return numbers;
     }
 
 }
