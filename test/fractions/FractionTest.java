@@ -1,5 +1,7 @@
 package fractions;
 
+import calculators.IntegerMath;
+
 import java.util.Random;
 
 import org.junit.jupiter.api.Test;
@@ -101,13 +103,45 @@ class FractionTest {
     }
 
     @Test
+    void testConstructorChangesNegativeDenominatorToPositive() {
+        int denominator = IntegerMath.randomPrime(-128);
+        int expected = -denominator;
+        int numerator = expected - 1;
+        Fraction fraction = new Fraction(numerator, denominator);
+        long actual = fraction.getDenominator();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testConstructorRejectsDenominatorZero() {
-        fail("Haven't written test yet");
+        int numerator = IntegerMath.randomPrime(128);
+        int denominator = 0;
+        Throwable t = assertThrows(ArithmeticException.class, () -> {
+            Fraction badFraction = new Fraction(numerator, denominator);
+            System.out.println("Should not have been able to create "
+                    + badFraction + " with denominator " + denominator);
+        });
+        System.out.println("Denominator " + denominator
+                + " correctly caused ArithmeticException");
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        System.out.println("\"" + excMsg + "\"");
     }
 
     @Test
     void testConstructorRejectsDenominatorLongMinValue() {
-        fail("Haven't written test yet");
+        int numerator = IntegerMath.randomPrime(128);
+        long denominator = Long.MIN_VALUE;
+        Throwable t = assertThrows(ArithmeticException.class, () -> {
+            Fraction badFraction = new Fraction(numerator, denominator);
+            System.out.println("Should not have been able to create "
+                    + badFraction + " with denominator " + denominator);
+        });
+        System.out.println("Denominator " + denominator
+                + " correctly caused ArithmeticException");
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        System.out.println("\"" + excMsg + "\"");
     }
 
 }
