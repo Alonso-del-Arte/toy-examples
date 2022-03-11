@@ -1,5 +1,9 @@
 package fractions;
 
+/**
+ * Represents a fraction, with numerator and denominator.
+ * @author Alonso del Arte
+ */
 public class Fraction {
 
     private final long numerator, denominator;
@@ -23,6 +27,11 @@ public class Fraction {
     }
 
     // TODO: Write tests for this
+    public Fraction plus(int addend) {
+        return this;
+    }
+
+    // TODO: Write tests for this
     public Fraction negate() {
         return this;
     }
@@ -33,7 +42,17 @@ public class Fraction {
     }
 
     // TODO: Write tests for this
+    public Fraction minus(int subtrahend) {
+        return this;
+    }
+
+    // TODO: Write tests for this
     public Fraction times(Fraction multiplicand) {
+        return this;
+    }
+
+    // TODO: Write tests for this
+    public Fraction times(int multiplicand) {
         return this;
     }
 
@@ -44,6 +63,11 @@ public class Fraction {
 
     // TODO: Write tests for this
     public Fraction divides(Fraction divisor) {
+        return this;
+    }
+
+    // TODO: Write tests for this
+    public Fraction divides(int divisor) {
         return this;
     }
 
@@ -66,6 +90,11 @@ public class Fraction {
         return this.toString();
     }
 
+    /**
+     * 
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -74,7 +103,7 @@ public class Fraction {
         if (obj == null) {
             return false;
         }
-        return obj.getClass().equals(this.getClass());
+        return false;
     }
 
     // TODO: Write tests for this

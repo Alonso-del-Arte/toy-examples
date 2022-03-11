@@ -87,10 +87,34 @@ class FractionTest {
 
     @Test
     void testNotEqualsDifferentNumerator() {
-        fail("Haven't written test yet");
+        int numeratorA = 2 * RANDOM.nextInt(2048) + 1;
+        int numeratorB = numeratorA + 2;
+        int denominator = numeratorA + 1;
+        Fraction fractionA = new Fraction(numeratorA, denominator);
+        Fraction fractionB = new Fraction(numeratorB, denominator);
+        assertNotEquals(fractionA, fractionB);
     }
 
     @Test
+    void testEqualsSameNumeratorSameDenominator() {
+        int numerator = RANDOM.nextInt(8192) + 1;
+        int denominator = numerator + RANDOM.nextInt(1024) + 1;
+        Fraction someFraction = new Fraction(numerator, denominator);
+        Fraction sameFraction = new Fraction(numerator, denominator);
+        assertEquals(someFraction, sameFraction);
+    }
+
+    @Test
+    void testNotEqualsDifferentDenominator() {
+        int numerator = 2 * RANDOM.nextInt(4096) + 3;
+        int denominatorA = numerator - 1;
+        int denominatorB = numerator + 1;
+        Fraction fractionA = new Fraction(numerator, denominatorA);
+        Fraction fractionB = new Fraction(numerator, denominatorB);
+        assertNotEquals(fractionA, fractionB);
+    }
+
+//    @Test
     void testEquals() {
         System.out.println("equals");
         int numerator = RANDOM.nextInt(1024) + 16;
