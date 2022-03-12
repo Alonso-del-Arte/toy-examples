@@ -19,7 +19,7 @@ public class Fraction implements Comparable<Fraction> {
     }
 
     public double getNumericApproximation() {
-        return -Double.MAX_VALUE;
+        return ((double) this.numerator) / this.denominator;
     }
 
     // TODO: Write tests for this
@@ -146,10 +146,19 @@ public class Fraction implements Comparable<Fraction> {
         return hash;
     }
 
-    // TODO: Write tests for this
+    // TODO: Refactor so as to not use floating point
+    //       (write test accordingly)
     @Override
     public int compareTo(Fraction other) {
-        return 0;
+        double diff = this.getNumericApproximation()
+                - other.getNumericApproximation();
+        if (diff == 0.0) {
+            return 0;
+        } else {
+            if (diff < 0) {
+                return -1;
+            } else return 1;
+        }
     }
 
     // TODO: Write tests for this
