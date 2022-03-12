@@ -1,10 +1,12 @@
 package fractions;
 
+import static calculators.IntegerMath.euclideanGCD;
+
 /**
  * Represents a fraction, with numerator and denominator.
  * @author Alonso del Arte
  */
-public class Fraction {
+public class Fraction implements Comparable<Fraction> {
 
     private final long numerator, denominator;
 
@@ -16,9 +18,8 @@ public class Fraction {
         return this.denominator;
     }
 
-    // TODO: Write tests for this
     public double getNumericApproximation() {
-        return -1.0;
+        return -Double.MAX_VALUE;
     }
 
     // TODO: Write tests for this
@@ -91,9 +92,27 @@ public class Fraction {
     }
 
     /**
-     * 
-     * @param obj
-     * @return
+     * Determines whether an object is equal to this <code>Fraction</code>
+     * instance. Optimized for referential equality.
+     * @param obj The object to compare. Examples: the fractions
+     *            <sup>22</sup>&frasl;<sub>25</sub>,
+     *            <sup>22</sup>&frasl;<sub>7</sub>,
+     *            &minus;<sup>1</sup>&frasl;<sub>7</sub>,
+     *            <sup>22</sup>&frasl;<sub>7</sub> but in an anonymous subclass
+     *            of <code>Fraction</code>, the floating point value
+     *            3.142857142857143 wrapped in a <code>Double</code>, and
+     *            a null.
+     * @return True only if <code>obj</code> is a <code>Fraction</code> with the
+     * same runtime class, the same numerator and the same denominator, false in
+     * all other cases. Suppose this is a <code>Fraction</code> instance for
+     * <sup>22</sup>&frasl;<sub>7</sub>. Then, given the examples above for
+     * <code>obj</code>, the results would be false (denominator is different),
+     * true, false (numerator is different), false (even though it is an
+     * instance of <code>Fraction</code>, its runtime class would be something
+     * like <code>org.example.SomeClass$1</code> rather than
+     * <code>fractions.Fraction</code>), false (even though the numerical values
+     * differ by less than 0.000000000000001) and false (because this is a
+     * non-null object).
      */
     @Override
     public boolean equals(Object obj) {
@@ -103,12 +122,33 @@ public class Fraction {
         if (obj == null) {
             return false;
         }
-        return false;
+        if (!this.getClass().equals(obj.getClass())) {
+            return false;
+        }
+        Fraction other = (Fraction) obj;
+        return this.numerator == other.numerator
+                && this.denominator == other.denominator;
+    }
+
+    /**
+     * Generates a hash code. Guaranteed to be unique in a given session only if
+     * every fraction used in the session has both numerator and denominator
+     * within the range of <code>short</code>. This is a pure function depending
+     * only on the numerator and the denominator, and so it is guaranteed not to
+     * change during a session.
+     * @return The hash code. For example, for <sup>22</sup>&frasl;<sub>7</sub>,
+     * this might be 1441799.
+     */
+    @Override
+    public int hashCode() {
+        int hash = ((int) this.numerator) << 16;
+        hash += ((int) this.denominator) % 65536;
+        return hash;
     }
 
     // TODO: Write tests for this
     @Override
-    public int hashCode() {
+    public int compareTo(Fraction other) {
         return 0;
     }
 
@@ -118,8 +158,11 @@ public class Fraction {
     }
 
     /**
-     * Constructor.
-     * @param numer The numerator of the fraction. For example, 2. Preferably in
+     * Primary constructor. This constructor does not require the caller to
+     * express the fraction in lowest terms, but it does ensure the fraction is
+     * internally represented in lowest terms so that no "reduction" is needed
+     * when {@link #toString()} is called.
+     * @param numer The numerator of the fraction. For example, 7. Preferably in
      *              the range of <code>int</code>, to avoid overflows in
      *              operations with other fractions.
      * @param denom The denominator of the fraction. It must not be 0 nor
@@ -149,12 +192,9 @@ public class Fraction {
                     + " is not valid or available";
             throw new ArithmeticException(excMsg);
         }
-        if (denom < 0) {
-            numer *= -1;
-            denom *= -1;
-        }
-        this.numerator = numer;
-        this.denominator = denom;
+        long adjust = euclideanGCD(numer, denom) * (denom < 0 ? -1 : 1);
+        this.numerator = numer / adjust;
+        this.denominator = denom / adjust;
     }
 
 }
