@@ -138,6 +138,18 @@ class IntegerMathTest {
     }
 
     @Test
+    void testRandomPrimeFromArbitraryRange() {
+        int start = RANDOM.nextInt(4096) + 4;
+        int end = 2 * start + RANDOM.nextInt(512) + 8;
+        int prime = IntegerMath.randomPrime(start, end);
+        String primeMsg = "Number " + prime + " should be prime";
+        assert IntegerMath.isPrime(prime) : primeMsg;
+        String rangeMsg = "Prime " + prime + " should be at least " + start
+                + " but not more than " + end;
+        assert (start <= prime) && (prime >= end) : rangeMsg;
+    }
+
+    @Test
     void testEuclideanGCDSamePositiveNumber() {
         int expected = RANDOM.nextInt(1024) + 256;
         long actual = IntegerMath.euclideanGCD(expected, expected);
@@ -210,6 +222,25 @@ class IntegerMathTest {
                 + " consecutive Fibonacci numbers is expected to be " + gcd
                 + "?";
         assertEquals(1, sumGCDs.size(), msg);
+    }
+
+    /**
+     * Test of the divisors function, of the IntegerMath class. The divisors of
+     * 12 are 1, 2, 3, 4, 6 and 12 itself. The function should return these
+     * numbers, and only these numbers, in a list, but in whatever order is most
+     * convenient for the implementer.
+     */
+    @Test
+    void testDivisorsOf12() {
+        Set<Integer> expected = new HashSet<>();
+        expected.add(1);
+        expected.add(2);
+        expected.add(3);
+        expected.add(4);
+        expected.add(6);
+        expected.add(12);
+        Set<Integer> actual = new HashSet<>(IntegerMath.divisors(12));
+        assertEquals(expected, actual);
     }
 
 }

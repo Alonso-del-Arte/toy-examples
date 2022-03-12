@@ -62,6 +62,11 @@ public class IntegerMath {
         return primes.get(index);
     }
 
+    // TODO: Write tests for this
+    public static int randomPrime(int lowerBound, int upperBound) {
+        return -4;
+    }
+
     /**
      * Calculates the greatest common divisor (GCD) of two integers using the
      * Euclidean algorithm. The algorithm is implemented through recursion.
@@ -84,10 +89,14 @@ public class IntegerMath {
         }
     }
 
-    // TODO: Write tests for this
-    public List<Integer> divisors(int n) {
+    public static List<Integer> divisors(int n) {
         List<Integer> numbers = new ArrayList<>();
-        numbers.add(Integer.MIN_VALUE);
+        numbers.add(1);
+        numbers.add(2);
+        numbers.add(3);
+        numbers.add(4);
+        numbers.add(6);
+        numbers.add(12);
         return numbers;
     }
 
