@@ -146,7 +146,7 @@ class IntegerMathTest {
         assert IntegerMath.isPrime(prime) : primeMsg;
         String rangeMsg = "Prime " + prime + " should be at least " + start
                 + " but not more than " + end;
-        assert (start <= prime) && (prime >= end) : rangeMsg;
+        assert (start <= prime) && (prime <= end) : rangeMsg;
     }
 
     @Test
