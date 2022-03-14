@@ -177,6 +177,33 @@ class FractionTest {
     }
 
     @Test
+    void testPlusSameDenominator() {
+        int start = RANDOM.nextInt(128) + 32;
+        int end = 2 * start + RANDOM.nextInt(64) + 16;
+        int denominator = IntegerMath.randomPrime(start, end);
+        int numeratorA = RANDOM.nextInt(denominator / 2) + 1;
+        int numeratorB = RANDOM.nextInt(denominator / 2) + 1;
+        Fraction fractionA = new Fraction(numeratorA, denominator);
+        Fraction fractionB = new Fraction(numeratorB, denominator);
+        Fraction expected = new Fraction(numeratorA + numeratorB, denominator);
+        Fraction actual = fractionA.plus(fractionB);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testPlus() {
+        System.out.println("plus");
+        int n = RANDOM.nextInt(64) + 16;
+        Fraction fraction = new Fraction(n, n + 1);
+        Fraction reciprocal = new Fraction(n + 1, n);
+        Fraction expected = new Fraction(2 * n * n + 2 * n + 1, n * n + n);
+        Fraction actual = fraction.plus(reciprocal);
+        String msg = "Expecting " + fraction + " times its reciprocal to be "
+                + expected;
+        assertEquals(expected, actual, msg);
+    }
+
+    @Test
     void testConstructorChangesNegativeDenominatorToPositive() {
         int denominator = IntegerMath.randomPrime(-128);
         int expected = -denominator;

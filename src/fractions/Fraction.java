@@ -22,9 +22,10 @@ public class Fraction implements Comparable<Fraction> {
         return ((double) this.numerator) / this.denominator;
     }
 
-    // TODO: Write tests for this
     public Fraction plus(Fraction addend) {
-        return this;
+        return new Fraction(this.numerator + addend.numerator,
+                this.denominator);
+        // return this;
     }
 
     // TODO: Write tests for this
