@@ -38,12 +38,8 @@ public class Fraction implements Comparable<Fraction> {
         return new Fraction(-this.numerator, this.denominator);
     }
 
-    // TODO: Refactor to use negate()
     public Fraction minus(Fraction subtrahend) {
-        long numeratorA = this.numerator * subtrahend.denominator;
-        long numeratorB = subtrahend.numerator * this.denominator;
-        long crossDenom = this.denominator * subtrahend.denominator;
-        return new Fraction(numeratorA - numeratorB, crossDenom);
+        return this.plus(subtrahend.negate());
     }
 
     // TODO: Write tests for this
