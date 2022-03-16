@@ -1,5 +1,6 @@
 package fractions;
 
+import calculators.ExtendedMath;
 import calculators.IntegerMath;
 
 import java.util.*;
@@ -199,6 +200,30 @@ class FractionTest {
         Fraction expected = new Fraction(2 * n * n + 2 * n + 1, n * n + n);
         Fraction actual = fraction.plus(reciprocal);
         String msg = "Expecting " + fraction + " times its reciprocal to be "
+                + expected;
+        assertEquals(expected, actual, msg);
+    }
+
+    @Test
+    void testNegate() {
+        System.out.println("negate");
+        int numerator = RANDOM.nextInt();
+        int denominator = RANDOM.nextInt(2048) + 2;
+        Fraction fraction = new Fraction(numerator, denominator);
+        Fraction expected = new Fraction(-numerator, denominator);
+        Fraction actual = fraction.negate();
+        String msg = fraction + " negated should be " + expected;
+        assertEquals(expected, actual, msg);
+    }
+
+    @Test
+    void testMinus() {
+        System.out.println("minus");
+        Fraction expected = ExtendedMath.random();
+        Fraction subtrahend = ExtendedMath.random();
+        Fraction minuend = expected.plus(subtrahend);
+        Fraction actual = minuend.minus(subtrahend);
+        String msg = minuend + " minus " + subtrahend + " expected to be "
                 + expected;
         assertEquals(expected, actual, msg);
     }

@@ -62,9 +62,38 @@ public class IntegerMath {
         return primes.get(index);
     }
 
-    // TODO: Write tests for this
+    /**
+     * Gives a pseudorandom prime number within specified bounds. The current
+     * implementation relies on having a complete list of primes between the
+     * bounds and to or through 0. For the sake of performance, the ranges
+     * should be small, but not too small. Keeping the bounds within the range
+     * of <code>short</code> should deliver results reasonably quickly.
+     * @param lowerBound The lower bound for the pseudorandom prime. For
+     *                   example, &minus;2048. If this number is itself prime,
+     *                   it may be given as a result, especially if the range is
+     *                   small.
+     * @param upperBound The upper bound for the pseudorandom prime, preferably
+     *                   greater than <code>lowerBound</code> but not too much
+     *                   greater. For example, 2047.  If this number is itself
+     *                   prime, it may be given as a result, especially if the
+     *                   range is small.
+     * @return A prime number within the specified bounds. Given the examples
+     * above, the result might &minus;1109.
+     * @throws IllegalArgumentException If there are no primes within the
+     * specified bounds. The exception message will say so, e.g., "There are no
+     * primes between 888 and 906".
+     */
     public static int randomPrime(int lowerBound, int upperBound) {
-        return -4;
+        List<Integer> primes = EratosthenesSieve.listPrimes(lowerBound,
+                upperBound);
+        int size = primes.size();
+        if (size == 0) {
+            String excMsg = "There are no primes between " + lowerBound
+                    + " and " + upperBound;
+            throw new IllegalArgumentException(excMsg);
+        }
+        int index = RANDOM.nextInt(size);
+        return primes.get(index);
     }
 
     /**

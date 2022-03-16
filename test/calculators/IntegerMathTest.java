@@ -150,6 +150,20 @@ class IntegerMathTest {
     }
 
     @Test
+    void testRandomPrimeFromPrimeEmptyRangeCausesException() {
+        int start = 524;
+        int end = 540;
+        Throwable exc = assertThrows(IllegalArgumentException.class, () -> {
+            int badResult = IntegerMath.randomPrime(start, end);
+            System.out.println("Trying to get prime between " + start + " and "
+                    + end + " should not have given result " + badResult);
+        });
+        String excMsg = exc.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
     void testEuclideanGCDSamePositiveNumber() {
         int expected = RANDOM.nextInt(1024) + 256;
         long actual = IntegerMath.euclideanGCD(expected, expected);
@@ -242,5 +256,8 @@ class IntegerMathTest {
         Set<Integer> actual = new HashSet<>(IntegerMath.divisors(12));
         assertEquals(expected, actual);
     }
+
+    // TODO: Write test for divisors of pseudorandom number with two or three
+    //       prime factors
 
 }

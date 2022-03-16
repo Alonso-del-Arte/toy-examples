@@ -23,9 +23,10 @@ public class Fraction implements Comparable<Fraction> {
     }
 
     public Fraction plus(Fraction addend) {
-        return new Fraction(this.numerator + addend.numerator,
-                this.denominator);
-        // return this;
+        long numeratorA = this.numerator * addend.denominator;
+        long numeratorB = addend.numerator * this.denominator;
+        long crossDenom = this.denominator * addend.denominator;
+        return new Fraction(numeratorA + numeratorB, crossDenom);
     }
 
     // TODO: Write tests for this
@@ -33,14 +34,16 @@ public class Fraction implements Comparable<Fraction> {
         return this;
     }
 
-    // TODO: Write tests for this
     public Fraction negate() {
-        return this;
+        return new Fraction(-this.numerator, this.denominator);
     }
 
-    // TODO: Write tests for this
+    // TODO: Refactor to use negate()
     public Fraction minus(Fraction subtrahend) {
-        return this;
+        long numeratorA = this.numerator * subtrahend.denominator;
+        long numeratorB = subtrahend.numerator * this.denominator;
+        long crossDenom = this.denominator * subtrahend.denominator;
+        return new Fraction(numeratorA - numeratorB, crossDenom);
     }
 
     // TODO: Write tests for this
