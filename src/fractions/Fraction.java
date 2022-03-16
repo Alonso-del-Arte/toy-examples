@@ -47,9 +47,9 @@ public class Fraction implements Comparable<Fraction> {
         return this;
     }
 
-    // TODO: Write tests for this
     public Fraction times(Fraction multiplicand) {
-        return this;
+        return new Fraction(this.numerator * multiplicand.numerator,
+                this.denominator * multiplicand.denominator);
     }
 
     // TODO: Write tests for this
@@ -57,13 +57,19 @@ public class Fraction implements Comparable<Fraction> {
         return this;
     }
 
-    // TODO: Write tests for this
     public Fraction reciprocal() {
-        return this;
+        if (this.numerator == 0L) {
+            String excMsg = "Denominator 0 is not valid";
+            throw new ArithmeticException(excMsg);
+        }
+        return new Fraction(this.denominator, this.numerator);
     }
 
-    // TODO: Write tests for this
     public Fraction divides(Fraction divisor) {
+        if (divisor.numerator == 0L) {
+            String excMsg = "Can't divide " + this + " by " + divisor;
+            throw new ArithmeticException(excMsg);
+        }
         return this;
     }
 

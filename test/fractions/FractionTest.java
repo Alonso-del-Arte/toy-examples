@@ -199,7 +199,7 @@ class FractionTest {
         Fraction reciprocal = new Fraction(n + 1, n);
         Fraction expected = new Fraction(2 * n * n + 2 * n + 1, n * n + n);
         Fraction actual = fraction.plus(reciprocal);
-        String msg = "Expecting " + fraction + " times its reciprocal to be "
+        String msg = "Expecting " + fraction + " plus its reciprocal to be "
                 + expected;
         assertEquals(expected, actual, msg);
     }
@@ -224,6 +224,71 @@ class FractionTest {
         Fraction minuend = expected.plus(subtrahend);
         Fraction actual = minuend.minus(subtrahend);
         String msg = minuend + " minus " + subtrahend + " expected to be "
+                + expected;
+        assertEquals(expected, actual, msg);
+    }
+
+    @Test
+    void testTimes() {
+        System.out.println("times");
+        int numeratorA = RANDOM.nextInt(128) - 64;
+        int denominatorA = RANDOM.nextInt(64) + 16;
+        int numeratorB = RANDOM.nextInt(128) - 64;
+        int denominatorB = RANDOM.nextInt(64) + 16;
+        Fraction multiplicandA = new Fraction(numeratorA, denominatorA);
+        Fraction multiplicandB = new Fraction(numeratorB, denominatorB);
+        Fraction expected = new Fraction(numeratorA * numeratorB,
+                denominatorA * denominatorB);
+        Fraction actual = multiplicandA.times(multiplicandB);
+        String msg = "Expecting " + multiplicandA + " times " + multiplicandB
+                + " to be " + expected;
+        assertEquals(expected, actual, msg);
+    }
+
+    @Test
+    void testNoReciprocalForZero() {
+        Fraction zero = new Fraction(0, 1);
+        Throwable exc = assertThrows(ArithmeticException.class, () -> {
+            Fraction badReciprocal = zero.reciprocal();
+            System.out.println("Reciprocal of " + zero.toString() + " is said to be "
+                    + badReciprocal.toString());
+        });
+        String excMsg = exc.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testReciprocal() {
+        Fraction fraction = ExtendedMath.random();
+        Fraction expected = new Fraction(fraction.getDenominator(),
+                fraction.getNumerator());
+        Fraction actual = fraction.reciprocal();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testDivisionByZero() {
+        Fraction fraction = ExtendedMath.random();
+        Fraction zero = new Fraction(0, 1);
+        Throwable exc = assertThrows(ArithmeticException.class, () -> {
+            Fraction badResult = fraction.divides(zero);
+            System.out.println(fraction + " divided by " + zero
+                    + " is said to be " + badResult.toString());
+        });
+        String excMsg = exc.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testDivides() {
+        System.out.println("divides");
+        Fraction expected = ExtendedMath.random();
+        Fraction divisor = ExtendedMath.random();
+        Fraction dividend = expected.times(divisor);
+        Fraction actual = dividend.divides(divisor);
+        String msg = dividend + " divided by " + divisor + " expected to be "
                 + expected;
         assertEquals(expected, actual, msg);
     }
