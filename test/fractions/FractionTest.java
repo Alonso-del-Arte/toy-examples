@@ -285,7 +285,7 @@ class FractionTest {
     void testDivides() {
         System.out.println("divides");
         Fraction expected = ExtendedMath.random();
-        Fraction divisor = ExtendedMath.random();
+        Fraction divisor = ExtendedMath.random().plus(new Fraction(1, 2));
         Fraction dividend = expected.times(divisor);
         Fraction actual = dividend.divides(divisor);
         String msg = dividend + " divided by " + divisor + " expected to be "

@@ -65,12 +65,14 @@ public class Fraction implements Comparable<Fraction> {
         return new Fraction(this.denominator, this.numerator);
     }
 
+    // TODO: Refactor to use times(), eliminate zero check
     public Fraction divides(Fraction divisor) {
         if (divisor.numerator == 0L) {
             String excMsg = "Can't divide " + this + " by " + divisor;
             throw new ArithmeticException(excMsg);
         }
-        return this;
+        return new Fraction(this.numerator * divisor.denominator,
+                this.denominator * divisor.numerator);
     }
 
     // TODO: Write tests for this
