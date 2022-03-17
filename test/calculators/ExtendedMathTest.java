@@ -21,8 +21,47 @@ class ExtendedMathTest {
         assertEquals(expected, actual, 0.0001);
     }
 
-    void testSqrtFractions() {
-        fail("Haven't written test yet");
+    @Test
+    void testAbsTheSameForPositive() {
+        int denominator = RANDOM.nextInt(256) + 4;
+        int numerator = 2 * denominator + 1;
+        Fraction expected = new Fraction(numerator, denominator);
+        Fraction actual = ExtendedMath.abs(expected);
+        String msg = "abs(" + expected + ") should be " + expected;
+        assertEquals(expected, actual, msg);
+    }
+
+    /**
+     * Another test of the sqrt function of the ExtendedMath class. The square
+     * root of a negative purely real number is an imaginary number, but the
+     * Fraction class can't represent nonzero imaginary numbers like half the
+     * imaginary unit. Therefore, the function should throw ArithmeticException
+     * for negative fractions.
+     */
+    @Test
+    void testNoSquareRootForNegativeFractions() {
+        int numerator = -RANDOM.nextInt(4096) - 1;
+        int denominator = RANDOM.nextInt(256) + 2;
+        Fraction negative = new Fraction(numerator, denominator);
+        Throwable exc = assertThrows(ArithmeticException.class, () -> {
+            Fraction badResult = ExtendedMath.sqrt(negative);
+            System.out.println("Square root of " + negative + " is said to be "
+                    + badResult + "?");
+        });
+        String excMsg = exc.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testSqrt() {
+        int denominator = RANDOM.nextInt(256) + 4;
+        int numerator = 2 * denominator + 1;
+        Fraction expected = new Fraction(numerator, denominator);
+        Fraction square = expected.times(expected);
+        Fraction actual = ExtendedMath.sqrt(square);
+        String msg = "sqrt(" + square + ") expected to be " + expected;
+        assertEquals(expected, actual, msg);
     }
 
     @Test
