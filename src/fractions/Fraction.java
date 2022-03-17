@@ -58,21 +58,11 @@ public class Fraction implements Comparable<Fraction> {
     }
 
     public Fraction reciprocal() {
-        if (this.numerator == 0L) {
-            String excMsg = "Denominator 0 is not valid";
-            throw new ArithmeticException(excMsg);
-        }
         return new Fraction(this.denominator, this.numerator);
     }
 
-    // TODO: Refactor to use times(), eliminate zero check
     public Fraction divides(Fraction divisor) {
-        if (divisor.numerator == 0L) {
-            String excMsg = "Can't divide " + this + " by " + divisor;
-            throw new ArithmeticException(excMsg);
-        }
-        return new Fraction(this.numerator * divisor.denominator,
-                this.denominator * divisor.numerator);
+        return this.times(divisor.reciprocal());
     }
 
     // TODO: Write tests for this
@@ -154,19 +144,10 @@ public class Fraction implements Comparable<Fraction> {
         return hash;
     }
 
-    // TODO: Refactor so as to not use floating point
-    //       (write test accordingly)
     @Override
     public int compareTo(Fraction other) {
-        double diff = this.getNumericApproximation()
-                - other.getNumericApproximation();
-        if (diff == 0.0) {
-            return 0;
-        } else {
-            if (diff < 0) {
-                return -1;
-            } else return 1;
-        }
+        Fraction diff = this.minus(other);
+        return Long.signum(diff.numerator);
     }
 
     // TODO: Write tests for this
