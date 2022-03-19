@@ -18,6 +18,11 @@ class BigFractionTest {
         return new BigInteger(72, RANDOM).add(BigInteger.ONE);
     }
 
+    @Test
+    void testCompareTo() {
+        fail("Haven't written test yet");
+    }
+
     /**
      * Constructor test. If the numerator is null, a
      * <code>NullPointerException</code> should be thrown.

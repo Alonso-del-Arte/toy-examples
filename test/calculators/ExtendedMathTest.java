@@ -3,6 +3,7 @@ package calculators;
 import fractions.Fraction;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -22,12 +23,35 @@ class ExtendedMathTest {
     }
 
     @Test
+    void testPrimePiBelowTwo() {
+        double x = 1.0 + RANDOM.nextDouble();
+        assertEquals(0, ExtendedMath.primePi(x));
+    }
+
+    @Test
+    void testPrimePi() {
+        fail("Haven't written test yet");
+    }
+
+    @Test
     void testAbsTheSameForPositive() {
         int denominator = RANDOM.nextInt(256) + 4;
-        int numerator = 2 * denominator + 1;
+        int numerator = 2 * denominator + RANDOM.nextInt(denominator) + 1;
         Fraction expected = new Fraction(numerator, denominator);
         Fraction actual = ExtendedMath.abs(expected);
         String msg = "abs(" + expected + ") should be " + expected;
+        assertEquals(expected, actual, msg);
+    }
+
+    @Test
+    void testAbs() {
+        System.out.println("abs");
+        int denominator = RANDOM.nextInt(256) + 4;
+        int numerator = 2 * denominator + RANDOM.nextInt(denominator) + 1;
+        Fraction negative = new Fraction(-numerator, denominator);
+        Fraction expected = new Fraction(numerator, denominator);
+        Fraction actual = ExtendedMath.abs(negative);
+        String msg = "abs(" + negative + ") should be " + expected;
         assertEquals(expected, actual, msg);
     }
 
@@ -53,16 +77,23 @@ class ExtendedMathTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
+    /**
+     * Another test of the sqrt function of the ExtendedMath class. The square
+     * root 2/9 is the irrational number sqrt(2)/3, and so the function can only
+     * give a rational approximation, the same as java.lang.Math.sqrt().
+     */
     @Test
     void testSqrt() {
-        int denominator = RANDOM.nextInt(256) + 4;
-        int numerator = 2 * denominator + 1;
-        Fraction expected = new Fraction(numerator, denominator);
-        Fraction square = expected.times(expected);
-        Fraction actual = ExtendedMath.sqrt(square);
-        String msg = "sqrt(" + square + ") expected to be " + expected;
-        assertEquals(expected, actual, msg);
+        Fraction twoNinths = new Fraction(2, 9);
+        Fraction squareRootApprox = ExtendedMath.sqrt(twoNinths);
+        double expected = Math.sqrt(twoNinths.getNumericApproximation());
+        double actual = squareRootApprox.getNumericApproximation();
+        double delta = 0.00000001;
+        assertEquals(expected, actual, delta);
     }
+
+    @Test
+    void testSqrtTwoNinths() {}
 
     @Test
     void testRandom() {

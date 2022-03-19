@@ -1,8 +1,11 @@
 package calculators;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * Utility class for integer arithmetic. Mostly concerning prime numbers and
@@ -119,14 +122,24 @@ public class IntegerMath {
     }
 
     public static List<Integer> divisors(int n) {
-        List<Integer> numbers = new ArrayList<>();
-        numbers.add(1);
-        numbers.add(2);
-        numbers.add(3);
-        numbers.add(4);
-        numbers.add(6);
-        numbers.add(12);
-        return numbers;
+        Set<Integer> set = new HashSet<>();
+        int smallDivisor = 1;
+        int bigDivisor = n;
+        while (smallDivisor < bigDivisor) {
+            set.add(smallDivisor);
+            set.add(bigDivisor);
+            int remainder;
+            do {
+                smallDivisor++;
+                remainder = n % smallDivisor;
+                if (remainder == 0) {
+                    bigDivisor = n / smallDivisor;
+                }
+            } while (remainder != 0);
+        }
+        List<Integer> divisors = new ArrayList<>(set);
+        Collections.sort(divisors);
+        return divisors;
     }
 
 }

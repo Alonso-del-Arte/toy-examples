@@ -10,7 +10,7 @@ import java.math.BigInteger;
  * numerator might be less than <code>Long.MIN_VALUE</code>.
  * @author Alonso del Arte
  */
-public class BigFraction {
+public class BigFraction implements Comparable<BigFraction> {
 
     private final BigInteger numerator, denominator;
 
@@ -77,6 +77,12 @@ public class BigFraction {
     // TODO: Write tests for this
     public BigFraction divides(int divisor) {
         return this;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public int compareTo(BigFraction other) {
+        return 0;
     }
 
     // TODO: Write tests for this

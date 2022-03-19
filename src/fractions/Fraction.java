@@ -150,6 +150,10 @@ public class Fraction implements Comparable<Fraction> {
         return Long.signum(diff.numerator);
     }
 
+    public static Fraction parseFract(String s) {
+        return new Fraction(-1, 2);
+    }
+
     // TODO: Write tests for this
     public Fraction(long numer) {
         this(1, numer);

@@ -30,29 +30,42 @@ public class ExtendedMath {
 
     private static final Fraction ONE_HALF = new Fraction(1, 2);
 
-    // TODO: Write tests for this
+    private static final long COMPARISON_EDGE_DENOMINATOR = Integer.MAX_VALUE;
+
+    private static final Fraction DELTA = new Fraction(1,
+            COMPARISON_EDGE_DENOMINATOR);
+
     public static double primePiLegendreEstimate(double x) {
-        return -1.0;
+        return x / (Math.log(x) - 1.08366);
     }
 
-    // TODO: Write tests for this
     public static int primePi(double x) {
-        return -1;
+        return 0;
     }
 
-    // TODO: Write tests for this
     public static Fraction abs(Fraction fraction) {
-        return ONE_HALF;
+        if (fraction.getNumerator() < 0L) {
+            return fraction.negate();
+        } else {
+            return fraction;
+        }
     }
 
-    private static Fraction newtonSqrtAlg(Fraction a, Fraction x0, Fraction x1) {
-        double diff = Math.abs(x0.getNumericApproximation()
-                - x1.getNumericApproximation());
-        if (diff <= Double.MIN_NORMAL) {
-            return x0;
+    private static Fraction newtonSqrtAlg(Fraction a, Fraction x0,
+                                          Fraction x1) {
+        System.out.println("x_0 = " + x0 + ", x_1 = " + x1);
+        Fraction diff = abs(x0.minus(x1));
+        if (diff.compareTo(DELTA) < 0) {
+            System.out.println("jump on compare to delta");
+            return x1;
         } else {
-            Fraction x2 = ONE_HALF.times(x1.plus(a.divides(x1)));
-            return newtonSqrtAlg(a, x1, x2);
+            try {
+                Fraction x2 = ONE_HALF.times(x1.plus(a.divides(x1)));
+                return newtonSqrtAlg(a, x1, x2);
+            } catch (ArithmeticException ae) {
+                System.err.println(ae.getMessage());
+                return x1;
+            }
         }
     }
 
@@ -71,8 +84,12 @@ public class ExtendedMath {
             String excMsg = "Fraction data type can't represent sqrt("
                     + fraction + "), which is an imaginary number";
             throw new ArithmeticException(excMsg);
-        }return fraction;
-//        return newtonSqrtAlg(fraction, ONE, ONE_HALF);
+        }
+        long numerator = (long) Math.floor(Math.sqrt(fraction.getNumerator()));
+        long denominator = (long) Math.floor(Math.sqrt(fraction
+                .getDenominator()));
+        Fraction firstGuess = new Fraction(numerator, denominator);
+        return abs(newtonSqrtAlg(fraction, ONE, firstGuess));
     }
 
     /**

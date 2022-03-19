@@ -257,7 +257,21 @@ class IntegerMathTest {
         assertEquals(expected, actual);
     }
 
-    // TODO: Write test for divisors of pseudorandom number with two or three
-    //       prime factors
+    @Test
+    void testDivisors() {
+        System.out.println("divisors");
+        int number = 36 * (RANDOM.nextInt(512) + 8);
+        Set<Integer> expected = new HashSet<>();
+        expected.add(1);
+        expected.add(number);
+        int half = number / 2;
+        for (int i = 2; i <= half; i++) {
+            if (number % i == 0) {
+                expected.add(i);
+            }
+        }
+        Set<Integer> actual = new HashSet<>(IntegerMath.divisors(number));
+        assertEquals(expected, actual);
+    }
 
 }

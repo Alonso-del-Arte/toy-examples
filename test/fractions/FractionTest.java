@@ -250,7 +250,7 @@ class FractionTest {
         Fraction zero = new Fraction(0, 1);
         Throwable exc = assertThrows(ArithmeticException.class, () -> {
             Fraction badReciprocal = zero.reciprocal();
-            System.out.println("Reciprocal of " + zero.toString() + " is said to be "
+            System.out.println("Reciprocal of " + zero + " is said to be "
                     + badReciprocal.toString());
         });
         String excMsg = exc.getMessage();
@@ -291,6 +291,19 @@ class FractionTest {
         String msg = dividend + " divided by " + divisor + " expected to be "
                 + expected;
         assertEquals(expected, actual, msg);
+    }
+
+    @Test
+    void testParseFractRejectsNonNumericString() {
+        String msg = "This message should not be parsed as a fraction";
+        Throwable t = assertThrows(NumberFormatException.class, () -> {
+            Fraction badFraction = Fraction.parseFract(msg);
+            System.out.println("Message \"" + msg
+                    + "\" was somehow parsed to fraction " + badFraction);
+        }, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
     }
 
     @Test
