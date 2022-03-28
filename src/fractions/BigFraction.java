@@ -96,8 +96,11 @@ public class BigFraction implements Comparable<BigFraction> {
         this(BigInteger.ONE, numer);
     }
 
-    // TODO: Write tests for this
     public BigFraction(BigInteger numer, BigInteger denom) {
+        if (numer == null || denom == null) {
+            String excMsg = "Neither numerator nor denominator may be null";
+            throw new NullPointerException(excMsg);
+        }
         this.numerator = numer;
         this.denominator = denom;
     }
