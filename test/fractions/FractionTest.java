@@ -178,6 +178,18 @@ class FractionTest {
     }
 
     @Test
+    void testCompareToLargeDenominators() {
+        long denomA = 1L << 53;
+        long denomB = denomA + 1;
+        Fraction fractionA = new Fraction(1, denomA);
+        Fraction fractionB = new Fraction(1, denomB);
+        String msg = fractionA + " should be found to be greater than "
+                + fractionB;
+        assert fractionA.compareTo(fractionB) > 0 : msg;
+        assert fractionB.compareTo(fractionA) < 0 : msg;
+    }
+
+    @Test
     void testPlusSameDenominator() {
         int start = RANDOM.nextInt(128) + 32;
         int end = 2 * start + RANDOM.nextInt(64) + 16;

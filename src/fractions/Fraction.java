@@ -146,17 +146,8 @@ public class Fraction implements Comparable<Fraction> {
 
     @Override
     public int compareTo(Fraction other) {
-        double diff = this.getNumericApproximation()
-                - other.getNumericApproximation();
-        if (diff == 0.0) {
-            return 0;
-        } else {
-            if (diff < 0) {
-                return -1;
-            } else return 1;
-        }
-//        Fraction diff = this.minus(other);
-//        return Long.signum(diff.numerator);
+        Fraction diff = this.minus(other);
+        return Long.signum(diff.numerator);
     }
 
     public static Fraction parseFract(String s) {
