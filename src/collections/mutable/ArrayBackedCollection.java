@@ -112,7 +112,25 @@ abstract class ArrayBackedCollection<E> implements Iterable<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new ArrayBackedIterator();
+        return new Iterator<E>() {
+
+            private int index = 0;
+
+            @Override
+            public boolean hasNext() {
+                return this.index < ArrayBackedCollection.this.nextUp;
+            }
+
+            @Override
+            public E next() {
+                if (this.index == ArrayBackedCollection.this.nextUp) {
+                    String excMsg = "Collection has no more elements";
+                    throw new NoSuchElementException(excMsg);
+                }
+                return (E) ArrayBackedCollection.this.elements[this.index++];
+            }
+
+        };
     }
 
     public ArrayBackedCollection(ArrayBackedCollection<?
@@ -129,26 +147,6 @@ abstract class ArrayBackedCollection<E> implements Iterable<E> {
             throw new IllegalArgumentException(excMsg);
         }
         this.elements = new Object[initialCapacity];
-    }
-
-    private class ArrayBackedIterator implements Iterator<E> {
-
-        private int index = 0;
-
-        @Override
-        public boolean hasNext() {
-            return this.index < ArrayBackedCollection.this.nextUp;
-        }
-
-        @Override
-        public E next() {
-            if (this.index == ArrayBackedCollection.this.nextUp) {
-                String excMsg = "Collection has no more elements";
-                throw new NoSuchElementException(excMsg);
-            }
-            return (E) ArrayBackedCollection.this.elements[this.index++];
-        }
-
     }
 
 }

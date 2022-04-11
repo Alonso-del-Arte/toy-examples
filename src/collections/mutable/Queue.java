@@ -41,6 +41,11 @@ public class Queue<E> implements Iterable<E> {
         return false;
     }
 
+    // TODO: Write tests for this
+    public boolean isFull() {
+        return true;
+    }
+
     public void clear() {
         // TODO: Write tests for this
     }
@@ -63,7 +68,11 @@ public class Queue<E> implements Iterable<E> {
     }
 
     public Queue(int capacity) {
-        // TODO: Write test for wrong capacity values, e.g., -47, 0, maybe 1, 2.
+        if (capacity < 0) {
+            String excMsg = "Capacity " + capacity
+                    + " not valid, should be positive";
+            throw new IllegalArgumentException(excMsg);
+        }
         this.elements = new Object[capacity];
     }
 
