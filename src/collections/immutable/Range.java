@@ -28,19 +28,16 @@ public class Range implements Iterable<Integer> {
         };
     }
 
-    // TODO: Write tests for this
     public int getStart() {
-        return Integer.MAX_VALUE;
+        return this.begin;
     }
 
-    // TODO: Write tests for this
     public int getFinish() {
-        return Integer.MIN_VALUE;
+        return this.end;
     }
 
-    // TODO: Write tests for this
     public int getStep() {
-        return 0;
+        return this.interval;
     }
 
     // TODO: Write tests for this
@@ -49,7 +46,7 @@ public class Range implements Iterable<Integer> {
     }
 
     public Range(int start, int finish) {
-        this(start, finish, determineStepSign(start, finish));
+        this(start, finish, 1);
     }
 
     public Range(int start, int finish, int step) {

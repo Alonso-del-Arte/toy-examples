@@ -127,7 +127,9 @@ abstract class ArrayBackedCollection<E> implements Iterable<E> {
                     String excMsg = "Collection has no more elements";
                     throw new NoSuchElementException(excMsg);
                 }
-                return (E) ArrayBackedCollection.this.elements[this.index++];
+                @SuppressWarnings("unchecked")
+                E element = (E) ArrayBackedCollection.this.elements[this.index++];
+                return element;
             }
 
         };
