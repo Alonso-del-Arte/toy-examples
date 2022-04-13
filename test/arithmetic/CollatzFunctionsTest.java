@@ -31,4 +31,18 @@ class CollatzFunctionsTest {
         }
     }
 
+    @Test
+    void testClassicOddMultiplyExact() {
+        int minimum = Integer.MAX_VALUE / 3 + 1;
+        int span = minimum / 3;
+        int n = minimum + RANDOM.nextInt(span);
+        Throwable t = assertThrows(ArithmeticException.class, () -> {
+            int badResult = CollatzFunctions.CLASSIC.applyAsInt(n);
+            System.out.println("f(" + n + ") said to be " + badResult);
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
 }
