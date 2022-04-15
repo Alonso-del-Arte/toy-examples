@@ -59,30 +59,6 @@ public class ComplexNumber implements Arithmeticable<ComplexNumber>  {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (!obj.getClass().equals(this.getClass())) {
-            return false;
-        }
-        final ComplexNumber other = (ComplexNumber) obj;
-        if (this.realPart != other.realPart) {
-            return false;
-        }
-        return this.imagPart == other.imagPart;
-    }
-
-    // TODO: Write test for this
-    @Override
-    public int hashCode() {
-        return Integer.MIN_VALUE;
-    }
-
-    @Override
     public ComplexNumber plus(ComplexNumber addend) {
         double sumRe = this.realPart + addend.realPart;
         double sumIm = this.imagPart + addend.imagPart;
@@ -93,7 +69,12 @@ public class ComplexNumber implements Arithmeticable<ComplexNumber>  {
         return new ComplexNumber(sumRe, sumIm);
     }
 
-    // STUB TO FAIL THE FIRST TEST
+    // TODO: Write tests for this
+    public ComplexNumber plus(double addend) {
+        return new ComplexNumber(0.0, 0.0);
+    }
+
+    // TODO: Write tests for this
     @Override
     public ComplexNumber plus(int addend) {
         return new ComplexNumber(0.0, 0.0);
@@ -125,19 +106,19 @@ public class ComplexNumber implements Arithmeticable<ComplexNumber>  {
         return new ComplexNumber(re, im);
     }
 
-    // STUB TO FAIL THE FIRST TEST
+    // TODO: Write tests for this
     @Override
     public ComplexNumber times(int multiplicand) {
         return new ComplexNumber(0.0, 0.0);
     }
 
-    // STUB TO FAIL THE FIRST TEST
+    // TODO: Write tests for this
     @Override
     public ComplexNumber divides(ComplexNumber divisor) {
         return new ComplexNumber(0.0, 0.0);
     }
 
-    // STUB TO FAIL THE FIRST TEST
+    // TODO: Write tests for this
     @Override
     public ComplexNumber divides(int divisor) {
         return new ComplexNumber(0.0, 0.0);
@@ -147,6 +128,30 @@ public class ComplexNumber implements Arithmeticable<ComplexNumber>  {
         double aSquared = this.realPart * this.realPart;
         double bSquared = this.imagPart * this.imagPart;
         return Math.sqrt(aSquared + bSquared);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!obj.getClass().equals(this.getClass())) {
+            return false;
+        }
+        final ComplexNumber other = (ComplexNumber) obj;
+        if (this.realPart != other.realPart) {
+            return false;
+        }
+        return this.imagPart == other.imagPart;
+    }
+
+    // TODO: Write test for this
+    @Override
+    public int hashCode() {
+        return Integer.MIN_VALUE;
     }
 
     public ComplexNumber(double re, double im) {
