@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Alonso del Arte
+ * Copyright (C) 2022 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -69,7 +69,8 @@ public final class MandelbrotJuliaViewer extends JPanel
 
     private static final int DEFAULT_HORIZ_MAX = 1080;
 
-    private static final int DEFAULT_VERTIC_MAX = 720;
+    private static final int DEFAULT_VERTIC_MAX = 640;
+    // TODO: Reminder: change back to 720 before next commit
 
     private int maxX, maxY;
 
@@ -91,7 +92,10 @@ public final class MandelbrotJuliaViewer extends JPanel
 
     private static final int MINIMUM_PIXELS_PER_UNIT_INTERVAL = 2;
 
-    private static final int MAXIMUM_PIXELS_PER_UNIT_INTERVAL = 131072;
+    /**
+     * How much zooming in is allowed.
+     */
+    private static final int MAXIMUM_PIXELS_PER_UNIT_INTERVAL = 524288;
 
     private int pixelsPerUnitInterval;
 
@@ -119,6 +123,8 @@ public final class MandelbrotJuliaViewer extends JPanel
 
     private String prevSavePathname;
 
+    private Thread slideshowThread = new JuliaSlideshow();
+
     public static final String PROGRAM_NAME = "Mandelbrot/Julia Set Viewer";
 
     public static final String VERSION_ID = "Version 0.1";
@@ -143,7 +149,7 @@ public final class MandelbrotJuliaViewer extends JPanel
     }
 
     private Color chooseColor(int iterationCount) {
-        int adjustedCount = iterationCount % DEFAULT_ITERATION_MAXIMUM;
+        int adjustedCount = iterationCount % this.iterMax;
         int r = (adjustedCount % 170) * 65536;
         int g = (adjustedCount % 85) * 256;
         int b = adjustedCount * 16;
@@ -278,6 +284,12 @@ public final class MandelbrotJuliaViewer extends JPanel
         this.getToolkit().getSystemClipboard().setContents(imgSel, imgSel);
     }
 
+    private void updateJuliaPoint() {
+        String text = "Julia set for " + this.juliaPoint.toString();
+        this.frame.setTitle(text);
+        this.repaint();
+    }
+
     private void toggleJuliaFlag() {
         this.juliaFlag = !this.juliaFlag;
         if (this.juliaFlag) {
@@ -350,6 +362,14 @@ public final class MandelbrotJuliaViewer extends JPanel
         System.out.println(ABOUT_BOX_MSG_ASCII);
     }
 
+    private void startSlideshow() {
+        this.slideshowThread.start();
+    }
+
+    private void stopSlideshow() {
+        this.slideshowThread.interrupt();
+    }
+
     @Override
     public void actionPerformed(ActionEvent ae) {
         String cmd = ae.getActionCommand();
@@ -392,6 +412,12 @@ public final class MandelbrotJuliaViewer extends JPanel
                 break;
             case "about":
                 this.showAboutBox();
+                break;
+            case "slideshow":
+                this.startSlideshow();
+                break;
+            case "stopSlideshow":
+                this.stopSlideshow();
                 break;
             default:
                 System.err.println("Command " + cmd + " not recognized");
@@ -560,6 +586,17 @@ public final class MandelbrotJuliaViewer extends JPanel
         }
         this.toggleReadoutsEnabled.addActionListener(this);
         menu.add(this.toggleReadoutsEnabled);
+        menu.addSeparator();
+        accDescr = "Begin slideshow";
+        accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_O, 0);
+        menuItem = this.makeMenuItem("Begin slideshow", accDescr, "slideshow",
+                accelerator);
+        menu.add(menuItem);
+        accDescr = "Stop slideshow";
+        accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_P, 0);
+        menuItem = this.makeMenuItem("Stop slideshow", accDescr,
+                "stopSlideshow", accelerator);
+        menu.add(menuItem);
         return menu;
     }
 
@@ -649,6 +686,26 @@ public final class MandelbrotJuliaViewer extends JPanel
     public static void main(String[] args) {
         MandelbrotJuliaViewer viewer = new MandelbrotJuliaViewer();
         viewer.setUpFrame();
+    }
+
+    private class JuliaSlideshow extends Thread {
+
+        private final ComplexNumber increment = new ComplexNumber(0.0005, -0.0005);
+
+        @Override
+        public void run() {
+            while (true) {
+                MandelbrotJuliaViewer.this.juliaPoint
+                        = MandelbrotJuliaViewer.this.juliaPoint.plus(increment);
+                MandelbrotJuliaViewer.this.updateJuliaPoint();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
     }
 
 }
