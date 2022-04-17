@@ -16,7 +16,9 @@
  */
 package numerics;
 
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -131,6 +133,23 @@ class ComplexNumberTest {
     }
 
     @Test
+    void testHashCode() {
+        System.out.println("hashCode");
+        int expected = RANDOM.nextInt(256) + 64;
+        Set<ComplexNumber> numbers = new HashSet<>(expected);
+        Set<Integer> hashes = new HashSet<>(expected);
+        while (numbers.size() < expected) {
+            double re = Math.random() - 0.5;
+            double im = Math.random() - 0.5;
+            ComplexNumber number = new ComplexNumber(re, im);
+            numbers.add(number);
+            hashes.add(number.hashCode());
+        }
+        int actual = hashes.size();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testEquals() {
         System.out.println("equals");
         double real = RANDOM.nextDouble();
@@ -141,7 +160,7 @@ class ComplexNumberTest {
     }
 
     /**
-     * Test of plus method, of class ComplexNumber.
+     * Test of the plus function, of the ComplexNumber class.
      */
     @Test
     void testPlus() {
@@ -159,10 +178,10 @@ class ComplexNumberTest {
     }
 
     /**
-     * Test of plus method, of class ComplexNumber.
+     * Another test of the plus function, of the ComplexNumber class.
      */
     @Test
-    void testPlus_int() {
+    void testPlusInt() {
         int addend = 0;
         ComplexNumber instance = null;
         ComplexNumber expResult = null;
@@ -170,6 +189,21 @@ class ComplexNumberTest {
 //        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
+    }
+
+    /**
+     * Another test of the plus function, of the ComplexNumber class.
+     */
+    @Test
+    void testPlusDouble() {
+        double re = Math.random() - 0.5;
+        double im = Math.random() - 0.5;
+        ComplexNumber addendA = new ComplexNumber(re, im);
+        double addendB = Math.random() - 0.5;
+        ComplexNumber expected = new ComplexNumber(re + addendB, im);
+        ComplexNumber actual = addendA.plus(addendB);
+        String msg = addendA + " + " + addendB + " expected to be " + expected;
+        assertEquals(expected, actual, msg);
     }
 
     /**
@@ -234,21 +268,24 @@ class ComplexNumberTest {
      * Test of times method, of class ComplexNumber.
      */
     @Test
-    void testTimes_int() {
-        int multiplicand = 0;
-        ComplexNumber instance = null;
-        ComplexNumber expResult = null;
-//        ComplexNumber result = instance.times(multiplicand);
-//        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    void testTimesInt() {
+        double re = Math.random() - 0.5;
+        double im = Math.random() - 0.5;
+        ComplexNumber number = new ComplexNumber(re, im);
+        int multiplicand = RANDOM.nextInt(65536) + 1024;
+        ComplexNumber expected = new ComplexNumber(re * multiplicand,
+                im * multiplicand);
+        ComplexNumber actual = number.times(multiplicand);
+        String msg = "Expecting " + number + " multiplied by " + multiplicand
+                + " to be " + expected;
+        assertEquals(expected, actual, msg);
     }
 
     /**
-     * Test of divides method, of class ComplexNumber.
+     * Test of the divides function, of the ComplexNumber class.
      */
     @Test
-    void testDivides_ComplexNumber() {
+    void testDivides() {
         System.out.println("divides");
         ComplexNumber divisor = null;
         ComplexNumber instance = null;
@@ -260,18 +297,37 @@ class ComplexNumberTest {
     }
 
     /**
-     * Test of divides method, of class ComplexNumber.
+     * Another test of the divides function, of the ComplexNumber class.
      */
     @Test
-    void testDivides_int() {
-        System.out.println("divides");
-        int divisor = 0;
-        ComplexNumber instance = null;
-        ComplexNumber expResult = null;
-//        ComplexNumber result = instance.divides(divisor);
-//        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    void testDividesIntDivisionByZeroException() {
+        double re = Math.random() - 0.5;
+        double im = Math.random() - 0.5;
+        ComplexNumber number = new ComplexNumber(re, im);
+        Throwable t = assertThrows(ArithmeticException.class, () -> {
+            ComplexNumber badResult = number.divides(0);
+            System.out.println(number + " divided by 0 is said to be "
+                    + badResult);
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    /**
+     * Another test of the divides function, of the ComplexNumber class.
+     */
+    @Test
+    void testDividesInt() {
+        double re = (Math.random() - 0.5) * 100;
+        double im = (Math.random() - 0.5) * 100;
+        ComplexNumber number = new ComplexNumber(re, im);
+        int divisor = RANDOM.nextInt(128) + 32;
+        ComplexNumber expected = new ComplexNumber(re / divisor, im / divisor);
+        ComplexNumber actual = number.divides(divisor);
+        String msg = "Expecting " + number + " divided by " + divisor
+                + " to be " + expected;
+        assertEquals(expected, actual, msg);
     }
 
     @Test

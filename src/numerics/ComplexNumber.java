@@ -69,9 +69,8 @@ public class ComplexNumber implements Arithmeticable<ComplexNumber>  {
         return new ComplexNumber(sumRe, sumIm);
     }
 
-    // TODO: Write tests for this
     public ComplexNumber plus(double addend) {
-        return new ComplexNumber(0.0, 0.0);
+        return new ComplexNumber(this.realPart + addend, this.imagPart);
     }
 
     // TODO: Write tests for this
@@ -109,7 +108,8 @@ public class ComplexNumber implements Arithmeticable<ComplexNumber>  {
     // TODO: Write tests for this
     @Override
     public ComplexNumber times(int multiplicand) {
-        return new ComplexNumber(0.0, 0.0);
+        return new ComplexNumber(this.realPart * multiplicand,
+                this.imagPart * multiplicand);
     }
 
     // TODO: Write tests for this
@@ -118,10 +118,14 @@ public class ComplexNumber implements Arithmeticable<ComplexNumber>  {
         return new ComplexNumber(0.0, 0.0);
     }
 
-    // TODO: Write tests for this
     @Override
     public ComplexNumber divides(int divisor) {
-        return new ComplexNumber(0.0, 0.0);
+        if (divisor == 0) {
+            String excMsg = "Can't divide " + this + " by zero";
+            throw new ArithmeticException(excMsg);
+        }
+        return new ComplexNumber(this.realPart / divisor,
+                this.imagPart / divisor);
     }
 
     public double abs() {
@@ -148,10 +152,11 @@ public class ComplexNumber implements Arithmeticable<ComplexNumber>  {
         return this.imagPart == other.imagPart;
     }
 
-    // TODO: Write test for this
     @Override
     public int hashCode() {
-        return Integer.MIN_VALUE;
+        int reLowerBits = (int) Double.doubleToLongBits(this.realPart);
+        int imLowerBits = (int) Double.doubleToLongBits(this.imagPart);
+        return reLowerBits ^ imLowerBits;
     }
 
     public ComplexNumber(double re, double im) {

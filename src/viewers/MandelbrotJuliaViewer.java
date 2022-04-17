@@ -24,12 +24,12 @@ import numerics.ComplexNumber;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Event;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -52,6 +52,13 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileFilter;
 
+/**
+ * Viewer of the Mandelbrot set and associated Julia set fractals. This started
+ * out as a quick and dirty demonstration of what can be done with the {@link
+ * ComplexNumber} class, but I'm going to have to spin this off into its own
+ * project.
+ * @author Alonso del Arte
+ */
 public final class MandelbrotJuliaViewer extends JPanel
         implements ActionListener, MouseListener, MouseMotionListener {
 
@@ -65,11 +72,18 @@ public final class MandelbrotJuliaViewer extends JPanel
      */
     private static final ComplexNumber ZERO = new ComplexNumber(0.0, 0.0);
 
+    /**
+     * The complex number <i>i</i>.
+     */
+    private static final ComplexNumber IMAGINARY_UNIT = new ComplexNumber(0.0,
+            1.0);
+
     private static final int BASELINE_READOUT_FIELD_COLUMNS = 20;
 
     private static final int DEFAULT_HORIZ_MAX = 1080;
 
-    private static final int DEFAULT_VERTIC_MAX = 720;
+    // TODO: Figure out how to not have to hard-code this
+    private static final int DEFAULT_VERTIC_MAX = 640;
 
     private int maxX, maxY;
 
@@ -110,11 +124,31 @@ public final class MandelbrotJuliaViewer extends JPanel
 
     private boolean juliaFlag;
 
+    private static final double DEFAULT_NUDGE_INTERVAL = 0.0001;
+
+    private static final double MINIMUM_NUDGE_INTERVAL = 0.00000001;
+
+    private static final double MAXIMUM_NUDGE_INTERVAL = 1.0;
+
+    private double nudgeInterval = DEFAULT_NUDGE_INTERVAL;
+
+    private ComplexNumber nudgeMinusImag
+            = new ComplexNumber(0.0, -this.nudgeInterval);
+
+    private ComplexNumber nudgePlusImag
+            = new ComplexNumber(0.0, this.nudgeInterval);
+
     private JFrame frame;
 
     private JTextField readoutRe, readoutIm;
 
-    private JMenuItem zoomInMenuItem, zoomOutMenuItem;
+    private JMenu viewMenu;
+
+    private JMenuItem zoomInMenuItem, zoomOutMenuItem, decreaseNudgeMenuItem,
+            increaseNudgeMenuItem, nudgeReMinusMenuItem, nudgeRePlusMenuItem,
+            nudgeImMinusMenuItem, nudgeImPlusMenuItem,
+            nudgeJuliaReMinusMenuItem, nudgeJuliaRePlusMenuItem,
+            nudgeJuliaImMinusMenuItem, nudgeJuliaImPlusMenuItem;
 
     private JCheckBoxMenuItem toggleReadoutsEnabled;
 
@@ -210,6 +244,7 @@ public final class MandelbrotJuliaViewer extends JPanel
         }
     }
 
+    // TODO: Refactor, break into smaller functions
     private void saveDiagramAs() {
         BufferedImage diagram = new BufferedImage(this.maxX,
                 this.maxY, BufferedImage.TYPE_INT_RGB);
@@ -299,7 +334,6 @@ public final class MandelbrotJuliaViewer extends JPanel
         } else {
             this.frame.setTitle("Mandelbrot set");
             this.pixelsPerUnitInterval = this.prevMandelPxui;
-            this.topLeftCorner = this.juliaTopLeftCorner;
             this.topLeftCorner = this.mandelbrotTopLeftCorner;
         }
         this.checkZoomMenuEnablements();
@@ -342,6 +376,77 @@ public final class MandelbrotJuliaViewer extends JPanel
         this.repaint();
         this.checkZoomMenuEnablements();
         this.checkIterationMaximum();
+    }
+
+    private void checkNudgeMenuEnablements() {
+        this.nudgeMinusImag = this.nudgePlusImag.negate();
+        this.decreaseNudgeMenuItem.setText("Decrease nudge to "
+                + (this.nudgeInterval / 10));
+        this.decreaseNudgeMenuItem
+                .setEnabled(this.nudgeInterval > MINIMUM_NUDGE_INTERVAL);
+        this.increaseNudgeMenuItem.setText("Increase nudge to "
+                + (this.nudgeInterval * 10));
+        this.increaseNudgeMenuItem.setEnabled(this.nudgeInterval < MAXIMUM_NUDGE_INTERVAL);
+        this.nudgeReMinusMenuItem.setText("Nudge diagram by \u2212" + this.nudgeInterval);
+        this.nudgeRePlusMenuItem.setText("Nudge diagram by " + this.nudgeInterval);
+        this.nudgeImMinusMenuItem.setText("Nudge diagram by \u2212" + this.nudgeInterval + "i");
+        this.nudgeImPlusMenuItem.setText("Nudge diagram by " + this.nudgeInterval + "i");
+        this.nudgeJuliaReMinusMenuItem.setText("Nudge Julia point by \u2212" + this.nudgeInterval);
+        this.nudgeJuliaRePlusMenuItem.setText("Nudge Julia point by " + this.nudgeInterval);
+        this.nudgeJuliaImMinusMenuItem.setText("Nudge Julia point by \u2212" + this.nudgeInterval + "i");
+        this.nudgeJuliaImPlusMenuItem.setText("Nudge Julia point by " + this.nudgeInterval + "i");
+    }
+
+    private void decreaseNudge() {
+        this.nudgeInterval /= 10;
+        this.nudgePlusImag = this.nudgePlusImag.divides(10);
+        this.checkNudgeMenuEnablements();
+    }
+
+    private void increaseNudge() {
+        this.nudgeInterval *= 10;
+        this.nudgePlusImag = this.nudgePlusImag.times(10);
+        this.checkNudgeMenuEnablements();
+    }
+
+    private void nudgeDiagramReMinus() {
+        this.topLeftCorner = this.topLeftCorner.plus(-this.nudgeInterval);
+        this.repaint();
+    }
+
+    private void nudgeDiagramRePlus() {
+        this.topLeftCorner = this.topLeftCorner.plus(this.nudgeInterval);
+        this.repaint();
+    }
+
+    private void nudgeDiagramImMinus() {
+        this.topLeftCorner = this.topLeftCorner.plus(this.nudgeMinusImag);
+        this.repaint();
+    }
+
+    private void nudgeDiagramImPlus() {
+        this.topLeftCorner = this.topLeftCorner.plus(this.nudgePlusImag);
+        this.repaint();
+    }
+
+    private void nudgeJuliaPointReMinus() {
+        this.juliaPoint = this.juliaPoint.plus(-this.nudgeInterval);
+        this.updateJuliaPoint();
+    }
+
+    private void nudgeJuliaPointRePlus() {
+        this.juliaPoint = this.juliaPoint.plus(this.nudgeInterval);
+        this.updateJuliaPoint();
+    }
+
+    private void nudgeJuliaPointImMinus() {
+        this.juliaPoint = this.juliaPoint.plus(this.nudgeMinusImag);
+        this.updateJuliaPoint();
+    }
+
+    private void nudgeJuliaPointImPlus() {
+        this.juliaPoint = this.juliaPoint.plus(this.nudgePlusImag);
+        this.updateJuliaPoint();
     }
 
     private void setToggleReadoutsEnabled() {
@@ -392,6 +497,36 @@ public final class MandelbrotJuliaViewer extends JPanel
                 break;
             case "increaseZoomStep":
 //                this.increaseZoomStep();
+                break;
+            case "decreaseNudge":
+                this.decreaseNudge();
+                break;
+            case "increaseNudge":
+                this.increaseNudge();
+                break;
+            case "nudgeReMinus":
+                this.nudgeDiagramReMinus();
+                break;
+            case "nudgeRePlus":
+                this.nudgeDiagramRePlus();
+                break;
+            case "nudgeImMinus":
+                this.nudgeDiagramImMinus();
+                break;
+            case "nudgeImPlus":
+                this.nudgeDiagramImPlus();
+                break;
+            case "nudgeJuliaReMinus":
+                this.nudgeJuliaPointReMinus();
+                break;
+            case "nudgeJuliaRePlus":
+                this.nudgeJuliaPointRePlus();
+                break;
+            case "nudgeJuliaImMinus":
+                this.nudgeJuliaPointImMinus();
+                break;
+            case "nudgeJuliaImPlus":
+                this.nudgeJuliaPointImPlus();
                 break;
             case "toggleReadOuts":
                 this.setToggleReadoutsEnabled();
@@ -475,7 +610,7 @@ public final class MandelbrotJuliaViewer extends JPanel
                 .setAccessibleDescription("Menu for file operations");
         String accDescr = "Save currently displayed diagram to a PNG file";
         KeyStroke accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_S,
-                maskCtrlCommand + Event.SHIFT_MASK);
+                maskCtrlCommand + InputEvent.SHIFT_MASK);
         JMenuItem menuItem = this.makeMenuItem("Save diagram as...",
                 accDescr, "saveDiagramAs", accelerator);
         menu.add(menuItem);
@@ -503,41 +638,120 @@ public final class MandelbrotJuliaViewer extends JPanel
         KeyStroke accelerator;
         accDescr = "Copy the readouts to the clipboard";
         accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_C, maskCtrlCommand
-                + Event.SHIFT_MASK);
+                + InputEvent.SHIFT_MASK);
         menuItem = this.makeMenuItem("Copy readouts to clipboard", accDescr,
                 "copyReadouts", accelerator);
         menu.add(menuItem);
         accDescr = "Copy the currently displayed diagram to the clipboard";
         accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_C, maskCtrlCommand
-                + Event.ALT_MASK);
+                + InputEvent.ALT_MASK);
         menuItem = this.makeMenuItem("Copy diagram to clipboard", accDescr,
                 "copyDiagram", accelerator);
         menu.add(menuItem);
         return menu;
     }
 
+    private void makeViewMenuNudgeDiagramItems() {
+        String menuText = "Nudge diagram by \u2212" + this.nudgeInterval;
+        String accDescr = "Nudge diagram by a real negative interval";
+        KeyStroke accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0);
+        this.nudgeReMinusMenuItem = this.makeMenuItem(menuText, accDescr,
+                "nudgeReMinus", accelerator);
+        this.viewMenu.add(this.nudgeReMinusMenuItem);
+        menuText = "Nudge diagram by " + this.nudgeInterval;
+        accDescr = "Nudge diagram by a real negative interval";
+        accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0);
+        this.nudgeRePlusMenuItem = this.makeMenuItem(menuText, accDescr,
+                "nudgeRePlus", accelerator);
+        this.viewMenu.add(this.nudgeRePlusMenuItem);
+        menuText = "Nudge diagram by \u2212" + this.nudgeInterval + "i";
+        accDescr = "Nudge diagram by an imaginary negative interval";
+        accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0);
+        this.nudgeImMinusMenuItem = this.makeMenuItem(menuText, accDescr,
+                "nudgeImMinus", accelerator);
+        this.viewMenu.add(this.nudgeImMinusMenuItem);
+        menuText = "Nudge diagram by " + this.nudgeInterval + "i";
+        accDescr = "Nudge diagram by an imaginary positive interval";
+        accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0);
+        this.nudgeImPlusMenuItem = this.makeMenuItem(menuText, accDescr,
+                "nudgeImPlus", accelerator);
+        this.viewMenu.add(this.nudgeImPlusMenuItem);
+    }
+
+    private void makeViewMenuNudgeJuliaPointItems() {
+        String menuText = "Nudge Julia point by \u2212" + this.nudgeInterval;
+        String accDescr = "Nudge Julia point by a real negative interval";
+        KeyStroke accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_LEFT,
+                InputEvent.ALT_MASK);
+        this.nudgeJuliaReMinusMenuItem = this.makeMenuItem(menuText, accDescr,
+                "nudgeJuliaReMinus", accelerator);
+        this.viewMenu.add(this.nudgeJuliaReMinusMenuItem);
+        menuText = "Nudge Julia point by " + this.nudgeInterval;
+        accDescr = "Nudge Julia point by a real negative interval";
+        accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT,
+                InputEvent.ALT_MASK);
+        this.nudgeJuliaRePlusMenuItem = this.makeMenuItem(menuText, accDescr,
+                "nudgeJuliaRePlus", accelerator);
+        this.viewMenu.add(this.nudgeJuliaRePlusMenuItem);
+        menuText = "Nudge Julia point by \u2212" + this.nudgeInterval + "i";
+        accDescr = "Nudge Julia point by an imaginary negative interval";
+        accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_UP,
+                InputEvent.ALT_MASK);
+        this.nudgeJuliaImMinusMenuItem = this.makeMenuItem(menuText, accDescr,
+                "nudgeJuliaImMinus", accelerator);
+        this.viewMenu.add(this.nudgeJuliaImMinusMenuItem);
+        menuText = "Nudge Julia point by " + this.nudgeInterval + "i";
+        accDescr = "Nudge Julia point by an imaginary positive interval";
+        accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,
+                InputEvent.ALT_MASK);
+        this.nudgeJuliaImPlusMenuItem = this.makeMenuItem(menuText, accDescr,
+                "nudgeJuliaImPlus", accelerator);
+        this.viewMenu.add(this.nudgeJuliaImPlusMenuItem);
+    }
+
+    private void makeViewMenuNudgeItems() {
+        String menuText = "Decrease nudge to " + (this.nudgeInterval / 10);
+        String accDescr = "Decrease nudge interval by dividing it by 10";
+        KeyStroke accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,
+                InputEvent.CTRL_MASK);
+        this.decreaseNudgeMenuItem = this.makeMenuItem(menuText, accDescr,
+                "decreaseNudge", accelerator);
+        this.viewMenu.add(this.decreaseNudgeMenuItem);
+        menuText = "Increase nudge to " + (this.nudgeInterval * 10);
+        accDescr = "Increase nudge interval by multiplying it by 10";
+        accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_UP,
+                InputEvent.CTRL_MASK);
+        this.increaseNudgeMenuItem = this.makeMenuItem(menuText, accDescr,
+                "increaseNudge", accelerator);
+        this.viewMenu.add(this.increaseNudgeMenuItem);
+        this.viewMenu.addSeparator();
+        this.makeViewMenuNudgeDiagramItems();
+        this.viewMenu.addSeparator();
+        this.makeViewMenuNudgeJuliaPointItems();
+    }
+
     private JMenu makeViewMenu() {
-        JMenu menu = new JMenu("View");
-        menu.setMnemonic(KeyEvent.VK_V);
-        menu.getAccessibleContext()
+        this.viewMenu = new JMenu("View");
+        this.viewMenu.setMnemonic(KeyEvent.VK_V);
+        this.viewMenu.getAccessibleContext()
                 .setAccessibleDescription("Menu to zoom in or zoom out");
         String accDescr = "Toggle between Mandelbrot set and Julia set display";
         KeyStroke accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_J, 0);
         JMenuItem menuItem = this.makeMenuItem("Toggle Mandelbrot/Julia",
                 accDescr, "mjToggle", accelerator);
-        menu.add(menuItem);
-        menu.addSeparator();
+        this.viewMenu.add(menuItem);
+        this.viewMenu.addSeparator();
         accDescr = "Zoom in, by increasing pixels per unit interval";
         if (MAC_OS_FLAG) {
             accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_EQUALS,
-                    Event.SHIFT_MASK);
+                    InputEvent.SHIFT_MASK);
         } else {
             accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_ADD,
-                    Event.CTRL_MASK);
+                    InputEvent.CTRL_MASK);
         }
         menuItem = this.makeMenuItem("Zoom in", accDescr, "zoomIn",
                 accelerator);
-        this.zoomInMenuItem = menu.add(menuItem);
+        this.zoomInMenuItem = viewMenu.add(menuItem);
         if (this.pixelsPerUnitInterval >= MAXIMUM_PIXELS_PER_UNIT_INTERVAL) {
             this.zoomInMenuItem.setEnabled(false);
         }
@@ -546,15 +760,17 @@ public final class MandelbrotJuliaViewer extends JPanel
             accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_MINUS, 0);
         } else {
             accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_SUBTRACT,
-                    Event.CTRL_MASK);
+                    InputEvent.CTRL_MASK);
         }
         menuItem = this.makeMenuItem("Zoom out", accDescr, "zoomOut",
                 accelerator);
-        this.zoomOutMenuItem = menu.add(menuItem);
+        this.zoomOutMenuItem = viewMenu.add(menuItem);
         if (this.pixelsPerUnitInterval <= MINIMUM_PIXELS_PER_UNIT_INTERVAL) {
             this.zoomOutMenuItem.setEnabled(false);
         }
-        menu.addSeparator();
+        this.viewMenu.addSeparator();
+        this.makeViewMenuNudgeItems();
+        this.viewMenu.addSeparator();
         this.toggleReadoutsEnabled = new JCheckBoxMenuItem("Update readouts",
                 true);
         this.toggleReadoutsEnabled.getAccessibleContext()
@@ -568,8 +784,8 @@ public final class MandelbrotJuliaViewer extends JPanel
                     .getKeyStroke(KeyEvent.VK_F2, 0));
         }
         this.toggleReadoutsEnabled.addActionListener(this);
-        menu.add(this.toggleReadoutsEnabled);
-        return menu;
+        this.viewMenu.add(this.toggleReadoutsEnabled);
+        return this.viewMenu;
     }
 
     private JMenu makeHelpMenu() {
@@ -613,9 +829,9 @@ public final class MandelbrotJuliaViewer extends JPanel
 
     private void setUpFrame() {
         if (MAC_OS_FLAG) {
-            maskCtrlCommand = Event.META_MASK;
+            maskCtrlCommand = InputEvent.META_MASK;
         } else {
-            maskCtrlCommand = Event.CTRL_MASK;
+            maskCtrlCommand = InputEvent.CTRL_MASK;
         }
         this.setBackground(Color.BLACK);
         Dimension dimension = new Dimension(DEFAULT_HORIZ_MAX,
