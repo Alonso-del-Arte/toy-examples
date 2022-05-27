@@ -299,24 +299,16 @@ public class CurrencyAmountTest {
         CurrencyAmount dollarAmount = new CurrencyAmount(599L,
                 US_DOLLAR_CURRENCY);
         CurrencyAmount yenAmount = new CurrencyAmount(599L, YEN_CURRENCY);
-        try {
+        Throwable t = assertThrows(CurrencyConversionNeededException.class, () -> {
             int result = dollarAmount.compareTo(yenAmount);
-            String msg = "Trying to compare " + dollarAmount.toString()
-                    + " to " + yenAmount.toString()
+            System.out.println("Trying to compare " + dollarAmount + " to "
+                    + yenAmount
                     + " should have caused an exception, not given result "
-                    + result;
-            fail(msg);
-        } catch (CurrencyConversionNeededException currConvNeedExc) {
-            System.out.println("Trying to compare " + dollarAmount.toString()
-                    + " to " + yenAmount.toString()
-                    + " correctly caused CurrencyConversionNeededException");
-            System.out.println("\"" + currConvNeedExc.getMessage() + "\"");
-        } catch (RuntimeException re) {
-            String msg = re.getClass().getName()
-                    + " is the wrong exception to throw for trying to compare "
-                    + dollarAmount.toString() + " to " + yenAmount.toString();
-            fail(msg);
-        }
+                    + result);
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
     }
 
     @Test
@@ -327,11 +319,23 @@ public class CurrencyAmountTest {
         Exception exception = assertThrows(IllegalArgumentException.class,
                 () -> {
             CurrencyAmount badAmount = new CurrencyAmount(100, platinum);
-                    System.out.println("somehow created " + badAmount);
+            System.out.println("somehow created " + badAmount);
         });
         System.out.println("correctly caused IllegalArgumentException");
         String excMsg = exception.getMessage();
         assert excMsg != null : "Exception message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testConstructorRejectsNullCurrency() {
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            CurrencyAmount badAmount = new CurrencyAmount(100, null);
+            System.out.println("Should not have created CurrencyAmount@"
+                    + badAmount.hashCode() + " with null currency");
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
         System.out.println("\"" + excMsg + "\"");
     }
 

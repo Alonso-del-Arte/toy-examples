@@ -32,14 +32,14 @@ public class CurrencyAmount implements Comparable<CurrencyAmount> {
         return this.currencyID;
     }
 
-    public CurrencyAmount plus(CurrencyAmount summand) {
-        if (this.currencyID.equals(summand.currencyID)) {
-            long sumCents = this.amountInCents + summand.amountInCents;
+    public CurrencyAmount plus(CurrencyAmount addend) {
+        if (this.currencyID.equals(addend.currencyID)) {
+            long sumCents = this.amountInCents + addend.amountInCents;
             return new CurrencyAmount(sumCents, this.currencyID);
         } else {
-            String excMsg = "Currency conversion needed to add "
-                    + summand.toString() + " to " + this.toString();
-            throw new CurrencyConversionNeededException(excMsg, this, summand);
+            String excMsg = "Currency conversion needed to add " + addend
+                    + " to " + this;
+            throw new CurrencyConversionNeededException(excMsg, this, addend);
         }
     }
 
@@ -107,6 +107,10 @@ public class CurrencyAmount implements Comparable<CurrencyAmount> {
     }
 
     public CurrencyAmount(long centsAmount, Currency currency) {
+        if (currency == null) {
+            String excMsg = "currency must not be null";
+            throw new NullPointerException(excMsg);
+        }
         if (currency.getDefaultFractionDigits() == -1) {
             String excMsg = "Can't use currency " + currency.getDisplayName()
                     + " (" + currency.getCurrencyCode() + ")";

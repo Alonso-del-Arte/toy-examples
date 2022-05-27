@@ -4,16 +4,23 @@ import java.util.Currency;
 
 public class CurrencyPair {
 
-    // TODO: Write tests for this
+    private final Currency fromCurrency, toCurrency;
+
     public Currency getFrom() {
-        return Currency.getInstance("XTS");
+        return this.fromCurrency;
     }
 
-    // TODO: Write tests for this
     public Currency getTo() {
-        return Currency.getInstance("XXX");
+        return this.toCurrency;
     }
 
-    public CurrencyPair(Currency from, Currency to) {}
+    public CurrencyPair(Currency from, Currency to) {
+        if (from == null || to == null) {
+            String excMsg = "from and to must both be non-null";
+            throw new NullPointerException(excMsg);
+        }
+        this.fromCurrency = from;
+        this.toCurrency = to;
+    }
 
 }
