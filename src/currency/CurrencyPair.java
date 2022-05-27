@@ -6,12 +6,12 @@ public class CurrencyPair {
 
     // TODO: Write tests for this
     public Currency getFrom() {
-        return null;
+        return Currency.getInstance("XTS");
     }
 
     // TODO: Write tests for this
     public Currency getTo() {
-        return null;
+        return Currency.getInstance("XXX");
     }
 
     public CurrencyPair(Currency from, Currency to) {}
