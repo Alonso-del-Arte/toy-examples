@@ -14,7 +14,20 @@ class NumberWordParserTest {
     void testInterpretZeroToNine() {
         String[] numberWords = {"zero", "one", "two", "three", "four", "five",
                 "six", "seven", "eight", "nine"};
-        fail("Haven't written test yet");
+        for (int expected = 0; expected < 10; expected++) {
+            int actual = NumberWordParser.interpret(numberWords[expected]);
+            assertEquals(expected, actual);
+        }
+    }
+
+    @Test
+    void testInterpretTenAndTeens() {
+        String[] numberWords = {"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+                "sixteen", "seventeen", "eighteen", "nineteen"};
+        for (int expected = 10; expected < 20; expected++) {
+            int actual = NumberWordParser.interpret(numberWords[expected - 10]);
+            assertEquals(expected, actual);
+        }
     }
 
 }

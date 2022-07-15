@@ -30,7 +30,15 @@ class ExtendedMathTest {
 
     @Test
     void testPrimePi() {
-        fail("Haven't written test yet");
+        int expected = 0;
+        for (int i = 0; i < 1024; i++) {
+            if (IntegerMath.isPrime(i)) {
+                expected++;
+            }
+            int actual = ExtendedMath.primePi(i);
+            String msg = "pi(" + i + ") ought to be " + expected;
+            assertEquals(expected, actual, msg);
+        }
     }
 
     @Test
@@ -77,13 +85,39 @@ class ExtendedMathTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
+    @Test
+    void testSqrt() {
+        System.out.println("sqrt");
+        int denominator = RANDOM.nextInt(256) + 4;
+        int numerator = 2 * denominator + 1;
+        Fraction expected = new Fraction(numerator, denominator);
+        Fraction square = expected.times(expected);
+        Fraction actual = ExtendedMath.sqrt(square);
+        String msg = "sqrt(" + square + ") expected to be " + expected;
+        assertEquals(expected, actual, msg);
+    }
+
+    /**
+     * Another test of the sqrt function of the ExtendedMath class. The square
+     * root of 7/8 is not 1, but it's close.
+     */
+    @Test
+    void testSqrtSevenEighths() {
+        Fraction sevenEighths = new Fraction(7, 8);
+        Fraction squareRootApprox = ExtendedMath.sqrt(sevenEighths);
+        double expected = Math.sqrt(sevenEighths.getNumericApproximation());
+        double actual = squareRootApprox.getNumericApproximation();
+        double delta = 0.00000001;
+        assertEquals(expected, actual, delta);
+    }
+
     /**
      * Another test of the sqrt function of the ExtendedMath class. The square
      * root 2/9 is the irrational number sqrt(2)/3, and so the function can only
      * give a rational approximation, the same as java.lang.Math.sqrt().
      */
     @Test
-    void testSqrt() {
+    void testSqrtTwoNinths() {
         Fraction twoNinths = new Fraction(2, 9);
         Fraction squareRootApprox = ExtendedMath.sqrt(twoNinths);
         double expected = Math.sqrt(twoNinths.getNumericApproximation());
@@ -91,9 +125,6 @@ class ExtendedMathTest {
         double delta = 0.00000001;
         assertEquals(expected, actual, delta);
     }
-
-    @Test
-    void testSqrtTwoNinths() {}
 
     @Test
     void testRandom() {

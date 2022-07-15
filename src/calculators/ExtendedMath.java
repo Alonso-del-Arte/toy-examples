@@ -2,6 +2,7 @@ package calculators;
 
 import fractions.Fraction;
 
+import java.util.List;
 import java.util.Random;
 
 public class ExtendedMath {
@@ -26,21 +27,32 @@ public class ExtendedMath {
     private static final int UPPER_BOUND = BOUND_FOR_RANDOM_DENOMINATORS
             - MINIMUM_RANDOM_DENOMINATOR + 1;
 
-    private static final Fraction ONE = new Fraction(1, 1);
-
     private static final Fraction ONE_HALF = new Fraction(1, 2);
 
-    private static final long COMPARISON_EDGE_DENOMINATOR = Integer.MAX_VALUE;
+    public static final Fraction NEGATIVE_ONE_HALF = ONE_HALF.negate();
 
-    private static final Fraction DELTA = new Fraction(1,
-            COMPARISON_EDGE_DENOMINATOR);
-
+    // TODO: Write test for negative x
     public static double primePiLegendreEstimate(double x) {
         return x / (Math.log(x) - 1.08366);
     }
 
+    // TODO: Write test for negative x
     public static int primePi(double x) {
-        return 0;
+        if (x < 0.0) {
+            return Integer.MAX_VALUE;
+        }
+        if (x < 2.0) {
+            return 0;
+        }
+        List<Integer> primes
+                = EratosthenesSieve.listPrimes((int) Math.floor(x) + 2);
+        int index = 0;
+        int currPrime;
+        do {
+            currPrime = primes.get(index);
+            index++;
+        } while (currPrime < x);
+        return index;// - ((currPrime == x) ? 0 : 1);
     }
 
     public static Fraction abs(Fraction fraction) {
@@ -53,23 +65,19 @@ public class ExtendedMath {
 
     private static Fraction newtonSqrtAlg(Fraction a, Fraction x0,
                                           Fraction x1) {
-        System.out.println("x_0 = " + x0 + ", x_1 = " + x1);
-        Fraction diff = abs(x0.minus(x1));
-        if (diff.compareTo(DELTA) < 0) {
-            System.out.println("jump on compare to delta");
+        if (x0.equals(x1)) {
             return x1;
         } else {
-            try {
+            if (x1.getNumerator() < 0L) {
+                return x0;
+            } else {
                 Fraction x2 = ONE_HALF.times(x1.plus(a.divides(x1)));
                 return newtonSqrtAlg(a, x1, x2);
-            } catch (ArithmeticException ae) {
-                System.err.println(ae.getMessage());
-                return x1;
             }
         }
     }
 
-    /* TODO: Restore Javadoc after test passes
+    /**
      * Calculates the square root of a number using Newton's approximation
      * algorithm. Since the algorithm is recursive, some inputs may cause stack
      * overflow errors.
@@ -89,7 +97,7 @@ public class ExtendedMath {
         long denominator = (long) Math.floor(Math.sqrt(fraction
                 .getDenominator()));
         Fraction firstGuess = new Fraction(numerator, denominator);
-        return abs(newtonSqrtAlg(fraction, ONE, firstGuess));
+        return abs(newtonSqrtAlg(fraction, NEGATIVE_ONE_HALF, firstGuess));
     }
 
     /**
