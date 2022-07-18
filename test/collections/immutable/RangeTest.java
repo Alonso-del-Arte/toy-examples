@@ -52,4 +52,14 @@ class RangeTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testAuxiliaryConstructorInfersNegativeOneStep() {
+        int begin = RANDOM.nextInt(256) + 4;
+        int end = -RANDOM.nextInt(begin) - 16;
+        Range range = new Range(begin, end);
+        int expected = -1;
+        int actual = range.getStep();
+        assertEquals(expected, actual);
+    }
+
 }

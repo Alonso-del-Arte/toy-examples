@@ -18,8 +18,7 @@ class ArrayBackedSetTest {
         System.out.println("add");
         ArrayBackedSet<LocalDateTime> set = new ArrayBackedSet<>();
         LocalDateTime dateTime = LocalDateTime.now();
-        String msg ="Should be able to add " + dateTime.toString()
-                + " to set of times";
+        String msg = "Should be able to add " + dateTime + " to set of times";
         boolean opResult = set.add(dateTime);
         assert opResult : msg;
     }
@@ -60,7 +59,7 @@ class ArrayBackedSetTest {
             set.add(dateTime);
         }
         String msg = "Set of upcoming times should not contain "
-                + LocalDateTime.MIN.toString();
+                + LocalDateTime.MIN;
         assert !set.contains(LocalDateTime.MIN) : msg;
     }
 
@@ -119,7 +118,7 @@ class ArrayBackedSetTest {
         ArrayBackedSet<LocalDateTime> set = new ArrayBackedSet<>();
         int expected = 0;
         LocalDateTime element = LocalDateTime.now();
-        String msg = "Should not be able to remove " + element.toString()
+        String msg = "Should not be able to remove " + element
                 + " from set since it wasn't added in the first place";
         boolean opResult = set.remove(element);
         int actual = set.size();
@@ -309,8 +308,8 @@ class ArrayBackedSetTest {
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
             ArrayBackedSet<LocalDateTime> badSet
                     = new ArrayBackedSet<>(badSize);
-            System.out.println("Should not have been able to create "
-                    + badSet.toString() + " with initial capacity " + badSize);
+            System.out.println("Should not have been able to create " + badSet
+                    + " with initial capacity " + badSize);
         });
         String excMsg = t.getMessage();
         assert excMsg != null : "Exception message should not be null";

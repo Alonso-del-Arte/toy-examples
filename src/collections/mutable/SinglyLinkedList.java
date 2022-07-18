@@ -64,7 +64,7 @@ public class SinglyLinkedList<E> implements List<E> {
         return found;
     }
 
-    // STUB TO FAIL THE FIRST TEST
+    // TODO: Write tests for this
     @Override
     public Iterator<E> iterator() {
         return null;
@@ -81,7 +81,7 @@ public class SinglyLinkedList<E> implements List<E> {
         return array;
     }
 
-    // STUB TO FAIL THE FIRST TEST
+    // TODO: Write tests for this
     @Override
     public <T> T[] toArray(T[] a) {
         return null;
@@ -100,43 +100,43 @@ public class SinglyLinkedList<E> implements List<E> {
         return true;
     }
 
-    // STUB TO FAIL THE FIRST TEST
+    // TODO: Write tests for this
     @Override
-    public boolean remove(Object o) {
+    public boolean remove(Object obj) {
         return true;
     }
 
-    // STUB TO FAIL THE FIRST TEST
+    // TODO: Write tests for this
     @Override
     public boolean containsAll(Collection<?> c) {
         return true;
     }
 
-    // STUB TO FAIL THE FIRST TEST
+    // TODO: Write tests for this
     @Override
     public boolean addAll(Collection<? extends E> c) {
         return true;
     }
 
-    // STUB TO FAIL THE FIRST TEST
+    // TODO: Write tests for this
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {
         return true;
     }
 
-    // STUB TO FAIL THE FIRST TEST
+    // TODO: Write tests for this
     @Override
     public boolean removeAll(Collection<?> c) {
         return true;
     }
 
-    // STUB TO FAIL THE FIRST TEST
+    // TODO: Write tests for this
     @Override
     public boolean retainAll(Collection<?> c) {
         return true;
     }
 
-    // STUB TO FAIL THE FIRST TEST
+    // TODO: Write tests for this
     @Override
     public void clear() {
         //
@@ -148,7 +148,7 @@ public class SinglyLinkedList<E> implements List<E> {
         return node.element;
     }
 
-    // STUB TO FAIL THE FIRST TEST
+    // TODO: Write tests for this
     @Override
     public E set(int index, E element) {
         return null;
@@ -190,7 +190,7 @@ public class SinglyLinkedList<E> implements List<E> {
         this.length++;
     }
 
-    // STUB TO FAIL THE FIRST TEST
+    // TODO: Write tests for this
     @Override
     public E remove(int index) {
         return null;
@@ -213,32 +213,32 @@ public class SinglyLinkedList<E> implements List<E> {
         }
     }
 
-    // STUB TO FAIL THE FIRST TEST
+    // TODO: Write tests for this
     @Override
     public int lastIndexOf(Object obj) {
         return -3;
     }
 
-    // STUB TO FAIL THE FIRST TEST
+    // TODO: Write tests for this
     @Override
     public ListIterator<E> listIterator() {
         return null;
     }
 
-    // STUB TO FAIL THE FIRST TEST
+    // TODO: Write tests for this
     @Override
     public ListIterator<E> listIterator(int index) {
         return null;
     }
 
-    // STUB TO FAIL THE FIRST TEST
+    // TODO: Write tests for this
     @Override
     public List<E> subList(int fromIndex, int toIndex) {
         return null;
     }
 
     public SinglyLinkedList() {
-        //
+        // TODO: Write tests for this
     }
 
     private static class Node<E> {

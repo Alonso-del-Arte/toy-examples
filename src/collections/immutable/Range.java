@@ -40,13 +40,8 @@ public class Range implements Iterable<Integer> {
         return this.interval;
     }
 
-    // TODO: Write tests for this
-    private static int determineStepSign(int start, int finish) {
-        return Integer.MAX_VALUE;
-    }
-
     public Range(int start, int finish) {
-        this(start, finish, 1);
+        this(start, finish, Integer.signum(finish - start));
     }
 
     public Range(int start, int finish, int step) {
