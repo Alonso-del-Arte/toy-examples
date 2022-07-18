@@ -1,4 +1,4 @@
-package calculators;
+package textops;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -19,6 +19,16 @@ public class NumberWordParser {
         NUMBER_WORDS.put("seven", 7);
         NUMBER_WORDS.put("eight", 8);
         NUMBER_WORDS.put("nine", 9);
+        NUMBER_WORDS.put("ten", 10);
+        NUMBER_WORDS.put("eleven", 11);
+        NUMBER_WORDS.put("twelve", 12);
+        NUMBER_WORDS.put("thirteen", 13);
+        NUMBER_WORDS.put("fourteen", 14);
+        NUMBER_WORDS.put("fifteen", 15);
+        NUMBER_WORDS.put("sixteen", 16);
+        NUMBER_WORDS.put("seventeen", 17);
+        NUMBER_WORDS.put("eighteen", 18);
+        NUMBER_WORDS.put("nineteen", 19);
     }
 
     private static int interpretEnglishNumberWord(String s) {

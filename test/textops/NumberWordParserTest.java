@@ -1,7 +1,8 @@
-package calculators;
+package textops;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests of the NumberWordParser class. For now, all these tests pertain to
