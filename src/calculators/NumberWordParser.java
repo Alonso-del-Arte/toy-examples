@@ -1,37 +1,28 @@
 package calculators;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class NumberWordParser {
 
+    private final static Map<String, Integer> NUMBER_WORDS = new HashMap<>();
+
+    static {
+        NUMBER_WORDS.put("zero", 0);
+        NUMBER_WORDS.put("one", 1);
+        NUMBER_WORDS.put("two", 2);
+        NUMBER_WORDS.put("three", 3);
+        NUMBER_WORDS.put("four", 4);
+        NUMBER_WORDS.put("five", 5);
+        NUMBER_WORDS.put("six", 6);
+        NUMBER_WORDS.put("seven", 7);
+        NUMBER_WORDS.put("eight", 8);
+        NUMBER_WORDS.put("nine", 9);
+    }
+
     private static int interpretEnglishNumberWord(String s) {
-        switch (s) {
-            case "zero":
-                return 0;
-            case "one":
-                return 1;
-            case "two":
-                return 2;
-            case "three":
-                return 3;
-            case "four":
-                return 4;
-            case "five":
-                return 5;
-            case "six":
-                return 6;
-            case "seven":
-                return 7;
-            case "eight":
-                return 8;
-            case "nine":
-                return 9;
-            default:
-                return Integer.MIN_VALUE;
-//                String excMsg = "Word \"" + s
-//                        + "\" not recognized as a number word in English";
-//                throw new NumberFormatException(excMsg);
-        }
+        return NUMBER_WORDS.getOrDefault(s, Integer.MIN_VALUE);
     }
 
     private static int interpretEnglishNumberWords(String s) {
