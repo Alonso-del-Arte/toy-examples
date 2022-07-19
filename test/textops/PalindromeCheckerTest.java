@@ -33,7 +33,9 @@ class PalindromeCheckerTest {
         assert otherCaseSensitivity == checker.isCaseSensitive() : toggleMsg;
         checker.setCaseSensitivity(originalCaseSensitivity);
         String msg = "Should be able to toggle case sensitivity to "
-                + originalCaseSensitivity + " back from " + otherCaseSensitivity;
+                + originalCaseSensitivity + " back from "
+                + otherCaseSensitivity;
+        assert originalCaseSensitivity == checker.isCaseSensitive() : msg;
     }
 
     @Test
