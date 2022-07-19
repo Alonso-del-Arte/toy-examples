@@ -6,19 +6,25 @@ public class PalindromeChecker {
 
     private boolean caseSensitive = true;
 
-    // TODO: Write tests for this
+    // TODO: Remove this field altogether
+    private int sensitivityChangeCount = 0;
+
     public boolean isCaseSensitive() {
-        return false;
+        return this.caseSensitive;
     }
 
-    // TODO: Write tests for this
     public void setCaseSensitivity(boolean sensitivity) {
+        if (this.sensitivityChangeCount == 0) {
+            this.caseSensitive = sensitivity;
+            this.sensitivityChangeCount++;
+        }
         //this.caseSensitive = sensitivity;
     }
 
-    // TODO: Write tests for this
     public boolean isPalindromic(String term) {
-        return false;
+        StringBuilder builder = new StringBuilder(term);
+        builder.reverse();
+        return term.equals(builder.toString());
     }
 
     public static void main(String[] args) {
