@@ -1,8 +1,10 @@
-package measures.metric;
+package measures.imperial;
 
-import java.math.BigDecimal;
+import fractions.Fraction;
 
-public class Meter extends LengthMeasure {
+public class Mile extends LengthMeasure {
+
+    private static final Fraction FOOT_MULTIPLIER = new Fraction(5280);
 
     // TODO: Write tests for this
     @Override
@@ -22,8 +24,8 @@ public class Meter extends LengthMeasure {
         return "NOT IMPLEMENTED YET";
     }
 
-    public Meter(BigDecimal number) {
-        super(number, BigDecimal.ONE);
+    public Mile(Fraction number) {
+        super(number, FOOT_MULTIPLIER);
     }
 
 }

@@ -2,7 +2,10 @@ package measures.metric;
 
 import java.math.BigDecimal;
 
-public abstract class LengthMeasure implements Comparable<LengthMeasure> {
+import measures.UnitOfMeasure;
+
+public abstract class LengthMeasure extends UnitOfMeasure
+        implements Comparable<LengthMeasure> {
 
     private final BigDecimal quantity;
 
