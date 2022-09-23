@@ -2,7 +2,7 @@ package measures.metric;
 
 import java.math.BigDecimal;
 
-public class Meter extends LengthMeasure {
+public final class Meter extends LengthMeasure {
 
     // TODO: Write tests for this
     @Override

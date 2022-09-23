@@ -2,7 +2,7 @@ package measures.imperial;
 
 import fractions.Fraction;
 
-public class Mile extends LengthMeasure {
+public final class Mile extends LengthMeasure {
 
     private static final Fraction FOOT_MULTIPLIER = new Fraction(5280);
 
@@ -22,6 +22,24 @@ public class Mile extends LengthMeasure {
     @Override
     public String getAbbreviation() {
         return "NOT IMPLEMENTED YET";
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public boolean equals(Object o) {
+        return false;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public int compareTo(LengthMeasure other) {
+        return 0;
     }
 
     public Mile(Fraction number) {

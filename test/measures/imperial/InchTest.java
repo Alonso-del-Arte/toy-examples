@@ -7,20 +7,14 @@ import java.util.Random;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import randomness.ExtendedRandom;
+
 class InchTest {
-
-    private static final Random RANDOM = new Random();
-
-    private static Fraction makeFraction() {
-        int numer = RANDOM.nextInt(768) - 384;
-        int denom = RANDOM.nextInt(5280) + 10;
-        return new Fraction(numer, denom);
-    }
 
     @Test
     public void testGetSingularWord() {
         System.out.println("getSingularWord");
-        Fraction fraction = makeFraction();
+        Fraction fraction = ExtendedRandom.nextFraction();
         Inch instance = new Inch(fraction);
         String expected = "inch";
         String actual = instance.getSingularWord();
@@ -30,7 +24,7 @@ class InchTest {
     @Test
     public void testGetPluralWord() {
         System.out.println("getPluralWord");
-        Fraction fraction = makeFraction();
+        Fraction fraction = ExtendedRandom.nextFraction();
         Inch instance = new Inch(fraction);
         String expected = "inches";
         String actual = instance.getPluralWord();
@@ -40,11 +34,22 @@ class InchTest {
     @Test
     public void testGetAbbreviation() {
         System.out.println("getAbbreviation");
-        Fraction fraction = makeFraction();
+        Fraction fraction = ExtendedRandom.nextFraction();
         Inch instance = new Inch(fraction);
         String expected = "in";
         String actual = instance.getAbbreviation();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void testConstructorRejectsNullFraction() {
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            Inch badInch = new Inch(null);
+            System.out.println("Created " + badInch + " with null number");
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
     }
 
 }

@@ -2,30 +2,49 @@ package measures.imperial;
 
 import fractions.Fraction;
 
-public class Inch extends LengthMeasure {
+public final class Inch extends LengthMeasure {
 
     private static final Fraction ONE_TWELFTH = new Fraction(1, 12);
 
-    // TODO: Write tests for this
     @Override
     public String getSingularWord() {
-        return "NOT IMPLEMENTED YET";
+        return "inch";
     }
 
-    // TODO: Write tests for this
     @Override
     public String getPluralWord() {
-        return "NOT IMPLEMENTED YET";
+        return "inches";
+    }
+
+    @Override
+    public String getAbbreviation() {
+        return "in";
     }
 
     // TODO: Write tests for this
     @Override
-    public String getAbbreviation() {
-        return "NOT IMPLEMENTED YET";
+    public boolean equals(Object o) {
+        return false;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public int compareTo(LengthMeasure other) {
+        return 0;
     }
 
     public Inch(Fraction number) {
         super(number, ONE_TWELFTH);
+        if (number == null) {
+            String excMsg = "Number must not be null";
+            throw new NullPointerException(excMsg);
+        }
     }
 
 }
