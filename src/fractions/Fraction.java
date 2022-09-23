@@ -154,9 +154,8 @@ public class Fraction implements Comparable<Fraction> {
         throw new NumberFormatException("Sorry");
     }
 
-    // TODO: Write tests for this
     public Fraction(long numer) {
-        this(1, numer);
+        this(numer, 1);
     }
 
     /**

@@ -319,6 +319,14 @@ class FractionTest {
     }
 
     @Test
+    void testAuxConstructor() {
+        int numer = RANDOM.nextInt();
+        Fraction expected = new Fraction(numer, 1);
+        Fraction actual = new Fraction(numer);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testConstructorChangesNegativeDenominatorToPositive() {
         int denominator = IntegerMath.randomPrime(-128);
         int expected = -denominator;
