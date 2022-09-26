@@ -217,6 +217,20 @@ class FractionTest {
     }
 
     @Test
+    void testPlusInt() {
+        int numerator = RANDOM.nextInt();
+        int denominator = RANDOM.nextInt(2048) + 2;
+        Fraction fraction = new Fraction(numerator, denominator);
+        int addend = RANDOM.nextInt(256);
+        Fraction expected = new Fraction(numerator + addend * denominator,
+                denominator);
+        Fraction actual = fraction.plus(addend);
+        String msg = "Expecting " + fraction + " + " + addend + " to be "
+                + expected;
+        assertEquals(expected, actual, msg);
+    }
+
+    @Test
     void testNegate() {
         System.out.println("negate");
         int numerator = RANDOM.nextInt();

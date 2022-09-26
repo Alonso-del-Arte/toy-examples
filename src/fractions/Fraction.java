@@ -29,9 +29,9 @@ public class Fraction implements Comparable<Fraction> {
         return new Fraction(numeratorA + numeratorB, crossDenom);
     }
 
-    // TODO: Write tests for this
     public Fraction plus(int addend) {
-        return this;
+        return new Fraction(this.numerator + addend * this.denominator,
+                this.denominator);
     }
 
     public Fraction negate() {
