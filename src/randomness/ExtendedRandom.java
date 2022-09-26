@@ -12,6 +12,16 @@ public class ExtendedRandom {
 
     private static final Random RANDOM = new Random();
 
+    // TODO: Write tests for this
+    public static int nextInt() {
+        return 0;
+    }
+
+    // TODO: Write tests for this
+    public static int nextInt(int bound) {
+        return 0;
+    }
+
     /**
      * Gives a pseudorandomly chosen fraction. May be positive or negative, or
      * it could even be 0.
