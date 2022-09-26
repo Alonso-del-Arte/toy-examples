@@ -4,6 +4,7 @@ import currency.CurrencyAmount;
 import fractions.Fraction;
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import numerics.ComplexNumber;
@@ -13,6 +14,46 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ExtendedRandomTest {
+
+    public static final Random RANDOM = new Random(-System.currentTimeMillis());
+
+    @Test
+    void testNextInt() {
+        System.out.println("nextInt");
+        int capacity = 2048;
+        Set<Integer> numbers = new HashSet<>(capacity);
+        for (int i = 0; i < capacity; i++) {
+            numbers.add(ExtendedRandom.nextInt());
+        }
+        int expected = 15 * capacity / 16;
+        int actual = numbers.size();
+        String msg = "Expected at least " + expected
+                + " distinct integers out of " + capacity + ", got " + actual;
+        System.out.println(msg);
+        assert actual >= expected : msg;
+    }
+
+    @Test
+    void testNextIntBounded() {
+        int capacity = 2048;
+        int bound = capacity - RANDOM.nextInt(128);
+        Set<Integer> numbers = new HashSet<>(capacity);
+        for (int i = 0; i < capacity; i++) {
+            int number = ExtendedRandom.nextInt(bound);
+            String msg = "Pseudorandom number " + number
+                    + " should be at least 0 but less than " + bound;
+            assert number >= 0 : msg;
+            assert number < bound : msg;
+            numbers.add(number);
+        }
+        int expected = capacity / 2;
+        int actual = numbers.size();
+        String msg = "Expected at least " + expected
+                + " distinct integers in the range 0 to " + (bound - 1)
+                + " out of " + capacity + ", got " + actual;
+        System.out.println(msg);
+        assert actual >= expected : msg;
+    }
 
     @Test
     void testNextFraction() {
