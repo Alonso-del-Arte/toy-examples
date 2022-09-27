@@ -23,10 +23,14 @@ public final class Foot extends LengthMeasure {
 
     @Override
     public String toString() {
-        if (this.quantity.getNumericApproximation() == 1.0) {
-            return "1 foot";
+        String intermediate = this.quantity.toString();
+        switch (intermediate) {
+            case "-1":
+            case "1":
+                return intermediate + " foot";
+            default:
+                return intermediate + " feet";
         }
-        return this.quantity + " feet";
     }
 
     @Override

@@ -23,6 +23,15 @@ class FootTest {
     }
 
     @Test
+    void testToStringSingularNegative() {
+        Fraction negOne = new Fraction(-1);
+        Foot negOneFoot = new Foot(negOne);
+        String expected = "-1 foot";
+        String actual = negOneFoot.toString();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void testGetPluralWord() {
         System.out.println("getPluralWord");
         Fraction fraction = ExtendedRandom.nextFraction();

@@ -6,34 +6,47 @@ public final class Mile extends LengthMeasure {
 
     private static final Fraction FOOT_MULTIPLIER = new Fraction(5280);
 
-    // TODO: Write tests for this
     @Override
     public String getSingularWord() {
-        return "NOT IMPLEMENTED YET";
+        return "mile";
     }
 
-    // TODO: Write tests for this
     @Override
     public String getPluralWord() {
-        return "NOT IMPLEMENTED YET";
+        return "miles";
     }
 
-    // TODO: Write tests for this
     @Override
     public String getAbbreviation() {
-        return "NOT IMPLEMENTED YET";
+        return "m";
     }
 
-    // TODO: Write tests for this
+    @Override
+    public String toString() {
+        String intermediate = this.quantity.toString();
+        switch (intermediate) {
+            case "-1":
+            case "1":
+                return intermediate + " mile";
+            default:
+                return intermediate + " miles";
+        }
+    }
+
     @Override
     public boolean equals(Object obj) {
-        return false;
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Mile)) {
+            return false;
+        }
+        return this.quantity.equals(((Mile) obj).quantity);
     }
 
-    // TODO: Write tests for this
     @Override
     public int hashCode() {
-        return 0;
+        return this.quantity.hashCode();
     }
 
     // TODO: Write tests for this
@@ -44,6 +57,9 @@ public final class Mile extends LengthMeasure {
 
     public Mile(Fraction number) {
         super(number, FOOT_MULTIPLIER);
+        if (number == null) {
+            throw new NullPointerException("Number should not be null");
+        }
     }
 
 }

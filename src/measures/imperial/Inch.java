@@ -23,10 +23,14 @@ public final class Inch extends LengthMeasure {
 
     @Override
     public String toString() {
-        if (this.quantity.getNumericApproximation() == 1.0) {
-            return "1 inch";
+        String intermediate = this.quantity.toString();
+        switch (intermediate) {
+            case "-1":
+            case "1":
+                return intermediate + " inch";
+            default:
+                return intermediate + " inches";
         }
-        return this.quantity + " inches";
     }
 
     @Override

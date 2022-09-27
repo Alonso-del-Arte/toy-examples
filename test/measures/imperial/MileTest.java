@@ -66,6 +66,15 @@ class MileTest {
     }
 
     @Test
+    void testToStringSingularNegative() {
+        Fraction negOne = new Fraction(-1);
+        Mile negOneMile = new Mile(negOne);
+        String expected = "-1 mile";
+        String actual = negOneMile.toString();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testReferentialEquality() {
         Mile someMile = new Mile(ExtendedRandom.nextFraction());
         assertEquals(someMile, someMile);

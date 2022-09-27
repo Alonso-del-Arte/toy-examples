@@ -66,6 +66,15 @@ class InchTest {
     }
 
     @Test
+    void testToStringSingularNegative() {
+        Fraction negOne = new Fraction(-1);
+        Inch negOneInch = new Inch(negOne);
+        String expected = "-1 inch";
+        String actual = negOneInch.toString();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testReferentialEquality() {
         Inch someInch = new Inch(ExtendedRandom.nextFraction());
         assertEquals(someInch, someInch);

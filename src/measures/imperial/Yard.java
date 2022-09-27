@@ -6,30 +6,31 @@ public final class Yard extends LengthMeasure {
 
     private static final Fraction THREE = new Fraction(3);
 
-    // TODO: Write tests for this
     @Override
     public String getSingularWord() {
-        return "NOT IMPLEMENTED YET";
+        return "yard";
     }
 
-    // TODO: Write tests for this
     @Override
     public String getPluralWord() {
-        return "NOT IMPLEMENTED YET";
+        return "yards";
     }
 
-    // TODO: Write tests for this
     @Override
     public String getAbbreviation() {
-        return "NOT IMPLEMENTED YET";
+        return "yd";
     }
 
     @Override
     public String toString() {
-        if (this.quantity.getNumericApproximation() == 1.0) {
-            return "1 yard";
+        String intermediate = this.quantity.toString();
+        switch (intermediate) {
+            case "-1":
+            case "1":
+                return intermediate + " yard";
+            default:
+                return intermediate + " yards";
         }
-        return this.quantity + " yards";
     }
 
     @Override

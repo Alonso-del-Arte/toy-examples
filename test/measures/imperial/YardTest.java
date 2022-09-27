@@ -66,6 +66,15 @@ class YardTest {
     }
 
     @Test
+    void testToStringSingularNegative() {
+        Fraction negOne = new Fraction(-1);
+        Yard negOneYard = new Yard(negOne);
+        String expected = "-1 yard";
+        String actual = negOneYard.toString();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testReferentialEquality() {
         Yard someYard = new Yard(ExtendedRandom.nextFraction());
         assertEquals(someYard, someYard);
