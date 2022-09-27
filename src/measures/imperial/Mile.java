@@ -26,7 +26,7 @@ public final class Mile extends LengthMeasure {
 
     // TODO: Write tests for this
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object obj) {
         return false;
     }
 

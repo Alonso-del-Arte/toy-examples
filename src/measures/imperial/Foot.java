@@ -21,16 +21,28 @@ public final class Foot extends LengthMeasure {
         return "ft";
     }
 
-    // TODO: Write tests for this
     @Override
-    public boolean equals(Object o) {
-        return false;
+    public String toString() {
+        if (this.quantity.getNumericApproximation() == 1.0) {
+            return "1 foot";
+        }
+        return this.quantity + " feet";
     }
 
-    // TODO: Write tests for this
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Foot)) {
+            return false;
+        }
+        return this.quantity.equals(((Foot) obj).quantity);
+    }
+
     @Override
     public int hashCode() {
-        return 0;
+        return this.quantity.hashCode();
     }
 
     // TODO: Write tests for this
@@ -41,6 +53,9 @@ public final class Foot extends LengthMeasure {
 
     public Foot(Fraction number) {
         super(number, ONE);
+        if (number == null) {
+            throw new NullPointerException("Number should not be null");
+        }
     }
 
 }

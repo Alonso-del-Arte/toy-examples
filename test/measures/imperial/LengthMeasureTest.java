@@ -14,13 +14,22 @@ class LengthMeasureTest {
     private static final Fraction TWENTY_TWO_SEVENTHS = new Fraction(22, 7);
 
     @Test
+    void testGetNumber() {
+        System.out.println("getNumber");
+        Fraction expected = ExtendedRandom.nextFraction();
+        LengthMeasure measure = new LengthMeasureImpl(expected);
+        Fraction actual = measure.getNumber();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testReferentialEquality() {
         Fraction fraction = ExtendedRandom.nextFraction();
         LengthMeasure lengthMeasure = new LengthMeasureImpl(fraction);
         assertEquals(lengthMeasure, lengthMeasure);
     }
 
-    private static class LengthMeasureImpl extends LengthMeasure {
+    static class LengthMeasureImpl extends LengthMeasure {
 
         @Override
         public String getSingularWord() {

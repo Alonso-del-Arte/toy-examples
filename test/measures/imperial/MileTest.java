@@ -10,14 +10,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import randomness.ExtendedRandom;
 
-class FootTest {
+class MileTest {
 
     @Test
     public void testGetSingularWord() {
         System.out.println("getSingularWord");
         Fraction fraction = ExtendedRandom.nextFraction();
-        Foot instance = new Foot(fraction);
-        String expected = "foot";
+        Mile instance = new Mile(fraction);
+        String expected = "mile";
         String actual = instance.getSingularWord();
         assertEquals(expected, actual);
     }
@@ -26,8 +26,8 @@ class FootTest {
     public void testGetPluralWord() {
         System.out.println("getPluralWord");
         Fraction fraction = ExtendedRandom.nextFraction();
-        Foot instance = new Foot(fraction);
-        String expected = "feet";
+        Mile instance = new Mile(fraction);
+        String expected = "miles";
         String actual = instance.getPluralWord();
         assertEquals(expected, actual);
     }
@@ -36,8 +36,8 @@ class FootTest {
     public void testGetAbbreviation() {
         System.out.println("getAbbreviation");
         Fraction fraction = ExtendedRandom.nextFraction();
-        Foot instance = new Foot(fraction);
-        String expected = "ft";
+        Mile instance = new Mile(fraction);
+        String expected = "m";
         String actual = instance.getAbbreviation();
         assertEquals(expected, actual);
     }
@@ -49,9 +49,9 @@ class FootTest {
         Fraction stop = new Fraction(129);
         for (Fraction n = new Fraction(-128); n.compareTo(stop) < 0;
              n = n.plus(two)) {
-            Foot foot = new Foot(n);
-            String expected = n + " feet";
-            String actual = foot.toString();
+            Mile mile = new Mile(n);
+            String expected = n + " miles";
+            String actual = mile.toString();
             assertEquals(expected, actual);
         }
     }
@@ -59,76 +59,76 @@ class FootTest {
     @Test
     void testToStringSingular() {
         Fraction one = new Fraction(1);
-        Foot oneFoot = new Foot(one);
-        String expected = "1 foot";
-        String actual = oneFoot.toString();
+        Mile oneMile = new Mile(one);
+        String expected = "1 mile";
+        String actual = oneMile.toString();
         assertEquals(expected, actual);
     }
 
     @Test
     void testReferentialEquality() {
-        Foot someFoot = new Foot(ExtendedRandom.nextFraction());
-        assertEquals(someFoot, someFoot);
+        Mile someMile = new Mile(ExtendedRandom.nextFraction());
+        assertEquals(someMile, someMile);
     }
 
     @Test
     void testNotEqualsNull() {
-        Foot someFoot = new Foot(ExtendedRandom.nextFraction());
-        assertNotEquals(someFoot, null);
+        Mile someMile = new Mile(ExtendedRandom.nextFraction());
+        assertNotEquals(someMile, null);
     }
 
     @Test
     void testNotEqualsDiffClass() {
         Fraction fraction = ExtendedRandom.nextFraction();
-        Foot someFoot = new Foot(fraction);
+        Mile someMile = new Mile(fraction);
         LengthMeasure someLength
                 = new LengthMeasureTest.LengthMeasureImpl(fraction);
-        assertNotEquals(someFoot, someLength);
+        assertNotEquals(someMile, someLength);
     }
 
     @Test
     void testNotEqualsDiffMeasure() {
         Fraction fractionA = ExtendedRandom.nextFraction();
         Fraction fractionB = fractionA.plus(1);
-        Foot feetA = new Foot(fractionA);
-        Foot feetB = new Foot(fractionB);
-        assertNotEquals(feetA, feetB);
+        Mile milesA = new Mile(fractionA);
+        Mile milesB = new Mile(fractionB);
+        assertNotEquals(milesA, milesB);
     }
 
     @Test
     void testEquals() {
         System.out.println("equals");
         Fraction fraction = ExtendedRandom.nextFraction();
-        Foot someFeet = new Foot(fraction);
-        Foot sameFeet = new Foot(fraction);
-        assertEquals(someFeet, sameFeet);
+        Mile someMiles = new Mile(fraction);
+        Mile sameMiles = new Mile(fraction);
+        assertEquals(someMiles, sameMiles);
     }
 
     @Test
     void testHashCode() {
         System.out.println("hashCode");
         int capacity = ExtendedRandom.nextInt(1024) + 16;
-        Set<Foot> footSet = new HashSet<>(capacity);
+        Set<Mile> mileSet = new HashSet<>(capacity);
         Set<Integer> hashes = new HashSet<>(capacity);
         for (int i = 0; i < capacity; i++) {
-            Foot foot = new Foot(ExtendedRandom.nextFraction());
-            footSet.add(foot);
-            hashes.add(foot.hashCode());
+            Mile mile = new Mile(ExtendedRandom.nextFraction());
+            mileSet.add(mile);
+            hashes.add(mile.hashCode());
         }
-        int expected = footSet.size();
+        int expected = mileSet.size();
         int actual = hashes.size();
-        System.out.println("Created " + expected + " Foot instances with "
+        System.out.println("Created " + expected + " Mile instances with "
                 + actual + " distinct hash codes");
         String msg = expected
-                + " Foot instances should have as many distinct hash codes";
+                + " Mile instances should have as many distinct hash codes";
         assertEquals(expected, actual, msg);
     }
 
     @Test
     void testConstructorRejectsNullFraction() {
         Throwable t = assertThrows(NullPointerException.class, () -> {
-            Foot badFoot = new Foot(null);
-            System.out.println("Created " + badFoot + " with null number");
+            Mile badMile = new Mile(null);
+            System.out.println("Created " + badMile + " with null number");
         });
         String excMsg = t.getMessage();
         assert excMsg != null : "Message should not be null";

@@ -2,7 +2,8 @@ package measures.imperial;
 
 import fractions.Fraction;
 
-import java.util.Random;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -39,6 +40,88 @@ class InchTest {
         String expected = "in";
         String actual = instance.getAbbreviation();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void testToString() {
+        System.out.println("toString");
+        Fraction two = new Fraction(2);
+        Fraction stop = new Fraction(129);
+        for (Fraction n = new Fraction(-128); n.compareTo(stop) < 0;
+             n = n.plus(two)) {
+            Inch inch = new Inch(n);
+            String expected = n + " inches";
+            String actual = inch.toString();
+            assertEquals(expected, actual);
+        }
+    }
+
+    @Test
+    void testToStringSingular() {
+        Fraction one = new Fraction(1);
+        Inch oneInch = new Inch(one);
+        String expected = "1 inch";
+        String actual = oneInch.toString();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testReferentialEquality() {
+        Inch someInch = new Inch(ExtendedRandom.nextFraction());
+        assertEquals(someInch, someInch);
+    }
+
+    @Test
+    void testNotEqualsNull() {
+        Inch someInch = new Inch(ExtendedRandom.nextFraction());
+        assertNotEquals(someInch, null);
+    }
+
+    @Test
+    void testNotEqualsDiffClass() {
+        Fraction fraction = ExtendedRandom.nextFraction();
+        Inch someInch = new Inch(fraction);
+        LengthMeasure someLength
+                = new LengthMeasureTest.LengthMeasureImpl(fraction);
+        assertNotEquals(someInch, someLength);
+    }
+
+    @Test
+    void testNotEqualsDiffMeasure() {
+        Fraction fractionA = ExtendedRandom.nextFraction();
+        Fraction fractionB = fractionA.plus(1);
+        Inch inchesA = new Inch(fractionA);
+        Inch inchesB = new Inch(fractionB);
+        assertNotEquals(inchesA, inchesB);
+    }
+
+    @Test
+    void testEquals() {
+        System.out.println("equals");
+        Fraction fraction = ExtendedRandom.nextFraction();
+        Inch someInches = new Inch(fraction);
+        Inch sameInches = new Inch(fraction);
+        assertEquals(someInches, sameInches);
+    }
+
+    @Test
+    void testHashCode() {
+        System.out.println("hashCode");
+        int capacity = ExtendedRandom.nextInt(1024) + 16;
+        Set<Inch> inchSet = new HashSet<>(capacity);
+        Set<Integer> hashes = new HashSet<>(capacity);
+        for (int i = 0; i < capacity; i++) {
+            Inch inch = new Inch(ExtendedRandom.nextFraction());
+            inchSet.add(inch);
+            hashes.add(inch.hashCode());
+        }
+        int expected = inchSet.size();
+        int actual = hashes.size();
+        System.out.println("Created " + expected + " Inch instances with "
+                + actual + " distinct hash codes");
+        String msg = expected
+                + " Inch instances should have as many distinct hash codes";
+        assertEquals(expected, actual, msg);
     }
 
     @Test

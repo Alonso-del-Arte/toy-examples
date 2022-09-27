@@ -7,18 +7,17 @@ import measures.UnitOfMeasure;
 public abstract class LengthMeasure extends UnitOfMeasure
         implements Comparable<LengthMeasure> {
 
-    private final Fraction quantity;
+    final Fraction quantity;
 
-    private final Fraction scaling;
+    final Fraction scaling;
 
-    // TODO: Write tests for this
     public final Fraction getNumber() {
-        return new Fraction(0);
+        return this.quantity;
     }
 
     // TODO: Write tests for this
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object obj) {
         return false;
     }
 
