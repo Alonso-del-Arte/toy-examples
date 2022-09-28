@@ -6,16 +6,14 @@ public class Hand extends LengthMeasure {
 
     private static final Fraction ONE_THIRD = new Fraction(1, 3);
 
-    // TODO: Write tests for this
     @Override
     public String getSingularWord() {
-        return "NOT IMPLEMENTED YET";
+        return "hand";
     }
 
-    // TODO: Write tests for this
     @Override
     public String getPluralWord() {
-        return "NOT IMPLEMENTED YET";
+        return "hands";
     }
 
     // TODO: Write tests for this
@@ -24,20 +22,39 @@ public class Hand extends LengthMeasure {
         return "NOT IMPLEMENTED YET";
     }
 
-    // TODO: Write tests for this
     @Override
-    public boolean equals(Object obj) {
-        return false;
+    public String toString() {
+        String intermediate = this.quantity.toString();
+        switch (intermediate) {
+            case "-1":
+            case "1":
+                return intermediate + " hand";
+            default:
+                return intermediate + " hands";
+        }
     }
 
-    // TODO: Write tests for this
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Hand)) {
+            return false;
+        }
+        return this.quantity.equals(((Hand) obj).quantity);
+    }
+
     @Override
     public int hashCode() {
-        return 0;
+        return this.quantity.hashCode();
     }
 
     public Hand(Fraction number) {
         super(number, ONE_THIRD);
+        if (number == null) {
+            throw new NullPointerException("number should not be null");
+        }
     }
 
 }

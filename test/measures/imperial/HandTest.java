@@ -10,14 +10,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import randomness.ExtendedRandom;
 
-class FootTest {
+class HandTest {
 
     @Test
     public void testGetSingularWord() {
         System.out.println("getSingularWord");
         Fraction fraction = ExtendedRandom.nextFraction();
-        Foot instance = new Foot(fraction);
-        String expected = "foot";
+        Hand instance = new Hand(fraction);
+        String expected = "hand";
         String actual = instance.getSingularWord();
         assertEquals(expected, actual);
     }
@@ -26,8 +26,8 @@ class FootTest {
     public void testGetPluralWord() {
         System.out.println("getPluralWord");
         Fraction fraction = ExtendedRandom.nextFraction();
-        Foot instance = new Foot(fraction);
-        String expected = "feet";
+        Hand instance = new Hand(fraction);
+        String expected = "hands";
         String actual = instance.getPluralWord();
         assertEquals(expected, actual);
     }
@@ -36,8 +36,9 @@ class FootTest {
     public void testGetAbbreviation() {
         System.out.println("getAbbreviation");
         Fraction fraction = ExtendedRandom.nextFraction();
-        Foot instance = new Foot(fraction);
-        String expected = "ft";
+        Hand instance = new Hand(fraction);
+        fail("Not sure what the proper abbreviation is");
+        String expected = "??? h ?????";
         String actual = instance.getAbbreviation();
         assertEquals(expected, actual);
     }
@@ -49,9 +50,9 @@ class FootTest {
         Fraction stop = new Fraction(129);
         for (Fraction n = new Fraction(-128); n.compareTo(stop) < 0;
              n = n.plus(two)) {
-            Foot foot = new Foot(n);
-            String expected = n + " feet";
-            String actual = foot.toString();
+            Hand hand = new Hand(n);
+            String expected = n + " hands";
+            String actual = hand.toString();
             assertEquals(expected, actual);
         }
     }
@@ -59,85 +60,85 @@ class FootTest {
     @Test
     void testToStringSingular() {
         Fraction one = new Fraction(1);
-        Foot oneFoot = new Foot(one);
-        String expected = "1 foot";
-        String actual = oneFoot.toString();
+        Hand oneHand = new Hand(one);
+        String expected = "1 hand";
+        String actual = oneHand.toString();
         assertEquals(expected, actual);
     }
 
     @Test
     void testToStringSingularNegative() {
         Fraction negOne = new Fraction(-1);
-        Foot negOneFoot = new Foot(negOne);
-        String expected = "-1 foot";
-        String actual = negOneFoot.toString();
+        Hand negOneHand = new Hand(negOne);
+        String expected = "-1 hand";
+        String actual = negOneHand.toString();
         assertEquals(expected, actual);
     }
 
     @Test
     void testReferentialEquality() {
-        Foot someFoot = new Foot(ExtendedRandom.nextFraction());
-        assertEquals(someFoot, someFoot);
+        Hand someHand = new Hand(ExtendedRandom.nextFraction());
+        assertEquals(someHand, someHand);
     }
 
     @Test
     void testNotEqualsNull() {
-        Foot someFoot = new Foot(ExtendedRandom.nextFraction());
-        assertNotEquals(someFoot, null);
+        Hand someHand = new Hand(ExtendedRandom.nextFraction());
+        assertNotEquals(someHand, null);
     }
 
     @Test
     void testNotEqualsDiffClass() {
         Fraction fraction = ExtendedRandom.nextFraction();
-        Foot someFoot = new Foot(fraction);
+        Hand someHand = new Hand(fraction);
         LengthMeasure someLength
                 = new LengthMeasureTest.LengthMeasureImpl(fraction);
-        assertNotEquals(someFoot, someLength);
+        assertNotEquals(someHand, someLength);
     }
 
     @Test
     void testNotEqualsDiffMeasure() {
         Fraction fractionA = ExtendedRandom.nextFraction();
         Fraction fractionB = fractionA.plus(1);
-        Foot feetA = new Foot(fractionA);
-        Foot feetB = new Foot(fractionB);
-        assertNotEquals(feetA, feetB);
+        Hand handsA = new Hand(fractionA);
+        Hand handsB = new Hand(fractionB);
+        assertNotEquals(handsA, handsB);
     }
 
     @Test
     void testEquals() {
         System.out.println("equals");
         Fraction fraction = ExtendedRandom.nextFraction();
-        Foot someFeet = new Foot(fraction);
-        Foot sameFeet = new Foot(fraction);
-        assertEquals(someFeet, sameFeet);
+        Hand someHands = new Hand(fraction);
+        Hand sameHands = new Hand(fraction);
+        assertEquals(someHands, sameHands);
     }
 
     @Test
     void testHashCode() {
         System.out.println("hashCode");
         int capacity = ExtendedRandom.nextInt(1024) + 16;
-        Set<Foot> footSet = new HashSet<>(capacity);
+        Set<Hand> handSet = new HashSet<>(capacity);
         Set<Integer> hashes = new HashSet<>(capacity);
         for (int i = 0; i < capacity; i++) {
-            Foot foot = new Foot(ExtendedRandom.nextFraction());
-            footSet.add(foot);
-            hashes.add(foot.hashCode());
+            Hand hand = new Hand(ExtendedRandom.nextFraction());
+            handSet.add(hand);
+            hashes.add(hand.hashCode());
         }
-        int expected = footSet.size();
+        int expected = handSet.size();
         int actual = hashes.size();
-        System.out.println("Created " + expected + " Foot instances with "
+        System.out.println("Created " + expected + " Hand instances with "
                 + actual + " distinct hash codes");
         String msg = expected
-                + " Foot instances should have as many distinct hash codes";
+                + " Hand instances should have as many distinct hash codes";
         assertEquals(expected, actual, msg);
     }
 
     @Test
     void testConstructorRejectsNullFraction() {
         Throwable t = assertThrows(NullPointerException.class, () -> {
-            Foot badFoot = new Foot(null);
-            System.out.println("Created " + badFoot + " with null number");
+            Hand badHand = new Hand(null);
+            System.out.println("Created " + badHand + " with null number");
         });
         String excMsg = t.getMessage();
         assert excMsg != null : "Message should not be null";
