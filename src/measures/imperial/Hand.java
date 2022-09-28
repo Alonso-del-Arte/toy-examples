@@ -24,6 +24,18 @@ public class Hand extends LengthMeasure {
         return "NOT IMPLEMENTED YET";
     }
 
+    // TODO: Write tests for this
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+
     public Hand(Fraction number) {
         super(number, ONE_THIRD);
     }
