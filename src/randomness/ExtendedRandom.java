@@ -43,6 +43,11 @@ public class ExtendedRandom {
         return RANDOM.nextInt(bound);
     }
 
+    // TODO: Write tests for this
+    public static double nextDouble() {
+        return 0.0;
+    }
+
     /**
      * Gives a pseudorandomly chosen fraction. May be positive or negative, or
      * it could even be 0.
