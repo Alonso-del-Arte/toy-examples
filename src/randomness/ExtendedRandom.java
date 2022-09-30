@@ -3,6 +3,7 @@ package randomness;
 import currency.CurrencyAmount;
 import fractions.Fraction;
 
+import java.math.BigInteger;
 import java.util.Random;
 
 import numerics.ComplexNumber;
@@ -41,6 +42,11 @@ public class ExtendedRandom {
      */
     public static int nextInt(int bound) {
         return RANDOM.nextInt(bound);
+    }
+
+    // TODO: Write tests for this
+    public static BigInteger nextBigInt(int bitLength) {
+        return BigInteger.ZERO;
     }
 
     // TODO: Write tests for this
