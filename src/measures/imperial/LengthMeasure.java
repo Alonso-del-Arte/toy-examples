@@ -1,11 +1,13 @@
 package measures.imperial;
 
+import arithmetic.IntegerMultipliable;
+import arithmetic.RingSummable;
 import fractions.Fraction;
-
 import measures.UnitOfMeasure;
 
 public abstract class LengthMeasure extends UnitOfMeasure
-        implements Comparable<LengthMeasure> {
+        implements Comparable<LengthMeasure>,
+        IntegerMultipliable<LengthMeasure>, RingSummable<LengthMeasure> {
 
     final Fraction quantity;
 

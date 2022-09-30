@@ -6,6 +6,30 @@ public final class Mile extends LengthMeasure {
 
     private static final Fraction FOOT_MULTIPLIER = new Fraction(5280);
 
+    // TODO: Write tests for this
+    @Override
+    public Mile plus(LengthMeasure addend) {
+        return this;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public Mile minus(LengthMeasure subtrahend) {
+        return this;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public Mile times(int multiplicand) {
+        return this;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public Mile divides(int divisor) {
+        return this;
+    }
+
     @Override
     public String getSingularWord() {
         return "mile";

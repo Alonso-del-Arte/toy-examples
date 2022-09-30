@@ -1,11 +1,15 @@
 package measures.metric;
 
+import arithmetic.IntegerMultipliable;
+import arithmetic.RingSummable;
+
 import java.math.BigDecimal;
 
 import measures.UnitOfMeasure;
 
 public abstract class LengthMeasure extends UnitOfMeasure
-        implements Comparable<LengthMeasure> {
+        implements Comparable<LengthMeasure>,
+        IntegerMultipliable<LengthMeasure>, RingSummable<LengthMeasure> {
 
     private final BigDecimal quantity;
 

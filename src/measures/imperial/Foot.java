@@ -6,6 +6,30 @@ public final class Foot extends LengthMeasure {
 
     private static final Fraction ONE = new Fraction(1);
 
+    // TODO: Write tests for this
+    @Override
+    public Foot plus(LengthMeasure addend) {
+        return this;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public Foot minus(LengthMeasure subtrahend) {
+        return this;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public Foot times(int multiplicand) {
+        return this;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public Foot divides(int divisor) {
+        return this;
+    }
+
     @Override
     public String getSingularWord() {
         return "foot";

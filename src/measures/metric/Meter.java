@@ -6,6 +6,30 @@ public final class Meter extends LengthMeasure {
 
     // TODO: Write tests for this
     @Override
+    public Meter plus(LengthMeasure addend) {
+        return this;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public Meter minus(LengthMeasure subtrahend) {
+        return this;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public Meter times(int multiplicand) {
+        return this;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public Meter divides(int divisor) {
+        return this;
+    }
+
+    // TODO: Write tests for this
+    @Override
     public String getSingularWord() {
         return "NOT IMPLEMENTED YET";
     }

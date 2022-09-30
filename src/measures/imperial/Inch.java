@@ -6,6 +6,30 @@ public final class Inch extends LengthMeasure {
 
     private static final Fraction ONE_TWELFTH = new Fraction(1, 12);
 
+    // TODO: Write tests for this
+    @Override
+    public Inch plus(LengthMeasure addend) {
+        return this;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public Inch minus(LengthMeasure subtrahend) {
+        return this;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public Inch times(int multiplicand) {
+        return this;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public Inch divides(int divisor) {
+        return this;
+    }
+
     @Override
     public String getSingularWord() {
         return "inch";

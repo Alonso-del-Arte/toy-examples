@@ -6,6 +6,30 @@ public class Hand extends LengthMeasure {
 
     private static final Fraction ONE_THIRD = new Fraction(1, 3);
 
+    // TODO: Write tests for this
+    @Override
+    public Hand plus(LengthMeasure addend) {
+        return this;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public Hand minus(LengthMeasure subtrahend) {
+        return this;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public Hand times(int multiplicand) {
+        return this;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public Hand divides(int divisor) {
+        return this;
+    }
+
     @Override
     public String getSingularWord() {
         return "hand";

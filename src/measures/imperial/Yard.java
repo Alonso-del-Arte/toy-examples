@@ -6,6 +6,30 @@ public final class Yard extends LengthMeasure {
 
     private static final Fraction THREE = new Fraction(3);
 
+    // TODO: Write tests for this
+    @Override
+    public Yard plus(LengthMeasure addend) {
+        return this;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public Yard minus(LengthMeasure subtrahend) {
+        return this;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public Yard times(int multiplicand) {
+        return this;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public Yard divides(int divisor) {
+        return this;
+    }
+
     @Override
     public String getSingularWord() {
         return "yard";
