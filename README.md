@@ -1,11 +1,57 @@
 # Toy Examples
 
-Just a random assortment of classic object-oriented programming toy examples, 
-some more fleshed out than others.
+Just a random assortment of classic object-oriented programming (OOP) toy 
+examples, some more fleshed out than others, to illustrate basic concepts of 
+OOP.
 
 If you fork this repository, be sure to add a FOREX_API_KEY environment variable 
 to your local machine, with that name, and a placeholder for a value if you 
 don't have an API key for an online currency exchange rate API. If you do have 
 such an API key, make sure it is not quoted in any file watched by Git.
 
-For information regarding Hacktoberfest, see CONTRIBUTING.md.
+For information regarding Hacktoberfest, see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## The four pillars of OOP
+
+* **Abstraction** &mdash; FINISH WRITING
+* **Encapsulation** &mdash; Objects encapsulate their state and forbid changes 
+except as prescribed by the defining class. See the `Odometer` class in the 
+`vehicles.parts` package. An `Odometer` instance allows its mileage to be 
+advanced but not rolled back.
+* **Inheritance** &mdash; Classes inherit properties from base classes. The 
+`animals` package definitely contains toy examples of this. Inheritance need not 
+be deep to be useful. In the more practical examples, inheritance tends to 
+average two or three levels: a subclass extends an abstract class, which in turn 
+implicitly extends `java.lang.Object`.
+* **Polymorphism** &mdash; FINISH WRITING
+
+## SOLID principles
+
+* **Single responsibility** &mdash; Each class should only have one 
+responsibility. For example, the `getBalance()` function in the 
+`CheckingAccount` class should only get the balance and not do anything else 
+(such as verifying all applicable fees have been assessed.)
+* **Open/Closed** &mdash; FINISH WRITING
+* **Liskov substitution** &mdash; Barbara Liskov was brought into this to make 
+the acronym work. FINISH WRITING
+* **Interface segregation** &mdash; Interfaces should not force implementing 
+classes to implement more than is necessary. For example, suppose we need the 
+`FlyingSquirrel` class and a few other classes to implement `glide()` from an 
+interface. But if we have those classes implement `FlightCapable`, they also 
+have to have an implementation for `fly()` or be declared abstract, and we don't 
+want either of those because flying squirrels don't actually fly, they glide. 
+Animals like eagles and hawks fly but they can also glide. So what we do is that 
+we separate `glide()` to the `GlideCapable` interface and then the 
+`FlightCapable` interface can inherit `glide()` from `GlideCapable`.
+* **Dependency inversion** &mdash; FINISH WRITING
+
+
+
+
+
+
+
+
+
+
+
