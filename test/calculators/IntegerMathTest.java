@@ -3,15 +3,14 @@ package calculators;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class IntegerMathTest {
+import randomness.ExtendedRandom;
 
-    private static final Random RANDOM = new Random();
+class IntegerMathTest {
 
     private static final List<Long> FIBONACCI_NUMBERS = new ArrayList<>();
 
@@ -37,8 +36,8 @@ class IntegerMathTest {
 
     @Test
     void testNotPrime() {
-        int start = RANDOM.nextInt(32) + 8;
-        int end = RANDOM.nextInt(4096) + start;
+        int start = ExtendedRandom.nextInt(32) + 8;
+        int end = ExtendedRandom.nextInt(4096) + start;
         List<Integer> primes = EratosthenesSieve.listPrimes(start, end);
         String msgPart = " is not prime";
         String msg;
@@ -62,8 +61,8 @@ class IntegerMathTest {
     @Test
     void testIsPrime() {
         System.out.println("isPrime");
-        int start = (RANDOM.nextInt(4096) + 64) | 1;
-        int end = (start + RANDOM.nextInt(128) + 2) | 1;
+        int start = (ExtendedRandom.nextInt(4096) + 64) | 1;
+        int end = (start + ExtendedRandom.nextInt(128) + 2) | 1;
         double root = Math.sqrt(end);
         String msgPart = " should be recognized as prime";
         for (int i = start; i < end; i += 2) {
@@ -117,7 +116,7 @@ class IntegerMathTest {
     @Test
     void testRandomPrime() {
         System.out.println("randomPrime");
-        int size = RANDOM.nextInt(128) + 32;
+        int size = ExtendedRandom.nextInt(128) + 32;
         Set<Integer> set = new HashSet<>(size);
         int start = size * size;
         int end = start + size;
@@ -139,8 +138,8 @@ class IntegerMathTest {
 
     @Test
     void testRandomPrimeFromArbitraryRange() {
-        int start = RANDOM.nextInt(4096) + 4;
-        int end = 2 * start + RANDOM.nextInt(512) + 8;
+        int start = ExtendedRandom.nextInt(4096) + 4;
+        int end = 2 * start + ExtendedRandom.nextInt(512) + 8;
         int prime = IntegerMath.randomPrime(start, end);
         String primeMsg = "Number " + prime + " should be prime";
         assert IntegerMath.isPrime(prime) : primeMsg;
@@ -165,14 +164,14 @@ class IntegerMathTest {
 
     @Test
     void testEuclideanGCDSamePositiveNumber() {
-        int expected = RANDOM.nextInt(1024) + 256;
+        int expected = ExtendedRandom.nextInt(1024) + 256;
         long actual = IntegerMath.euclideanGCD(expected, expected);
         assertEquals(expected, actual);
     }
 
     @Test
     void testEuclideanGCDSameNegativeNumber() {
-        int a = -RANDOM.nextInt(1024) - 256;
+        int a = -ExtendedRandom.nextInt(1024) - 256;
         int expected = -a;
         long actual = IntegerMath.euclideanGCD(a, a);
         assertEquals(expected, actual);
@@ -181,7 +180,7 @@ class IntegerMathTest {
     @Test
     void testEuclideanGCD() {
         System.out.println("euclideanGCD");
-        int expected = RANDOM.nextInt(4096) + 4;
+        int expected = ExtendedRandom.nextInt(4096) + 4;
         for (long i = -256; i < 256; i++) {
             long a = i * expected;
             long b = a + expected;
@@ -221,7 +220,7 @@ class IntegerMathTest {
 
     @Test
     void testEuclideanGCDConsecutiveSumsOfFibonacciNumbers() {
-        int n = RANDOM.nextInt(7) + 3;
+        int n = ExtendedRandom.nextInt(7) + 3;
         List<Long> sums = sumsOfConsecutiveFibonacciNumbers(n);
         int lastIndex = sums.size() - 1;
         Set<Long> sumGCDs = new HashSet<>();
@@ -260,7 +259,7 @@ class IntegerMathTest {
     @Test
     void testDivisors() {
         System.out.println("divisors");
-        int number = 36 * (RANDOM.nextInt(512) + 8);
+        int number = 36 * (ExtendedRandom.nextInt(512) + 8);
         Set<Integer> expected = new HashSet<>();
         expected.add(1);
         expected.add(number);

@@ -9,6 +9,8 @@ import java.util.Random;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import randomness.ExtendedRandom;
+
 class ArrayBackedSetTest {
 
     private static final Random RANDOM = new Random();
@@ -35,7 +37,7 @@ class ArrayBackedSetTest {
     void testContains() {
         System.out.println("contains");
         ArrayBackedSet<LocalDateTime> set = new ArrayBackedSet<>();
-        int size = RANDOM.nextInt(13) + 2;
+        int size = ExtendedRandom.nextInt(13) + 2;
         LocalDateTime dateTime = LocalDateTime.now();
         LocalDateTime[] dateTimes = new LocalDateTime[size];
         for (int i = 0; i < size; i++) {
@@ -52,7 +54,7 @@ class ArrayBackedSetTest {
     @Test
     void testDoesNotContain() {
         ArrayBackedSet<LocalDateTime> set = new ArrayBackedSet<>();
-        int size = RANDOM.nextInt(13) + 2;
+        int size = ExtendedRandom.nextInt(13) + 2;
         LocalDateTime dateTime = LocalDateTime.now();
         for (int i = 0; i < size; i++) {
             dateTime = dateTime.plusDays(i);
@@ -68,7 +70,7 @@ class ArrayBackedSetTest {
         System.out.println("size");
         int bound = 24;
         ArrayBackedSet<LocalDateTime> set = new ArrayBackedSet<>(bound);
-        int expected = RANDOM.nextInt(bound);
+        int expected = ExtendedRandom.nextInt(bound);
         LocalDateTime dateTime = LocalDateTime.now();
         for (int i = 0; i < expected; i++) {
             dateTime = dateTime.plusHours(i);
@@ -93,7 +95,7 @@ class ArrayBackedSetTest {
 
     @Test
     void testCapacityExpandsAsNeeded() {
-        int size = RANDOM.nextInt(20) + 25;
+        int size = ExtendedRandom.nextInt(20) + 25;
         ArrayBackedSet<LocalDateTime> set = new ArrayBackedSet<>(size);
         LocalDateTime dateTime = LocalDateTime.now();
         for (int i = 0; i < size; i++) {
@@ -131,13 +133,13 @@ class ArrayBackedSetTest {
         System.out.println("remove");
         int originalSize = 20;
         ArrayBackedSet<String> set = new ArrayBackedSet<>(originalSize);
-        int placementIndex = RANDOM.nextInt(20);
+        int placementIndex = ExtendedRandom.nextInt(20);
         String element = "Element to be removed";
         for (int i = 0; i < originalSize; i++) {
             if (i == placementIndex) {
                 set.add(element);
             } else {
-                set.add(Integer.toString(RANDOM.nextInt()));
+                set.add(Integer.toString(ExtendedRandom.nextInt()));
             }
         }
         boolean opResult = set.remove(element);
@@ -161,9 +163,9 @@ class ArrayBackedSetTest {
 
     @Test
     void testIsNotEmpty() {
-        int expected = RANDOM.nextInt(16) + 20;
+        int expected = ExtendedRandom.nextInt(16) + 20;
         ArrayBackedSet<Integer> set = new ArrayBackedSet<>(expected);
-        int start = RANDOM.nextInt();
+        int start = ExtendedRandom.nextInt();
         for (int i = 0; i < expected; i++) {
             set.add(start + i);
         }
@@ -177,7 +179,7 @@ class ArrayBackedSetTest {
     @Test
     void testClear() {
         System.out.println("clear");
-        int size = RANDOM.nextInt(100) + 20;
+        int size = ExtendedRandom.nextInt(100) + 20;
         ArrayBackedSet<LocalDateTime> set = new ArrayBackedSet<>(size);
         for (int i = 0; i < size; i++) {
             set.add(LocalDateTime.now());
@@ -224,7 +226,7 @@ class ArrayBackedSetTest {
 
     @Test
     void testNotEqualsDiffElems() {
-        int size = RANDOM.nextInt(20) + 16;
+        int size = ExtendedRandom.nextInt(20) + 16;
         ArrayBackedSet<Integer> someSet = new ArrayBackedSet<>(size);
         ArrayBackedSet<Integer> diffSet = new ArrayBackedSet<>(size);
         for (int i = 0; i < size; i++) {
@@ -255,7 +257,7 @@ class ArrayBackedSetTest {
     void testHashCode() {
         System.out.println("hashCode");
         HashSet<Integer> hashes = new HashSet<>();
-        int expected = RANDOM.nextInt(24);
+        int expected = ExtendedRandom.nextInt(24);
         LocalDateTime dateTime;
         ArrayBackedSet<LocalDateTime> set = new ArrayBackedSet<>();
         for (int i = 0; i < expected; i++) {
@@ -288,7 +290,7 @@ class ArrayBackedSetTest {
     @Test
     void testIterator() {
         System.out.println("iterator");
-        int size = RANDOM.nextInt(48) + 16;
+        int size = ExtendedRandom.nextInt(48) + 16;
         ArrayBackedSet<BigInteger> expected = new ArrayBackedSet<>(size);
         BigInteger number;
         for (int i = 0; i < size; i++) {
@@ -304,7 +306,7 @@ class ArrayBackedSetTest {
 
     @Test
     void testConstructorRejectsNegativeCapacity() {
-        int badSize = -RANDOM.nextInt(128) - 1;
+        int badSize = -ExtendedRandom.nextInt(128) - 1;
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
             ArrayBackedSet<LocalDateTime> badSet
                     = new ArrayBackedSet<>(badSize);

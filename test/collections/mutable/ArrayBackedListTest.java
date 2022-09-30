@@ -11,6 +11,8 @@ import java.util.Random;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import randomness.ExtendedRandom;
+
 class ArrayBackedListTest {
 
     private static final Random RANDOM = new Random();
@@ -58,7 +60,7 @@ class ArrayBackedListTest {
     @Test
     void testSize() {
         System.out.println("size");
-        int expected = RANDOM.nextInt(32);
+        int expected = ExtendedRandom.nextInt(32);
         ArrayBackedList<BigInteger> list = this.makeBigIntList(expected);
         String msg = "Array-backed list should have " + expected + " elements";
         int actual = list.size();
@@ -67,7 +69,7 @@ class ArrayBackedListTest {
 
     @Test
     void testCapacityExpandsAsNeeded() {
-        int size = RANDOM.nextInt(20) + 25;
+        int size = ExtendedRandom.nextInt(20) + 25;
         ArrayBackedList<LocalDateTime> list = new ArrayBackedList<>(size);
         LocalDateTime dateTime = LocalDateTime.now();
         for (int i = 0; i < size; i++) {
@@ -90,7 +92,7 @@ class ArrayBackedListTest {
     @Test
     void testGetRejectsNegativeIndex() {
         ArrayBackedList<CallableStatement> list = new ArrayBackedList<>();
-        int badIndex = -RANDOM.nextInt(256) - 1;
+        int badIndex = -ExtendedRandom.nextInt(256) - 1;
         Throwable t = assertThrows(IndexOutOfBoundsException.class, () -> {
             CallableStatement badStatement = list.get(badIndex);
             System.out.println("Using index " + badIndex
@@ -104,9 +106,9 @@ class ArrayBackedListTest {
 
     @Test
     void testGetRejectsExcessiveIndex() {
-        int size = RANDOM.nextInt(32) + 1;
+        int size = ExtendedRandom.nextInt(32) + 1;
         ArrayBackedList<BigInteger> list = this.makeBigIntList(size);
-        int badIndex = size + RANDOM.nextInt(32);
+        int badIndex = size + ExtendedRandom.nextInt(32);
         Throwable t = assertThrows(IndexOutOfBoundsException.class, () -> {
             BigInteger badNumber = list.get(badIndex);
             System.out.println("Using index " + badIndex
@@ -122,7 +124,7 @@ class ArrayBackedListTest {
     @Test
     void testGet() {
         System.out.println("get");
-        int size = RANDOM.nextInt(24) + 12;
+        int size = ExtendedRandom.nextInt(24) + 12;
         LocalDateTime[] array = new LocalDateTime[size];
         ArrayBackedList<LocalDateTime> list = new ArrayBackedList<>();
         LocalDateTime time = LocalDateTime.now();
@@ -152,13 +154,13 @@ class ArrayBackedListTest {
         System.out.println("remove");
         int originalSize = 20;
         ArrayBackedList<String> list = new ArrayBackedList<>(originalSize);
-        int placementIndex = RANDOM.nextInt(20);
+        int placementIndex = ExtendedRandom.nextInt(originalSize);
         String element = "Element to be removed";
         for (int i = 0; i < originalSize; i++) {
             if (i == placementIndex) {
                 list.add(element);
             } else {
-                list.add(Integer.toString(RANDOM.nextInt()));
+                list.add(Integer.toString(ExtendedRandom.nextInt()));
             }
         }
         boolean opResult = list.remove(element);
@@ -173,7 +175,7 @@ class ArrayBackedListTest {
     @Test
     void testRemoveByIndexRejectsNegativeIndex() {
         ArrayBackedList<CallableStatement> list = new ArrayBackedList<>();
-        int badIndex = -RANDOM.nextInt(256) - 1;
+        int badIndex = -ExtendedRandom.nextInt(256) - 1;
         Throwable t = assertThrows(IndexOutOfBoundsException.class, () -> {
             CallableStatement badStatement = list.remove(badIndex);
             System.out.println("Using index " + badIndex
@@ -187,9 +189,9 @@ class ArrayBackedListTest {
 
     @Test
     void testRemoveByIndexRejectsExcessiveIndex() {
-        int size = RANDOM.nextInt(32) + 1;
+        int size = ExtendedRandom.nextInt(32) + 1;
         ArrayBackedList<BigInteger> list = this.makeBigIntList(size);
-        int badIndex = size + RANDOM.nextInt(32);
+        int badIndex = size + ExtendedRandom.nextInt(32);
         Throwable t = assertThrows(IndexOutOfBoundsException.class, () -> {
             BigInteger badNumber = list.remove(badIndex);
             System.out.println("Using index " + badIndex
@@ -204,9 +206,9 @@ class ArrayBackedListTest {
 
     @Test
     void testRemoveByIndex() {
-        int size = RANDOM.nextInt(40) + 10;
+        int size = ExtendedRandom.nextInt(40) + 10;
         ArrayBackedList<BigInteger> list = this.makeBigIntList(size);
-        int index = RANDOM.nextInt(size);
+        int index = ExtendedRandom.nextInt(size);
         BigInteger expected = list.get(index);
         BigInteger actual = list.remove(index);
         assertEquals(expected, actual);
@@ -215,9 +217,9 @@ class ArrayBackedListTest {
 
     @Test
     void testRemoveShiftsRemainingElementsLeft() {
-        int size = RANDOM.nextInt(48) + 12;
+        int size = ExtendedRandom.nextInt(48) + 12;
         ArrayBackedList<LocalDateTime> list = new ArrayBackedList<>(size);
-        int removalIndex = RANDOM.nextInt(size - 5);
+        int removalIndex = ExtendedRandom.nextInt(size - 5);
         LocalDateTime currTime = LocalDateTime.now();
         LocalDateTime otherTime;
         LocalDateTime[] expected = new LocalDateTime[size - 1];
@@ -244,9 +246,9 @@ class ArrayBackedListTest {
 
     @Test
     void testRemoveByIndexShiftsRemainingElementsLeft() {
-        int size = RANDOM.nextInt(48) + 12;
+        int size = ExtendedRandom.nextInt(48) + 12;
         ArrayBackedList<LocalDateTime> list = new ArrayBackedList<>(size);
-        int removalIndex = RANDOM.nextInt(size - 5);
+        int removalIndex = ExtendedRandom.nextInt(size - 5);
         LocalDateTime currTime = LocalDateTime.now();
         LocalDateTime otherTime;
         LocalDateTime[] expected = new LocalDateTime[size - 1];
@@ -278,9 +280,9 @@ class ArrayBackedListTest {
 
     @Test
     void testIsNotEmpty() {
-        int expected = RANDOM.nextInt(16) + 20;
+        int expected = ExtendedRandom.nextInt(16) + 20;
         ArrayBackedList<Integer> list = new ArrayBackedList<>(expected);
-        int start = RANDOM.nextInt();
+        int start = ExtendedRandom.nextInt();
         for (int i = 0; i < expected; i++) {
             list.add(start + i);
         }
@@ -294,7 +296,7 @@ class ArrayBackedListTest {
     @Test
     void testClear() {
         System.out.println("clear");
-        int size = RANDOM.nextInt(32) + 16;
+        int size = ExtendedRandom.nextInt(32) + 16;
         ArrayBackedList<BigInteger> list = this.makeBigIntList(size);
         String preMsg = "List with " + size
                 + " elements should not be considered empty";
@@ -306,9 +308,9 @@ class ArrayBackedListTest {
 
     @Test
     void testAddRejectsNegativeIndex() {
-        int size = RANDOM.nextInt(32) + 8;
+        int size = ExtendedRandom.nextInt(32) + 8;
         ArrayBackedList<BigInteger> list = this.makeBigIntList(size);
-        int badIndex = -RANDOM.nextInt(128) - 1;
+        int badIndex = -ExtendedRandom.nextInt(128) - 1;
         BigInteger someNumber = new BigInteger(size, RANDOM);
         Throwable t = assertThrows(IndexOutOfBoundsException.class, () -> {
             list.add(someNumber, badIndex);
@@ -325,9 +327,9 @@ class ArrayBackedListTest {
 
     @Test
     void testAddRejectsExcessiveIndex() {
-        int size = RANDOM.nextInt(32) + 8;
+        int size = ExtendedRandom.nextInt(32) + 8;
         ArrayBackedList<BigInteger> list = this.makeBigIntList(size);
-        int badIndex = size + RANDOM.nextInt(size) + 2 * DEFAULT_PADDING;
+        int badIndex = size + ExtendedRandom.nextInt(size) + 2 * DEFAULT_PADDING;
         BigInteger someNumber = new BigInteger(size, RANDOM);
         Throwable t = assertThrows(IndexOutOfBoundsException.class, () -> {
             list.add(someNumber, badIndex);
@@ -345,9 +347,9 @@ class ArrayBackedListTest {
 
     @Test
     void testAddAtSpecificIndex() {
-        int size = RANDOM.nextInt(48) + 16;
+        int size = ExtendedRandom.nextInt(48) + 16;
         ArrayBackedList<BigInteger> list = this.makeBigIntList(size + 1);
-        int index = RANDOM.nextInt(size);
+        int index = ExtendedRandom.nextInt(size);
         int displacedLength = size - index;
         BigInteger[] expected = new BigInteger[displacedLength];
         for (int i = 0; i < displacedLength; i++) {
@@ -364,16 +366,16 @@ class ArrayBackedListTest {
 
     @Test
     void testAddAtLastIndexCanExpandCapacity() {
-        int size = RANDOM.nextInt(32) + 16;
+        int size = ExtendedRandom.nextInt(32) + 16;
         ArrayBackedList<String> list = new ArrayBackedList<>(size);
         int number;
         String element;
         for (int i = 0; i < size; i++) {
-            number = i + RANDOM.nextInt();
+            number = i + ExtendedRandom.nextInt();
             element = "Element at position " + i + " is " + number;
             list.add(element);
         }
-        number = size + RANDOM.nextInt();
+        number = size + ExtendedRandom.nextInt();
         int position = size - 1;
         element = "Element " + number + " will be inserted at position " + position;
         try {
@@ -405,10 +407,10 @@ class ArrayBackedListTest {
 
     @Test
     void testAddAtIndexRejectsNull() {
-        int size = RANDOM.nextInt(32) + 8;
+        int size = ExtendedRandom.nextInt(32) + 8;
         ArrayBackedList<BigInteger> list = this.makeBigIntList(size);
         int expected = list.size();
-        int index = RANDOM.nextInt(size - 1);
+        int index = ExtendedRandom.nextInt(size - 1);
         String msg = "List add at index " + index + " out of " + size
                 + " should reject null";
         boolean opResult = list.add(null, index);
@@ -442,7 +444,7 @@ class ArrayBackedListTest {
 
     @Test
     void testNotEqualsDiffSize() {
-        int sizeA = RANDOM.nextInt(48);
+        int sizeA = ExtendedRandom.nextInt(48);
         int sizeB = 2 * sizeA + 1;
         ArrayBackedList<BigInteger> listA = this.makeBigIntList(sizeA);
         ArrayBackedList<BigInteger> listB = this.makeBigIntList(sizeB);
@@ -452,7 +454,7 @@ class ArrayBackedListTest {
 
     @Test
     void testNotEqualsDiffElems() {
-        int size = RANDOM.nextInt(40);
+        int size = ExtendedRandom.nextInt(40);
         ArrayBackedList<BigInteger> listA = this.makeBigIntList(size);
         ArrayBackedList<BigInteger> listB = this.makeBigIntList(size);
         assertNotEquals(listA, listB);
@@ -461,7 +463,7 @@ class ArrayBackedListTest {
     @Test
     void testEquals() {
         System.out.println("equals");
-        int size = RANDOM.nextInt(128);
+        int size = ExtendedRandom.nextInt(128);
         ArrayBackedList<BigInteger> someList = new ArrayBackedList<>(size);
         ArrayBackedList<BigInteger> sameList = new ArrayBackedList<>(size);
         BigInteger number;
@@ -477,7 +479,7 @@ class ArrayBackedListTest {
     void testHashCode() {
         System.out.println("hashCode");
         HashSet<Integer> hashes = new HashSet<>();
-        int expected = RANDOM.nextInt(24);
+        int expected = ExtendedRandom.nextInt(24);
         LocalDateTime dateTime;
         ArrayBackedList<LocalDateTime> list = new ArrayBackedList<>();
         for (int i = 0; i < expected; i++) {
@@ -492,7 +494,7 @@ class ArrayBackedListTest {
     @Test
     void testIterator() {
         System.out.println("iterator");
-        int size = RANDOM.nextInt(48) + 16;
+        int size = ExtendedRandom.nextInt(48) + 16;
         ArrayBackedList<BigInteger> expected = new ArrayBackedList<>(size);
         BigInteger number;
         for (int i = 0; i < size; i++) {
@@ -508,7 +510,7 @@ class ArrayBackedListTest {
 
     @Test
     void testConstructorRejectsNegativeCapacity() {
-        int badSize = -RANDOM.nextInt(128) - 1;
+        int badSize = -ExtendedRandom.nextInt(128) - 1;
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
             ArrayBackedList<LocalDateTime> badList
                     = new ArrayBackedList<>(badSize);

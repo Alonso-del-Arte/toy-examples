@@ -3,12 +3,13 @@ package calculators;
 import fractions.Fraction;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+
+import randomness.ExtendedRandom;
 
 class ExtendedMathTest {
 
@@ -22,6 +23,7 @@ class ExtendedMathTest {
         assertEquals(expected, actual, 0.0001);
     }
 
+    // TODO: Replace RANDOM.nextDouble() with ExtendedRandom.nextDouble()
     @Test
     void testPrimePiBelowTwo() {
         double x = 1.0 + RANDOM.nextDouble();
@@ -43,8 +45,9 @@ class ExtendedMathTest {
 
     @Test
     void testAbsTheSameForPositive() {
-        int denominator = RANDOM.nextInt(256) + 4;
-        int numerator = 2 * denominator + RANDOM.nextInt(denominator) + 1;
+        int denominator = ExtendedRandom.nextInt(256) + 4;
+        int numerator = 2 * denominator + ExtendedRandom.nextInt(denominator)
+                + 1;
         Fraction expected = new Fraction(numerator, denominator);
         Fraction actual = ExtendedMath.abs(expected);
         String msg = "abs(" + expected + ") should be " + expected;
@@ -54,8 +57,8 @@ class ExtendedMathTest {
     @Test
     void testAbs() {
         System.out.println("abs");
-        int denominator = RANDOM.nextInt(256) + 4;
-        int numerator = 2 * denominator + RANDOM.nextInt(denominator) + 1;
+        int denominator = ExtendedRandom.nextInt(256) + 4;
+        int numerator = 2 * denominator + ExtendedRandom.nextInt(denominator) + 1;
         Fraction negative = new Fraction(-numerator, denominator);
         Fraction expected = new Fraction(numerator, denominator);
         Fraction actual = ExtendedMath.abs(negative);
@@ -72,8 +75,8 @@ class ExtendedMathTest {
      */
     @Test
     void testNoSquareRootForNegativeFractions() {
-        int numerator = -RANDOM.nextInt(4096) - 1;
-        int denominator = RANDOM.nextInt(256) + 2;
+        int numerator = -ExtendedRandom.nextInt(4096) - 1;
+        int denominator = ExtendedRandom.nextInt(256) + 2;
         Fraction negative = new Fraction(numerator, denominator);
         Throwable exc = assertThrows(ArithmeticException.class, () -> {
             Fraction badResult = ExtendedMath.sqrt(negative);
@@ -88,7 +91,7 @@ class ExtendedMathTest {
     @Test
     void testSqrt() {
         System.out.println("sqrt");
-        int denominator = RANDOM.nextInt(256) + 4;
+        int denominator = ExtendedRandom.nextInt(256) + 4;
         int numerator = 2 * denominator + 1;
         Fraction expected = new Fraction(numerator, denominator);
         Fraction square = expected.times(expected);
@@ -131,7 +134,7 @@ class ExtendedMathTest {
         System.out.println("random");
         Fraction zero = new Fraction(0, 1);
         Fraction one = new Fraction(1, 1);
-        int size = RANDOM.nextInt(512) + 128;
+        int size = ExtendedRandom.nextInt(512) + 128;
         Set<Fraction> fractions = new HashSet<>(size);
         for (int i = 0; i < size; i++) {
             Fraction fraction = ExtendedMath.random();
