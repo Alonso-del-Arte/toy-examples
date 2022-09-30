@@ -1,18 +1,16 @@
 package arithmetic;
 
-import java.util.Random;
-
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class CollatzFunctionsTest {
+import randomness.ExtendedRandom;
 
-    private static final Random RANDOM = new Random();
+class CollatzFunctionsTest {
 
     @Test
     void testClassicOdd() {
-        int start = 2 * RANDOM.nextInt(1024) + 1;
-        int end = start + 2 * RANDOM.nextInt(512) + 1;
+        int start = 2 * ExtendedRandom.nextInt(1024) + 1;
+        int end = start + 2 * ExtendedRandom.nextInt(512) + 1;
         for (int n = start; n < end; n += 2) {
             int expected = 3 * n + 1;
             int actual = CollatzFunctions.CLASSIC.applyAsInt(n);
@@ -22,8 +20,8 @@ class CollatzFunctionsTest {
 
     @Test
     void testClassicEven() {
-        int start = 2 * RANDOM.nextInt(1024);
-        int end = start + 2 * RANDOM.nextInt(512);
+        int start = 2 * ExtendedRandom.nextInt(1024);
+        int end = start + 2 * ExtendedRandom.nextInt(512);
         for (int n = start; n < end; n += 2) {
             int expected = n / 2;
             int actual = CollatzFunctions.CLASSIC.applyAsInt(n);
@@ -35,7 +33,7 @@ class CollatzFunctionsTest {
     void testClassicOddMultiplyExactNegative() {
         int maximum = Integer.MIN_VALUE / 3 - 1;
         int span = -maximum / 6;
-        int n = maximum - 2 * RANDOM.nextInt(span);
+        int n = maximum - 2 * ExtendedRandom.nextInt(span);
         Throwable t = assertThrows(ArithmeticException.class, () -> {
             int badResult = CollatzFunctions.CLASSIC.applyAsInt(n);
             System.out.println("f(" + n + ") said to be " + badResult);
@@ -49,7 +47,7 @@ class CollatzFunctionsTest {
     void testClassicOddMultiplyExactPositive() {
         int minimum = Integer.MAX_VALUE / 3 + 1;
         int span = minimum / 6;
-        int n = minimum + 2 * RANDOM.nextInt(span);
+        int n = minimum + 2 * ExtendedRandom.nextInt(span);
         Throwable t = assertThrows(ArithmeticException.class, () -> {
             int badResult = CollatzFunctions.CLASSIC.applyAsInt(n);
             System.out.println("f(" + n + ") said to be " + badResult);
@@ -61,8 +59,8 @@ class CollatzFunctionsTest {
 
     @Test
     void testThreeXMinusOneOdd() {
-        int start = 2 * RANDOM.nextInt(1024) + 1;
-        int end = start + 2 * RANDOM.nextInt(512) + 1;
+        int start = 2 * ExtendedRandom.nextInt(1024) + 1;
+        int end = start + 2 * ExtendedRandom.nextInt(512) + 1;
         for (int n = start; n < end; n += 2) {
             int expected = 3 * n - 1;
             int actual = CollatzFunctions.THREE_X_MINUS_1.applyAsInt(n);
@@ -72,8 +70,8 @@ class CollatzFunctionsTest {
 
     @Test
     void testThreeXMinusOneEven() {
-        int start = 2 * RANDOM.nextInt(1024);
-        int end = start + 2 * RANDOM.nextInt(512);
+        int start = 2 * ExtendedRandom.nextInt(1024);
+        int end = start + 2 * ExtendedRandom.nextInt(512);
         for (int n = start; n < end; n += 2) {
             int expected = n / 2;
             int actual = CollatzFunctions.THREE_X_MINUS_1.applyAsInt(n);
@@ -85,7 +83,7 @@ class CollatzFunctionsTest {
     void testThreeXMinusOneOddMultiplyExactNegative() {
         int maximum = Integer.MIN_VALUE / 3 - 1;
         int span = -maximum / 6;
-        int n = maximum - 2 * RANDOM.nextInt(span);
+        int n = maximum - 2 * ExtendedRandom.nextInt(span);
         Throwable t = assertThrows(ArithmeticException.class, () -> {
             int badResult = CollatzFunctions.THREE_X_MINUS_1.applyAsInt(n);
             System.out.println("f(" + n + ") said to be " + badResult);
@@ -99,7 +97,7 @@ class CollatzFunctionsTest {
     void testThreeXMinusOneOddMultiplyExactPositive() {
         int minimum = Integer.MAX_VALUE / 3 + 1;
         int span = minimum / 6;
-        int n = minimum + 2 * RANDOM.nextInt(span);
+        int n = minimum + 2 * ExtendedRandom.nextInt(span);
         Throwable t = assertThrows(ArithmeticException.class, () -> {
             int badResult = CollatzFunctions.THREE_X_MINUS_1.applyAsInt(n);
             System.out.println("f(" + n + ") said to be " + badResult);
