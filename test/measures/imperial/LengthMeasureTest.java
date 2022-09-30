@@ -31,6 +31,30 @@ class LengthMeasureTest {
 
     static class LengthMeasureImpl extends LengthMeasure {
 
+        // TODO: Write tests for this
+        @Override
+        public LengthMeasureImpl plus(LengthMeasure addend) {
+            return this;
+        }
+
+        // TODO: Write tests for this
+        @Override
+        public LengthMeasureImpl minus(LengthMeasure subtrahend) {
+            return this;
+        }
+
+        // TODO: Write tests for this
+        @Override
+        public LengthMeasureImpl times(int multiplicand) {
+            return this;
+        }
+
+        // TODO: Write tests for this
+        @Override
+        public LengthMeasureImpl divides(int divisor) {
+            return this;
+        }
+
         @Override
         public String getSingularWord() {
             return "length measure";
