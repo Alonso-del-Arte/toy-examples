@@ -65,7 +65,7 @@ public class IntegerGraph {
 
         private final int number;
 
-        private Set<IntegerNode> previous = new HashSet<>();
+        private final Set<IntegerNode> previous = new HashSet<>();
 
         private IntegerNode next;
 
@@ -105,7 +105,7 @@ public class IntegerGraph {
         @Override
         public boolean equals(Object obj) {
             if (this == obj) return true;
-            if (obj == null || getClass() != obj.getClass()) return false;
+            if (obj == null || this.getClass() != obj.getClass()) return false;
             IntegerNode other = (IntegerNode) obj;
             return this.number == other.number;
         }
@@ -115,7 +115,7 @@ public class IntegerGraph {
             return this.number;
         }
 
-        public IntegerNode(int n) {
+        private IntegerNode(int n) {
             this.number = n;
         }
 
