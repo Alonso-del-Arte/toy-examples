@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 public class CurrencyConversionNeededException extends RuntimeException {
 
+    private static final long serialVersionUID = 4551063568756729760L;
+
     private final CurrencyAmount amtA;
     private final CurrencyAmount amtB;
 
