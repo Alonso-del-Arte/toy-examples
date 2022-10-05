@@ -3,6 +3,7 @@ package randomness;
 import currency.CurrencyAmount;
 import fractions.Fraction;
 
+import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -51,6 +52,32 @@ class ExtendedRandomTest {
         String msg = "Expected at least " + expected
                 + " distinct integers in the range 0 to " + (bound - 1)
                 + " out of " + capacity + ", got " + actual;
+        System.out.println(msg);
+        assert actual >= expected : msg;
+    }
+
+    @Test
+    void testNextBigInt() {
+        System.out.println("nextBigInt");
+        int capacity = 64;
+        int boundExponent = capacity + RANDOM.nextInt(64);
+        BigInteger two = BigInteger.valueOf(2);
+        BigInteger bound = two.pow(boundExponent);
+        Set<BigInteger> numbers = new HashSet<>(capacity);
+        for (int i = 0; i < capacity; i++) {
+            BigInteger number = ExtendedRandom.nextBigInt(boundExponent);
+            String msg = "Pseudorandom number " + number
+                    + " should be at least 0 but less than " + bound;
+            assert number.compareTo(BigInteger.ZERO) >= 0 : msg;
+            assert number.compareTo(bound) < 0 : msg;
+            numbers.add(number);
+        }
+        int expected = 3 * capacity / 4;
+        int actual = numbers.size();
+        String msg = "Expected at least " + expected
+                + " distinct integers in the range 0 to "
+                + (bound.subtract(BigInteger.ONE)) + " out of " + capacity
+                + ", got " + actual;
         System.out.println(msg);
         assert actual >= expected : msg;
     }

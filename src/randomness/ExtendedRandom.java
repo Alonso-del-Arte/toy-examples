@@ -44,9 +44,19 @@ public class ExtendedRandom {
         return RANDOM.nextInt(bound);
     }
 
-    // TODO: Write tests for this
+    /**
+     * Gives a pseudorandomly chosen <code>BigInteger</code> instance. This is a
+     * static wrapper for one of the <code>BigInteger</code> constructors.
+     * @param bitLength How many significant bits the integer should have at
+     *                  most. For example, 72.
+     * @return A pseudorandomly chosen <code>BigInteger</code> instance, at
+     * least <code>BigInteger.ZERO</code>, at most
+     * 2<sup><code>bitLength</code></sup> &minus; 1. But it's likelier to be
+     * closer to the latter than to the former. For example, given a
+     * <code>bitLength</code> of 72, the result might be 1617975039218359439262.
+     */
     public static BigInteger nextBigInt(int bitLength) {
-        return BigInteger.ZERO;
+        return new BigInteger(bitLength, RANDOM);
     }
 
     // TODO: Write tests for this
