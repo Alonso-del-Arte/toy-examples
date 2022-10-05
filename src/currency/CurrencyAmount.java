@@ -1,12 +1,16 @@
 package currency;
 
+import arithmetic.IntegerMultipliable;
+import arithmetic.RingSummable;
+
 import java.util.Currency;
 import java.util.Locale;
 
-public class CurrencyAmount implements Comparable<CurrencyAmount> {
+public class CurrencyAmount implements Comparable<CurrencyAmount>,
+        IntegerMultipliable<CurrencyAmount>, RingSummable<CurrencyAmount> {
 
-    private long amountInCents;
-    private Currency currencyID;
+    private final long amountInCents;
+    private final Currency currencyID;
 
     public long getAmountInCents() {
         return this.amountInCents;
@@ -51,12 +55,14 @@ public class CurrencyAmount implements Comparable<CurrencyAmount> {
         return this.plus(subtrahend.negate());
     }
 
-    public CurrencyAmount times(short multiplicand) {
+    @Override
+    public CurrencyAmount times(int multiplicand) {
         long multCents = this.amountInCents * multiplicand;
         return new CurrencyAmount(multCents, this.currencyID);
     }
 
-    public CurrencyAmount divides(short divisor) {
+    @Override
+    public CurrencyAmount divides(int divisor) {
         long divCents = this.amountInCents / divisor;
         return new CurrencyAmount(divCents, this.currencyID);
     }
