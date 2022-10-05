@@ -39,6 +39,16 @@ class PalindromeCheckerTest {
     }
 
     @Test
+    void testIsPalindromicCaseInsensitive() {
+        PalindromeChecker checker = new PalindromeChecker();
+        checker.setCaseSensitivity(false);
+        String word = "Kayak";
+        String msg = "\"" + word
+                + "\" should be considered case-insensitive palindromic";
+        assert checker.isPalindromic(word) : msg;
+    }
+
+    @Test
     void testConstructorSetsCaseSensitivityToTrue() {
         PalindromeChecker checker = new PalindromeChecker();
         String msg = "Newly constructed " + checker

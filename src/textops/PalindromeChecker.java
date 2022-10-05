@@ -1,30 +1,36 @@
 package textops;
 
-import java.util.Arrays;
+import java.util.Locale;
 
+/**
+ * Checks whether <code>String</code> instances are palindromes or not. Includes
+ * options for case-sensitivity.
+ * @author Alonso del Arte
+ */
 public class PalindromeChecker {
 
     private boolean caseSensitive = true;
-
-    // TODO: Remove this field altogether
-    private int sensitivityChangeCount = 0;
 
     public boolean isCaseSensitive() {
         return this.caseSensitive;
     }
 
     public void setCaseSensitivity(boolean sensitivity) {
-        if (this.sensitivityChangeCount == 0) {
-            this.caseSensitive = sensitivity;
-            this.sensitivityChangeCount++;
-        }
-        //this.caseSensitive = sensitivity;
+        this.caseSensitive = sensitivity;
     }
 
-    public boolean isPalindromic(String term) {
+    private boolean checkPalindromic(String term) {
         StringBuilder builder = new StringBuilder(term);
         builder.reverse();
         return term.equals(builder.toString());
+    }
+
+    public boolean isPalindromic(String term) {
+        if (this.caseSensitive) {
+            return this.checkPalindromic(term);
+        } else {
+            return this.checkPalindromic(term.toLowerCase());
+        }
     }
 
     public static void main(String[] args) {

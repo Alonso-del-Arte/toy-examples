@@ -31,4 +31,14 @@ class NumberWordParserTest {
         }
     }
 
+    @Test
+    void testInterpretTwentyThroughNinety() {
+        String[] numberWords = {"twenty", "thirty", "forty", "fifty", "sixty",
+                "seventy", "eighty", "ninety"};
+        for (int expected = 20; expected < 100; expected += 10) {
+            int actual = NumberWordParser.interpret(numberWords[expected / 10 - 2]);
+            assertEquals(expected, actual);
+        }
+    }
+
 }

@@ -29,6 +29,14 @@ public class NumberWordParser {
         NUMBER_WORDS.put("seventeen", 17);
         NUMBER_WORDS.put("eighteen", 18);
         NUMBER_WORDS.put("nineteen", 19);
+        NUMBER_WORDS.put("twenty", 20);
+        NUMBER_WORDS.put("thirty", 30);
+        NUMBER_WORDS.put("forty", 40);
+        NUMBER_WORDS.put("fifty", 50);
+        NUMBER_WORDS.put("sixty", 60);
+        NUMBER_WORDS.put("seventy", 70);
+        NUMBER_WORDS.put("eighty", 80);
+        NUMBER_WORDS.put("ninety", 90);
     }
 
     private static int interpretEnglishNumberWord(String s) {
