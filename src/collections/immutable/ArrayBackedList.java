@@ -4,8 +4,11 @@ import java.util.Iterator;
 
 public class ArrayBackedList<E> implements Iterable<E> {
 
+    int count = 0;
+
     // TODO: Write test for this
     public ArrayBackedList<E> add(E element) {
+        this.count++;
         return this;
     }
 
@@ -24,9 +27,8 @@ public class ArrayBackedList<E> implements Iterable<E> {
         return false;
     }
 
-    // TODO: Write test for this
     public int size() {
-        return Integer.MIN_VALUE;
+        return this.count;
     }
 
     // TODO: Write test for this
@@ -60,9 +62,5 @@ public class ArrayBackedList<E> implements Iterable<E> {
     public ArrayBackedList(E... elements) {
         // TODO: Write tests for this
     }
-
-//    private ArrayBackedList(E[] elements, E appendable) {
-//        //
-//    }
 
 }
