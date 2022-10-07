@@ -17,7 +17,7 @@ class ArrayBackedListTest {
         for (int expected = 0; expected < max; expected++) {
             int actual = list.size();
             assertEquals(expected, actual);
-            list.add(expected);
+            list = list.add(expected);
         }
     }
 
