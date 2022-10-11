@@ -25,9 +25,9 @@ public class ArrayBackedList<E> implements Iterable<E> {
         return this;
     }
 
-    // TODO: Write test for this
+    @SuppressWarnings("unchecked")
     public E get(int index) {
-        return null;
+        return (E) this.elements[index];
     }
 
     // TODO: Write test for this
