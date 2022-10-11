@@ -40,9 +40,39 @@ class ArrayBackedListTest {
     }
 
     @Test
+    void testGet() {
+        System.out.println("get");
+        ArrayBackedList<BigInteger> list = new ArrayBackedList<>();
+        for (int index = 0; index < 64; index++) {
+            BigInteger expected = ExtendedRandom.nextBigInt(64 + index);
+            list = list.add(expected);
+            BigInteger actual = list.get(index);
+            assertEquals(expected, actual);
+        }
+    }
+
+    @Test
     void testReferentialEquality() {
         ArrayBackedList<ResultSet> someList = new ArrayBackedList<>();
         assertEquals(someList, someList);
+    }
+
+    @Test
+    void testNotEqualsNull() {
+        ArrayBackedList<ResultSet> someList = new ArrayBackedList<>();
+        assertNotEquals(someList, null);
+    }
+
+    @Test
+    void testNotEqualsDiffClass() {
+        ArrayBackedList<ResultSet> someList = new ArrayBackedList<>();
+        Object obj = new Object();
+        assertNotEquals(someList, obj);
+    }
+
+    @Test
+    void testNotEqualsDiffSizeList() {
+        fail("Resume work here");
     }
 
     @Test
@@ -57,6 +87,17 @@ class ArrayBackedListTest {
         String excMsg = t.getMessage();
         assert excMsg != null : "Message should not be null";
         System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testConstructorTakesElements() {
+        //
+//        a
+//        b
+//        c
+//        d
+//        e
+        fail("Haven't written test yet");
     }
 
 }
