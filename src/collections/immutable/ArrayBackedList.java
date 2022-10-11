@@ -26,6 +26,11 @@ public class ArrayBackedList<E> implements Iterable<E> {
     }
 
     // TODO: Write test for this
+    public E get(int index) {
+        return null;
+    }
+
+    // TODO: Write test for this
     public int indexOf(E element) {
         return Integer.MAX_VALUE;
     }
@@ -71,7 +76,7 @@ public class ArrayBackedList<E> implements Iterable<E> {
 
     @Override
     public boolean equals(Object obj) {
-        return false;
+        return obj instanceof ArrayBackedList;
     }
 
     @Override
