@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 public class ArrayBackedList<E> implements Iterable<E> {
 
-    int count = 0;
+    private int count = 0;
 
     private final Object[] elements = new Object[256];
 
@@ -76,7 +76,16 @@ public class ArrayBackedList<E> implements Iterable<E> {
 
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof ArrayBackedList;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!this.getClass().equals(obj.getClass())) {
+            return false;
+        }
+        return this.count == ((ArrayBackedList<?>) obj).count;
     }
 
     @Override

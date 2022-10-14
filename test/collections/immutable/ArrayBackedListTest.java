@@ -72,7 +72,16 @@ class ArrayBackedListTest {
 
     @Test
     void testNotEqualsDiffSizeList() {
-        fail("Resume work here");
+        int size = ExtendedRandom.nextInt(64) + 32;
+        ArrayBackedList<BigInteger> listA = new ArrayBackedList<>();
+        ArrayBackedList<BigInteger> listB = new ArrayBackedList<>();
+        for (int i = 0; i < size; i++) {
+            BigInteger number = ExtendedRandom.nextBigInt(i);
+            listA = listA.add(number);
+            listB = listB.add(number);
+        }
+        listA.add(ExtendedRandom.nextBigInt(size));
+        assertNotEquals(listA, listB);
     }
 
     @Test
