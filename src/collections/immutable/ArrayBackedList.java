@@ -76,17 +76,16 @@ public class ArrayBackedList<E> implements Iterable<E> {
 
     @Override
     public boolean equals(Object obj) {
-        return this == obj;
-//        if (this == obj) {
-//            return true;
-//        }
-//        if (obj == null) {
-//            return false;
-//        }
-//        if (!this.getClass().equals(obj.getClass())) {
-//            return false;
-//        }
-//        return this.count == ((ArrayBackedList<?>) obj).count;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!this.getClass().equals(obj.getClass())) {
+            return false;
+        }
+        return this.count == ((ArrayBackedList<?>) obj).count;
     }
 
     @Override

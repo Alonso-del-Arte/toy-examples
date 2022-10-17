@@ -2,6 +2,7 @@ package collections.immutable;
 
 import java.math.BigInteger;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -85,6 +86,21 @@ class ArrayBackedListTest {
     }
 
     @Test
+    void testEquals() {
+        System.out.println("equals");
+        int size = ExtendedRandom.nextInt(8) + 2;
+        ArrayBackedList<BigInteger> someList = new ArrayBackedList<>();
+        ArrayBackedList<BigInteger> sameList = new ArrayBackedList<>();
+        for (int i = 0; i < size; i++) {
+            int n = ExtendedRandom.nextInt();
+            BigInteger number = BigInteger.valueOf(n);
+            someList.add(number);
+            sameList.add(number);
+        }
+        assertEquals(someList, sameList);
+    }
+
+    @Test
     void testConstructorRejectsNullElement() {
         String msg = "Constructor should reject null elements";
         Throwable t = assertThrows(NullPointerException.class, () -> {
@@ -100,13 +116,16 @@ class ArrayBackedListTest {
 
     @Test
     void testConstructorTakesElements() {
-        //
-//        a
-//        b
-//        c
-//        d
-//        e
-        fail("Haven't written test yet");
+        BigInteger firstElement = ExtendedRandom.nextBigInt(72);
+        BigInteger secondElement = ExtendedRandom.nextBigInt(78);
+        BigInteger thirdElement = ExtendedRandom.nextBigInt(84);
+        ArrayBackedList<BigInteger> list = new ArrayBackedList<>(firstElement,
+                secondElement, thirdElement);
+        BigInteger[] expected = {firstElement, secondElement, thirdElement};
+        for (int index = 0; index < expected.length; index++) {
+            BigInteger actual = list.get(index);
+            assertEquals(expected[index], actual);
+        }
     }
 
 }
