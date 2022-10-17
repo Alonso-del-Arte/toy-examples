@@ -87,10 +87,7 @@ public class ArrayBackedList<E> implements Iterable<E> {
             return false;
         }
         ArrayBackedList<?> other = (ArrayBackedList<?>) obj;
-        if (this.count != other.count) {
-            return false;
-        }
-        return Arrays.equals(this.elements, other.elements);
+        return this.count == other.count;
     }
 
     @Override
