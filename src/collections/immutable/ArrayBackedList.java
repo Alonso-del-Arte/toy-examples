@@ -1,5 +1,6 @@
 package collections.immutable;
 
+import java.util.Arrays;
 import java.util.Iterator;
 
 public class ArrayBackedList<E> implements Iterable<E> {
@@ -85,7 +86,11 @@ public class ArrayBackedList<E> implements Iterable<E> {
         if (!this.getClass().equals(obj.getClass())) {
             return false;
         }
-        return this.count == ((ArrayBackedList<?>) obj).count;
+        ArrayBackedList<?> other = (ArrayBackedList<?>) obj;
+        if (this.count != other.count) {
+            return false;
+        }
+        return Arrays.equals(this.elements, other.elements);
     }
 
     @Override

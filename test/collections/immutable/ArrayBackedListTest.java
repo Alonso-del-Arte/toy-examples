@@ -101,6 +101,19 @@ class ArrayBackedListTest {
     }
 
     @Test
+    void testNotEqualsDiffElemsList() {
+        int size = ExtendedRandom.nextInt(8) + 2;
+        ArrayBackedList<BigInteger> listA = new ArrayBackedList<>();
+        ArrayBackedList<LocalDateTime> listB = new ArrayBackedList<>();
+        for (int i = 0; i < size; i++) {
+            int n = ExtendedRandom.nextInt();
+            listA.add(BigInteger.valueOf(n));
+            listB.add(LocalDateTime.now().plusHours(i));
+        }
+        assertNotEquals(listA, listB);
+    }
+
+    @Test
     void testConstructorRejectsNullElement() {
         String msg = "Constructor should reject null elements";
         Throwable t = assertThrows(NullPointerException.class, () -> {
