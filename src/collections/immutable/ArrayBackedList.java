@@ -76,16 +76,17 @@ public class ArrayBackedList<E> implements Iterable<E> {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (!this.getClass().equals(obj.getClass())) {
-            return false;
-        }
-        return this.count == ((ArrayBackedList<?>) obj).count;
+        return this == obj;
+//        if (this == obj) {
+//            return true;
+//        }
+//        if (obj == null) {
+//            return false;
+//        }
+//        if (!this.getClass().equals(obj.getClass())) {
+//            return false;
+//        }
+//        return this.count == ((ArrayBackedList<?>) obj).count;
     }
 
     @Override
@@ -97,12 +98,15 @@ public class ArrayBackedList<E> implements Iterable<E> {
         // TODO: Write tests for this
     }
 
-    // TODO: Determine if this needs SafeVarargs annotation
-    public ArrayBackedList(E... elements) {
-        for (E element : elements) {
+    // TODO: Determine if this ought to have SafeVarargs annotation
+    public ArrayBackedList(E... elems) {
+        for (E element : elems) {
             if (element == null) {
                 throw new NullPointerException("Element should not be null");
             }
+        }
+        for (int i = 0; i < elems.length; i++) {
+            this.elements[i] = elems[i];
         }
         // TODO: Write tests for this
     }
