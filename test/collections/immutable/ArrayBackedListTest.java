@@ -3,6 +3,8 @@ package collections.immutable;
 import java.math.BigInteger;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -111,6 +113,21 @@ class ArrayBackedListTest {
             listB.add(number.add(BigInteger.ONE));
         }
         assertNotEquals(listA, listB);
+    }
+
+    @Test
+    void testHashCode() {
+        System.out.println("hashCode");
+        LocalDateTime now = LocalDateTime.now();
+        int expected = ExtendedRandom.nextInt(32) + 8;
+        Set<Integer> hashes = new HashSet<>(expected);
+        ArrayBackedList<LocalDateTime> list = new ArrayBackedList<>();
+        for (int i = 0; i < expected; i++) {
+            list = list.add(now.plusDays(i));
+            hashes.add(list.hashCode());
+        }
+        int actual = hashes.size();
+        assertEquals(expected, actual);
     }
 
     @Test

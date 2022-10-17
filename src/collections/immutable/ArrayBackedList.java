@@ -3,6 +3,7 @@ package collections.immutable;
 import java.util.Arrays;
 import java.util.Iterator;
 
+// TODO: Enforce immutability
 public class ArrayBackedList<E> implements Iterable<E> {
 
     private int count = 0;
@@ -95,7 +96,11 @@ public class ArrayBackedList<E> implements Iterable<E> {
 
     @Override
     public int hashCode() {
-        return 0;
+        int hash = 0;
+        for (int i = 0; i < this.count; i++) {
+            hash = (hash << 1) + this.elements[i].hashCode();
+        }
+        return hash;
     }
 
     public ArrayBackedList() {
