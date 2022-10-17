@@ -102,13 +102,13 @@ class ArrayBackedListTest {
 
     @Test
     void testNotEqualsDiffElemsList() {
-        int size = ExtendedRandom.nextInt(8) + 2;
+        int size = ExtendedRandom.nextInt(16) + 4;
         ArrayBackedList<BigInteger> listA = new ArrayBackedList<>();
-        ArrayBackedList<LocalDateTime> listB = new ArrayBackedList<>();
+        ArrayBackedList<BigInteger> listB = new ArrayBackedList<>();
         for (int i = 0; i < size; i++) {
-            int n = ExtendedRandom.nextInt();
-            listA.add(BigInteger.valueOf(n));
-            listB.add(LocalDateTime.now().plusHours(i));
+            BigInteger number = ExtendedRandom.nextBigInt(64 + i);
+            listA.add(number);
+            listB.add(number.add(BigInteger.ONE));
         }
         assertNotEquals(listA, listB);
     }
