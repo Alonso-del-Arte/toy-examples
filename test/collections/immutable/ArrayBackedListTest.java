@@ -83,7 +83,7 @@ class ArrayBackedListTest {
             listA = listA.add(number);
             listB = listB.add(number);
         }
-        listA.add(ExtendedRandom.nextBigInt(size));
+        listA = listA.add(ExtendedRandom.nextBigInt(size));
         assertNotEquals(listA, listB);
     }
 
