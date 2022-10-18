@@ -131,6 +131,18 @@ class ArrayBackedListTest {
     }
 
     @Test
+    void testAddDoesNotChangeList() {
+        ArrayBackedList<BigInteger> emptyList = new ArrayBackedList<>();
+        BigInteger firstNumber = ExtendedRandom.nextBigInt(72);
+        ArrayBackedList<BigInteger> expected = emptyList.add(firstNumber);
+        ArrayBackedList<BigInteger> actual = emptyList.add(firstNumber);
+        ArrayBackedList<BigInteger> unexpected = actual.add(firstNumber);
+        assertEquals(0, emptyList.size());
+        assertEquals(expected, actual);
+        assertNotEquals(unexpected, actual);
+    }
+
+    @Test
     void testConstructorRejectsNullElement() {
         String msg = "Constructor should reject null elements";
         Throwable t = assertThrows(NullPointerException.class, () -> {

@@ -6,15 +6,14 @@ import java.util.Iterator;
 // TODO: Enforce immutability
 public class ArrayBackedList<E> implements Iterable<E> {
 
-    private int count = 0;
+    private final Object[] elements;
 
-    private final Object[] elements = new Object[256];
-
-    // TODO: Write test for this
+    @SuppressWarnings("unchecked")
     public ArrayBackedList<E> add(E element) {
-        this.elements[this.count] = element;
-        this.count++;
-        return this;
+        Object[] elems = new Object[this.elements.length + 1];
+        System.arraycopy(this.elements, 0, elems, 0, this.elements.length);
+        elems[this.elements.length] = element;
+        return new ArrayBackedList<>((E[]) elems);
     }
 
     // TODO: Write test for this
@@ -48,7 +47,7 @@ public class ArrayBackedList<E> implements Iterable<E> {
     }
 
     public int size() {
-        return this.count;
+        return this.elements.length;
     }
 
     // TODO: Write test for this
@@ -88,7 +87,7 @@ public class ArrayBackedList<E> implements Iterable<E> {
             return false;
         }
         ArrayBackedList<?> other = (ArrayBackedList<?>) obj;
-        if (this.count != other.count) {
+        if (this.elements.length != other.elements.length) {
             return false;
         }
         return Arrays.equals(this.elements, other.elements);
@@ -97,14 +96,14 @@ public class ArrayBackedList<E> implements Iterable<E> {
     @Override
     public int hashCode() {
         int hash = 0;
-        for (int i = 0; i < this.count; i++) {
-            hash = (hash << 1) + this.elements[i].hashCode();
+        for (Object element : this.elements) {
+            hash = (hash << 1) + element.hashCode();
         }
         return hash;
     }
 
     public ArrayBackedList() {
-        // TODO: Write tests for this
+        this.elements = new Object[]{};
     }
 
     // TODO: Determine if this ought to have SafeVarargs annotation
@@ -114,10 +113,8 @@ public class ArrayBackedList<E> implements Iterable<E> {
                 throw new NullPointerException("Element should not be null");
             }
         }
-        for (int i = 0; i < elems.length; i++) {
-            this.elements[i] = elems[i];
-        }
-        // TODO: Write tests for this
+        this.elements = new Object[elems.length];
+        System.arraycopy(elems, 0, this.elements, 0, elems.length);
     }
 
 }
