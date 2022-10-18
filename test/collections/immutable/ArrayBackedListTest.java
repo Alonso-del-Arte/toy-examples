@@ -35,7 +35,7 @@ class ArrayBackedListTest {
             String beforeMsg = "List should not contain " + elem
                     + " before it's added to the list";
             assert !list.contains(elem) : beforeMsg;
-            list.add(elem);
+            list = list.add(elem);
             String afterMsg = "List should contain " + elem
                     + " after it's added to the list";
             assert list.contains(elem) : afterMsg;
@@ -96,8 +96,8 @@ class ArrayBackedListTest {
         for (int i = 0; i < size; i++) {
             int n = ExtendedRandom.nextInt();
             BigInteger number = BigInteger.valueOf(n);
-            someList.add(number);
-            sameList.add(number);
+            someList = someList.add(number);
+            sameList = sameList.add(number);
         }
         assertEquals(someList, sameList);
     }
@@ -109,8 +109,8 @@ class ArrayBackedListTest {
         ArrayBackedList<BigInteger> listB = new ArrayBackedList<>();
         for (int i = 0; i < size; i++) {
             BigInteger number = ExtendedRandom.nextBigInt(64 + i);
-            listA.add(number);
-            listB.add(number.add(BigInteger.ONE));
+            listA = listA.add(number);
+            listB = listB.add(number.add(BigInteger.ONE));
         }
         assertNotEquals(listA, listB);
     }
