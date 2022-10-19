@@ -45,8 +45,9 @@ public class ExtendedRandom {
     }
 
     /**
-     * Gives a pseudorandomly chosen <code>BigInteger</code> instance. This is a
-     * static wrapper for one of the <code>BigInteger</code> constructors.
+     * Gives a pseudorandomly chosen <code>BigInteger</code> instance
+     * corresponding to 0 or a positive integer. This is a static wrapper for
+     * one of the <code>BigInteger</code> constructors.
      * @param bitLength How many significant bits the integer should have at
      *                  most. For example, 72.
      * @return A pseudorandomly chosen <code>BigInteger</code> instance, at
