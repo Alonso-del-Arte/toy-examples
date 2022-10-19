@@ -3,7 +3,6 @@ package collections.immutable;
 import java.util.Arrays;
 import java.util.Iterator;
 
-// TODO: Enforce immutability
 public class ArrayBackedList<E> implements Iterable<E> {
 
     private final Object[] elements;
@@ -16,12 +15,12 @@ public class ArrayBackedList<E> implements Iterable<E> {
         return new ArrayBackedList<>((E[]) elems);
     }
 
-    // TODO: Write test for this
+    // TODO: Write test for this, including test for immutability enforced
     public ArrayBackedList<E> add(int index, E element) {
         return this;
     }
 
-    // TODO: Write test for this
+    // TODO: Write test for this, including test for immutability enforced
     public ArrayBackedList<E> remove(int index) {
         return this;
     }
@@ -33,7 +32,7 @@ public class ArrayBackedList<E> implements Iterable<E> {
 
     // TODO: Write test for this
     public int indexOf(E element) {
-        return Integer.MAX_VALUE;
+        return Integer.MIN_VALUE;
     }
 
     public boolean contains(E element) {

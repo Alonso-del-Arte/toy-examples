@@ -43,6 +43,31 @@ class ArrayBackedListTest {
     }
 
     @Test
+    void testIndexOfWhenNotContained() {
+        ArrayBackedList<BigInteger> list = new ArrayBackedList<>();
+        int size = ExtendedRandom.nextInt(64) + 16;
+        for (int i = 0; i < size; i++) {
+            list = list.add(ExtendedRandom.nextBigInt(64 + i));
+        }
+        BigInteger absentNumber = ExtendedRandom.nextBigInt(84).negate();
+        int index = list.indexOf(absentNumber);
+        String msg = "List of positive integers should not have "
+                + absentNumber + " so indexOf should not return positive";
+        assert index < 0 : msg;
+    }
+
+    @Test
+    void testIndexOf() {
+        ArrayBackedList<Integer> list = new ArrayBackedList<>();
+        int size = ExtendedRandom.nextInt(64) + 16;
+        for (int expected = 0; expected < size; expected++) {
+            list = list.add(expected);
+            int actual = list.indexOf(expected);
+            assertEquals(expected, actual);
+        }
+    }
+
+    @Test
     void testGet() {
         System.out.println("get");
         ArrayBackedList<BigInteger> list = new ArrayBackedList<>();
