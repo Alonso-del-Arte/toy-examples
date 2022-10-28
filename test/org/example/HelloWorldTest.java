@@ -14,4 +14,11 @@ class HelloWorldTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testGreetingSpanish() {
+        String expected = "\u00A1Hola, mundo!";
+        String actual = HelloWorld.greeting(new Locale("es", "US"));
+        assertEquals(expected, actual);
+    }
+
 }

@@ -8,7 +8,7 @@ import textops.LocaleParser;
 public class HelloWorld {
 
     static String greeting(Locale locale) {
-        return "NOT IMPLEMENTED YET";
+        return "Hello, world!";
     }
 
     public static void main(String[] args) {
