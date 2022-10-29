@@ -16,7 +16,4 @@ inheritance and polymorphism are involved).
 At first, I was using JUnit 4, I believe I have switched over the project to 
 JUnit 5, but I'll have to check.
 
-Use whatever build tool you like, just don't put any record of it in pull 
-requests. These toy examples are not worth putting up with Maven headaches or 
-Gradle headaches or sbt headaches. If you're using IntelliJ, it's probably 
-easiest to just use IntelliJ's built-in build tool.
+Use Maven for the build tool. Even though Maven is awful, it seems to be absolutely required for Java Hacktoberfest projects.
