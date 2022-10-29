@@ -16,4 +16,4 @@ inheritance and polymorphism are involved).
 At first, I was using JUnit 4, I believe I have switched over the project to 
 JUnit 5, but I'll have to check.
 
-Use Maven for the build tool. Even though Maven is awful, it seems to be absolutely required for Java Hacktoberfest projects.
+Use Maven for the build tool. This project is provisionally a Maven project only for the sake of Hacktoberfest 2022. The problem with Maven is that it's a bloated program that does way more than what it was originally intended for, so it adds a lot of its own complexity to a project.
