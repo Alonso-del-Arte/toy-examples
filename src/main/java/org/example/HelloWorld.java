@@ -1,9 +1,5 @@
 package org.example;
 
-import com.google.cloud.translate.Translate;
-import com.google.cloud.translate.Translate.TranslateOption;
-import com.google.cloud.translate.TranslateOptions;
-import com.google.cloud.translate.Translation;
 import java.util.Locale;
 import java.util.NoSuchElementException;
 
@@ -11,16 +7,9 @@ import textops.LocaleParser;
 
 public class HelloWorld {
 
+    // TODO: Write tests first, don't use external API to get tests to pass
     static String greeting(Locale locale) {
-
-        String originalGreeting = "Hello, world!";
-
-        Translate translate = TranslateOptions.getDefaultInstance().getService();
-
-        Translation translation =
-            translate.translate(originalGreeting, TranslateOption.targetLanguage(locale.toString()));
-
-        return translation.getTranslatedText();
+        return "NOT IMPLEMENTED YET";
     }
 
     public static void main(String[] args) {
