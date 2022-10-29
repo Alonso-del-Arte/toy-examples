@@ -34,3 +34,9 @@ test/secrets
 # Strictly for drafting
 src/draft
 test/draft
+
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
