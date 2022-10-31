@@ -8,9 +8,6 @@ import textops.LocaleParser;
 public class HelloWorld {
 
     static String greeting(Locale locale) {
-//        if (locale.toString().equals("es_US")) {
-//            return "\u00A1Hola, mundo!";
-//        }
         switch (locale.getISO3Language()) {
             case "deu":
                 return "Hallo Welt!";

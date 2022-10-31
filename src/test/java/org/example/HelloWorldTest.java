@@ -29,8 +29,8 @@ class HelloWorldTest {
 
     /**
      * Test for the greeting function of the HelloWorld class as specified in
-     * <a href="https://github.com/Alonso-del-Arte/toy-examples/issues/5">Issue
-     * 5</a>: it should return an appropriate "Hello World" greeting for each of
+     * <a href="https://github.com/Alonso-del-Arte/toy-examples/issues/5">Issue 5</a>:
+     * it should return an appropriate "Hello World" greeting for each of
      * the named <code>Locale</code> constants in that class's Javadoc. And it
      * should be done without using external APIs like the one for Google
      * Translate.
@@ -68,9 +68,8 @@ class HelloWorldTest {
         greetings.put(Locale.TRADITIONAL_CHINESE, greetingZH);
         greetings.put(Locale.UK, greetingEN);
         greetings.put(Locale.US, greetingEN);
-        greetings.entrySet().forEach((entry) -> {
-            String expected = entry.getValue();
-            String actual = HelloWorld.greeting(entry.getKey());
+        greetings.forEach((key, expected) -> {
+            String actual = HelloWorld.greeting(key);
             assertEquals(expected, actual);
         });
     }
