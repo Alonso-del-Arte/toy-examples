@@ -18,6 +18,7 @@ public class CurrencyConverterTest {
      */
     @Test
     void testConvertDollarsToYen() {
+        fail("Examine this test");
         int cents = 10000;
         CurrencyAmount dollarAmount = new CurrencyAmount(cents,
                 UNITED_STATES_DOLLARS);
@@ -41,6 +42,7 @@ public class CurrencyConverterTest {
      */
     @Test
     void testConvertYenToDollars() {
+        fail("Examine this test");
         int cents = 1000000;
         CurrencyAmount yenAmount = new CurrencyAmount(cents, YEN);
         CurrencyAmount maxDollars = new CurrencyAmount(cents + cents / 4,
@@ -56,6 +58,7 @@ public class CurrencyConverterTest {
 
     @Test
     void testConvertNegativeAmountStaysNegative() {
+        fail("Examine this test");
         CurrencyAmount negAmount = new CurrencyAmount(-300L,
                 UNITED_STATES_DOLLARS);
         CurrencyAmount zeroYen = new CurrencyAmount(0L, YEN);
@@ -70,6 +73,7 @@ public class CurrencyConverterTest {
 
     @Test
     void testZeroAmountStaysZero() {
+        fail("Examine this test");
         CurrencyAmount zeroDollars = new CurrencyAmount(0L,
                 UNITED_STATES_DOLLARS);
         CurrencyAmount zeroYen = new CurrencyAmount(0L, YEN);
@@ -82,6 +86,7 @@ public class CurrencyConverterTest {
 
     @Test
     void testConvertPositiveAmountStaysPositive() {
+        fail("Examine this test");
         CurrencyAmount posAmount = new CurrencyAmount(5989,
                 UNITED_STATES_DOLLARS);
         CurrencyAmount zeroYen = new CurrencyAmount(0L, YEN);
@@ -96,6 +101,7 @@ public class CurrencyConverterTest {
 
     @Test
     void testNoChangeSameCurrencyDollars() {
+        fail("Examine this test");
         CurrencyAmount someAmount = new CurrencyAmount(81052,
                 UNITED_STATES_DOLLARS);
         CurrencyAmount convertedAmount = CurrencyConverter.convert(someAmount,
@@ -105,6 +111,7 @@ public class CurrencyConverterTest {
 
     @Test
     void testNoChangeSameCurrencyYen() {
+        fail("Examine this test");
         CurrencyAmount someAmount = new CurrencyAmount(87698264, YEN);
         CurrencyAmount convertedAmount = CurrencyConverter.convert(someAmount,
                 YEN);

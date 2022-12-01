@@ -60,6 +60,7 @@ public class CurrencyConversionNeededExceptionTest {
     @Test
     void testExchangeAToB() {
         System.out.println("exchangeAToB");
+        fail("Examine this test");
         Currency aToBCurrency = testExc.exchangeAToB().getCurrency();
         assertEquals(EUROS, aToBCurrency);
     }
@@ -72,6 +73,7 @@ public class CurrencyConversionNeededExceptionTest {
     @Test
     void testExchangeBToA() {
         System.out.println("exchangeBToA");
+        fail("Examine this test");
         Currency bToACurrency = testExc.exchangeBToA().getCurrency();
         assertEquals(DOLLARS, bToACurrency);
     }
