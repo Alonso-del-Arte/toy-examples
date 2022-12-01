@@ -9,7 +9,10 @@ to your local machine, with that name, and a placeholder for a value if you
 don't have an API key for an online currency exchange rate API. If you do have 
 such an API key, make sure it is not quoted in any file watched by Git.
 
-For information regarding Hacktoberfest, see [CONTRIBUTING.md](CONTRIBUTING.md).
+For information regarding Hacktoberfest, see [CONTRIBUTING.md](CONTRIBUTING.md). 
+Follow those guidelines to ensure not just that your contribution is accepted 
+for Hacktoberfest, but also that it persists in the main branch after 
+Hacktoberfest.
 
 ## The four pillars of OOP
 
@@ -45,13 +48,16 @@ we separate `glide()` to the `GlideCapable` interface and then the
 `FlightCapable` interface can inherit `glide()` from `GlideCapable`.
 * **Dependency inversion** &mdash; FINISH WRITING
 
+## CUPID principles
 
+Some people have questioned SOLID, arguing that it's not as relevant today as 
+when it was introduced. Dan North has proposed one alternative to SOLID, CUPID.
 
-
-
-
-
-
-
-
+* **Composable** &mdash; "plays well with others" FINISH WRITING
+* **Unix philosophy** &mdash; "does one thing well" This one goes beyond the 
+single responsibility principle in SOLID in that the FINISH WRITING
+* **Predictable** &mdash; "does what you expect" FINISH WRITING
+* **Idiomatic** &mdash; "feels natural"  FINISH WRITING
+* **Domain-based** &mdash; "the solution domain models the problem domain in 
+language and structure"  FINISH WRITING
 
