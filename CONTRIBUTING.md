@@ -1,6 +1,10 @@
 # Contribution Guidelines
 
-This project is open to Hacktoberfest 2022.
+This project will be open to Hacktoberfest 2023. This year I want to be 
+absolutely clear that I don't want to deal with Maven. I think it's obnoxious, 
+obtrusive and adds way too much of its own complexity to the project. And it's 
+overkill for this project anyway. Issues asking for Maven will be flatly 
+rejected. Same goes for pull requests.
 
 I will only consider pull requests pertaining to open issues or TODO comments. 
 You need to have an integrated development environment (IDE) like IntelliJ IDEA 
