@@ -7,9 +7,8 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 
 public class ClipboardUtilities {
 
-    // TODO: Write tests for this
     public static DataFlavor findPrimaryFlavor(DataFlavor[] flavors) {
-        return DataFlavor.getTextPlainUnicodeFlavor();
+        return DataFlavor.imageFlavor;
     }
 
 }
