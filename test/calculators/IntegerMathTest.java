@@ -316,4 +316,22 @@ class IntegerMathTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void testRandomPartition() {
+        System.out.println("randomPartition");
+        int expected = ExtendedRandom.nextInt(128) + 32;
+        int numParts = ExtendedRandom.nextInt(16) + 4;
+        List<Integer> partition = IntegerMath.randomPartition(expected, numParts);
+        System.out.println("Partition of " + expected + " into " + numParts
+                + " parts said to be " + partition);
+        String msgA = "Partition was requested to be in " + numParts;
+        assertEquals(numParts, partition.size(), msgA);
+        int actual = 0;
+        for (int part : partition) {
+            actual += part;
+        }
+        String msgB = "Numbers " + partition + " expected to add up to " + expected;
+        assertEquals(expected, actual, msgB);
+    }
+
 }
