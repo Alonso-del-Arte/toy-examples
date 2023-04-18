@@ -143,7 +143,7 @@ public class IntegerMath {
     }
 
     // TODO: Write tests for this
-    public List<Integer> randomPartition(int n, int numParts) {
+    public static List<Integer> randomPartition(int n, int numParts) {
         return new ArrayList<>();
     }
 
