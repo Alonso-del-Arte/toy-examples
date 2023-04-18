@@ -324,13 +324,11 @@ class IntegerMathTest {
         List<Integer> partition = IntegerMath.randomPartition(expected, numParts);
         System.out.println("Partition of " + expected + " into " + numParts
                 + " parts said to be " + partition);
-        String msgA = "Partition was requested to be in " + numParts;
+        String msgA = "Partition was requested to be in " + numParts + " parts";
         assertEquals(numParts, partition.size(), msgA);
-        int actual = 0;
-        for (int part : partition) {
-            actual += part;
-        }
-        String msgB = "Numbers " + partition + " expected to add up to " + expected;
+        int actual = partition.stream().reduce(0, Integer::sum);
+        String msgB = "Numbers " + partition + " expected to add up to "
+                + expected;
         assertEquals(expected, actual, msgB);
     }
 
