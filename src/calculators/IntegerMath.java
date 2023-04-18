@@ -16,8 +16,6 @@ import randomness.ExtendedRandom;
  */
 public class IntegerMath {
 
-    private static final Random RANDOM = new Random();
-
     /**
      * Determines whether a given number is prime or not in <b>Z</b>.
      * @param n The number to test for primality. Examples: 13, &minus;883, 49.
@@ -63,7 +61,7 @@ public class IntegerMath {
             String excMsg = "No primes in range 0 to " + bound;
             throw new IllegalArgumentException(excMsg);
         }
-        int index = RANDOM.nextInt(primePi);
+        int index = ExtendedRandom.nextInt(primePi);
         return primes.get(index);
     }
 
@@ -97,7 +95,7 @@ public class IntegerMath {
                     + " and " + upperBound;
             throw new IllegalArgumentException(excMsg);
         }
-        int index = RANDOM.nextInt(size);
+        int index = ExtendedRandom.nextInt(size);
         return primes.get(index);
     }
 
