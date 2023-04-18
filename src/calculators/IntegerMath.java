@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import randomness.ExtendedRandom;
+
 /**
  * Utility class for integer arithmetic. Mostly concerning prime numbers and
  * divisors.
@@ -142,12 +144,37 @@ public class IntegerMath {
         return divisors;
     }
 
+    /**
+     * Pseudorandomly chooses a partition of a number into a specified number of
+     * parts. The algorithm may be described as "greedy."
+     * @param n The number to partition. For example, 72. The behavior of this
+     *          function is undefined if the number to be partitioned is 0 or
+     *          negative. This will probably change in a later version.
+     * @param numParts The number of desired parts. Should be at least 1. For
+     *                 example, 17.
+     * @return A list of positive integers adding up to <code>n</code>. The list
+     * is not guaranteed to be in any particular order, though the smaller parts
+     * are likelier to be towards the end of the list. For example, 19, 3, 22,
+     * 5, 1, 1, 10, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1 (these seventeen numbers add up
+     * to 72). However, if <code>numParts</code> is low enough, the largest part
+     * might actually be last, e.g., partitioning 119 into four parts might give
+     * 35, 12, 15, 57.
+     * @throws IllegalArgumentException If <code>numParts</code> is 0 or
+     * negative.
+     */
     public static List<Integer> randomPartition(int n, int numParts) {
         if (numParts < 1) {
             String excMsg = "Number of parts " + numParts + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
         List<Integer> parts = new ArrayList<>(numParts);
+        while (numParts > 1) {
+            int available = n - numParts + 1;
+            int part = ExtendedRandom.nextInt(available) + 1;
+            parts.add(part);
+            n -= part;
+            numParts--;
+        }
         parts.add(n);
         return parts;
     }
