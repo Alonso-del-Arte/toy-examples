@@ -142,8 +142,11 @@ public class IntegerMath {
         return divisors;
     }
 
-    // TODO: Write tests for this
     public static List<Integer> randomPartition(int n, int numParts) {
+        if (numParts < 0) {
+            String excMsg = "Number of parts " + numParts + " is not valid";
+            throw new IllegalArgumentException(excMsg);
+        }
         return new ArrayList<>();
     }
 
