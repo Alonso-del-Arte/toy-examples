@@ -290,4 +290,21 @@ class IntegerMathTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
+    @Test
+    public void testRandomPartitionRejectsSizeZero() {
+        int n = ExtendedRandom.nextInt(256) + 1;
+        int badSize = 0;
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            List<Integer> badPartition
+                    = IntegerMath.randomPartition(n, badSize);
+            System.out.println(n + " said to be partitioned into " + badSize
+                    + " parts as " + badPartition);
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        String msg = "Exception message should contain bad size 0";
+        assert excMsg.contains("0") : msg;
+        System.out.println("\"" + excMsg + "\"");
+    }
+
 }
