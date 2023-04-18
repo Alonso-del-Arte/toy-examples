@@ -147,7 +147,9 @@ public class IntegerMath {
             String excMsg = "Number of parts " + numParts + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
-        return new ArrayList<>();
+        List<Integer> parts = new ArrayList<>(numParts);
+        parts.add(n);
+        return parts;
     }
 
 }
