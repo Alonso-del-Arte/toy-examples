@@ -142,4 +142,9 @@ public class IntegerMath {
         return divisors;
     }
 
+    // TODO: Write tests for this
+    public List<Integer> randomPartition(int n, int numParts) {
+        return new ArrayList<>();
+    }
+
 }
