@@ -273,4 +273,21 @@ class IntegerMathTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void testRandomPartitionRejectsNegativeSize() {
+        int n = ExtendedRandom.nextInt(256) + 1;
+        int badSize = -ExtendedRandom.nextInt(262144) - 1;
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            List<Integer> badPartition
+                    = IntegerMath.randomPartition(n, badSize);
+            System.out.println(n + " said to be partitioned into " + badSize
+                    + " parts as " + badPartition);
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        String msg = "Exception message should contain bad size " + badSize;
+        assert excMsg.contains(Integer.toString(badSize)) : msg;
+        System.out.println("\"" + excMsg + "\"");
+    }
+
 }
