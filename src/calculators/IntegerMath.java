@@ -123,6 +123,16 @@ public class IntegerMath {
         }
     }
 
+    /**
+     * Computes the divisors of a number. This algorithm has not been optimized
+     * for larger numbers (e.g., primes with more than 16 significant bits).
+     * @param n The number to compute the divisors of. For example, 496. The
+     *          behavior of this function is undefined for 0 and negative
+     *          numbers. This is subject to change in a later version.
+     * @return A list of the divisors of <code>n</code>, starting with 1, ending
+     * with <code>n</code>, and with any other divisors in between in strictly
+     * ascending order. For example, 1, 2, 4, 8, 16, 31, 62, 124, 248, 496.
+     */
     public static List<Integer> divisors(int n) {
         Set<Integer> set = new HashSet<>();
         int smallDivisor = 1;
