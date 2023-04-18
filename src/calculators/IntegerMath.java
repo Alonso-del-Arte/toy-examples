@@ -143,7 +143,7 @@ public class IntegerMath {
     }
 
     public static List<Integer> randomPartition(int n, int numParts) {
-        if (numParts < 0) {
+        if (numParts < 1) {
             String excMsg = "Number of parts " + numParts + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
