@@ -307,4 +307,13 @@ class IntegerMathTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
+    @Test
+    public void testRandomPartitionOfJustOne() {
+        int expected = ExtendedRandom.nextInt(256) + 4;
+        List<Integer> partition = IntegerMath.randomPartition(expected, 1);
+        assertEquals(1, partition.size(), "Partition of length 1 requested");
+        int actual = partition.get(0);
+        assertEquals(expected, actual);
+    }
+
 }
