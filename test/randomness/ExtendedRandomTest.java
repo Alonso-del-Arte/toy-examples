@@ -83,6 +83,23 @@ class ExtendedRandomTest {
     }
 
     @Test
+    void testNextDouble() {
+        System.out.println("nextDouble");
+        int capacity = RANDOM.nextInt(32) + 128;
+        Set<Double> set = new HashSet<>(capacity);
+        int curr = 0;
+        while (curr < capacity) {
+            set.add(ExtendedRandom.nextDouble());
+            curr++;
+        }
+        int expected = 9 * capacity / 10;
+        int actual = set.size();
+        String msg = "nextDouble() should have given at least " + expected
+                + " distinct numbers, gave " + actual + " distinct";
+        assert expected <= actual : msg;
+    }
+
+    @Test
     void testNextFraction() {
         System.out.println("nextFraction");
         int capacity = 1000;
