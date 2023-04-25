@@ -60,9 +60,9 @@ public class ExtendedRandom {
         return new BigInteger(bitLength, RANDOM);
     }
 
-    // TODO: Write tests for this
+    // TODO: Write Javadoc
     public static double nextDouble() {
-        return 0.0;
+        return RANDOM.nextDouble();
     }
 
     /**
