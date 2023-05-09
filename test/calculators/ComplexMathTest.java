@@ -35,8 +35,8 @@ class ComplexMathTest {
     @Test
     void testSqrt() {
         System.out.println("sqrt");
-        double expectedRe = ExtendedRandom.nextDouble() - 0.5;
-        double expectedIm = ExtendedRandom.nextDouble() - 0.5;
+        double expectedRe = ExtendedRandom.nextDouble();
+        double expectedIm = ExtendedRandom.nextDouble();
         ComplexNumber expected = new ComplexNumber(expectedRe, expectedIm);
         ComplexNumber square = expected.times(expected);
         ComplexNumber actual = ComplexMath.sqrt(square);
