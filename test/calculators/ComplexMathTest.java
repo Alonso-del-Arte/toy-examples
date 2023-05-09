@@ -35,9 +35,13 @@ class ComplexMathTest {
     @Test
     void testSqrt() {
         System.out.println("sqrt");
-        double expectedRe = ExtendedRandom.nextDouble();
-//        ComplexNumber expected
-        fail("Haven't written test yet");
+        double expectedRe = ExtendedRandom.nextDouble() - 0.5;
+        double expectedIm = ExtendedRandom.nextDouble() - 0.5;
+        ComplexNumber expected = new ComplexNumber(expectedRe, expectedIm);
+        ComplexNumber square = expected.times(expected);
+        ComplexNumber actual = ComplexMath.sqrt(square);
+        String expLabel = "sqrt(" + square.toString() + ")";
+        assertEqualsWithinDelta(expected, actual, expLabel);
     }
 
 }
