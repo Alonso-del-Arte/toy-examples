@@ -5,17 +5,16 @@ import numerics.ComplexNumber;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import randomness.ExtendedRandom;
+
 class ComplexMathTest {
 
     private static final double TEST_DELTA = 0.00000001;
 
-    @Test
-    void testSqrtOfNegativeOne() {
-        System.out.println("sqrt");
-        ComplexNumber negOne = new ComplexNumber(-1.0, 0.0);
-        ComplexNumber expected = new ComplexNumber(0.0, 1.0);
-        ComplexNumber actual = ComplexMath.sqrt(negOne);
-        String msgPart = " part of sqrt(-1) expected to be ";
+    private static void assertEqualsWithinDelta(ComplexNumber expected,
+                                                ComplexNumber actual,
+                                                String expLabel) {
+        String msgPart = " part of " + expLabel + " expected to be ";
         String msgRe = "Real" + msgPart + expected.getRealPart();
         assertEquals(expected.getRealPart(), actual.getRealPart(), TEST_DELTA,
                 msgRe);
@@ -24,9 +23,20 @@ class ComplexMathTest {
                 msgIm);
     }
 
-//    @Test
+    @Test
+    void testSqrtOfNegativeOne() {
+        System.out.println("sqrt");
+        ComplexNumber negOne = new ComplexNumber(-1.0, 0.0);
+        ComplexNumber expected = new ComplexNumber(0.0, 1.0);
+        ComplexNumber actual = ComplexMath.sqrt(negOne);
+        assertEqualsWithinDelta(expected, actual, "sqrt(-1)");
+    }
+
+    @Test
     void testSqrt() {
         System.out.println("sqrt");
+        double expectedRe = ExtendedRandom.nextDouble();
+//        ComplexNumber expected
         fail("Haven't written test yet");
     }
 
