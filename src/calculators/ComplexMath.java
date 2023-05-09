@@ -4,9 +4,14 @@ import numerics.ComplexNumber;
 
 public class ComplexMath {
 
-    // TODO: Write tests for this
     public static ComplexNumber sqrt(ComplexNumber z) {
-        return new ComplexNumber(0.0, 1.0);
+        double a = z.getRealPart();
+        double b = z.getImagPart();
+        double norm = z.abs();
+        double re = Math.sqrt((norm + a) / 2);
+        double im = Math.sqrt((norm - a) / 2) * (b / Math.abs(b));
+        return new ComplexNumber(re, im);
+//        return new ComplexNumber(0.0, 1.0);
     }
 
 }
