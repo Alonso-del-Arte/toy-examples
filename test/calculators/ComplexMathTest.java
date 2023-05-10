@@ -53,4 +53,14 @@ class ComplexMathTest {
         assertEqualsWithinDelta(expected, actual, expLabel);
     }
 
+    @Test
+    void testSqrtPurelyRealNegative() {
+        double expectedIm = ExtendedRandom.nextDouble() + ExtendedRandom.nextInt(100);
+        ComplexNumber expected = new ComplexNumber(0, expectedIm);
+        ComplexNumber square = expected.times(expected);
+        ComplexNumber actual = ComplexMath.sqrt(square);
+        String expLabel = "sqrt(" + square + ")";
+        assertEqualsWithinDelta(expected, actual, expLabel);
+    }
+
 }
