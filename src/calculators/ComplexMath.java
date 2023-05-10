@@ -8,7 +8,7 @@ public class ComplexMath {
         double a = z.getRealPart();
         double b = z.getImagPart();
         if (b == 0) {
-            return new ComplexNumber(0.0, 1.0);
+            return new ComplexNumber(Math.sqrt(Math.abs(a)), 0.0);
         }
         double norm = z.abs();
         double re = Math.sqrt((norm + a) / 2);
