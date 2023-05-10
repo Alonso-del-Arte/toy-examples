@@ -25,7 +25,6 @@ class ComplexMathTest {
 
     @Test
     void testSqrtOfNegativeOne() {
-        System.out.println("sqrt");
         ComplexNumber negOne = new ComplexNumber(-1.0, 0.0);
         ComplexNumber expected = new ComplexNumber(0.0, 1.0);
         ComplexNumber actual = ComplexMath.sqrt(negOne);
@@ -40,7 +39,17 @@ class ComplexMathTest {
         ComplexNumber expected = new ComplexNumber(expectedRe, expectedIm);
         ComplexNumber square = expected.times(expected);
         ComplexNumber actual = ComplexMath.sqrt(square);
-        String expLabel = "sqrt(" + square.toString() + ")";
+        String expLabel = "sqrt(" + square + ")";
+        assertEqualsWithinDelta(expected, actual, expLabel);
+    }
+
+    @Test
+    void testSqrtPurelyRealPositive() {
+        double expectedRe = ExtendedRandom.nextDouble() + ExtendedRandom.nextInt(100);
+        ComplexNumber expected = new ComplexNumber(expectedRe, 0);
+        ComplexNumber square = expected.times(expected);
+        ComplexNumber actual = ComplexMath.sqrt(square);
+        String expLabel = "sqrt(" + square + ")";
         assertEqualsWithinDelta(expected, actual, expLabel);
     }
 
