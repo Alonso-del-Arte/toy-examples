@@ -30,6 +30,10 @@ public class ToyCalculator {
 
     // TODO: Write tests for this
     public static int divides(int dividend, int divisor) {
+        if (divisor == 0) {
+            String excMsg = "Can't divide " + dividend + " by 0";
+            throw new ArithmeticException(excMsg);
+        }
         return Integer.MAX_VALUE;
     }
 
