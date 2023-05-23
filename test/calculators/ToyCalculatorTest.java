@@ -25,8 +25,17 @@ class ToyCalculatorTest {
         assertEquals(expected, actual, msg);
     }
 
+    @Test
     void testDivisionByZero() {
-        fail();
+        int dividend = ExtendedRandom.nextInt();
+        Throwable t = assertThrows(ArithmeticException.class, () -> {
+            int badDivision = ToyCalculator.divides(dividend, 0);
+            System.out.println(dividend + " divided by 0 is said to be "
+                    + badDivision);
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        System.out.println("\"" + excMsg + "\"");
     }
 
 }
