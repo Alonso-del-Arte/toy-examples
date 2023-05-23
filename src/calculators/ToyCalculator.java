@@ -1,14 +1,21 @@
 package calculators;
 
 /**
- * A completely unnecessary
+ * A completely unnecessary utility class, duplicating arithmetic functions
+ * already available in Java as operators.
  * @author Alonso del Arte
  */
 public class ToyCalculator {
 
-    // TODO: Write tests for this
+    /**
+     * Adds two integers. This is the most popular toy example for test-driven
+     * development (TDD), and, in my opinion, also the lamest.
+     * @param addendA The first integer to add. For example, 1.
+     * @param addendB The second integer to add. For example, also 1.
+     * @return The sum of the two integers. For example, 1.
+     */
     public static int plus(int addendA, int addendB) {
-        return 2;
+        return addendA + addendB;
     }
 
     // TODO: Write tests for this
