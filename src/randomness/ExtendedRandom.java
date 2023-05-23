@@ -1,5 +1,6 @@
 package randomness;
 
+import collections.immutable.Range;
 import currency.CurrencyAmount;
 import fractions.Fraction;
 
@@ -42,6 +43,11 @@ public class ExtendedRandom {
      */
     public static int nextInt(int bound) {
         return RANDOM.nextInt(bound);
+    }
+
+    // TODO: Write tests for this
+    public static int nextInt(Range range) {
+        return 0;
     }
 
     /**
