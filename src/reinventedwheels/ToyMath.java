@@ -1,0 +1,4 @@
+package reinventedwheels;
+
+class ToyMath {
+}
