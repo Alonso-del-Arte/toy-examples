@@ -19,7 +19,7 @@ class ToyMath {
 
     // TODO: Write tests for this
     static double random() {
-        return Double.POSITIVE_INFINITY;
+        return 0.5;
     }
 
 }
