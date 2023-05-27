@@ -20,8 +20,23 @@ class ToyMathTest {
             assert x >= 0.0 : msg;
             assert x < 1.0 : msg;
             runningTotal += x;
-            adjusted += runningTotal + additionalIncrement;
+            adjusted += x + additionalIncrement;
         }
+        System.out.println("Pseudorandom numbers added up to " + runningTotal);
+    }
+
+    @Test
+    void testRandomGivesEnoughDistinctValues() {
+        int capacity = 100;
+        Set<Double> numbers = new HashSet<>(capacity);
+        for (int i = 0; i < capacity; i++) {
+            numbers.add(ToyMath.random());
+        }
+        int expected = 9 * capacity / 10;
+        int actual = numbers.size();
+        String msg = "random() gave " + actual
+                + " distinct number(s), should've given at least " + expected;
+        assert actual >= expected : msg;
     }
 
 }
