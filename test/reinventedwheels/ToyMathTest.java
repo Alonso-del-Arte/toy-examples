@@ -16,7 +16,7 @@ class ToyMathTest {
         while (adjusted < 100.0) {
             double x = ToyMath.random();
             String msg = "Pseudorandom number " + x
-                    + " should be at least 0.00 and less than 1.0";
+                    + " should be at least 0.0 and less than 1.0";
             assert x >= 0.0 : msg;
             assert x < 1.0 : msg;
             runningTotal += x;
@@ -37,6 +37,18 @@ class ToyMathTest {
         String msg = "random() gave " + actual
                 + " distinct number(s), should've given at least " + expected;
         assert actual >= expected : msg;
+    }
+
+    @Test
+    void testRandomDistributesWellAcrossUnitInterval() {
+        int expected = 16;
+        Set<Integer> numbers = new HashSet<>(expected);
+        int attempts = expected * expected;
+        for (int i = 0; i < attempts; i++) {
+            numbers.add((int) (ToyMath.random() * expected));
+        }
+        int actual = numbers.size();
+        assertEquals(expected, actual);
     }
 
 }
