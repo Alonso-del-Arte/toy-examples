@@ -5,6 +5,9 @@ package reinventedwheels;
  * software," that is to say, without "native methods." This is of course
  * completely unnecessary for real world projects. The value here is purely
  * educational.
+ * <p>For the most part, the functions of <code>java.lang.Math</code> should
+ * pass the tests of <code>ToyMathTest</code>. However, we won't get these tests
+ * to pass by delegating to <code>Math</code>.</p>
  * @author Alonso del Arte
  */
 public class ToyMath {
@@ -40,6 +43,15 @@ public class ToyMath {
         return Double.MIN_VALUE;
     }
 
+    /**
+     * Gives a pseudorandom number that is at least 0.0 but less than 1.0. No
+     * promises about the distribution being uniform enough.
+     * @return A pseudorandom number most likely to not be subnormal. Some
+     * examples of actual consecutive return values: 0.8220326832526383,
+     * 0.9538167054666133, 0.5021587719883371, 0.1457593655088658,
+     * 0.18885082182314927, 0.4517967681540198, 0.5446456099783232,
+     * 0.5776502266232226,  0.13911368720712836, 0.2645468660833896.
+     */
     public static double random() {
         previousCallCount++;
         long bitPattern = ((107374182 * previousBitPattern
@@ -48,9 +60,7 @@ public class ToyMath {
                 & FLOATING_POINT_ALMOST_ONE_BIT_PATTERN;
         earlierBitPattern = previousBitPattern;
         previousBitPattern = bitPattern;
-        double number = Double.longBitsToDouble(bitPattern);
-        return (previousCallCount % 2 == 0 && number > 0.5)
-                ? number : number - 0.5;
+        return (Double.longBitsToDouble(bitPattern) - 0.5) * 2;
     }
 
 }
