@@ -9,6 +9,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class ToyMathTest {
 
     @Test
+    void testAbsPositive() {
+        long millis = System.currentTimeMillis();
+        double expected = 1.0 / millis + (millis >> 32);
+        double actual = ToyMath.abs(expected);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testRandomIsInUnitInterval() {
         double runningTotal = 0.0;
         double additionalIncrement = 0.1;
