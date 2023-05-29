@@ -44,7 +44,7 @@ public class ToyMath {
             return Double.MIN_VALUE;
         } else {
             long bitPattern = Double.doubleToLongBits(x);
-            return Double.longBitsToDouble(bitPattern ^ Long.MIN_VALUE);
+            return Double.longBitsToDouble(bitPattern & Long.MAX_VALUE);
         }
     }
 
