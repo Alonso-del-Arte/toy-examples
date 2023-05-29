@@ -9,10 +9,21 @@ package reinventedwheels;
  */
 public class ToyMath {
 
+    private static final long FLOATING_POINT_EXPONENT_MASK
+            = 0x000FFFFFFFFFFFFFL;
+
+    public static final long FLOATING_POINT_ONE_HALF_BIT_PATTERN
+            = 0x3FE0000000000000L;
+
     private static final long FLOATING_POINT_ALMOST_ONE_BIT_PATTERN
             = 0x3FEFFFFFFFFFFFFFL;
 
-    private static long previousBitPattern = Double.doubleToLongBits(0.5);
+    private static int previousCallCount = 0;
+
+    private static long earlierBitPattern = System.currentTimeMillis();
+
+    private static long previousBitPattern = (earlierBitPattern << 32)
+            + earlierBitPattern;
 
     // TODO: Write tests for this
     public static double floor(double x) {
@@ -30,11 +41,16 @@ public class ToyMath {
     }
 
     public static double random() {
-        long millis = System.currentTimeMillis();
-        long bitPattern = (millis ^ (previousBitPattern * 37))
+        previousCallCount++;
+        long bitPattern = ((107374182 * previousBitPattern
+                + 104480 * earlierBitPattern + previousCallCount)
+                | FLOATING_POINT_ONE_HALF_BIT_PATTERN)
                 & FLOATING_POINT_ALMOST_ONE_BIT_PATTERN;
+        earlierBitPattern = previousBitPattern;
         previousBitPattern = bitPattern;
-        return Double.longBitsToDouble(bitPattern);
+        double number = Double.longBitsToDouble(bitPattern);
+        return (previousCallCount % 2 == 0 && number > 0.5)
+                ? number : number - 0.5;
     }
 
 }
