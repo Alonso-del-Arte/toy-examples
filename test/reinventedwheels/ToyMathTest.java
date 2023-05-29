@@ -42,6 +42,18 @@ class ToyMathTest {
         assertEquals(expected, actual, msg);
     }
 
+    @Test
+    void testAbsPositiveInfinity() {
+        assertEquals(Double.POSITIVE_INFINITY,
+                ToyMath.abs(Double.POSITIVE_INFINITY));
+    }
+
+    @Test
+    void testAbsNegativeInfinity() {
+        assertEquals(Double.POSITIVE_INFINITY,
+                ToyMath.abs(Double.NEGATIVE_INFINITY));
+    }
+
     /**
      * Test of the random function, of the ToyMath class. The return value of
      * random() should be at least 0.0 but less than 1.0.
