@@ -32,6 +32,16 @@ class ToyMathTest {
         assertEquals(0, actual);
     }
 
+    @Test
+    void testAbsNegative() {
+        long millis = System.currentTimeMillis();
+        double expected = 2.5E16 / millis + 1.3E10 / millis;
+        double actual = ToyMath.abs(-expected);
+        String msg = "Absolute value of " + (-expected) + " should be "
+                + expected;
+        assertEquals(expected, actual, msg);
+    }
+
     /**
      * Test of the random function, of the ToyMath class. The return value of
      * random() should be at least 0.0 but less than 1.0.
