@@ -43,7 +43,8 @@ public class ToyMath {
         if (Double.isInfinite(x) || Double.isNaN(x)) {
             return Double.MIN_VALUE;
         } else {
-            return x;
+            long bitPattern = Double.doubleToLongBits(x);
+            return Double.longBitsToDouble(bitPattern ^ Long.MIN_VALUE);
         }
     }
 
