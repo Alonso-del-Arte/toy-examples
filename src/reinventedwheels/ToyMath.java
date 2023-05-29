@@ -40,7 +40,11 @@ public class ToyMath {
 
     // TODO: Write tests for this
     public static double abs(double x) {
-        return Double.MIN_VALUE;
+        if (Double.isInfinite(x) || Double.isNaN(x)) {
+            return Double.MIN_VALUE;
+        } else {
+            return x;
+        }
     }
 
     /**
