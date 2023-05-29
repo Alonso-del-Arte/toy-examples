@@ -12,6 +12,9 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class ToyMathTest {
 
+    private static final long FLOATING_POINT_POSITIVE_INFINITY_BIT_PATTERN
+            = Double.doubleToLongBits(Double.POSITIVE_INFINITY);
+
     @Test
     void testAbsPositive() {
         long millis = System.currentTimeMillis();
@@ -52,6 +55,29 @@ class ToyMathTest {
     void testAbsNegativeInfinity() {
         assertEquals(Double.POSITIVE_INFINITY,
                 ToyMath.abs(Double.NEGATIVE_INFINITY));
+    }
+
+    private static double makeNaN(long n) {
+        return Double.longBitsToDouble(n
+                | FLOATING_POINT_POSITIVE_INFINITY_BIT_PATTERN);
+    }
+
+    @Test
+    void testAbsPositiveNaN() {
+        long expected = this.hashCode() >> 1;
+        double notNumber = makeNaN(expected);
+        long actual = Double.doubleToLongBits(ToyMath.abs(notNumber));
+        String msg = "abs(" + notNumber + ") should preserve bit pattern";
+        assertEquals(expected, actual, msg);
+    }
+
+    @Test
+    void testAbsNegativeNaN() {
+        long expected = this.hashCode() >> 1;
+        double notNumber = makeNaN(-expected);
+        long actual = Double.doubleToLongBits(ToyMath.abs(notNumber));
+        String msg = "abs(" + notNumber + ") should preserve bit pattern";
+        assertEquals(expected, actual, msg);
     }
 
     /**
