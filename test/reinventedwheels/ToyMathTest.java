@@ -25,6 +25,13 @@ class ToyMathTest {
         assertEquals(0.0, ToyMath.abs(0.0));
     }
 
+    @Test
+    void testAbsNegativeZero() {
+        double negativeZero = Double.longBitsToDouble(Long.MIN_VALUE);
+        long actual = Double.doubleToLongBits(ToyMath.abs(negativeZero));
+        assertEquals(0, actual);
+    }
+
     /**
      * Test of the random function, of the ToyMath class. The return value of
      * random() should be at least 0.0 but less than 1.0.
