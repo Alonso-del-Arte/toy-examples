@@ -39,10 +39,6 @@ public class ToyMath {
     }
 
     public static double abs(double x) {
-        if (x == -0.0) return 0.0;
-        if (Double.isInfinite(x)) {
-            return Double.POSITIVE_INFINITY;
-        }
         if (Double.isNaN(x)) {
             return Double.MIN_VALUE;
         } else {
