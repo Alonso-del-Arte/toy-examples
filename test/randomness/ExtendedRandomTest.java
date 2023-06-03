@@ -160,4 +160,24 @@ class ExtendedRandomTest {
         }
     }
 
+    private static boolean isASCIILetterOrDigit(char ch) {
+        boolean isDigit = ch >= '0' && ch <= '9';
+        boolean isUppercaseLetter = ch >= 'A' && ch <= 'Z';
+        boolean isLowercaseLetter = ch >= 'a' && ch <= 'z';
+        return isDigit || isUppercaseLetter || isLowercaseLetter;
+    }
+
+    @Test
+    void testAlphanumericGivesStringOfASCIIAlphanumerics() {
+        int length = RANDOM.nextInt(16) + 4;
+        String s = ExtendedRandom.alphanumeric(length);
+        String msgPartA = "Character '";
+        String msgPartB = "' should be ASCII letter or digit";
+        char[] characters = s.toCharArray();
+        for (char ch : characters) {
+            String msg = msgPartA + ch + msgPartB;
+            assert isASCIILetterOrDigit(ch) : msg;
+        }
+    }
+
 }
