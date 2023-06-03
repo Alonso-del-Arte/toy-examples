@@ -94,7 +94,11 @@ public class ExtendedRandom {
             String excMsg = "Length " + length + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
-        return "SORRY, NOT IMPLEMENTED YET!";
+        char[] asciiChars = new char[length];
+        for (int i = 0; i < length; i++) {
+            asciiChars[i] = '@';
+        }
+        return new String(asciiChars);
     }
 
 }
