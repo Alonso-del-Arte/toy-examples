@@ -180,4 +180,21 @@ class ExtendedRandomTest {
         }
     }
 
+    @Test
+    void testAlphanumeric() {
+        System.out.println("alphanumeric");
+        int capacity = RANDOM.nextInt(64) + 36;
+        Set<String> strings = new HashSet<>(capacity);
+        int length = RANDOM.nextInt(16) + 4;
+        for (int i = 0; i < capacity; i++) {
+            String s = ExtendedRandom.alphanumeric(length);
+            strings.add(s);
+        }
+        int expected = 9 * capacity / 10;
+        int actual = strings.size();
+        String msg = "alphanumeric should've given at least " + expected
+                + " distinct, gave " + actual + " distinct";
+        assert actual >= expected : msg;
+    }
+
 }
