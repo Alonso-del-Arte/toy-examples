@@ -1,8 +1,12 @@
 package org.example;
 
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
+import mock.io.MockPrintStream;
+import mock.io.OutputInterceptor;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -72,6 +76,24 @@ class HelloWorldTest {
             String actual = HelloWorld.greeting(key);
             assertEquals(expected, actual);
         });
+    }
+
+    @Test
+    void testMain() {
+        System.out.println("main");
+        System.out.println("Rerouting System.out");
+        PrintStream usualPrintStream = System.out;
+        OutputInterceptor interceptor = new OutputInterceptor();
+        MockPrintStream interceptedStream = new MockPrintStream(interceptor);
+        System.setOut(interceptedStream);
+        String expected = HelloWorld.greeting(Locale.getDefault());
+        String[] args = {};
+        HelloWorld.main(args);
+        String actual = interceptor.getText().replace("\n", "")
+                .replace("\r", "");
+        System.setOut(usualPrintStream);
+        System.out.println("Restored usual System.out");
+        assertEquals(expected, actual);
     }
 
 }
