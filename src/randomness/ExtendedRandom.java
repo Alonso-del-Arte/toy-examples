@@ -89,4 +89,8 @@ public class ExtendedRandom {
         return new ComplexNumber(0.0, 0.0);
     }
 
+    public static String alphanumeric(int length) {
+        return "SORRY, NOT IMPLEMENTED YET!";
+    }
+
 }

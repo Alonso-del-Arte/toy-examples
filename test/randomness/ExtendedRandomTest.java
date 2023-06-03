@@ -115,4 +115,22 @@ class ExtendedRandomTest {
         assert actual >= expected : msg;
     }
 
+    @Test
+    void testAlphanumericRejectsNegativeLength() {
+        int badLength = -RANDOM.nextInt(1024) - 1;
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            String badString = ExtendedRandom.alphanumeric(badLength);
+            System.out.println("Trying to get random alphanumeric of length "
+                    + badLength + " should not have given \"" + badString
+                    + "\"");
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+        String badLengthStr = Integer.toString(badLength);
+        String msg = "Exception message should include \"" + badLengthStr
+                + "\"";
+        assert excMsg.contains(badLengthStr) : msg;
+    }
+
 }
