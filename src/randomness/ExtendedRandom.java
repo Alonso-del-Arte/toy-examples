@@ -96,7 +96,7 @@ public class ExtendedRandom {
         }
         char[] asciiChars = new char[length];
         for (int i = 0; i < length; i++) {
-            asciiChars[i] = '@';
+            asciiChars[i] = 'A';
         }
         return new String(asciiChars);
     }
