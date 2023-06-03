@@ -96,7 +96,17 @@ public class ExtendedRandom {
         }
         char[] asciiChars = new char[length];
         for (int i = 0; i < length; i++) {
-            asciiChars[i] = 'A';
+            char ch = '?';
+            if (RANDOM.nextBoolean()) {
+                ch = (char) (RANDOM.nextInt(10) + '0');
+            } else {
+                if (RANDOM.nextBoolean()) {
+                    ch = (char) (RANDOM.nextInt(26) + 'A');
+                } else {
+                    ch = (char) (RANDOM.nextInt(26) + 'a');
+                }
+            }
+            asciiChars[i] = ch;
         }
         return new String(asciiChars);
     }
