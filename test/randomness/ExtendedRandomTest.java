@@ -151,4 +151,13 @@ class ExtendedRandomTest {
         assert excMsg.contains(badLengthStr) : msg;
     }
 
+    @Test
+    void testAlphanumericGivesStringOfSpecifiedLength() {
+        for (int expected = 1; expected < 21; expected++) {
+            String s = ExtendedRandom.alphanumeric(expected);
+            int actual = s.length();
+            assertEquals(expected, actual);
+        }
+    }
+
 }
