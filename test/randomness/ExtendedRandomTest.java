@@ -194,6 +194,7 @@ class ExtendedRandomTest {
         int actual = strings.size();
         String msg = "alphanumeric should've given at least " + expected
                 + " distinct, gave " + actual + " distinct";
+        System.out.println(msg);
         assert actual >= expected : msg;
     }
 
