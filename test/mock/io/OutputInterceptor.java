@@ -8,8 +8,7 @@ import java.io.OutputStream;
  */
 public class OutputInterceptor extends OutputStream {
 
-    private final StringBuffer buffer
-            = new StringBuffer("SORRY, NOT IMPLEMENTED YET");
+    private final StringBuffer buffer = new StringBuffer();
 
     /**
      *
