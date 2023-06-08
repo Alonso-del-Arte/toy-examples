@@ -1,5 +1,6 @@
 package org.example;
 
+import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Locale;
@@ -83,13 +84,13 @@ class HelloWorldTest {
         System.out.println("main");
         System.out.println("Rerouting System.out");
         PrintStream usualPrintStream = System.out;
-        OutputInterceptor interceptor = new OutputInterceptor();
-        MockPrintStream interceptedStream = new MockPrintStream(interceptor);
+        ByteArrayOutputStream interceptor = new ByteArrayOutputStream();
+        PrintStream interceptedStream = new PrintStream(interceptor);
         System.setOut(interceptedStream);
         String expected = HelloWorld.greeting(Locale.getDefault());
         String[] args = {};
         HelloWorld.main(args);
-        String actual = interceptor.getText().replace("\n", "")
+        String actual = interceptor.toString().replace("\n", "")
                 .replace("\r", "");
         System.setOut(usualPrintStream);
         System.out.println("Restored usual System.out");
