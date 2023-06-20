@@ -45,6 +45,16 @@ class ExtendedMathTest {
     }
 
     @Test
+    void testIsNotSubnormal() {
+        int divisor = ExtendedRandom.nextInt(16) + 4;
+        int multiplier = ExtendedRandom.nextInt() | 1;
+        double x = Double.MIN_NORMAL * multiplier;
+        String msg = "The number " + x
+                + " should not be found to be IEEE-754 subnormal";
+        assert !ExtendedMath.isSubnormal(x) : msg;
+    }
+
+    @Test
     void testPrimePiLegendreEstimate() {
         double x = Math.random() * 10000;
         double expected = x / (Math.log(x) - 1.08366);
