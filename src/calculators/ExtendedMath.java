@@ -41,7 +41,7 @@ public class ExtendedMath {
     }
 
     public static boolean isSubnormal(double x) {
-        return false;
+        return true;
     }
 
     // TODO: Write test for negative x
