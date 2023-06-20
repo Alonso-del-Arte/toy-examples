@@ -29,10 +29,15 @@ public class ExtendedMath {
 
     private static final Fraction ONE_HALF = new Fraction(1, 2);
 
-    public static final Fraction NEGATIVE_ONE_HALF = ONE_HALF.negate();
+    private static final Fraction NEGATIVE_ONE_HALF = ONE_HALF.negate();
+
+    public static final long POSITIVE_INFINITY_BIT_PATTERN
+            = Double.doubleToLongBits(Double.POSITIVE_INFINITY);
 
     public static boolean isNormal(double x) {
-        return true;
+        long bitPattern = Double.doubleToLongBits(x);
+        long masked = bitPattern & POSITIVE_INFINITY_BIT_PATTERN;
+        return masked != 0;
     }
 
     public static boolean isSubnormal(double x) {
