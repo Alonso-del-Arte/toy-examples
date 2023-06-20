@@ -16,6 +16,16 @@ class ExtendedMathTest {
     private static final Random RANDOM = new Random();
 
     @Test
+    void testIsNormal() {
+        System.out.println("isNormal");
+        int multiplier = ExtendedRandom.nextInt() | 1;
+        double x = Double.MIN_NORMAL * multiplier;
+        String msg = "The number " + x
+                + " should be found to be IEEE-754 normal";
+        assert ExtendedMath.isNormal(x) : msg;
+    }
+
+    @Test
     void testPrimePiLegendreEstimate() {
         double x = Math.random() * 10000;
         double expected = x / (Math.log(x) - 1.08366);
