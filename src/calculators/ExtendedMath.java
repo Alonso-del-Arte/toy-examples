@@ -32,7 +32,7 @@ public class ExtendedMath {
     public static final Fraction NEGATIVE_ONE_HALF = ONE_HALF.negate();
 
     public static boolean isNormal(double x) {
-        return false;
+        return true;
     }
 
     public static boolean isSubnormal(double x) {
