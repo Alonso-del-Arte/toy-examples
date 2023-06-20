@@ -31,6 +31,14 @@ public class ExtendedMath {
 
     public static final Fraction NEGATIVE_ONE_HALF = ONE_HALF.negate();
 
+    public static boolean isNormal(double x) {
+        return false;
+    }
+
+    public static boolean isSubnormal(double x) {
+        return false;
+    }
+
     // TODO: Write test for negative x
     public static double primePiLegendreEstimate(double x) {
         return x / (Math.log(x) - 1.08366);
