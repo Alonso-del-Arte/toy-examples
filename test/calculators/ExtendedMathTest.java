@@ -26,6 +26,15 @@ class ExtendedMathTest {
     }
 
     @Test
+    void testIsNotNormal() {
+        int divisor = ExtendedRandom.nextInt(16) + 4;
+        double x = Double.MIN_NORMAL / divisor;
+        String msg = "The number " + x
+                + " should not be found to be IEEE-754 normal";
+        assert !ExtendedMath.isNormal(x) : msg;
+    }
+
+    @Test
     void testPrimePiLegendreEstimate() {
         double x = Math.random() * 10000;
         double expected = x / (Math.log(x) - 1.08366);
