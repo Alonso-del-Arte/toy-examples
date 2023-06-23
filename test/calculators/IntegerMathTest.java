@@ -274,7 +274,7 @@ class IntegerMathTest {
     }
 
     @Test
-    public void testRandomPartitionRejectsNegativeSize() {
+    void testRandomPartitionRejectsNegativeSize() {
         int n = ExtendedRandom.nextInt(256) + 1;
         int badSize = -ExtendedRandom.nextInt(262144) - 1;
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
@@ -291,7 +291,7 @@ class IntegerMathTest {
     }
 
     @Test
-    public void testRandomPartitionRejectsSizeZero() {
+    void testRandomPartitionRejectsSizeZero() {
         int n = ExtendedRandom.nextInt(256) + 1;
         int badSize = 0;
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
@@ -308,7 +308,7 @@ class IntegerMathTest {
     }
 
     @Test
-    public void testRandomPartitionOfJustOne() {
+    void testRandomPartitionOfJustOne() {
         int expected = ExtendedRandom.nextInt(256) + 4;
         List<Integer> partition = IntegerMath.randomPartition(expected, 1);
         assertEquals(1, partition.size(), "Partition of length 1 requested");
@@ -317,7 +317,7 @@ class IntegerMathTest {
     }
 
     @Test
-    public void testRandomPartition() {
+    void testRandomPartition() {
         System.out.println("randomPartition");
         int expected = ExtendedRandom.nextInt(128) + 32;
         int numParts = ExtendedRandom.nextInt(16) + 4;
