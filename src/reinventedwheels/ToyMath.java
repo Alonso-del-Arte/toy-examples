@@ -39,12 +39,8 @@ public class ToyMath {
     }
 
     public static double abs(double x) {
-        if (Double.isNaN(x)) {
-            return Double.MIN_VALUE;
-        } else {
-            long bitPattern = Double.doubleToLongBits(x);
-            return Double.longBitsToDouble(bitPattern & Long.MAX_VALUE);
-        }
+        long bitPattern = Double.doubleToLongBits(x);
+        return Double.longBitsToDouble(bitPattern & Long.MAX_VALUE);
     }
 
     /**
