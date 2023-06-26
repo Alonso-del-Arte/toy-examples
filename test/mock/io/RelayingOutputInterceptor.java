@@ -12,6 +12,11 @@ public class RelayingOutputInterceptor extends OutputStream {
         this.target.write(b);
     }
 
+    // TODO: Write tests for this
+    public String getText() {
+        return "SORRY, NOT IMPLEMENTED YET";
+    }
+
     public RelayingOutputInterceptor(OutputStream relayTarget) {
         this.target = relayTarget;
     }
