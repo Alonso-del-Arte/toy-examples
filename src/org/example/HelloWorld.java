@@ -45,6 +45,7 @@ public class HelloWorld {
     }
 
     public static void main(String[] args) {
+        System.out.println("World, hello?");
         boolean responded = false;
         for (String arg : args) {
             try {
