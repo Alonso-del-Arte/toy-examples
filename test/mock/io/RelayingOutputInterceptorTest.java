@@ -22,9 +22,25 @@ class RelayingOutputInterceptorTest {
             bytes[i] = (byte) characters[i];
         }
         OutputStream relayTarget = new ByteArrayOutputStream();
-        OutputStream relayer = new RelayingOutputInterceptor(relayTarget);
-        relayer.write(bytes);String actual = relayTarget.toString()
-                .replace("\n", "").replace("\r", "");
+        OutputStream relay = new RelayingOutputInterceptor(relayTarget);
+        relay.write(bytes);
+        String actual = relayTarget.toString().replace("\n", "")
+                .replace("\r", "");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testGetText() throws IOException {
+        System.out.println("getText");
+        int length = ExtendedRandom.nextInt(32) + 8;
+        String expected = ExtendedRandom.alphanumeric(length);
+        char[] characters = expected.toCharArray();
+        RelayingOutputInterceptor interceptor
+                = new RelayingOutputInterceptor(new ByteArrayOutputStream());
+        for (char ch : characters) {
+            interceptor.write(ch);
+        }
+        String actual = interceptor.getText();
         assertEquals(expected, actual);
     }
 
