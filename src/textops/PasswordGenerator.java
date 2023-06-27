@@ -14,7 +14,7 @@ public class PasswordGenerator {
 
     // TODO: Write tests for this
     public String generate(Pattern regex) {
-        return "SORRY, NOT IMPLEMENTED YET";
+        return "01234Aa!";
     }
 
     public PasswordGenerator(SecureRandom random) {
