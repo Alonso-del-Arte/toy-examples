@@ -24,6 +24,25 @@ class BinaryStringsCollectorTest {
         assert set.isEmpty() : msg;
     }
 
+    private static void assertSetsContainSame(Set<String> expected,
+                                              Set<String> actual) {
+        assertEquals(expected.size(), actual.size(),
+                "Expected and actual should be of the same size");
+        String msg = "Set " + expected + " should contain the same elements as "
+                + actual;
+        assert expected.containsAll(actual) : msg;
+    }
+
+    @Test
+    void testGiveLengthOne() {
+        BinaryStringsCollector collector = new BinaryStringsCollector((byte) 1);
+        Set<String> expected = new HashSet<>();
+        expected.add("0");
+        expected.add("1");
+        Set<String> actual = collector.give();
+        assertSetsContainSame(expected, actual);
+    }
+
     @Test
     void testConstructorRejectsNegativeLength() {
         Random random = new Random();
