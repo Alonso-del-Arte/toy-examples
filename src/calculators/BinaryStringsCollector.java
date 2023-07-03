@@ -7,9 +7,7 @@ public class BinaryStringsCollector {
 
     // TODO: Write tests for this
     public Set<String> give() {
-        Set<String> set = new HashSet<>();
-        set.add("SORRY, NOT IMPLEMENTED YET");
-        return set;
+        return new HashSet<>();
     }
 
     public BinaryStringsCollector(byte length) {
