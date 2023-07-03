@@ -27,6 +27,9 @@ class BinaryStringsCollectorTest {
         });
         String excMsg = t.getMessage();
         assert excMsg != null : "Message should not be null";
+        String numStr = Byte.toString(badLength);
+        String msg = "Message should contain \"" + numStr + "\"";
+        assert excMsg.contains(numStr) : msg;
         System.out.println("\"" + excMsg + "\"");
     }
 
