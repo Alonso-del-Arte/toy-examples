@@ -16,6 +16,15 @@ class BinaryStringsCollectorTest {
 //    static void setUpClass() {}
 
     @Test
+    void testGiveLengthZero() {
+        BinaryStringsCollector collector = new BinaryStringsCollector((byte) 0);
+        Set<String> set = collector.give();
+        String msg = "Set for length 0 should be empty, was given " + set.size()
+                + " element(s)";
+        assert set.isEmpty() : msg;
+    }
+
+    @Test
     void testConstructorRejectsNegativeLength() {
         Random random = new Random();
         byte badLength = (byte) (-random.nextInt(128));
