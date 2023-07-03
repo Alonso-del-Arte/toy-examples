@@ -12,9 +12,12 @@ public class BinaryStringsCollector {
         return set;
     }
 
-    // TODO: Write tests for this
     public BinaryStringsCollector(byte length) {
-        //
+        if (length < 0) {
+            String excMsg = "Length " + length
+                    + " not valid, needs to be 0 or greater";
+            throw new IllegalArgumentException(excMsg);
+        }
     }
 
 }
