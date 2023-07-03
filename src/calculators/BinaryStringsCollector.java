@@ -5,9 +5,15 @@ import java.util.Set;
 
 public class BinaryStringsCollector {
 
-    // TODO: Write tests for this
+    private final boolean isLengthMoreThanZero;
+
     public Set<String> give() {
-        return new HashSet<>();
+        Set<String> set = new HashSet<>();
+        if (this.isLengthMoreThanZero) {
+            set.add("0");
+            set.add("1");
+        }
+        return set;
     }
 
     public BinaryStringsCollector(byte length) {
@@ -16,6 +22,7 @@ public class BinaryStringsCollector {
                     + " not valid, needs to be 0 or greater";
             throw new IllegalArgumentException(excMsg);
         }
+        this.isLengthMoreThanZero = length > 0;
     }
 
 }
