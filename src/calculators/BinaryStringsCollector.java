@@ -10,6 +10,8 @@ public class BinaryStringsCollector {
     public Set<String> give() {
         Set<String> set = new HashSet<>();
         switch (this.len) {
+            case 0:
+                break;
             case 1:
                 set.add("0");
                 set.add("1");
@@ -25,6 +27,7 @@ public class BinaryStringsCollector {
                 set.add("010");
                 set.add("100");
                 set.add("101");
+                break;
             default:
                 set.add("0000");
                 set.add("0001");
