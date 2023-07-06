@@ -55,6 +55,19 @@ class BinaryStringsCollectorTest {
     }
 
     @Test
+    void testGiveLengthThree() {
+        BinaryStringsCollector collector = new BinaryStringsCollector((byte) 3);
+        Set<String> expected = new HashSet<>();
+        expected.add("000");
+        expected.add("001");
+        expected.add("010");
+        expected.add("100");
+        expected.add("101");
+        Set<String> actual = collector.give();
+        assertSetsContainSame(expected, actual);
+    }
+
+    @Test
     void testConstructorRejectsNegativeLength() {
         Random random = new Random();
         byte badLength = (byte) (-random.nextInt(128));
