@@ -20,6 +20,11 @@ public class BinaryStringsCollector {
                 set.add("10");
                 break;
             default:
+                set.add("000");
+                set.add("001");
+                set.add("010");
+                set.add("100");
+                set.add("101");
         }
         return set;
     }
