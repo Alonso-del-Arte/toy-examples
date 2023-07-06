@@ -12,8 +12,30 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BinaryStringsCollectorTest {
 
-//    @BeforeAll
-//    static void setUpClass() {}
+    private static final byte MINIMUM_N_TO_CALCULATE = 5;
+
+    private static final byte MAXIMUM_N_TO_CALCULATE = 12;
+
+    private static final Map<Byte, Set<String>> BINARY_STRINGS_MAP
+            = new HashMap<>(MAXIMUM_N_TO_CALCULATE
+                    - MINIMUM_N_TO_CALCULATE + 1);
+
+    @BeforeAll
+    static void setUpClass() {
+        for (byte i = MINIMUM_N_TO_CALCULATE; i <= MAXIMUM_N_TO_CALCULATE; i++) {
+            int capacity = 1 << (i - 1);
+            Set<String> set = new HashSet<>(capacity);
+            int threshold = 2 * capacity;
+            for (int j = 0; j < threshold; j++) {
+                String numStr = String.format("%1$" + i + "s",
+                        Integer.toString(j, 2)).replace(' ', '0');
+                if (!numStr.contains("11")) {
+                    set.add(numStr);
+                }
+            }
+            BINARY_STRINGS_MAP.put(i, set);
+        }
+    }
 
     @Test
     void testGiveLengthZero() {
@@ -81,6 +103,17 @@ class BinaryStringsCollectorTest {
         expected.add("1010");
         Set<String> actual = collector.give();
         assertSetsContainSame(expected, actual);
+    }
+
+    @Test
+    void testGiveOtherLengths() {
+        for (byte n = MINIMUM_N_TO_CALCULATE; n <= MAXIMUM_N_TO_CALCULATE;
+                n++) {
+            BinaryStringsCollector collector = new BinaryStringsCollector(n);
+            Set<String> expected = BINARY_STRINGS_MAP.get(n);
+            Set<String> actual = collector.give();
+            assertSetsContainSame(expected, actual);
+        }
     }
 
     @Test
