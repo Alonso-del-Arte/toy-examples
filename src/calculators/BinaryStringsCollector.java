@@ -5,22 +5,10 @@ import java.util.Set;
 
 public class BinaryStringsCollector {
 
-    private final int len;
+    private final Set<String> SET = new HashSet<>();
 
     public Set<String> give() {
-        int capacity = 1 << (this.len - 1);
-        if (this.len == 0) return new HashSet<>();
-        Set<String> set = new HashSet<>(capacity);
-        int threshold = capacity + (capacity / 2);
-        if (this.len == 1) threshold = 2;
-        for (int i = 0; i < threshold; i++) {
-            String numStr = String.format("%1$" + this.len + "s",
-                    Integer.toString(i, 2)).replace(' ', '0');
-            if (!numStr.contains("11")) {
-                set.add(numStr);
-            }
-        }
-        return set;
+        return this.SET;
     }
 
     public BinaryStringsCollector(byte length) {
@@ -29,7 +17,18 @@ public class BinaryStringsCollector {
                     + " not valid, needs to be 0 or greater";
             throw new IllegalArgumentException(excMsg);
         }
-        this.len = length;
+        int capacity = 1 << (length - 1);
+        if (length > 0) {
+            int threshold = capacity + (capacity / 2);
+            if (length == 1) threshold = 2;
+            for (int i = 0; i < threshold; i++) {
+                String numStr = String.format("%1$" + length + "s",
+                        Integer.toString(i, 2)).replace(' ', '0');
+                if (!numStr.contains("11")) {
+                    SET.add(numStr);
+                }
+            }
+        }
     }
 
 }
