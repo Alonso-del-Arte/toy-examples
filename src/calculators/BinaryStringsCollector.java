@@ -8,35 +8,15 @@ public class BinaryStringsCollector {
     private final int len;
 
     public Set<String> give() {
-        Set<String> set = new HashSet<>();
-        switch (this.len) {
-            case 0:
-                break;
-            case 1:
-                set.add("0");
-                set.add("1");
-                break;
-            case 2:
-                set.add("00");
-                set.add("01");
-                set.add("10");
-                break;
-            case 3:
-                set.add("000");
-                set.add("001");
-                set.add("010");
-                set.add("100");
-                set.add("101");
-                break;
-            default:
-                set.add("0000");
-                set.add("0001");
-                set.add("0010");
-                set.add("0100");
-                set.add("0101");
-                set.add("1000");
-                set.add("1001");
-                set.add("1010");
+        int capacity = 1 << (this.len - 1);
+        Set<String> set = new HashSet<>(capacity);
+        int threshold = 2 * capacity;
+        for (int i = 0; i < threshold; i++) {
+            String numStr = String.format("%1$" + this.len + "s",
+                    Integer.toString(i, 2)).replace(' ', '0');
+            if (!numStr.contains("11")) {
+                set.add(numStr);
+            }
         }
         return set;
     }
