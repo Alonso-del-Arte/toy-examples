@@ -5,13 +5,21 @@ import java.util.Set;
 
 public class BinaryStringsCollector {
 
-    private final boolean isLengthMoreThanZero;
+    private final int len;
 
     public Set<String> give() {
         Set<String> set = new HashSet<>();
-        if (this.isLengthMoreThanZero) {
-            set.add("0");
-            set.add("1");
+        switch (this.len) {
+            case 1:
+                set.add("0");
+                set.add("1");
+                break;
+            case 2:
+                set.add("00");
+                set.add("01");
+                set.add("10");
+                break;
+            default:
         }
         return set;
     }
@@ -22,7 +30,7 @@ public class BinaryStringsCollector {
                     + " not valid, needs to be 0 or greater";
             throw new IllegalArgumentException(excMsg);
         }
-        this.isLengthMoreThanZero = length > 0;
+        this.len = length;
     }
 
 }
