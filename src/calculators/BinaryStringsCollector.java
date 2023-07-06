@@ -5,10 +5,33 @@ import java.util.Set;
 
 public class BinaryStringsCollector {
 
-    private final Set<String> SET = new HashSet<>();
+    private final byte len;
+    private final Set<String> set = new HashSet<>();
 
     public Set<String> give() {
-        return this.SET;
+        return this.set;
+    }
+
+    private void addZero(String numStr) {
+        String doubled = numStr + '0';
+        if (doubled.length() <= this.len) {
+            this.set.add(String.format("%1$" + this.len + "s", doubled)
+                    .replace(' ', '0'));
+            this.addZero(doubled);
+            this.addOne(numStr);
+        }
+    }
+
+    private void addOne(String numStr) {
+        String doubledPlusOne = numStr + '1';
+        if (doubledPlusOne.length() <= this.len) {
+            if (!doubledPlusOne.contains("11")) {
+                this.set.add(String.format("%1$" + this.len + "s",
+                        doubledPlusOne).replace(' ', '0'));
+                this.addZero(doubledPlusOne);
+                this.addOne(doubledPlusOne);
+            }
+        }
     }
 
     public BinaryStringsCollector(byte length) {
@@ -17,17 +40,10 @@ public class BinaryStringsCollector {
                     + " not valid, needs to be 0 or greater";
             throw new IllegalArgumentException(excMsg);
         }
+        this.len = length;
         int capacity = 1 << (length - 1);
-        if (length > 0) {
-            int threshold = capacity + (capacity / 2);
-            if (length == 1) threshold = 2;
-            for (int i = 0; i < threshold; i++) {
-                String numStr = String.format("%1$" + length + "s",
-                        Integer.toString(i, 2)).replace(' ', '0');
-                if (!numStr.contains("11")) {
-                    SET.add(numStr);
-                }
-            }
+        if (this.len > 0) {
+            this.addZero("");
         }
     }
 
