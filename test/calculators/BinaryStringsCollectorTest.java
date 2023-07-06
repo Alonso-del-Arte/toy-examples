@@ -117,6 +117,24 @@ class BinaryStringsCollectorTest {
     }
 
     @Test
+    void testGiveSecondTimeDoesNotRecalculate() {
+        long firstCallStart = System.currentTimeMillis();
+        BinaryStringsCollector collector
+                = new BinaryStringsCollector(MAXIMUM_N_TO_CALCULATE);
+        collector.give();
+        long firstCallEnd = System.currentTimeMillis();
+        collector.give();
+        long secondCallEnd = System.currentTimeMillis();
+        long firstCallDuration = firstCallEnd - firstCallStart;
+        long secondCallDuration = secondCallEnd - firstCallEnd;
+        long expected = firstCallDuration / 4;
+        String msg = "First call took " + firstCallDuration
+                + " ms, second call took " + secondCallDuration
+                + " ms (should not have taken more than " + expected + " ms)";
+        assert secondCallDuration <= expected : msg;
+    }
+
+    @Test
     void testConstructorRejectsNegativeLength() {
         Random random = new Random();
         byte badLength = (byte) (-random.nextInt(128));
