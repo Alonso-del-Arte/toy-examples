@@ -10,7 +10,7 @@ public class BinaryStringsCollector {
     public Set<String> give() {
         int capacity = 1 << (this.len - 1);
         Set<String> set = new HashSet<>(capacity);
-        int threshold = 2 * capacity;
+        int threshold = capacity + (capacity / 2);
         for (int i = 0; i < threshold; i++) {
             String numStr = String.format("%1$" + this.len + "s",
                     Integer.toString(i, 2)).replace(' ', '0');
