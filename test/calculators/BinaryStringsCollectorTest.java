@@ -68,6 +68,22 @@ class BinaryStringsCollectorTest {
     }
 
     @Test
+    void testGiveLengthFour() {
+        BinaryStringsCollector collector = new BinaryStringsCollector((byte) 4);
+        Set<String> expected = new HashSet<>();
+        expected.add("0000");
+        expected.add("0001");
+        expected.add("0010");
+        expected.add("0100");
+        expected.add("0101");
+        expected.add("1000");
+        expected.add("1001");
+        expected.add("1010");
+        Set<String> actual = collector.give();
+        assertSetsContainSame(expected, actual);
+    }
+
+    @Test
     void testConstructorRejectsNegativeLength() {
         Random random = new Random();
         byte badLength = (byte) (-random.nextInt(128));
