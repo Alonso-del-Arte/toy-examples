@@ -12,11 +12,14 @@ public class BinaryStringsCollector {
         return this.set;
     }
 
+    private String leftZeroPad(String s) {
+        return String.format("%1$" + this.len + "s", s).replace(' ', '0');
+    }
+
     private void addZero(String numStr) {
         String doubled = numStr + '0';
         if (doubled.length() <= this.len) {
-            this.set.add(String.format("%1$" + this.len + "s", doubled)
-                    .replace(' ', '0'));
+            this.set.add(leftZeroPad(doubled));
             this.addZero(doubled);
             this.addOne(numStr);
         }
@@ -26,10 +29,8 @@ public class BinaryStringsCollector {
         String doubledPlusOne = numStr + '1';
         if (doubledPlusOne.length() <= this.len) {
             if (!doubledPlusOne.contains("11")) {
-                this.set.add(String.format("%1$" + this.len + "s",
-                        doubledPlusOne).replace(' ', '0'));
+                this.set.add(leftZeroPad(doubledPlusOne));
                 this.addZero(doubledPlusOne);
-                this.addOne(doubledPlusOne);
             }
         }
     }
@@ -41,7 +42,6 @@ public class BinaryStringsCollector {
             throw new IllegalArgumentException(excMsg);
         }
         this.len = length;
-        int capacity = 1 << (length - 1);
         if (this.len > 0) {
             this.addZero("");
         }
