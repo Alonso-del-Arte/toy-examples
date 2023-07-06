@@ -19,12 +19,21 @@ public class BinaryStringsCollector {
                 set.add("01");
                 set.add("10");
                 break;
-            default:
+            case 3:
                 set.add("000");
                 set.add("001");
                 set.add("010");
                 set.add("100");
                 set.add("101");
+            default:
+                set.add("0000");
+                set.add("0001");
+                set.add("0010");
+                set.add("0100");
+                set.add("0101");
+                set.add("1000");
+                set.add("1001");
+                set.add("1010");
         }
         return set;
     }
