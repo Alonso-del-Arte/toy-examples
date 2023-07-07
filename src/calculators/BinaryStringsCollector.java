@@ -12,7 +12,7 @@ public class BinaryStringsCollector {
     private final Set<String> set = new HashSet<>();
 
     public Set<String> give() {
-        return this.set;
+        return new HashSet<>(this.set);
     }
 
     private String leftZeroPad(String s) {
