@@ -135,6 +135,17 @@ class BinaryStringsCollectorTest {
     }
 
     @Test
+    void testGiveDoesNotLeakReferenceToPrivateSet() {
+        BinaryStringsCollector collector
+                = new BinaryStringsCollector(MAXIMUM_N_TO_CALCULATE);
+        Set<String> firstGiven = collector.give();
+        Set<String> expected = new HashSet<>(firstGiven);
+        firstGiven.clear();
+        Set<String> actual = collector.give();
+        assertSetsContainSame(expected, actual);
+    }
+
+    @Test
     void testConstructorRejectsNegativeLength() {
         Random random = new Random();
         byte badLength = (byte) (-random.nextInt(128));
