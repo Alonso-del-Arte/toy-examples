@@ -1,4 +1,4 @@
-package collections.mutable;
+package collections.caches;
 
 import java.util.regex.Pattern;
 
