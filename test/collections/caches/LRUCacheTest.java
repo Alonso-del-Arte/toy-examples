@@ -100,7 +100,7 @@ class LRUCacheTest {
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
             LRUCacheImpl badCache = new LRUCacheImpl(badSize);
             System.out.println("Should not have been able to create "
-                    + badCache.toString() + " of size " + badSize
+                    + badCache + " of size " + badSize
                     + ", one less than minimum capacity");
         });
         String excMsg = t.getMessage();
