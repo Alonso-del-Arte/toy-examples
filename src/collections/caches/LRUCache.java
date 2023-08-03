@@ -93,16 +93,16 @@ public abstract class LRUCache<N, V> {
     }
 
     public LRUCache(int size) {
-        if (size < MINIMUM_CAPACITY) {
-            String excMsg = "Size " + size + " is less than minimum "
-                    + MINIMUM_CAPACITY;
-            throw new IllegalArgumentException(excMsg);
-        }
-        if (size > MAXIMUM_CAPACITY) {
-            String excMsg = "Size " + size + " is more than maximum "
-                    + MAXIMUM_CAPACITY;
-            throw new IllegalArgumentException(excMsg);
-        }
+//        if (size < MINIMUM_CAPACITY) {
+//            String excMsg = "Size " + size + " is less than minimum "
+//                    + MINIMUM_CAPACITY;
+//            throw new IllegalArgumentException(excMsg);
+//        }
+//        if (size > MAXIMUM_CAPACITY) {
+//            String excMsg = "Size " + size + " is more than maximum "
+//                    + MAXIMUM_CAPACITY;
+//            throw new IllegalArgumentException(excMsg);
+//        }
         this.capacity = size;
         this.names = new Object[this.capacity];
         this.values = new Object[this.capacity];
