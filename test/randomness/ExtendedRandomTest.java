@@ -57,6 +57,33 @@ class ExtendedRandomTest {
     }
 
     @Test
+    void testNextIntBoundedByNegative() {
+        int capacity = 2048;
+        int bound = -(capacity - RANDOM.nextInt(128));
+        Set<Integer> numbers = new HashSet<>(capacity);
+        for (int i = 0; i < capacity; i++) {
+            try {
+                int number = ExtendedRandom.nextInt(bound);
+                String msg = "Pseudorandom number " + number
+                        + " should be at most 0 but also more than " + bound;
+                assert number <= 0 : msg;
+                assert number > bound : msg;
+                numbers.add(number);
+            } catch (IllegalArgumentException iae) {
+                String errMsg = "IllegalArgumentException should not have occurred";
+                throw new AssertionError(errMsg, iae);
+            }
+        }
+        int expected = capacity / 2;
+        int actual = numbers.size();
+        String msg = "Expected at least " + expected
+                + " distinct integers in the range 0 to " + (bound - 1)
+                + " out of " + capacity + ", got " + actual;
+        System.out.println(msg);
+        assert actual >= expected : msg;
+    }
+
+    @Test
     void testNextBigInt() {
         System.out.println("nextBigInt");
         int capacity = 64;
