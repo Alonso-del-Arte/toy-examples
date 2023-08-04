@@ -70,15 +70,16 @@ class ExtendedRandomTest {
                 assert number > bound : msg;
                 numbers.add(number);
             } catch (IllegalArgumentException iae) {
-                String errMsg = "IllegalArgumentException should not have occurred";
+                String errMsg = "Bound " + bound
+                        + " shouldn't've caused IllegalArgumentException";
                 throw new AssertionError(errMsg, iae);
             }
         }
         int expected = capacity / 2;
         int actual = numbers.size();
         String msg = "Expected at least " + expected
-                + " distinct integers in the range 0 to " + (bound - 1)
-                + " out of " + capacity + ", got " + actual;
+                + " distinct integers in the range " + (bound - 1)
+                + " to 0 out of " + capacity + ", got " + actual;
         System.out.println(msg);
         assert actual >= expected : msg;
     }
