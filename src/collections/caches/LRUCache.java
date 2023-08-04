@@ -103,7 +103,7 @@ public abstract class LRUCache<N, V> {
 //                    + MAXIMUM_CAPACITY;
 //            throw new IllegalArgumentException(excMsg);
 //        }
-        this.capacity = size;
+        this.capacity = MINIMUM_CAPACITY;
         this.names = new Object[this.capacity];
         this.values = new Object[this.capacity];
     }
