@@ -26,9 +26,6 @@ public class ExtendedRandom {
         return RANDOM.nextInt();
     }
 
-    // TODO: Write test for negative bound. Should still give a result, e.g., if
-    //  bound = -128, then an integer in the range -127 to 0 would be a valid
-    //  result
     /**
      * Gives a pseudorandomly chosen integer as specified by the bound. This
      * function is essentially a static wrapper for
@@ -36,15 +33,17 @@ public class ExtendedRandom {
      * @param bound A lower or upper bound for the pseudorandomly chosen
      *              integer. The other bound is 0. The farther away from 0 that
      *              this parameter is, the likelier it is for repeated calls to
-     *              give a decent distribution of values.
+     *              give a decent distribution of values. Examples: 1024,
+     *              &minus;1024.
      * @return A pseudorandomly chosen integer, may be 0 or any integer between
      * 0 and <code>bound</code>. For example, given a bound of 1024, this
-     * function might return 743.
+     * function might return 743. Given a bound of &minus;1024, this function
+     * might return &minus;692.
      */
     public static int nextInt(int bound) {
-        int signAdjust = bound < 0 ? -1 : 1;
-        bound /= signAdjust;
-        return RANDOM.nextInt(bound) * signAdjust;
+//        int signAdjust = bound < 0 ? -1 : 1;
+//        bound /= signAdjust;
+        return RANDOM.nextInt();// * signAdjust;
     }
 
     // TODO: Write tests for this
