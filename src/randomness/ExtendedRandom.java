@@ -42,7 +42,9 @@ public class ExtendedRandom {
      * function might return 743.
      */
     public static int nextInt(int bound) {
-        return RANDOM.nextInt(bound);
+        int signAdjust = bound < 0 ? -1 : 1;
+        bound /= signAdjust;
+        return RANDOM.nextInt(bound) * signAdjust;
     }
 
     // TODO: Write tests for this
