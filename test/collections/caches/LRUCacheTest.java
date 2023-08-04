@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import static randomness.ExtendedRandom.nextInt;
+
 class LRUCacheTest {
 
     private static final int DEFAULT_SIZE = 7;
@@ -95,16 +97,16 @@ class LRUCacheTest {
     }
 
     @Test
-    void testConstructorRejectsSizeBelowMinimum() {
-        int badSize = LRUCache.MINIMUM_CAPACITY - 1;
+    void testConstructorRejectsNegativeSize() {
+        int badSize = nextInt(-512) - 1;
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
             LRUCacheImpl badCache = new LRUCacheImpl(badSize);
             System.out.println("Should not have been able to create "
-                    + badCache + " of size " + badSize
-                    + ", one less than minimum capacity");
+                    + badCache + " of size " + badSize);
         });
         String excMsg = t.getMessage();
         assert excMsg != null : "Message should not be null";
+        assert !excMsg.isEmpty() : "Message should not be empty";
         System.out.println("\"" + excMsg + "\"");
     }
 
