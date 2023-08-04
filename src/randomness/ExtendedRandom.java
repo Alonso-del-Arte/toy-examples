@@ -41,10 +41,9 @@ public class ExtendedRandom {
      * might return &minus;692.
      */
     public static int nextInt(int bound) {
-//        int signAdjust = bound < 0 ? -1 : 1;
-//        bound /= signAdjust;
-//        return RANDOM.nextInt(bound) * signAdjust;
-        throw new IllegalArgumentException("Bound " + bound + " is bad");
+        int signAdjust = bound < 0 ? -1 : 1;
+        bound /= signAdjust;
+        return -RANDOM.nextInt(bound);// * signAdjust;
     }
 
     // TODO: Write tests for this
