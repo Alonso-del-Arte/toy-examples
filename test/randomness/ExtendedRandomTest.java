@@ -1,15 +1,11 @@
 package randomness;
 
-import currency.CurrencyAmount;
 import fractions.Fraction;
 
 import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
-
-import numerics.ComplexNumber;
-import numerics.RomanNumeralsNumber;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,6 +28,19 @@ class ExtendedRandomTest {
                 + " distinct integers out of " + capacity + ", got " + actual;
         System.out.println(msg);
         assert actual >= expected : msg;
+    }
+
+    @Test
+    void testNextIntBoundedByZeroThrowsException() {
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            int badResult = ExtendedRandom.nextInt(0);
+            System.out.println("Calling nextInt with bound 0 gave "
+                    + badResult);
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        assert !excMsg.isEmpty() : "Message should not be empty";
+        System.out.println("\"" + excMsg + "\"");
     }
 
     @Test
