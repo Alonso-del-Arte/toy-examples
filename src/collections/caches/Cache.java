@@ -11,9 +11,11 @@ public abstract class Cache<N, V> {
      * cache should be too large, however, though I'm not providing a maximum
      * capacity constant.
      */
-    public static final int MINIMUM_CAPACITY = 4;
+    // TODO: Write test for this
+    public static final int MINIMUM_CAPACITY = -1;
 
-    public static final int MAXIMUM_CAPACITY = 128;
+    // TODO: Write test for this
+    public static final int MAXIMUM_CAPACITY = Integer.MAX_VALUE;
 
     /**
      * Creates a value for a given name. Ideally this function should only be
