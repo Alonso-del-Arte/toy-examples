@@ -8,6 +8,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CacheTest {
 
+    @Test
+    void testConstants() {
+        assertEquals(4, Cache.MINIMUM_CAPACITY);
+        assertEquals(128, Cache.MAXIMUM_CAPACITY);
+    }
+
     /**
      * A cache with the Least Recently Added eviction policy.
      */
