@@ -3,6 +3,8 @@ package collections.caches;
 import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.Test;
+import randomness.ExtendedRandom;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import static randomness.ExtendedRandom.nextInt;
@@ -129,12 +131,13 @@ class LRUCacheTest {
 
     @Test
     void testConstructorRejectsSizeAboveMaximum() {
-        int badSize = Cache.MAXIMUM_CAPACITY + 1;
+        int badSize = Cache.MAXIMUM_CAPACITY + nextInt(512) + 1;
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
             LRUCacheImpl badCache = new LRUCacheImpl(badSize);
             System.out.println("Should not have been able to create "
                     + badCache + " of size " + badSize
-                    + ", one more than maximum capacity");
+                    + ", which is more than maximum capacity "
+                    + Cache.MAXIMUM_CAPACITY);
         });
         String excMsg = t.getMessage();
         assert excMsg != null : "Message should not be null";
