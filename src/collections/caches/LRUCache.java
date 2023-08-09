@@ -97,16 +97,11 @@ public abstract class LRUCache<N, V> {
             String excMsg = "Size " + size + " not valid";
             throw new IllegalArgumentException(excMsg);
         }
-//        if (size < Cache.MINIMUM_CAPACITY) {
-//            String excMsg = "Size " + size + " is less than minimum "
-//                    + Cache.MINIMUM_CAPACITY;
-//            throw new IllegalArgumentException(excMsg);
-//        }
-//        if (size > Cache.MAXIMUM_CAPACITY) {
-//            String excMsg = "Size " + size + " is more than maximum "
-//                    + Cache.MAXIMUM_CAPACITY;
-//            throw new IllegalArgumentException(excMsg);
-//        }
+        if (size > Cache.MAXIMUM_CAPACITY) {
+            String excMsg = "Size " + size + " is more than maximum "
+                    + Cache.MAXIMUM_CAPACITY;
+            throw new IllegalArgumentException(excMsg);
+        }
         this.capacity = Cache.MINIMUM_CAPACITY;
         this.names = new Object[this.capacity];
         this.values = new Object[this.capacity];
