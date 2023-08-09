@@ -32,10 +32,10 @@ class LRUCacheTest {
 
     @Test
     void testCacheRetainsValueWhileCapacityAvailable() {
-        LRUCacheImpl cache = new LRUCacheImpl(LRUCache.MINIMUM_CAPACITY);
+        LRUCacheImpl cache = new LRUCacheImpl(Cache.MINIMUM_CAPACITY);
         String timeName = "^(?:\\d|[01]\\d|2[0-3]):[0-5]\\d$";
         Pattern expected = cache.retrieve(timeName);
-        for (int i = 1; i < LRUCache.MINIMUM_CAPACITY; i++) {
+        for (int i = 1; i < Cache.MINIMUM_CAPACITY; i++) {
             String fillerName = "^" + i + "*$";
             cache.retrieve(fillerName);
         }
@@ -111,12 +111,29 @@ class LRUCacheTest {
     }
 
     @Test
+    void testConstructorRejectsSizeBelowMinimum() {
+        for (int i = 0; i < Cache.MINIMUM_CAPACITY; i++) {
+            final int badSize = i;
+            Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+                LRUCacheImpl badCache = new LRUCacheImpl(badSize);
+                System.out.println("Should not have been able to create "
+                        + badCache + " of size " + badSize
+                        + ", which is less than minimum capacity "
+                        + Cache.MINIMUM_CAPACITY);
+            });
+            String excMsg = t.getMessage();
+            assert excMsg != null : "Message should not be null";
+            System.out.println("\"" + excMsg + "\"");
+        }
+    }
+
+    @Test
     void testConstructorRejectsSizeAboveMaximum() {
-        int badSize = LRUCache.MAXIMUM_CAPACITY + 1;
+        int badSize = Cache.MAXIMUM_CAPACITY + 1;
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
             LRUCacheImpl badCache = new LRUCacheImpl(badSize);
             System.out.println("Should not have been able to create "
-                    + badCache.toString() + " of size " + badSize
+                    + badCache + " of size " + badSize
                     + ", one more than maximum capacity");
         });
         String excMsg = t.getMessage();
