@@ -32,7 +32,7 @@ public abstract class Cache<N, V> {
     public abstract V retrieve(N name);
 
     public Cache(int size) {
-        if (size < MINIMUM_CAPACITY) {
+        if (size < MINIMUM_CAPACITY || size > MAXIMUM_CAPACITY) {
             String excMsg = "Size " + size
                     + " is not valid, should be at least " + MINIMUM_CAPACITY
                     + ", at most " + MAXIMUM_CAPACITY;
