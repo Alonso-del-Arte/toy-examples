@@ -36,7 +36,7 @@ class CacheTest {
 
     @Test
     void testConstructorRejectsNegativeSize() {
-        int badSize = vetBadSize(nextInt(-512) - 1, -1);
+        int badSize = vetBadSize(nextInt(-1024) - 1, -1);
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
             CacheImpl badCache = new CacheImpl(badSize);
             System.out.println("Should not have been able to create "
@@ -71,7 +71,7 @@ class CacheTest {
 
     @Test
     void testConstructorRejectsSizeAboveMaximum() {
-        int badSize = vetBadSize(Cache.MAXIMUM_CAPACITY + nextInt(512) + 1, 1);
+        int badSize = vetBadSize(Cache.MAXIMUM_CAPACITY + nextInt(768) + 1, 1);
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
             CacheImpl badCache = new CacheImpl(badSize);
             System.out.println("Should not have been able to create "

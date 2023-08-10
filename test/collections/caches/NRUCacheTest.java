@@ -11,7 +11,7 @@ class NRUCacheTest {
 
     @Test
     void testConstructorRejectsNegativeSize() {
-        int badSize = CacheTest.vetBadSize(nextInt(-512) - 1, -1);
+        int badSize = CacheTest.vetBadSize(nextInt(-1024) - 1, -1);
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
             NRUCacheImpl badCache = new NRUCacheImpl(badSize);
             System.out.println("Should not have been able to create "
@@ -51,7 +51,7 @@ class NRUCacheTest {
     @Test
     void testConstructorRejectsSizeAboveMaximum() {
         int badSize = CacheTest.vetBadSize(Cache.MAXIMUM_CAPACITY
-                + nextInt(512) + 1, 1);
+                + nextInt(1024) + 1, 1);
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
             NRUCacheImpl badCache = new NRUCacheImpl(badSize);
             System.out.println("Should not have been able to create "
