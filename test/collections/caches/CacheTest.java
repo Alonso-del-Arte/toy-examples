@@ -45,11 +45,28 @@ class CacheTest {
         String excMsg = t.getMessage();
         assert excMsg != null : "Message should not be null";
         assert !excMsg.isEmpty() : "Message should not be empty";
-        assert excMsg.contains(CacheTest.MIN_CAP_STR)
-                : CacheTest.CAPACITY_ASSERTION_MESSAGE;
-        assert excMsg.contains(CacheTest.MAX_CAP_STR)
-                : CacheTest.CAPACITY_ASSERTION_MESSAGE;
+        assert excMsg.contains(MIN_CAP_STR) : CAPACITY_ASSERTION_MESSAGE;
+        assert excMsg.contains(MAX_CAP_STR) : CAPACITY_ASSERTION_MESSAGE;
         System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testConstructorRejectsSizeBelowMinimum() {
+        for (int i = 0; i < Cache.MINIMUM_CAPACITY; i++) {
+            final int badSize = i;
+            Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+                CacheImpl badCache = new CacheImpl(badSize);
+                System.out.println("Should not have been able to create "
+                        + badCache + " of size " + badSize
+                        + ", which is less than minimum capacity "
+                        + Cache.MINIMUM_CAPACITY);
+            });
+            String excMsg = t.getMessage();
+            assert excMsg != null : "Message should not be null";
+            assert excMsg.contains(MIN_CAP_STR) : CAPACITY_ASSERTION_MESSAGE;
+            assert excMsg.contains(MAX_CAP_STR) : CAPACITY_ASSERTION_MESSAGE;
+            System.out.println("\"" + excMsg + "\"");
+        }
     }
 
     /**
