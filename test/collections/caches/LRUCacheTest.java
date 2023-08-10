@@ -3,7 +3,6 @@ package collections.caches;
 import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.Test;
-import randomness.ExtendedRandom;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,6 +11,16 @@ import static randomness.ExtendedRandom.nextInt;
 class LRUCacheTest {
 
     private static final int DEFAULT_SIZE = 7;
+
+    public static final String MIN_CAP_STR
+            = Integer.toString(Cache.MINIMUM_CAPACITY);
+
+    public static final String MAX_CAP_STR
+            = Integer.toString(Cache.MAXIMUM_CAPACITY);
+
+    public static final String CAPACITY_ASSERTION_MESSAGE
+            = "Exception message should include \"" + MIN_CAP_STR + "\" and \""
+            + MAX_CAP_STR + "\"";
 
     @Test
     void testAddToCache() {
@@ -98,9 +107,19 @@ class LRUCacheTest {
         assert cache.has(expected) : msg;
     }
 
+    private static int vetBadSize(int firstSelection, int step) {
+        int badSize = firstSelection - step;
+        String numStr;
+        do {
+            badSize += step;
+            numStr = Integer.toString(badSize);
+        } while (numStr.contains(MIN_CAP_STR) || numStr.contains(MAX_CAP_STR));
+        return badSize;
+    }
+
     @Test
     void testConstructorRejectsNegativeSize() {
-        int badSize = nextInt(-512) - 1;
+        int badSize = vetBadSize(nextInt(-512) - 1, -1);
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
             LRUCacheImpl badCache = new LRUCacheImpl(badSize);
             System.out.println("Should not have been able to create "
@@ -109,6 +128,8 @@ class LRUCacheTest {
         String excMsg = t.getMessage();
         assert excMsg != null : "Message should not be null";
         assert !excMsg.isEmpty() : "Message should not be empty";
+        assert excMsg.contains(MIN_CAP_STR) : CAPACITY_ASSERTION_MESSAGE;
+        assert excMsg.contains(MAX_CAP_STR) : CAPACITY_ASSERTION_MESSAGE;
         System.out.println("\"" + excMsg + "\"");
     }
 
@@ -125,13 +146,15 @@ class LRUCacheTest {
             });
             String excMsg = t.getMessage();
             assert excMsg != null : "Message should not be null";
+            assert excMsg.contains(MIN_CAP_STR) : CAPACITY_ASSERTION_MESSAGE;
+            assert excMsg.contains(MAX_CAP_STR) : CAPACITY_ASSERTION_MESSAGE;
             System.out.println("\"" + excMsg + "\"");
         }
     }
 
     @Test
     void testConstructorRejectsSizeAboveMaximum() {
-        int badSize = Cache.MAXIMUM_CAPACITY + nextInt(512) + 1;
+        int badSize = vetBadSize(Cache.MAXIMUM_CAPACITY + nextInt(512) + 1, 1);
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
             LRUCacheImpl badCache = new LRUCacheImpl(badSize);
             System.out.println("Should not have been able to create "
@@ -141,6 +164,8 @@ class LRUCacheTest {
         });
         String excMsg = t.getMessage();
         assert excMsg != null : "Message should not be null";
+        assert excMsg.contains(MIN_CAP_STR) : CAPACITY_ASSERTION_MESSAGE;
+        assert excMsg.contains(MAX_CAP_STR) : CAPACITY_ASSERTION_MESSAGE;
         System.out.println("\"" + excMsg + "\"");
     }
 
