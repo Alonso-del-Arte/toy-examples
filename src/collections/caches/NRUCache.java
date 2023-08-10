@@ -35,7 +35,7 @@ public abstract class NRUCache<N, V> {
     }
 
     public NRUCache(int size) {
-        if (size < Cache.MINIMUM_CAPACITY) {
+        if (size < Cache.MINIMUM_CAPACITY || size > Cache.MAXIMUM_CAPACITY) {
             String excMsg = "Size " + size
                     + " is not valid, should be at least "
                     + Cache.MINIMUM_CAPACITY + ", at most "
