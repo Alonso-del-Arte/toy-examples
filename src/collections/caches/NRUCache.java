@@ -36,11 +36,13 @@ public abstract class NRUCache<N, V> {
 
     // TODO: Write tests for this
     public NRUCache(int size) {
-//        if (size < MINIMUM_CAPACITY) {
-//            String excMsg = "Size " + size + " is less than minimum "
-//                    + MINIMUM_CAPACITY;
-//            throw new IllegalArgumentException(excMsg);
-//        }
+        if (size < 0) {
+            String excMsg = "Size " + size
+                    + " is not valid, should be at least "
+                    + Cache.MINIMUM_CAPACITY + ", at most "
+                    + Cache.MAXIMUM_CAPACITY;
+            throw new IllegalArgumentException(excMsg);
+        }
     }
 
 }
