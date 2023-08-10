@@ -48,6 +48,26 @@ class NRUCacheTest {
         }
     }
 
+    @Test
+    void testConstructorRejectsSizeAboveMaximum() {
+        int badSize = CacheTest.vetBadSize(Cache.MAXIMUM_CAPACITY
+                + nextInt(512) + 1, 1);
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            NRUCacheImpl badCache = new NRUCacheImpl(badSize);
+            System.out.println("Should not have been able to create "
+                    + badCache + " of size " + badSize
+                    + ", which is more than maximum capacity "
+                    + Cache.MAXIMUM_CAPACITY);
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        assert excMsg.contains(CacheTest.MIN_CAP_STR)
+                : CacheTest.CAPACITY_ASSERTION_MESSAGE;
+        assert excMsg.contains(CacheTest.MAX_CAP_STR)
+                : CacheTest.CAPACITY_ASSERTION_MESSAGE;
+        System.out.println("\"" + excMsg + "\"");
+    }
+
     private static class NRUCacheImpl extends NRUCache<String, Pattern> {
 
         @Override
