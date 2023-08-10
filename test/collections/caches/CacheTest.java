@@ -36,7 +36,7 @@ class CacheTest {
 
     @Test
     void testConstructorRejectsNegativeSize() {
-        int badSize = CacheTest.vetBadSize(nextInt(-512) - 1, -1);
+        int badSize = vetBadSize(nextInt(-512) - 1, -1);
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
             CacheImpl badCache = new CacheImpl(badSize);
             System.out.println("Should not have been able to create "
@@ -67,6 +67,23 @@ class CacheTest {
             assert excMsg.contains(MAX_CAP_STR) : CAPACITY_ASSERTION_MESSAGE;
             System.out.println("\"" + excMsg + "\"");
         }
+    }
+
+    @Test
+    void testConstructorRejectsSizeAboveMaximum() {
+        int badSize = vetBadSize(Cache.MAXIMUM_CAPACITY + nextInt(512) + 1, 1);
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            CacheImpl badCache = new CacheImpl(badSize);
+            System.out.println("Should not have been able to create "
+                    + badCache + " of size " + badSize
+                    + ", which is more than maximum capacity "
+                    + Cache.MAXIMUM_CAPACITY);
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        assert excMsg.contains(MIN_CAP_STR) : CAPACITY_ASSERTION_MESSAGE;
+        assert excMsg.contains(MAX_CAP_STR) : CAPACITY_ASSERTION_MESSAGE;
+        System.out.println("\"" + excMsg + "\"");
     }
 
     /**
