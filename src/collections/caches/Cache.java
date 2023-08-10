@@ -18,6 +18,8 @@ public abstract class Cache<N, V> {
      */
     public static final int MAXIMUM_CAPACITY = 128;
 
+    final int capacity;
+
     /**
      * Creates a value for a given name. Ideally this function should only be
      * called by {@link #retrieve(java.lang.Object) retrieve()}.
@@ -31,6 +33,14 @@ public abstract class Cache<N, V> {
 
     public abstract V retrieve(N name);
 
+    /**
+     * Sole constructor.
+     * @param size How many slots the cache should have. This value can't be
+     *             changed after construction. It should be at least {@link
+     *             #MINIMUM_CAPACITY}, at most {@link #MAXIMUM_CAPACITY}.
+     * @throws IllegalArgumentException If <code>size</code> is less than
+     * <code>MINIMUM_CAPACITY</code> or more than <code>MAXIMUM_CAPACITY</code>.
+     */
     public Cache(int size) {
         if (size < MINIMUM_CAPACITY || size > MAXIMUM_CAPACITY) {
             String excMsg = "Size " + size
@@ -38,6 +48,7 @@ public abstract class Cache<N, V> {
                     + ", at most " + MAXIMUM_CAPACITY;
             throw new IllegalArgumentException(excMsg);
         }
+        this.capacity = size;
     }
 
 }

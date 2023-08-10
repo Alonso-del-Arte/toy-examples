@@ -1,36 +1,23 @@
 package collections.caches;
 
-public abstract class LRUCache<N, V> {
-
-    /**
-     * The minimum capacity for a cache. Obviously this should not be a negative
-     * number, and zero doesn't make sense either. A value of 1 would be
-     * pointless, since the cache would be constantly pushing items out. So
-     * perhaps 2 is the smallest value that makes sense. But I think 4 is the
-     * smallest value likely to be used with any frequency. I don't think the
-     * cache should be too large, however, though I'm not providing a maximum
-     * capacity constant.
-     */
-    public static final int MINIMUM_CAPACITY = 4;
-
-    public static final int MAXIMUM_CAPACITY = 128;
+/**
+ * A fixed-capacity least recently used cache. When the cache is full and a new
+ * name-value pair is added, the least recently used name-value pair will be
+ * removed to make room.
+ * @param <N> The type for the names. Preferably a type for which instances are
+ *           in some sense inexpensive to compute, like
+ *           <code>java.lang.String</code>.
+ * @param <V> The type for the values. It should generally be a value that is in
+ *           some sense expensive to compute and thus easier to retrieve from a
+ *           cache. For example, <code>java.util.regex.Pattern</code>.
+ */
+public abstract class LRUCache<N, V> extends Cache<N, V> {
 
     private final Object[] names;
 
     private final Object[] values;
 
-    private final int capacity;
-
     private int nextUp = 0;
-
-    /**
-     * Creates a value for a given name. Ideally this function should only be
-     * called by {@link #retrieve(java.lang.Object) retrieve()}.
-     * @param name The name to create a value for. Once the value is in the
-     * cache, this name can be used to retrieve it.
-     * @return A new value. Preferably not null.
-     */
-    protected abstract V create(N name);
 
     private static int indexOf(Object obj, Object[] array, int endBound) {
         boolean found = false;
@@ -76,6 +63,7 @@ public abstract class LRUCache<N, V> {
         return value;
     }
 
+    @SuppressWarnings(value = "unchecked")
     public V retrieve(N name) {
         V value;
         int index = indexOf(name, this.names, this.capacity);
@@ -92,15 +80,17 @@ public abstract class LRUCache<N, V> {
         return value;
     }
 
+    /**
+     * Sole constructor.
+     * @param size How many slots the cache should have. This value can't be
+     *             changed after construction. It should be at least {@link
+     *             Cache#MINIMUM_CAPACITY}, at most {@link
+     *             Cache#MAXIMUM_CAPACITY}.
+     * @throws IllegalArgumentException If <code>size</code> is less than
+     * <code>MINIMUM_CAPACITY</code> or more than <code>MAXIMUM_CAPACITY</code>.
+     */
     public LRUCache(int size) {
-        if (size < Cache.MINIMUM_CAPACITY || size > Cache.MAXIMUM_CAPACITY) {
-            String excMsg = "Size " + size
-                    + " is not valid, should be at least "
-                    + Cache.MINIMUM_CAPACITY + ", at most "
-                    + Cache.MAXIMUM_CAPACITY;
-            throw new IllegalArgumentException(excMsg);
-        }
-        this.capacity = size;
+        super(size);
         this.names = new Object[this.capacity];
         this.values = new Object[this.capacity];
     }
