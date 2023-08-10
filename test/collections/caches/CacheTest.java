@@ -8,10 +8,28 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CacheTest {
 
+    static final String MIN_CAP_STR = Integer.toString(Cache.MINIMUM_CAPACITY);
+
+    static final String MAX_CAP_STR = Integer.toString(Cache.MAXIMUM_CAPACITY);
+
+    static final String CAPACITY_ASSERTION_MESSAGE
+            = "Exception message should include \"" + MIN_CAP_STR + "\" and \""
+            + MAX_CAP_STR + "\"";
+
     @Test
     void testConstants() {
         assertEquals(4, Cache.MINIMUM_CAPACITY);
         assertEquals(128, Cache.MAXIMUM_CAPACITY);
+    }
+
+    static int vetBadSize(int firstSelection, int step) {
+        int badSize = firstSelection - step;
+        String numStr;
+        do {
+            badSize += step;
+            numStr = Integer.toString(badSize);
+        } while (numStr.contains(MIN_CAP_STR) || numStr.contains(MAX_CAP_STR));
+        return badSize;
     }
 
     /**
