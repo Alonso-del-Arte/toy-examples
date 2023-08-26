@@ -44,8 +44,8 @@ public class StockMarket {
      * null.
      */
     public StockMarket(String name, String abbrev, Currency currency) {
-        if (name == null || abbrev == null) {
-            String excMsg = "Name, abbreviation must not be null";
+        if (name == null || abbrev == null || currency == null) {
+            String excMsg = "Name, abbreviation, currency must not be null";
             throw new NullPointerException(excMsg);
         }
         if (name.isEmpty() || abbrev.isEmpty()) {
