@@ -147,4 +147,17 @@ class StockMarketTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
+    @Test
+    void testConstructorRejectsNullCurrency() {
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            StockMarket exchange = new StockMarket("Some Exchange", "SE", null);
+            System.out.println("Should not have been able to create " + exchange
+                    + " with null currency");
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        assert !excMsg.isEmpty() : "Message should not be empty";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
 }
