@@ -57,4 +57,12 @@ class StockMarketTest {
         }
     }
 
+    @Test
+    void testGetAbbreviationRandom() {
+        String expected = ExtendedRandom.alphanumeric(5);
+        StockMarket exchange = new StockMarket("Fictional Exchange", expected);
+        String actual = exchange.getAbbreviation();
+        assertEquals(expected, actual);
+    }
+
 }
