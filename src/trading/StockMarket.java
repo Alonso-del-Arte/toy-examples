@@ -1,5 +1,7 @@
 package trading;
 
+import java.util.Currency;
+
 public class StockMarket {
 
     private final String fullName, abbreviation;
@@ -13,8 +15,13 @@ public class StockMarket {
     }
 
     // TODO: Write tests for this
-    public StockMarket(String name) {
-        this(name, "SNIY");
+    public Currency getCurrency() {
+        return Currency.getInstance("XTS");
+    }
+
+    // TODO: Write tests for this
+    public StockMarket(String name, Currency currency) {
+        this(name, "SNIY", currency);
     }
 
     /**
@@ -27,12 +34,16 @@ public class StockMarket {
      *               Thus in this example there would be no problem with "LSX"
      *               or even an abbreviation using no characters from the name
      *               at all.
+     * @param currency The currency that this stock market operates in. In the
+     *                 example, this should probably be the British pound
+     *                 sterling (GBP), even though some stocks are quoted in
+     *                 euros (EUR) or even United States dollars (USD).
      * @throws IllegalArgumentException If the name or abbreviation is empty, or
      * if the abbreviation is longer than the name.
      * @throws NullPointerException If either the name or the abbreviation is
      * null.
      */
-    public StockMarket(String name, String abbrev) {
+    public StockMarket(String name, String abbrev, Currency currency) {
         if (name == null || abbrev == null) {
             String excMsg = "Name, abbreviation must not be null";
             throw new NullPointerException(excMsg);

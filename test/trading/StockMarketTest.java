@@ -1,6 +1,8 @@
 package trading;
 
+import java.util.Currency;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
@@ -9,6 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import randomness.ExtendedRandom;
 
 class StockMarketTest {
+
+    public static final Currency DOLLARS = Currency.getInstance(Locale.US);
 
     private static final Map<String, String> MARKET_NAMES_AND_ABBREVIATIONS
             = new HashMap<>();
@@ -29,7 +33,7 @@ class StockMarketTest {
                 : MARKET_NAMES_AND_ABBREVIATIONS.entrySet()) {
             String expected = nameAndAbbrev.getKey();
             StockMarket exchange = new StockMarket(expected,
-                    nameAndAbbrev.getValue());
+                    nameAndAbbrev.getValue(), DOLLARS);
             String actual = exchange.getName();
             assertEquals(expected, actual);
         }
@@ -39,7 +43,7 @@ class StockMarketTest {
     void testGetNameRandom() {
         String expected = ExtendedRandom.alphanumeric(20);
         StockMarket exchange = new StockMarket(expected,
-                expected.substring(0, 5));
+                expected.substring(0, 5), DOLLARS);
         String actual = exchange.getName();
         assertEquals(expected, actual);
     }
@@ -51,7 +55,7 @@ class StockMarketTest {
                 : MARKET_NAMES_AND_ABBREVIATIONS.entrySet()) {
             String expected = nameAndAbbrev.getValue();
             StockMarket exchange = new StockMarket(nameAndAbbrev.getKey(),
-                    expected);
+                    expected, DOLLARS);
             String actual = exchange.getAbbreviation();
             assertEquals(expected, actual);
         }
@@ -60,7 +64,8 @@ class StockMarketTest {
     @Test
     void testGetAbbreviationRandom() {
         String expected = ExtendedRandom.alphanumeric(5);
-        StockMarket exchange = new StockMarket("Fictional Exchange", expected);
+        StockMarket exchange = new StockMarket("Fictional Exchange", expected,
+                DOLLARS);
         String actual = exchange.getAbbreviation();
         assertEquals(expected, actual);
     }
@@ -74,7 +79,7 @@ class StockMarketTest {
     @Test
     void testConstructorRejectsNullName() {
         Throwable t = assertThrows(NullPointerException.class, () -> {
-            StockMarket exchange = new StockMarket(null, "???");
+            StockMarket exchange = new StockMarket(null, "???", DOLLARS);
             System.out.println("Should not have been able to create " + exchange
                     + " with null name");
         });
@@ -87,7 +92,7 @@ class StockMarketTest {
     @Test
     void testConstructorRejectsEmptyName() {
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
-            StockMarket exchange = new StockMarket("", "???");
+            StockMarket exchange = new StockMarket("", "???", DOLLARS);
             System.out.println("Should not have been able to create " + exchange
                     + " with empty name");
         });
@@ -100,7 +105,8 @@ class StockMarketTest {
     @Test
     void testConstructorRejectsNullAbbreviation() {
         Throwable t = assertThrows(NullPointerException.class, () -> {
-            StockMarket exchange = new StockMarket("Some Exchange", null);
+            StockMarket exchange = new StockMarket("Some Exchange", null,
+                    DOLLARS);
             System.out.println("Should not have been able to create " + exchange
                     + " with null abbreviation");
         });
@@ -113,7 +119,8 @@ class StockMarketTest {
     @Test
     void testConstructorRejectsEmptyAbbreviation() {
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
-            StockMarket exchange = new StockMarket("Some Exchange", "");
+            StockMarket exchange = new StockMarket("Some Exchange", "",
+                    DOLLARS);
             System.out.println("Should not have been able to create " + exchange
                     + " with empty abbreviation");
         });
@@ -130,7 +137,7 @@ class StockMarketTest {
         int abbrevLen = nameLen + ExtendedRandom.nextInt(9) + 1;
         String abbrev = ExtendedRandom.alphanumeric(abbrevLen);
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
-            StockMarket exchange = new StockMarket(name, abbrev);
+            StockMarket exchange = new StockMarket(name, abbrev, DOLLARS);
             System.out.println("Should not have been able to create " + exchange
                     + " with name " + name + " and abbreviation " + abbrev);
         });
