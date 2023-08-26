@@ -44,4 +44,17 @@ class StockMarketTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testGetAbbreviation() {
+        System.out.println("getAbbreviation");
+        for (Map.Entry<String, String> nameAndAbbrev
+                : MARKET_NAMES_AND_ABBREVIATIONS.entrySet()) {
+            String expected = nameAndAbbrev.getValue();
+            StockMarket exchange = new StockMarket(nameAndAbbrev.getKey(),
+                    expected);
+            String actual = exchange.getAbbreviation();
+            assertEquals(expected, actual);
+        }
+    }
+
 }
