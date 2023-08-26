@@ -65,4 +65,79 @@ class StockMarketTest {
         assertEquals(expected, actual);
     }
 
+//    @Test 1-param constructor should be able to determine acronym, at least
+//    for the simpler cases, e.g., "SFE" for "San
+    void testAuxiliaryConstructor() {
+        fail("Haven't written test yet");
+    }
+
+    @Test
+    void testConstructorRejectsNullName() {
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            StockMarket exchange = new StockMarket(null, "???");
+            System.out.println("Should not have been able to create " + exchange
+                    + " with null name");
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        assert !excMsg.isEmpty() : "Message should not be empty";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testConstructorRejectsEmptyName() {
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            StockMarket exchange = new StockMarket("", "???");
+            System.out.println("Should not have been able to create " + exchange
+                    + " with empty name");
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        assert !excMsg.isEmpty() : "Message should not be empty";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testConstructorRejectsNullAbbreviation() {
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            StockMarket exchange = new StockMarket("Some Exchange", null);
+            System.out.println("Should not have been able to create " + exchange
+                    + " with null abbreviation");
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        assert !excMsg.isEmpty() : "Message should not be empty";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testConstructorRejectsEmptyAbbreviation() {
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            StockMarket exchange = new StockMarket("Some Exchange", "");
+            System.out.println("Should not have been able to create " + exchange
+                    + " with empty abbreviation");
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        assert !excMsg.isEmpty() : "Message should not be empty";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testConstructorRejectsAbbreviationLongerThanName() {
+        int nameLen = ExtendedRandom.nextInt(64) + 16;
+        String name = ExtendedRandom.alphanumeric(nameLen);
+        int abbrevLen = nameLen + ExtendedRandom.nextInt(9) + 1;
+        String abbrev = ExtendedRandom.alphanumeric(abbrevLen);
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            StockMarket exchange = new StockMarket(name, abbrev);
+            System.out.println("Should not have been able to create " + exchange
+                    + " with name " + name + " and abbreviation " + abbrev);
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        assert !excMsg.isEmpty() : "Message should not be empty";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
 }
