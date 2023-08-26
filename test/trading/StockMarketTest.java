@@ -35,4 +35,13 @@ class StockMarketTest {
         }
     }
 
+    @Test
+    void testGetNameRandom() {
+        String expected = ExtendedRandom.alphanumeric(20);
+        StockMarket exchange = new StockMarket(expected,
+                expected.substring(0, 5));
+        String actual = exchange.getName();
+        assertEquals(expected, actual);
+    }
+
 }
