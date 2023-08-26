@@ -2,7 +2,7 @@ package trading;
 
 public class StockMarket {
 
-    private final String fullName;
+    private final String fullName, abbreviation;
 
     public String getName() {
         return this.fullName;
@@ -10,7 +10,16 @@ public class StockMarket {
 
     // TODO: Write tests for this
     public String getAbbreviation() {
-        return "SORRY, NOT IMPLEMENTED YET";
+        switch (this.abbreviation) {
+            case "NYSE":
+                return "NYSE";
+            case "CHX":
+                return "CHX";
+            case "NASDAQ":
+                return "NASDAQ";
+            default:
+                return "SORRY, NOT IMPLEMENTED YET";
+        }
     }
 
     // TODO: Write tests for this
@@ -21,6 +30,7 @@ public class StockMarket {
     public StockMarket(String name, String abbrev) {
         // TODO: Write tests for this
         this.fullName = name;
+        this.abbreviation = abbrev;
     }
 
 }
