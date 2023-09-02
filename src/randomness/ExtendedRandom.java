@@ -5,7 +5,11 @@ import currency.CurrencyAmount;
 import fractions.Fraction;
 
 import java.math.BigInteger;
+import java.util.Iterator;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Random;
+import java.util.Set;
 
 import numerics.ComplexNumber;
 import numerics.RomanNumeralsNumber;
@@ -115,6 +119,17 @@ public class ExtendedRandom {
     // TODO: Write tests for this
     public static <E> E nextObject(E[] array) {
         return array[0];
+    }
+
+    // TODO: Write tests for this
+    public static <E> E nextObject(List<E> list) {
+        return list.get(0);
+    }
+
+    // TODO: Write tests for this
+    public static <E> E nextObject(Set<E> set) {
+        Iterator<E> iterator = set.iterator();
+        return iterator.next();
     }
 
 }
