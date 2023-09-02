@@ -118,7 +118,8 @@ public class ExtendedRandom {
 
     // TODO: Write tests for this
     public static <E> E nextObject(E[] array) {
-        return array[0];
+        int index = RANDOM.nextInt(array.length);
+        return array[index];
     }
 
     // TODO: Write tests for this
