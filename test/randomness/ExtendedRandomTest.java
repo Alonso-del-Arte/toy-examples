@@ -3,9 +3,9 @@ package randomness;
 import fractions.Fraction;
 
 import java.math.BigInteger;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Set;
@@ -259,6 +259,19 @@ class ExtendedRandomTest {
                 + " nextObject() calls for array with " + capacity
                 + " elements, all elements should have been given";
         assertEquals(expected, actual, msg);
+    }
+
+    @Test
+    void testNextObjectEmptyArrayThrowsException() {
+        Statement[] array = {};
+        Throwable t = assertThrows(NoSuchElementException.class, () -> {
+            Statement badStatement = ExtendedRandom.nextObject(array);
+            System.out.println("Calling nextObject() on empty array gave "
+                    + badStatement.toString());
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
     }
 
 }
