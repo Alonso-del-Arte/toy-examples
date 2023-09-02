@@ -5,6 +5,7 @@ import currency.CurrencyAmount;
 import fractions.Fraction;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -116,8 +117,21 @@ public class ExtendedRandom {
         return new String(asciiChars);
     }
 
-    // TODO: Write tests for this
+    /**
+     * Pseudorandomly chooses an element from an array.
+     * @param array The array of elements to choose from. For example, an array
+     *              of weekdays. Should not be empty.
+     * @param <E> The type of the elements in the array. This will be the return
+     *           type.
+     * @return An element from the array. For example, Thursday.
+     * @throws NoSuchElementException If <code>array</code> is empty.
+     */
     public static <E> E nextObject(E[] array) {
+        if (array.length == 0) {
+            String excMsg = "Array " + Arrays.toString(array)
+                    + " has no elements to choose from";
+            throw new NoSuchElementException(excMsg);
+        }
         int index = RANDOM.nextInt(array.length);
         return array[index];
     }
