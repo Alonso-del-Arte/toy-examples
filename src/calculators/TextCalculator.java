@@ -22,4 +22,14 @@ public class TextCalculator {
         return "SORRY, NOT IMPLEMENTED YET";
     }
 
+    // TODO: Write tests for this
+    public static String makeAcronym(String s) {
+        return "SORRY, NOT IMPLEMENTED YET";
+    }
+
+    // TODO: Write tests for this
+    public static String makeAcronym(String s, char c) {
+        return "SORRY, NOT IMPLEMENTED YET";
+    }
+
 }
