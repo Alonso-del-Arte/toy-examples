@@ -112,4 +112,9 @@ public class ExtendedRandom {
         return new String(asciiChars);
     }
 
+    // TODO: Write tests for this
+    public static <E> E nextObject(E[] array) {
+        return array[0];
+    }
+
 }
