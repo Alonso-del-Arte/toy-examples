@@ -3,7 +3,10 @@ package randomness;
 import fractions.Fraction;
 
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Set;
 
@@ -233,6 +236,29 @@ class ExtendedRandomTest {
                 + " distinct, gave " + actual + " distinct";
         System.out.println(msg);
         assert actual >= expected : msg;
+    }
+
+    @Test
+    void testNextObject() {
+        System.out.println("nextObject");
+        int capacity = RANDOM.nextInt(32) + 8;
+        LocalDateTime[] array = new LocalDateTime[capacity];
+        Set<LocalDateTime> expected = new HashSet<>(capacity);
+        LocalDateTime curr = LocalDateTime.now();
+        for (int i = 0; i < capacity; i++) {
+            curr = curr.minusHours((long) i * RANDOM.nextInt(24));
+            array[i] = curr;
+            expected.add(curr);
+        }
+        Set<LocalDateTime> actual = new HashSet<>(capacity);
+        int numberOfCalls = 20 * capacity;
+        for (int j = 0; j < numberOfCalls; j++) {
+            actual.add(ExtendedRandom.nextObject(array));
+        }
+        String msg = "After " + numberOfCalls
+                + " nextObject() calls for array with " + capacity
+                + " elements, all elements should have been given";
+        assertEquals(expected, actual, msg);
     }
 
 }
