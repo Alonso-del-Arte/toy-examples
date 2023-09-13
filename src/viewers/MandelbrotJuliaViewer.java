@@ -888,15 +888,18 @@ public final class MandelbrotJuliaViewer extends JPanel
     }
 
     public MandelbrotJuliaViewer(ComplexNumber point, boolean showJulia) {
-        if (!MAC_OS_FLAG) {
-            System.setProperty("apple.laf.useScreenMenuBar", "true");
-        }
+//        if (MAC_OS_FLAG) {
+//            System.setProperty("apple.laf.useScreenMenuBar", "true");
+//        }
         this.currPoint = point;
         this.juliaPoint = this.currPoint;
         this.juliaFlag = showJulia;
     }
 
     public static void main(String[] args) {
+        if (MAC_OS_FLAG) {
+            System.setProperty("apple.laf.useScreenMenuBar", "true");
+        }
         MandelbrotJuliaViewer viewer = new MandelbrotJuliaViewer();
         viewer.setUpFrame();
     }
