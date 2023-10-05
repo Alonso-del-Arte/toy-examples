@@ -4,7 +4,7 @@ public class TextCalculator {
 
     // TODO: Write tests for this
     public static boolean isHighSurrogate(char ch) {
-        return false;
+        return true;
     }
 
     // TODO: Write tests for this
