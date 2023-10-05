@@ -27,4 +27,30 @@ class TextCalculatorTest {
         assert TextCalculator.isHighSurrogate(ch) : msg;
     }
 
+    @Test
+    void testIsNotHighSurrogatePrecede0xD800() {
+        char ch = (char) (ExtendedRandom.nextInt(0xD800));
+        String msg = "Character " + Character.getName(ch)
+                + " should not be found to be a high surrogate";
+        assert !TextCalculator.isHighSurrogate(ch) : msg;
+    }
+
+    @Test
+    void testLowSurrogateIsNotHighSurrogate() {
+        int span = 0xE000 - 0xDC00;
+        char ch = (char) (0xDC00 + ExtendedRandom.nextInt(span));
+        String msg = "Character " + Character.getName(ch)
+                + " should not be found to be a high surrogate";
+        assert !TextCalculator.isHighSurrogate(ch) : msg;
+    }
+
+    @Test
+    void testIsNotHighSurrogateFollow0xDFFF() {
+        int span = 0x10000 - 0xE000;
+        char ch = (char) (0xE000 + ExtendedRandom.nextInt(span));
+        String msg = "Character " + Character.getName(ch)
+                + " should not be found to be a high surrogate";
+        assert !TextCalculator.isHighSurrogate(ch) : msg;
+    }
+
 }
