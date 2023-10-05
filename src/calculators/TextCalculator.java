@@ -2,9 +2,13 @@ package calculators;
 
 public class TextCalculator {
 
-    // TODO: Write tests for this
+    /**
+     * Checks whether a character is a Unicode high surrogate.
+     * @param ch The character to check. For example, '&Lambda;'.
+     * @return True if a character is a high surrogate (at least U+D800, at most U+DBFF), false otherwise.
+     */
     public static boolean isHighSurrogate(char ch) {
-        return true;
+        return ch > '\uD7FF' && ch < '\uDC00';
     }
 
     // TODO: Write tests for this
