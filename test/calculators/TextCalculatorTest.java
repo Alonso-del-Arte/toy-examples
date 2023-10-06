@@ -63,4 +63,30 @@ class TextCalculatorTest {
         assert TextCalculator.isLowSurrogate(ch) : msg;
     }
 
+    @Test
+    void testIsNotLowSurrogatePrecede0xD800() {
+        char ch = (char) (ExtendedRandom.nextInt(0xD800));
+        String msg = "Character " + Character.getName(ch)
+                + " should not be found to be a low surrogate";
+        assert !TextCalculator.isLowSurrogate(ch) : msg;
+    }
+
+    @Test
+    void testHighSurrogateIsNotLowSurrogate() {
+        int span = 0xDC00 - 0xD800;
+        char ch = (char) (0xD800 + ExtendedRandom.nextInt(span));
+        String msg = "Character " + Character.getName(ch)
+                + " should not be found to be a low surrogate";
+        assert !TextCalculator.isLowSurrogate(ch) : msg;
+    }
+
+    @Test
+    void testIsNotLowSurrogateFollow0xDFFF() {
+        int span = 0x10000 - 0xE000;
+        char ch = (char) (0xE000 + ExtendedRandom.nextInt(span));
+        String msg = "Character " + Character.getName(ch)
+                + " should not be found to be a low surrogate";
+        assert !TextCalculator.isLowSurrogate(ch) : msg;
+    }
+
 }
