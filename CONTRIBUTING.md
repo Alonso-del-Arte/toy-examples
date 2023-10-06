@@ -1,6 +1,6 @@
 # Contribution Guidelines
 
-This project will be open to Hacktoberfest 2023. This year I want to be 
+This project is now open to Hacktoberfest 2023. This year I want to be 
 absolutely clear that I don't want to deal with Maven. I think it's obnoxious, 
 obtrusive and adds way too much of its own complexity to the project.
 
