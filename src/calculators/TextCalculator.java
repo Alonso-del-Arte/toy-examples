@@ -5,15 +5,21 @@ public class TextCalculator {
     /**
      * Checks whether a character is a Unicode high surrogate.
      * @param ch The character to check. For example, '&Lambda;'.
-     * @return True if a character is a high surrogate (at least U+D800, at most U+DBFF), false otherwise.
+     * @return True if a character is a high surrogate (at least U+D800, at most
+     * U+DBFF), false otherwise.
      */
     public static boolean isHighSurrogate(char ch) {
         return ch > '\uD7FF' && ch < '\uDC00';
     }
 
-    // TODO: Write tests for this
+    /**
+     * Checks whether a character is a Unicode low surrogate.
+     * @param ch The character to check. For example, '&lambda;'.
+     * @return True if a character is a low surrogate (at least U+DC00, at most
+     * U+DFFF), false otherwise.
+     */
     public static boolean isLowSurrogate(char ch) {
-        return true;
+        return ch > '\uDBFF' && ch < '\uE000';
     }
 
     // TODO: Write tests for this
