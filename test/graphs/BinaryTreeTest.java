@@ -17,10 +17,15 @@ class BinaryTreeTest {
         assertEquals(expected, actual);
     }
 
-    //    @Test
-    void testGetRoot() {fail("Haven't written test yet");
+    @Test
+    void testGetRoot() {
         System.out.println("getRoot");
-        BinaryTree<Integer> tree;
+        int expected = ExtendedRandom.nextInt();
+        BinaryTree<Integer> tree = new BinaryTree<>(expected);
+        BinaryTree.Node<Integer> root = tree.getRoot();
+        assert root != null : "Root should never be null";
+        int actual = root.getElement();
+        assertEquals(expected, actual);
     }
 
 }
