@@ -1,7 +1,6 @@
 package randomness;
 
 import collections.immutable.Range;
-import currency.CurrencyAmount;
 import fractions.Fraction;
 
 import java.math.BigInteger;
@@ -14,7 +13,6 @@ import java.util.Random;
 import java.util.Set;
 
 import numerics.ComplexNumber;
-import numerics.RomanNumeralsNumber;
 
 public class ExtendedRandom {
 
@@ -127,7 +125,7 @@ public class ExtendedRandom {
         }
         char[] asciiChars = new char[length];
         for (int i = 0; i < length; i++) {
-            char ch = '?';
+            char ch;
             if (RANDOM.nextBoolean()) {
                 ch = (char) (RANDOM.nextInt(10) + '0');
             } else {
