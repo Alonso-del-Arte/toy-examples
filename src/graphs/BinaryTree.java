@@ -12,6 +12,11 @@ public class BinaryTree<E extends Comparable<E>> {
     public static class Node<E> {
 
         // TODO: Write tests for this
+        public E getElement() {
+            return null;
+        }
+
+        // TODO: Write tests for this
         public Node<E> addLeft(E element) {
             return null;
         }
