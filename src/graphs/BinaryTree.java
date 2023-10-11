@@ -11,9 +11,10 @@ public class BinaryTree<E extends Comparable<E>> {
 
     public static class Node<E> {
 
-        // TODO: Write tests for this
+        private final E element;
+
         public E getElement() {
-            return null;
+            return this.element;
         }
 
         // TODO: Write tests for this
@@ -26,16 +27,8 @@ public class BinaryTree<E extends Comparable<E>> {
             return null;
         }
 
-        Node(E element) {
-            //
-        }
-
-        Node(Node<E> ancestor, E element) {
-            //
-        }
-
-        private Node(Node<E> ancestor, E element, Node<E> leftChild) {
-            //
+        Node(E elem) {
+            this.element = elem;
         }
 
     }
