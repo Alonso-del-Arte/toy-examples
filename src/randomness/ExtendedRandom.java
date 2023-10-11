@@ -5,6 +5,7 @@ import currency.CurrencyAmount;
 import fractions.Fraction;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -19,6 +20,30 @@ public class ExtendedRandom {
 
     private static final Random RANDOM = new Random();
 
+
+/**
+     * Pseudorandomly chooses an element from an array, list, or set.
+     *
+     * @param collection The collection of elements to choose from. Should not be empty.
+     * @param <E>        The type of the elements in the collection. This will be the return type.
+     * @return An element from the collection.
+     * @throws NoSuchElementException If the collection is empty.
+     */
+    public static <E> E nextObject(Iterable<E> collection) {
+        List<E> elements = new ArrayList<>();
+        for (E element : collection) {
+            elements.add(element);
+        }
+
+        if (elements.isEmpty()) {
+            throw new NoSuchElementException("Collection is empty");
+        }
+
+        int index = RANDOM.nextInt(elements.size());
+        return elements.get(index);
+    }
+
+    
     /**
      * Gives a pseudorandomly chosen integer. May be positive or negative, or
      * it could even be 0. This function is essentially a static wrapper for
