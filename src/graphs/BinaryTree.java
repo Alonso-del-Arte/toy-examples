@@ -2,6 +2,11 @@ package graphs;
 
 public class BinaryTree<E extends Comparable<E>> {
 
+    // TODO: Write tests for this
+    public Node<E> getRoot() {
+        return null;
+    }
+
     public BinaryTree(E root) {}
 
     public static class Node<E> {
@@ -16,7 +21,7 @@ public class BinaryTree<E extends Comparable<E>> {
             return null;
         }
 
-        public Node(E element) {
+        Node(E element) {
             //
         }
 
