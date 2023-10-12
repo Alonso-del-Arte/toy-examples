@@ -1,9 +1,11 @@
 package graphs;
 
-import org.junit.jupiter.api.Test;
-import randomness.ExtendedRandom;
+import java.math.BigInteger;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+
+import randomness.ExtendedRandom;
 
 class BinaryTreeTest {
 
@@ -26,6 +28,24 @@ class BinaryTreeTest {
         assert root != null : "Root should never be null";
         int actual = root.getElement();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void testNodeGetLeftIsNullForNewNode() {
+        int bitLength = 64 + ExtendedRandom.nextInt(64);
+        BinaryTree.Node<BigInteger> node
+                = new BinaryTree.Node<>(ExtendedRandom.nextBigInt(bitLength));
+        BinaryTree.Node<BigInteger> left = node.getLeft();
+        assertNull(left);
+    }
+
+    @Test
+    void testNodeGetRightIsNullForNewNode() {
+        int bitLength = 64 + ExtendedRandom.nextInt(64);
+        BinaryTree.Node<BigInteger> node
+                = new BinaryTree.Node<>(ExtendedRandom.nextBigInt(bitLength));
+        BinaryTree.Node<BigInteger> right = node.getRight();
+        assertNull(right);
     }
 
 }
