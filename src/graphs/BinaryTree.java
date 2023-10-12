@@ -48,12 +48,12 @@ public class BinaryTree<E extends Comparable<E>> {
         }
 
         // TODO: Write tests for this
-        public Node<E> getLeft(E element) {
+        public Node<E> getLeft() {
             return new Node<>((E) new Object());
         }
 
         // TODO: Write tests for this
-        public Node<E> getRight(E element) {
+        public Node<E> getRight() {
             return new Node<>((E) new Object());
         }
 
