@@ -300,7 +300,7 @@ class ExtendedRandomTest {
         assertEquals(expected, actual, msg);
     }
 
-//    @Test
+    @Test
     void testNextObjectEmptyListThrowsException() {
         List<Double> list = new ArrayList<>();
         double someNumber = RANDOM.nextDouble();
