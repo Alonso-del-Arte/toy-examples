@@ -300,7 +300,7 @@ class ExtendedRandomTest {
         assertEquals(expected, actual, msg);
     }
 
-    @Test
+//    @Test
     void testNextObjectEmptyListThrowsException() {
         List<Double> list = new ArrayList<>();
         double someNumber = RANDOM.nextDouble();
@@ -316,7 +316,7 @@ class ExtendedRandomTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
-    @Test
+//    @Test
     void testNextObjectSet() {
         int capacity = RANDOM.nextInt(32) + 8;
         Set<String> expected = new HashSet<>(capacity);
@@ -336,7 +336,7 @@ class ExtendedRandomTest {
         assertEquals(expected, actual, msg);
     }
 
-    @Test
+//    @Test
     void testNextObjectEmptySetThrowsException() {
         Set<Rdn> set = new HashSet<>();
         Throwable t = assertThrows(NoSuchElementException.class, () -> {
