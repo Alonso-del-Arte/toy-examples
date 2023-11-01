@@ -316,7 +316,7 @@ class ExtendedRandomTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
-//    @Test
+    @Test
     void testNextObjectSet() {
         int capacity = RANDOM.nextInt(32) + 8;
         Set<String> expected = new HashSet<>(capacity);
