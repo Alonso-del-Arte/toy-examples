@@ -1,12 +1,25 @@
+This project might be open to Hacktoberfest 2024.
+
 # Contribution Guidelines
 
-This project is now open to Hacktoberfest 2023. This year I want to be 
+This project is now closed to Hacktoberfest 2023. This year I wanted to be 
 absolutely clear that I don't want to deal with Maven. I think it's obnoxious, 
 obtrusive and adds way too much of its own complexity to the project.
 
-And it's overkill for this project anyway, because this project is not supposed 
-to have a hundred dependencies to keep track of. Issues asking for Maven will be 
-flatly rejected. Same goes for pull requests.
+However, I now realize I needed to insist on something far more basic: don't 
+make a pull request if you haven't verified that what you wrote compiles and 
+passes the relevant tests.
+
+And even more basic: actually read the issue you want to work on and make sure 
+you understand what is being asked. If you don't understand the issue, comment 
+to request clarification or move on to some other issue.
+
+And don't make pull requests just to impose your own opinions on things, such as  
+that this project should use Maven, after my having written precisely not that.
+
+Maven is overkill for this project, because this project is not supposed to have 
+a hundred dependencies to keep track of. Issues asking for Maven will be flatly 
+rejected. Same goes for pull requests.
 
 To ask for dependencies besides JUnit is to completely miss the point of toy 
 examples. These toy examples are about illustrating concepts of object-oriented 
