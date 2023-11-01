@@ -2,6 +2,7 @@ package randomness;
 
 import fractions.Fraction;
 
+import java.awt.Color;
 import java.math.BigInteger;
 import java.sql.Statement;
 import java.time.LocalDateTime;
@@ -11,6 +12,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Set;
+
+import javax.naming.ldap.Rdn;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -279,15 +282,14 @@ class ExtendedRandomTest {
     @Test
     void testNextObjectList() {
         int capacity = RANDOM.nextInt(32) + 8;
-        List<LocalDateTime> list = new ArrayList<>(capacity);
-        Set<LocalDateTime> expected = new HashSet<>(capacity);
-        LocalDateTime curr = LocalDateTime.now();
+        List<Color> list = new ArrayList<>(capacity);
+        Set<Color> expected = new HashSet<>(capacity);
         for (int i = 0; i < capacity; i++) {
-            curr = curr.minusHours((long) i * RANDOM.nextInt(24));
-            list.add(curr);
-            expected.add(curr);
+            Color color = new Color(RANDOM.nextInt() + i);
+            list.add(color);
+            expected.add(color);
         }
-        Set<LocalDateTime> actual = new HashSet<>(capacity);
+        Set<Color> actual = new HashSet<>(capacity);
         int numberOfCalls = 20 * capacity;
         for (int j = 0; j < numberOfCalls; j++) {
             actual.add(ExtendedRandom.nextObject(list));
@@ -300,11 +302,14 @@ class ExtendedRandomTest {
 
     @Test
     void testNextObjectEmptyListThrowsException() {
-        List<Statement> list = new ArrayList<>();
+        List<Double> list = new ArrayList<>();
+        double someNumber = RANDOM.nextDouble();
+        list.add(someNumber);
+        list.remove(0);
         Throwable t = assertThrows(NoSuchElementException.class, () -> {
-            Statement badStatement = ExtendedRandom.nextObject(list);
+            double badNumber = ExtendedRandom.nextObject(list);
             System.out.println("Calling nextObject() on empty list gave "
-                    + badStatement.toString());
+                    + badNumber);
         });
         String excMsg = t.getMessage();
         assert excMsg != null : "Message should not be null";
@@ -314,13 +319,13 @@ class ExtendedRandomTest {
     @Test
     void testNextObjectSet() {
         int capacity = RANDOM.nextInt(32) + 8;
-        Set<LocalDateTime> expected = new HashSet<>(capacity);
+        Set<String> expected = new HashSet<>(capacity);
         LocalDateTime curr = LocalDateTime.now();
         for (int i = 0; i < capacity; i++) {
             curr = curr.minusHours((long) i * RANDOM.nextInt(24));
-            expected.add(curr);
+            expected.add(curr.toString());
         }
-        Set<LocalDateTime> actual = new HashSet<>(capacity);
+        Set<String> actual = new HashSet<>(capacity);
         int numberOfCalls = 20 * capacity;
         for (int j = 0; j < numberOfCalls; j++) {
             actual.add(ExtendedRandom.nextObject(expected));
@@ -333,11 +338,11 @@ class ExtendedRandomTest {
 
     @Test
     void testNextObjectEmptySetThrowsException() {
-        Set<Statement> set = new HashSet<>();
+        Set<Rdn> set = new HashSet<>();
         Throwable t = assertThrows(NoSuchElementException.class, () -> {
-            Statement badStatement = ExtendedRandom.nextObject(set);
+            Rdn badRDN = ExtendedRandom.nextObject(set);
             System.out.println("Calling nextObject() on empty set gave "
-                    + badStatement.toString());
+                    + badRDN.toString());
         });
         String excMsg = t.getMessage();
         assert excMsg != null : "Message should not be null";
