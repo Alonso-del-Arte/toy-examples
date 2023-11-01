@@ -134,13 +134,21 @@ public class ExtendedRandom {
         return array[index];
     }
 
-    // TODO: Write tests for this
+    /**
+     * Pseudorandomly chooses an element from a list.
+     * @param list The list of elements to choose from. For example, a list of
+     *             Web-safe colors.
+     * @param <E> The type of the elements in the list. This will be the return
+     *           type.
+     * @return An element from the list. For example, cyan.
+     */
     public static <E> E nextObject(List<E> list) {
-        if (list.size() == 0) {
+        int size = list.size();
+        if (size == 0) {
             String excMsg = "List " + list + " has no elements to choose from";
             throw new NoSuchElementException(excMsg);
         }
-        int index = RANDOM.nextInt(list.size());
+        int index = RANDOM.nextInt(size);
         return list.get(index);
     }
 
