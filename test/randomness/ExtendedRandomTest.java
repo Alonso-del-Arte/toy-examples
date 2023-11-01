@@ -300,7 +300,7 @@ class ExtendedRandomTest {
 
     @Test
     void testNextObjectEmptyListThrowsException() {
-        List<Statement> list = new ArrayList<>(capacity);
+        List<Statement> list = new ArrayList<>();
         Throwable t = assertThrows(NoSuchElementException.class, () -> {
             Statement badStatement = ExtendedRandom.nextObject(list);
             System.out.println("Calling nextObject() on empty list gave "
@@ -333,7 +333,7 @@ class ExtendedRandomTest {
 
     @Test
     void testNextObjectEmptySetThrowsException() {
-        Set<Statement> set = new HashSet<>(capacity);
+        Set<Statement> set = new HashSet<>();
         Throwable t = assertThrows(NoSuchElementException.class, () -> {
             Statement badStatement = ExtendedRandom.nextObject(set);
             System.out.println("Calling nextObject() on empty set gave "
