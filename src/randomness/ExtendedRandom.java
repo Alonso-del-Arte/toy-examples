@@ -141,6 +141,7 @@ public class ExtendedRandom {
      * @param <E> The type of the elements in the list. This will be the return
      *           type.
      * @return An element from the list. For example, cyan.
+     * @throws NoSuchElementException If <code>list</code> is empty.
      */
     public static <E> E nextObject(List<E> list) {
         int size = list.size();
@@ -159,6 +160,7 @@ public class ExtendedRandom {
      * @param <E> The type of the elements in the set. This will be the return
      *           type.
      * @return An element from the set. For example, Canadian dollars.
+     * @throws NoSuchElementException If <code>set</code> is empty.
      */
     public static <E> E nextObject(Set<E> set) {
         int size = set.size();
