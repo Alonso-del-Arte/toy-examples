@@ -336,7 +336,7 @@ class ExtendedRandomTest {
         assertEquals(expected, actual, msg);
     }
 
-//    @Test
+    @Test
     void testNextObjectEmptySetThrowsException() {
         Set<Rdn> set = new HashSet<>();
         Throwable t = assertThrows(NoSuchElementException.class, () -> {
