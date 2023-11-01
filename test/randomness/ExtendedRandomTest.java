@@ -5,7 +5,9 @@ import fractions.Fraction;
 import java.math.BigInteger;
 import java.sql.Statement;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Set;
@@ -267,6 +269,74 @@ class ExtendedRandomTest {
         Throwable t = assertThrows(NoSuchElementException.class, () -> {
             Statement badStatement = ExtendedRandom.nextObject(array);
             System.out.println("Calling nextObject() on empty array gave "
+                    + badStatement.toString());
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testNextObjectList() {
+        int capacity = RANDOM.nextInt(32) + 8;
+        List<LocalDateTime> list = new ArrayList<>(capacity);
+        Set<LocalDateTime> expected = new HashSet<>(capacity);
+        LocalDateTime curr = LocalDateTime.now();
+        for (int i = 0; i < capacity; i++) {
+            curr = curr.minusHours((long) i * RANDOM.nextInt(24));
+            list.add(curr);
+            expected.add(curr);
+        }
+        Set<LocalDateTime> actual = new HashSet<>(capacity);
+        int numberOfCalls = 20 * capacity;
+        for (int j = 0; j < numberOfCalls; j++) {
+            actual.add(ExtendedRandom.nextObject(list));
+        }
+        String msg = "After " + numberOfCalls
+                + " nextObject() calls for list with " + capacity
+                + " elements, all elements should have been given";
+        assertEquals(expected, actual, msg);
+    }
+
+    @Test
+    void testNextObjectEmptyListThrowsException() {
+        List<Statement> list = new ArrayList<>(capacity);
+        Throwable t = assertThrows(NoSuchElementException.class, () -> {
+            Statement badStatement = ExtendedRandom.nextObject(list);
+            System.out.println("Calling nextObject() on empty list gave "
+                    + badStatement.toString());
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
+    void testNextObjectSet() {
+        int capacity = RANDOM.nextInt(32) + 8;
+        Set<LocalDateTime> expected = new HashSet<>(capacity);
+        LocalDateTime curr = LocalDateTime.now();
+        for (int i = 0; i < capacity; i++) {
+            curr = curr.minusHours((long) i * RANDOM.nextInt(24));
+            expected.add(curr);
+        }
+        Set<LocalDateTime> actual = new HashSet<>(capacity);
+        int numberOfCalls = 20 * capacity;
+        for (int j = 0; j < numberOfCalls; j++) {
+            actual.add(ExtendedRandom.nextObject(expected));
+        }
+        String msg = "After " + numberOfCalls
+                + " nextObject() calls for set with " + capacity
+                + " elements, all elements should have been given";
+        assertEquals(expected, actual, msg);
+    }
+
+    @Test
+    void testNextObjectEmptySetThrowsException() {
+        Set<Statement> set = new HashSet<>(capacity);
+        Throwable t = assertThrows(NoSuchElementException.class, () -> {
+            Statement badStatement = ExtendedRandom.nextObject(set);
+            System.out.println("Calling nextObject() on empty set gave "
                     + badStatement.toString());
         });
         String excMsg = t.getMessage();
