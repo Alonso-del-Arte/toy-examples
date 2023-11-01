@@ -152,14 +152,21 @@ public class ExtendedRandom {
         return list.get(index);
     }
 
-    // TODO: Write tests for this
+    /**
+     * Pseudorandomly chooses an element from a set.
+     * @param set The set of elements to choose from. For example, a set of
+     *            currencies.
+     * @param <E> The type of the elements in the set. This will be the return
+     *           type.
+     * @return An element from the set. For example, Canadian dollars.
+     */
     public static <E> E nextObject(Set<E> set) {
-        if (set.size() == 0) {
-            String excMsg = "Set " + set.toString()
-                    + " has no elements to choose from";
+        int size = set.size();
+        if (size == 0) {
+            String excMsg = "Set " + set + " has no elements to choose from";
             throw new NoSuchElementException(excMsg);
         }
-        int index = RANDOM.nextInt(set.size());
+        int index = RANDOM.nextInt(size);
         Iterator<E> iterator = set.iterator();
         int curr = 0;
         while (curr < index) {
