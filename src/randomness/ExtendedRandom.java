@@ -137,10 +137,8 @@ public class ExtendedRandom {
     // TODO: Write tests for this
     public static <E> E nextObject(List<E> list) {
         if (list.size() == 0) {
-            return null;
-//            String excMsg = "List " + list.toString()
-//                    + " has no elements to choose from";
-//            throw new NoSuchElementException(excMsg);
+            String excMsg = "List " + list + " has no elements to choose from";
+            throw new NoSuchElementException(excMsg);
         }
         int index = RANDOM.nextInt(list.size());
         return list.get(index);
