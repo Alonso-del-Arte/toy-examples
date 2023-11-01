@@ -154,17 +154,19 @@ public class ExtendedRandom {
 
     // TODO: Write tests for this
     public static <E> E nextObject(Set<E> set) {
-//        if (set.size() == 0) {
+        if (set.size() == 0) {
+            return null;
 //            String excMsg = "Set " + set.toString()
 //                    + " has no elements to choose from";
 //            throw new NoSuchElementException(excMsg);
-//        }
-//        int index = RANDOM.nextInt(set.size());
+        }
+        int index = RANDOM.nextInt(set.size());
         Iterator<E> iterator = set.iterator();
-//        int curr = 0;
-//        while (curr < index) {
-//            iterator.next();
-//        }
+        int curr = 0;
+        while (curr < index) {
+            iterator.next();
+            curr++;
+        }
         return iterator.next();
     }
 
