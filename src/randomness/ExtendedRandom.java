@@ -136,28 +136,29 @@ public class ExtendedRandom {
 
     // TODO: Write tests for this
     public static <E> E nextObject(List<E> list) {
-        if (list.size() == 0) {
-            String excMsg = "List " + list.toString()
-                    + " has no elements to choose from";
-            throw new NoSuchElementException(excMsg);
-        }
-        int index = RANDOM.nextInt(list.size());
-        return list.get(index);
+//        if (list.size() == 0) {
+//            String excMsg = "List " + list.toString()
+//                    + " has no elements to choose from";
+//            throw new NoSuchElementException(excMsg);
+//        }
+//        int index = RANDOM.nextInt(list.size());
+//        return list.get(index);
+        return list.get(0);
     }
 
     // TODO: Write tests for this
     public static <E> E nextObject(Set<E> set) {
-        if (set.size() == 0) {
-            String excMsg = "Set " + set.toString()
-                    + " has no elements to choose from";
-            throw new NoSuchElementException(excMsg);
-        }
-        int index = RANDOM.nextInt(set.size());
+//        if (set.size() == 0) {
+//            String excMsg = "Set " + set.toString()
+//                    + " has no elements to choose from";
+//            throw new NoSuchElementException(excMsg);
+//        }
+//        int index = RANDOM.nextInt(set.size());
         Iterator<E> iterator = set.iterator();
-        int curr = 0;
-        while (curr < index) {
-            iterator.next();
-        }
+//        int curr = 0;
+//        while (curr < index) {
+//            iterator.next();
+//        }
         return iterator.next();
     }
 
