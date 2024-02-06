@@ -36,4 +36,13 @@ public class FileChooserWithOverwriteGuard extends JFileChooser {
                         + " already exists", JOptionPane.YES_NO_CANCEL_OPTION);
     }
 
+    @Override
+    public void approveSelection() {
+        File file = this.getSelectedFile();
+        if (file.exists()) {
+            this.getOverwriteQuestionResponse(file.getName());
+        }
+        super.approveSelection();
+    }
+
 }
