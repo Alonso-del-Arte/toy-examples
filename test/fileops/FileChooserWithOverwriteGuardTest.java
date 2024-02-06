@@ -150,6 +150,26 @@ public class FileChooserWithOverwriteGuardTest  implements ActionListener {
         assertEquals(expected, actual, message);
     }
 
+    @Test
+    public void testApproveSelectionCanAllowOverwrite() throws IOException {
+        this.sendStandByEvent();
+        JFileChooser chooser = new MockFileChooser(JOptionPane.YES_OPTION);
+        chooser.addActionListener(this);
+        chooser.setSelectedFile(EXISTING_FILE);
+        chooser.approveSelection();
+        String expected = JFileChooser.APPROVE_SELECTION;
+        String actual = this.mostRecentEvent.getActionCommand();
+        String message = "Approving selection of existing file "
+                + EXISTING_FILE.getAbsolutePath() + " should trigger command \""
+                + expected + "\"";
+        assertEquals(expected, actual, message);
+        try (BufferedWriter writer
+                     = new BufferedWriter(new FileWriter(EXISTING_FILE, true))) {
+            String str = "This message was placed by allow overwrite test";
+            writer.write(str);
+        }
+    }
+
     @AfterAll
     public static void tearDownClass() throws IOException {
         System.out.println("About to read contents of "
