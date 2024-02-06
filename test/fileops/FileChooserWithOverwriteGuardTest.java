@@ -119,6 +119,22 @@ public class FileChooserWithOverwriteGuardTest  implements ActionListener {
         assertEquals(expected, actual, message);
     }
 
+    @Test
+    public void testApproveSelectionCallsAskToOverwriteExistingFile() {
+        int[] responses = {JOptionPane.YES_OPTION, JOptionPane.NO_OPTION,
+                JOptionPane.CANCEL_OPTION, JOptionPane.CLOSED_OPTION};
+        for (int responseCode : responses) {
+            MockFileChooser chooser = new MockFileChooser(responseCode);
+            chooser.setSelectedFile(EXISTING_FILE);
+            chooser.approveSelection();
+            int expected = 1;
+            int actual = chooser.askToOverwriteCallCount;
+            String message = "Since file " + EXISTING_FILE.getAbsolutePath()
+                    + " already exists, user should have been asked";
+            assertEquals(expected, actual, message);
+        }
+    }
+
     @AfterAll
     public static void tearDownClass() throws IOException {
         System.out.println("About to read contents of "
