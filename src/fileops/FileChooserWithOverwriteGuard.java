@@ -30,27 +30,14 @@ import javax.swing.JOptionPane;
  */
 public class FileChooserWithOverwriteGuard extends JFileChooser {
 
+    int getOverwriteQuestionResponse(String filename) {
+        return JOptionPane.showConfirmDialog(this,
+                "Do you want to overwrite the existing file?", filename
+                        + " already exists", JOptionPane.YES_NO_CANCEL_OPTION);
+    }
+
     @Override
     public void approveSelection() {
-        File file = this.getSelectedFile();
-        if (file.exists()) {
-            int confResp = JOptionPane.showConfirmDialog(this,
-                    "Do you want to overwrite the existing file?",
-                    file.getName() + " already exists",
-                    JOptionPane.YES_NO_CANCEL_OPTION);
-            switch (confResp) {
-                case JOptionPane.YES_OPTION:
-                    super.approveSelection();
-                    break;
-                case JOptionPane.NO_OPTION:
-                    return;
-                case JOptionPane.CLOSED_OPTION:
-                case JOptionPane.CANCEL_OPTION:
-                    this.cancelSelection();
-                    return;
-            }
-        }
-        super.approveSelection();
     }
 
 }
