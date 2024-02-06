@@ -41,7 +41,8 @@ public class FileChooserWithOverwriteGuard extends JFileChooser {
         File file = this.getSelectedFile();
         if (file.exists()) {
             int response = this.getOverwriteQuestionResponse(file.getName());
-            if (response == JOptionPane.CANCEL_OPTION) {
+            if (response == JOptionPane.CANCEL_OPTION
+                    || response == JOptionPane.CLOSED_OPTION) {
                 this.cancelSelection();
                 return;
             }
