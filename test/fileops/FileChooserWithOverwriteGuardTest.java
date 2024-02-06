@@ -170,6 +170,21 @@ public class FileChooserWithOverwriteGuardTest  implements ActionListener {
         }
     }
 
+    @Test
+    public void testApproveSelectionClosedOptionCancelsSelection() {
+        this.sendStandByEvent();
+        JFileChooser chooser = new MockFileChooser(JOptionPane.CLOSED_OPTION);
+        chooser.addActionListener(this);
+        chooser.setSelectedFile(EXISTING_FILE);
+        chooser.approveSelection();
+        String expected = JFileChooser.CANCEL_SELECTION;
+        String actual = this.mostRecentEvent.getActionCommand();
+        String message = "Closing dialog for selection of existing file "
+                + EXISTING_FILE.getAbsolutePath() + " should trigger command \""
+                + expected + "\"";
+        assertEquals(expected, actual, message);
+    }
+
     @AfterAll
     public static void tearDownClass() throws IOException {
         System.out.println("About to read contents of "
