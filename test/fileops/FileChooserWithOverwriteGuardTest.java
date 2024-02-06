@@ -34,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import static randomness.ExtendedRandom.nextInt;
 
-public class FileChooserWithOverwriteGuardTest  implements ActionListener {
+public class FileChooserWithOverwriteGuardTest implements ActionListener {
 
     private static final String TEMP_DIR_PATH
             = System.getProperty("java.io.tmpdir");
@@ -183,6 +183,20 @@ public class FileChooserWithOverwriteGuardTest  implements ActionListener {
                 + EXISTING_FILE.getAbsolutePath() + " should trigger command \""
                 + expected + "\"";
         assertEquals(expected, actual, message);
+    }
+
+    @Test
+    public void testApproveSelectionNoOptionDoesNotIssueCommand() {
+        this.sendStandByEvent();
+        JFileChooser chooser = new MockFileChooser(JOptionPane.NO_OPTION);
+        chooser.addActionListener(this);
+        chooser.setSelectedFile(EXISTING_FILE);
+        chooser.approveSelection();
+        String actual = this.mostRecentEvent.getActionCommand();
+        String message = "No on dialog for selection of existing file "
+                + EXISTING_FILE.getAbsolutePath()
+                + " should not trigger any command";
+        assertEquals(STAND_BY_COMMAND, actual, message);
     }
 
     @AfterAll
