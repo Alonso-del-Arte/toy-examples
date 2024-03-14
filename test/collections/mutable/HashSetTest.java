@@ -1,5 +1,6 @@
 package collections.mutable;
 
+import java.sql.NClob;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
 
@@ -13,6 +14,15 @@ class HashSetTest {
         System.out.println("isEmpty");
         HashSet<ResultSet> set = new HashSet<>();
         assert set.isEmpty() : "Newly created set should be empty";
+    }
+
+    @Test
+    void testSizeZeroAtFirst() {
+        HashSet<NClob> set = new HashSet<>();
+        int expected = 0;
+        int actual = set.size();
+        assertEquals(expected, actual,
+                "Newly created set should have zero elements");
     }
 
     @Test
