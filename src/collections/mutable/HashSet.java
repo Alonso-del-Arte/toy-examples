@@ -3,7 +3,7 @@ package collections.mutable;
 public class HashSet<E> {
 
     public boolean isEmpty() {
-        return false;
+        return true;
     }
 
     public int size() {
