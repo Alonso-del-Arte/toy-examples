@@ -2,8 +2,10 @@ package collections.mutable;
 
 public class HashSet<E> {
 
+    private boolean empty = true;
+
     public boolean isEmpty() {
-        return true;
+        return this.empty;
     }
 
     public int size() {
@@ -11,6 +13,7 @@ public class HashSet<E> {
     }
 
     public boolean add(E element) {
+        this.empty = false;
         return false;
     }
 
