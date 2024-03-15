@@ -1,7 +1,5 @@
 package collections.immutable;
 
-import java.util.Random;
-
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,6 +37,18 @@ class RangeTest {
         int end = 2 * ExtendedRandom.nextInt(65535);
         Range range = new Range(begin, end, expected);
         int actual = range.getStep();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testToString() {
+        System.out.println("toString");
+        int begin = ExtendedRandom.nextInt(1024) + 16;
+        int step = ExtendedRandom.nextInt(16) + 4;
+        int end = begin + step * ExtendedRandom.nextInt(256) + step;
+        Range range = new Range(begin, end, step);
+        String expected = begin + " to " + end + " by " + step;
+        String actual = range.toString();
         assertEquals(expected, actual);
     }
 
