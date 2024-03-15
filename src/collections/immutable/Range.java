@@ -40,6 +40,11 @@ public class Range implements Iterable<Integer> {
         return this.interval;
     }
 
+    @Override
+    public String toString() {
+        return this.begin + " to " + this.end + " by " + this.interval;
+    }
+
     public Range(int start, int finish) {
         this(start, finish, Integer.signum(finish - start));
     }
