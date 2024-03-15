@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import randomness.ExtendedRandom;
+
 class HashSetTest {
 
     @Test
@@ -32,6 +34,20 @@ class HashSetTest {
         set.add(dateTime);String msg = "After adding " + dateTime
                 + " to set of times, set should not be empty";
         assert !set.isEmpty() : msg;
+    }
+
+    @Test
+    void testSize() {
+        System.out.println("size");
+        int maxCap = ExtendedRandom.nextInt(64) + 16;
+        HashSet<Integer> set = new HashSet<>();
+        for (int expected = 0; expected < maxCap; expected++) {
+            int actual = set.size();
+            String msg = "Element should have " + expected
+                    + " element(s) so far";
+            assertEquals(expected, actual, msg);
+            set.add(expected);
+        }
     }
 
 }
