@@ -63,6 +63,19 @@ class RangeTest {
     }
 
     @Test
+    void testReferentialEquality() {
+        int begin = ExtendedRandom.nextInt(1024) + 16;
+        int step = ExtendedRandom.nextInt(4) + 1;
+        int end = begin + step * ExtendedRandom.nextInt(256) + step;
+        Range range = new Range(begin, end, step);
+        assertEquals(range, range);
+    }
+
+    void testEquals() {
+        System.out.println("equals");fail("WRITE THIS TEST");
+    }
+
+    @Test
     void testAuxiliaryConstructorInfersPositiveOneStep() {
         int begin = -ExtendedRandom.nextInt(256) - 4;
         int end = ExtendedRandom.nextInt(-begin) + 16;
