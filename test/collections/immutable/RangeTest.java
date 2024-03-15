@@ -84,6 +84,17 @@ class RangeTest {
         assert !range.equals(obj) : msg;
     }
 
+    @Test
+    void testNotEqualsDiffClass() {
+        int begin = ExtendedRandom.nextInt(1024) + 16;
+        int step = ExtendedRandom.nextInt(4) + 1;
+        int end = begin + step * ExtendedRandom.nextInt(256) + step;
+        Range range = new Range(begin, end, step);
+        Object obj = new Object();
+        String msg = "Range " + range + " should not equal " + obj;
+        assert !range.equals(obj) : msg;
+    }
+
     void testEquals() {
         System.out.println("equals");fail("WRITE THIS TEST");
     }
