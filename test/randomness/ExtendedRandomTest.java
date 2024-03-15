@@ -102,6 +102,11 @@ class ExtendedRandomTest {
     }
 
     @Test
+    void testNextIntFromRange() {
+        fail("RESUME WORK HERE");
+    }
+
+    @Test
     void testNextBigInt() {
         System.out.println("nextBigInt");
         int capacity = 64;
@@ -342,7 +347,7 @@ class ExtendedRandomTest {
         Throwable t = assertThrows(NoSuchElementException.class, () -> {
             Rdn badRDN = ExtendedRandom.nextObject(set);
             System.out.println("Calling nextObject() on empty set gave "
-                    + badRDN.toString());
+                     + badRDN.toString());
         });
         String excMsg = t.getMessage();
         assert excMsg != null : "Message should not be null";
