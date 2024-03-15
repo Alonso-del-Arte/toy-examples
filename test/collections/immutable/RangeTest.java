@@ -1,5 +1,7 @@
 package collections.immutable;
 
+import static org.example.NullProvider.provideNull;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -69,6 +71,17 @@ class RangeTest {
         int end = begin + step * ExtendedRandom.nextInt(256) + step;
         Range range = new Range(begin, end, step);
         assertEquals(range, range);
+    }
+
+    @Test
+    void testNotEqualsNull() {
+        int begin = ExtendedRandom.nextInt(1024) + 16;
+        int step = -ExtendedRandom.nextInt(4) - 1;
+        int end = begin + step * ExtendedRandom.nextInt(256) + step;
+        Range range = new Range(begin, end, step);
+        String msg = "Range " + range + " should not equal null";
+        Object obj = provideNull();
+        assert !range.equals(obj) : msg;
     }
 
     void testEquals() {
