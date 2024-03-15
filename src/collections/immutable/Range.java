@@ -42,12 +42,8 @@ public class Range implements Iterable<Integer> {
 
     @Override
     public String toString() {
-        String intermediate = this.begin + " to " + this.end;
-        if (this.interval == 1) {
-            return intermediate;
-        } else {
-            return intermediate + " by " + this.interval;
-        }
+        return this.begin + " to " + this.end + ((this.interval == 1) ? ""
+                : " by " + this.interval);
     }
 
     public Range(int start, int finish) {
