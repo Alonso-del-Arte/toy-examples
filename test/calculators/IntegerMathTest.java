@@ -332,4 +332,9 @@ class IntegerMathTest {
         assertEquals(expected, actual, msgB);
     }
 
+    @Test
+    void testRandomPartitionTooManyParts() { // e.g., partition 8 into ten parts
+        fail("RESUME WORKING HERE");
+    }
+
 }
