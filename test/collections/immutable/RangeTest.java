@@ -53,6 +53,16 @@ class RangeTest {
     }
 
     @Test
+    void testToStringStepOneIsTacit() {
+        int begin = ExtendedRandom.nextInt(256) + 4;
+        int end = begin + ExtendedRandom.nextInt(32) + 8;
+        Range range = new Range(begin, end);
+        String expected = begin + " to " + end;
+        String actual = range.toString();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testAuxiliaryConstructorInfersPositiveOneStep() {
         int begin = -ExtendedRandom.nextInt(256) - 4;
         int end = ExtendedRandom.nextInt(-begin) + 16;
