@@ -1,5 +1,6 @@
 package viewers;
 
+import calculators.TextCalculator;
 import clipboardops.ImageSelection;
 import fileops.FileChooserWithOverwriteGuard;
 import fileops.PNGFileFilter;
@@ -36,5 +37,47 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileFilter;
 
-public class CharacterInfoViewer {
+public class CharacterInfoViewer extends JFrame implements ActionListener {
+
+    private static final boolean MAC_OS_FLAG = System.getProperty("os.name")
+            .equals("Mac OS X");
+
+    private static final int MASK_CTRL_COMMAND = MAC_OS_FLAG
+            ? InputEvent.META_MASK : InputEvent.CTRL_MASK;
+
+    String glyphString = "?";
+
+    private final JPanel glyphPanel = new GlyphPanel();
+
+    public void actionPerformed(ActionEvent event) {
+        //
+    }
+
+    public CharacterInfoViewer(String s) {
+        this.pack();
+    }
+
+    public static void main(String[] args) {
+        CharacterInfoViewer viewer = new CharacterInfoViewer("EXAMPLE");
+        viewer.add(viewer.glyphPanel);
+        viewer.setVisible(true);
+    }
+
+    private class GlyphPanel extends JPanel {
+
+        private static final int DEFAULT_HEIGHT = 400;
+
+        private static final int DEFAULT_WIDTH = 300;
+
+        public void paintComponent(Graphics g) {
+            g.drawString(CharacterInfoViewer.this.glyphString, 100, 100);
+        }
+
+        GlyphPanel() {
+            Dimension dimension = new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+            this.setPreferredSize(dimension);
+        }
+
+    }
+
 }
