@@ -108,6 +108,18 @@ class RangeTest {
     }
 
     @Test
+    void testNotEqualsDiffEnd() {
+        int begin = ExtendedRandom.nextInt(1024) + 16;
+        int step = ExtendedRandom.nextInt(4) + 1;
+        int endA = begin + step * ExtendedRandom.nextInt(256) + step;
+        int endB = endA + step;
+        Range rangeA = new Range(begin, endA, step);
+        Range rangeB = new Range(begin, endB, step);
+        String msg = "Range " + rangeA + " should not be the same as " + rangeB;
+        assertNotEquals(rangeA, rangeB, msg);
+    }
+
+    @Test
     void testEquals() {
         System.out.println("equals");
         int begin = ExtendedRandom.nextInt(1024) + 16;
