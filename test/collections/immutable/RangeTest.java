@@ -137,7 +137,7 @@ class RangeTest {
     void testNotEqualsDiffStep() {
         int begin = ExtendedRandom.nextInt(1024) + 16;
         int stepA = ExtendedRandom.nextInt(4) + 1;
-        int stepB = stepA * stepA;
+        int stepB = (stepA == 1) ? 2 : stepA * stepA;
         int end = begin + stepB * (ExtendedRandom.nextInt(256) + 4);
         Range rangeA = new Range(begin, end, stepA);
         Range rangeB = new Range(begin, end, stepB);
