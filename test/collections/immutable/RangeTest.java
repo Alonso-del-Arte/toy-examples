@@ -1,5 +1,8 @@
 package collections.immutable;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static org.example.NullProvider.provideNull;
 
 import org.junit.jupiter.api.Test;
@@ -140,6 +143,27 @@ class RangeTest {
         Range rangeB = new Range(begin, end, stepB);
         String msg = "Range " + rangeA + " should not be the same as " + rangeB;
         assertNotEquals(rangeA, rangeB, msg);
+    }
+
+    @Test
+    void testHashCode() {
+        System.out.println("hashCode");
+        int capacity = ExtendedRandom.nextInt(64) + 16;
+        Set<Range> ranges = new HashSet<>(capacity);
+        Set<Integer> hashes = new HashSet<>(capacity);
+        for (int start = 0; start < capacity; start++) {
+            for (int step = 1; step < capacity; step++) {
+                int end = start + step * (ExtendedRandom.nextInt(16) + 4);
+                Range range = new Range(start, end, step);
+                ranges.add(range);
+                hashes.add(range.hashCode());
+            }
+        }
+        int expected = ranges.size();
+        int actual = hashes.size();
+        String msg = "Given " + expected
+                + " distinct ranges, there should be as many hashes";
+        assertEquals(expected, actual, msg);
     }
 
     @Test
