@@ -66,7 +66,9 @@ public class Range implements Iterable<Integer> {
 
     @Override
     public int hashCode() {
-        return 0;
+        int hash = this.begin << 22;
+        hash += this.end << 11;
+        return hash + this.interval;
     }
 
     public Range(int start, int finish) {
