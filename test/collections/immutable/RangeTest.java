@@ -95,8 +95,21 @@ class RangeTest {
         assert !range.equals(obj) : msg;
     }
 
+    @Test
+    void testNotEqualsDiffStart() {
+        int beginA = ExtendedRandom.nextInt(1024) + 16;
+        int step = ExtendedRandom.nextInt(4) + 1;
+        int beginB = beginA - step;
+        int end = beginA + step * ExtendedRandom.nextInt(256) + step;
+        Range rangeA = new Range(beginA, end, step);
+        Range rangeB = new Range(beginB, end, step);
+        String msg = "Range " + rangeA + " should not be the same as " + rangeB;
+        assertNotEquals(rangeA, rangeB, msg);
+    }
+
     void testEquals() {
-        System.out.println("equals");fail("WRITE THIS TEST");
+        System.out.println("equals");
+        fail("WRITE THIS TEST");
     }
 
     @Test
