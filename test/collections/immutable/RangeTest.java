@@ -107,9 +107,15 @@ class RangeTest {
         assertNotEquals(rangeA, rangeB, msg);
     }
 
+    @Test
     void testEquals() {
         System.out.println("equals");
-        fail("WRITE THIS TEST");
+        int begin = ExtendedRandom.nextInt(1024) + 16;
+        int step = ExtendedRandom.nextInt(4) + 1;
+        int end = begin + step * ExtendedRandom.nextInt(256) + step;
+        Range someRange = new Range(begin, end, step);
+        Range sameRange = new Range(begin, end, step);
+        assertEquals(someRange, sameRange);
     }
 
     @Test
