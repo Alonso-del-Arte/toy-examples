@@ -58,10 +58,10 @@ public class Range implements Iterable<Integer> {
             return false;
         }
         final Range other = (Range) obj;
-        if (this.begin != other.begin) {
+        if (this.begin != other.begin || this.end != other.end) {
             return false;
         }
-        return this.end == other.end;
+        return this.interval == other.interval;
     }
 
     @Override
