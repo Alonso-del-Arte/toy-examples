@@ -98,6 +98,11 @@ public class IntegerMath {
         return primes.get(index);
     }
 
+    // TODO: Write tests for this
+    public static int mod(int a, int b) {
+        return Integer.MIN_VALUE;
+    }
+
     /**
      * Calculates the greatest common divisor (GCD) of two integers using the
      * Euclidean algorithm. The algorithm is implemented through recursion.
