@@ -46,10 +46,10 @@ public class Range implements Iterable<Integer> {
                 : " by " + this.interval);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return obj instanceof Range;
-    }
+//    @Override
+//    public boolean equals(Object obj) {
+//        return obj instanceof Range;
+//    }
 
     @Override
     public int hashCode() {
