@@ -57,7 +57,11 @@ public class Range implements Iterable<Integer> {
         if (!this.getClass().equals(obj.getClass())) {
             return false;
         }
-        return this.begin == ((Range) obj).begin;
+        final Range other = (Range) obj;
+        if (this.begin != other.begin) {
+            return false;
+        }
+        return this.end == other.end;
     }
 
     @Override
