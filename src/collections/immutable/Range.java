@@ -48,20 +48,20 @@ public class Range implements Iterable<Integer> {
 
     @Override
     public boolean equals(Object obj) {
-//        if (this == obj) {
+        if (this == obj) {
             return true;
-//        }
-//        if (obj == null) {
-//            return false;
-//        }
-//        if (!this.getClass().equals(obj.getClass())) {
-//            return false;
-//        }
-//        final Range other = (Range) obj;
-//        if (this.begin != other.begin || this.end != other.end) {
-//            return false;
-//        }
-//        return this.interval == other.interval;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!this.getClass().equals(obj.getClass())) {
+            return false;
+        }
+        final Range other = (Range) obj;
+        if (this.begin != other.begin || this.end != other.end) {
+            return false;
+        }
+        return this.interval == other.interval;
     }
 
     @Override
