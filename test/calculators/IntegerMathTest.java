@@ -187,6 +187,22 @@ class IntegerMathTest {
     }
 
     @Test
+    void testModZero() {
+        int n = ExtendedRandom.nextInt() ^ 16;
+        Throwable t = assertThrows(ArithmeticException.class, () -> {
+            int badResidue = IntegerMath.mod(n, 0);
+            System.out.println("Trying to calculate " + n
+                    + " mod 0 should've caused an exception, not given result "
+                    + badResidue);
+        });
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isEmpty() : "Exception message should not be empty";
+        String msg = "Exception message should contain parameter n = " + n;
+        assert excMsg.contains(Integer.toString(n)) : msg;
+    }
+
+    @Test
     void testEuclideanGCDSameNegativeNumber() {
         int a = -ExtendedRandom.nextInt(1024) - 256;
         int expected = -a;
