@@ -170,6 +170,23 @@ class IntegerMathTest {
     }
 
     @Test
+    void testMod() {
+        System.out.println("mod");
+        int m = ExtendedRandom.nextInt(256) + 4;
+        int numberOfSpans = 12;
+        int stop = m * numberOfSpans;
+        for (int i = -stop; i < stop; i += m) {
+            for (int expected = 0; expected < m; expected++) {
+                int n = i + expected;
+                int actual = IntegerMath.mod(n, m);
+                String msg= "Expecting " + n + " modulo " + m + " to be "
+                        + expected;
+                assertEquals(expected, actual, msg);
+            }
+        }
+    }
+
+    @Test
     void testEuclideanGCDSameNegativeNumber() {
         int a = -ExtendedRandom.nextInt(1024) - 256;
         int expected = -a;
