@@ -98,8 +98,12 @@ public class IntegerMath {
         return primes.get(index);
     }
 
-    // TODO: Write tests for this
     public static int mod(int a, int b) {
+        if (b == 0) {
+            String excMsg = "Taking " + a + " modulo " + b
+                    + " involves division by 0";
+            throw new ArithmeticException(excMsg);
+        }
         int intermediate = a % b;
         if (intermediate < 0) {
             return b + intermediate;
