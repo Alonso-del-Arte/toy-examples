@@ -100,7 +100,12 @@ public class IntegerMath {
 
     // TODO: Write tests for this
     public static int mod(int a, int b) {
-        return Integer.MIN_VALUE;
+        int intermediate = a % b;
+        if (intermediate < 0) {
+            return b + intermediate;
+        } else {
+            return intermediate;
+        }
     }
 
     /**
