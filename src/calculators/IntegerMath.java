@@ -98,6 +98,25 @@ public class IntegerMath {
         return primes.get(index);
     }
 
+    /**
+     * Calculates the remainder of the division of <i>a</i> by <i>b</i>. This
+     * function gives the same result as the <code>%</code> operator if <i>a</i>
+     * and <i>b</i> are both positive. But if <i>a</i> is negative and <i>b</i>
+     * is positive, this function will return either 0 or a positive integer,
+     * whereas the <code>%</code> operator returns a negative number. Both
+     * values, and infinitely many others, are mathematically correct, but our
+     * expectation is for the return value to be at least 0 and less than the
+     * modulo.
+     * @param a The number to be divided by the modulo. For example, &minus;118.
+     * @param b The modulo. For example, 30.
+     * @return Given positive <code>b</code>, either 0 or a positive integer
+     * less than <code>b</code> according to whether or not <code>a</code>
+     * divides <code>b</code> evenly. For example, 2, since &minus;4 &times; 30
+     * + 2 = &minus;118. This function has not yet been tested for negative
+     * <code>b</code>.
+     * @throws ArithmeticException If <code>b</code> equals 0, as the
+     * calculation involves division by 0.
+     */
     public static int mod(int a, int b) {
         if (b == 0) {
             String excMsg = "Taking " + a + " modulo " + b
@@ -105,11 +124,7 @@ public class IntegerMath {
             throw new ArithmeticException(excMsg);
         }
         int intermediate = a % b;
-        if (intermediate < 0) {
-            return b + intermediate;
-        } else {
-            return intermediate;
-        }
+        return (intermediate < 0) ? b + intermediate : intermediate;
     }
 
     /**
