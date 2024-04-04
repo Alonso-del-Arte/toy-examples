@@ -2,7 +2,7 @@ package collections.mutable;
 
 import java.util.Iterator;
 
-public class HashSet<E> implements Iterable {
+public class HashSet<E> implements Iterable<E> {
 
     private boolean empty = true;
 
@@ -19,7 +19,7 @@ public class HashSet<E> implements Iterable {
     public boolean add(E element) {
         this.empty = false;
         this.count++;
-        return false;
+        return true;
     }
 
     // TODO: Write tests for this
