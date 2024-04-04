@@ -1,5 +1,6 @@
 package collections.mutable;
 
+import java.math.BigInteger;
 import java.sql.NClob;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
@@ -48,6 +49,16 @@ class HashSetTest {
             assertEquals(expected, actual, msg);
             set.add(expected);
         }
+    }
+
+    @Test
+    void testAdd() {
+        System.out.println("add");
+        HashSet<BigInteger> set = new HashSet<>();
+        BigInteger number = BigInteger.valueOf(System.currentTimeMillis());
+        boolean opResult = set.add(number);
+        String msg = "Should have been able to add " + number + " to empty set";
+        assert opResult : msg;
     }
 
 }
