@@ -61,4 +61,14 @@ class HashSetTest {
         assert opResult : msg;
     }
 
+    @Test
+    void testNoAddSameElementTwice() {
+        HashSet<LocalDateTime> set = new HashSet<>();
+        LocalDateTime currTime = LocalDateTime.now();
+        boolean firstAddResult = set.add(currTime);
+        boolean secondAddResult = set.add(currTime);
+        String msg = "Should not be able to add " + currTime + " to set twice";
+        assert firstAddResult && (!secondAddResult) : msg;
+    }
+
 }
