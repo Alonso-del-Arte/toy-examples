@@ -1,6 +1,8 @@
 package collections.mutable;
 
-public class HashSet<E> {
+import java.util.Iterator;
+
+public class HashSet<E> implements Iterable {
 
     private boolean empty = true;
 
@@ -18,6 +20,24 @@ public class HashSet<E> {
         this.empty = false;
         this.count++;
         return false;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public Iterator<E> iterator() {
+        return new Iterator<E>() {
+
+            @Override
+            public boolean hasNext() {
+                return false;
+            }
+
+            @Override
+            public E next() {
+                return null;
+            }
+
+        };
     }
 
     public HashSet() {
