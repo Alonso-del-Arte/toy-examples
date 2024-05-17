@@ -51,7 +51,7 @@ public class CharacterInfoViewer extends JFrame implements ActionListener {
 
     // TODO: Write tests for this
     public String getGlyphString() {
-        return "SORRY NOT IMPLEMENTED YET";
+        return this.glyphString;
     }
 
     public void actionPerformed(ActionEvent event) {
@@ -59,6 +59,7 @@ public class CharacterInfoViewer extends JFrame implements ActionListener {
     }
 
     public CharacterInfoViewer(String s) {
+        this.glyphString = s;
         this.pack();
     }
 
