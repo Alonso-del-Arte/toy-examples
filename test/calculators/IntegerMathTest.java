@@ -54,6 +54,20 @@ class IntegerMathTest {
     }
 
     @Test
+    void testIsNotPowerOfTwo() {
+        int bound = Short.MAX_VALUE;
+        for (int n = 3; n < bound; n += 2) {
+            int m = n;
+            while (m < bound) {
+                String msg = "Number " + m
+                        + " should not be considered a power of 2";
+                assert !IntegerMath.isPowerOfTwo(m) : msg;
+                m <<= 1;
+            }
+        }
+    }
+
+    @Test
     void testNeitherPrimeNorComposite() {
         assert !IntegerMath.isPrime(-1) : "-1 is not prime";
         assert !IntegerMath.isPrime(0) : "0 is not prime";
