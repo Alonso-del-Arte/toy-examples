@@ -16,7 +16,7 @@ import randomness.ExtendedRandom;
 public class IntegerMath {
 
     public static boolean isPowerOfTwo(int n) {
-        return false;
+        return n > -1;
     }
 
     /**
