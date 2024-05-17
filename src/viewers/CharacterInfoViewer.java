@@ -49,6 +49,11 @@ public class CharacterInfoViewer extends JFrame implements ActionListener {
 
     private final JPanel glyphPanel = new GlyphPanel();
 
+    // TODO: Write tests for this
+    public String getGlyphString() {
+        return "SORRY NOT IMPLEMENTED YET";
+    }
+
     public void actionPerformed(ActionEvent event) {
         //
     }
