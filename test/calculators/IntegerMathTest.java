@@ -28,6 +28,14 @@ class IntegerMathTest {
     }
 
     @Test
+    void testNegativeNumberIsNotPowerOfTwo() {
+        int bound = -((int) Short.MAX_VALUE);
+        int n = ExtendedRandom.nextInt(bound);
+        String msg = "Number " + n + " should not be considered power of 2";
+        assert !IntegerMath.isPowerOfTwo(n) : msg;
+    }
+
+    @Test
     void testNeitherPrimeNorComposite() {
         assert !IntegerMath.isPrime(-1) : "-1 is not prime";
         assert !IntegerMath.isPrime(0) : "0 is not prime";
