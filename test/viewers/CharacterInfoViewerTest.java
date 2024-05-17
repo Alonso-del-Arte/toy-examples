@@ -37,7 +37,19 @@ import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileFilter;
 
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class CharacterInfoViewerTest {
+
+    @Test
+    void testGetGlyphString() {
+        System.out.println("getGlyphString");
+        for (char ch = ' '; ch < '\u007F'; ch++) {
+            String expected = "" + ch;
+            CharacterInfoViewer viewer = new CharacterInfoViewer(expected);
+            String actual = viewer.getGlyphString();
+            assertEquals(expected, actual);
+        }
+    }
 
 }
