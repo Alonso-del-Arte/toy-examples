@@ -36,6 +36,18 @@ class IntegerMathTest {
     }
 
     @Test
+    void testIsPowerOfTwo() {
+        System.out.println("isPowerOfTwo");
+        int power = 1;
+        while (power > 0) {
+            String msg = "Number " + power
+                    + " should be considered a power of 2";
+            assert IntegerMath.isPowerOfTwo(power) : msg;
+            power <<= 1;
+        }
+    }
+
+    @Test
     void testNeitherPrimeNorComposite() {
         assert !IntegerMath.isPrime(-1) : "-1 is not prime";
         assert !IntegerMath.isPrime(0) : "0 is not prime";
