@@ -48,6 +48,12 @@ class IntegerMathTest {
     }
 
     @Test
+    void testZeroIsNotPowerOfTwo() {
+        assert !IntegerMath.isPowerOfTwo(0)
+                : "0 should not be considered a power of 2";
+    }
+
+    @Test
     void testNeitherPrimeNorComposite() {
         assert !IntegerMath.isPrime(-1) : "-1 is not prime";
         assert !IntegerMath.isPrime(0) : "0 is not prime";
