@@ -15,6 +15,10 @@ import randomness.ExtendedRandom;
  */
 public class IntegerMath {
 
+    public static boolean isPowerOfTwo(int n) {
+        return true;
+    }
+
     /**
      * Determines whether a given number is prime or not in <b>Z</b>.
      * @param n The number to test for primality. Examples: 13, &minus;883, 49.
