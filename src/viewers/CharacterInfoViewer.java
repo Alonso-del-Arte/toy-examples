@@ -55,7 +55,15 @@ public class CharacterInfoViewer extends JFrame implements ActionListener,
 
     String glyphString = "?";
 
-    private final JPanel glyphPanel = new GlyphPanel();
+    final JPanel glyphPanel = new GlyphPanel();
+
+    final InfoPanel infoPanel;
+
+    String inputString;
+
+    final JTextField input;
+
+    int codePoint;
 
     // TODO: Write tests for this
     public String getGlyphString() {
@@ -83,6 +91,8 @@ public class CharacterInfoViewer extends JFrame implements ActionListener,
 
     public CharacterInfoViewer(String s) {
         this.glyphString = s;
+        this.infoPanel = new InfoPanel('?', '?');
+        this.input = new JTextField("???");
         this.pack();
     }
 
@@ -92,7 +102,7 @@ public class CharacterInfoViewer extends JFrame implements ActionListener,
         viewer.setVisible(true);
     }
 
-    private class GlyphPanel extends JPanel {
+    class GlyphPanel extends JPanel {
 
         private static final int DEFAULT_HEIGHT = 400;
 
@@ -105,6 +115,40 @@ public class CharacterInfoViewer extends JFrame implements ActionListener,
         GlyphPanel() {
             Dimension dimension = new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
             this.setPreferredSize(dimension);
+        }
+
+    }
+
+    final class InfoPanel extends JPanel {
+
+        private static final int DEFAULT_HEIGHT = 200;
+
+        private static final int DEFAULT_WIDTH = 400;
+
+        private JTextField nameField;
+
+        void update() {
+            this.nameField.setText(Character.getName(CharacterInfoViewer.this.codePoint));
+        }
+
+        InfoPanel(char ch1, char ch2) {
+            super(new GridLayout(5, 2));
+            this.setBorder(new EmptyBorder(10, 10, 10, 10));
+            Dimension dimension = new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+            this.setPreferredSize(dimension);
+            this.add(new JLabel("Character name: "));
+            System.out.println(CharacterInfoViewer.this.codePoint);
+            this.nameField = new JTextField(Character.getName(CharacterInfoViewer.this.codePoint));
+            System.out.println(this.nameField.getText());
+            this.add(this.nameField);
+            this.add(new JLabel("???: "));
+            this.add(new JTextField());
+            this.add(new JLabel("???: "));
+            this.add(new JTextField());
+            this.add(new JLabel("???: "));
+            this.add(new JTextField());
+            this.add(new JLabel("???: "));
+            this.add(new JTextField());
         }
 
     }
