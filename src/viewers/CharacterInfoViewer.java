@@ -90,7 +90,7 @@ public class CharacterInfoViewer extends JFrame implements ActionListener,
     }
 
     public CharacterInfoViewer(String s) {
-        this.glyphString = s;
+        this.glyphString = s.substring(0, 1);
         this.infoPanel = new InfoPanel('?', '?');
         this.input = new JTextField("???");
         this.pack();
