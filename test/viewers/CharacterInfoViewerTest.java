@@ -1,10 +1,5 @@
 package viewers;
 
-import clipboardops.ImageSelection;
-import fileops.FileChooserWithOverwriteGuard;
-import fileops.PNGFileFilter;
-import numerics.ComplexNumber;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -34,6 +29,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileFilter;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -43,6 +39,34 @@ import static randomness.ExtendedRandom.alphanumeric;
 import static randomness.ExtendedRandom.nextInt;
 
 class CharacterInfoViewerTest {
+
+    private static final String DEFAULT_TESTING_TEXT = "FOR TESTING PURPOSES";
+
+    private static String defaultCloseOperationText(int operation) {
+        switch (operation) {
+            case WindowConstants.DO_NOTHING_ON_CLOSE:
+                return "DO_NOTHING_ON_CLOSE";
+            case WindowConstants.HIDE_ON_CLOSE:
+                return "HIDE_ON_CLOSE";
+            case WindowConstants.DISPOSE_ON_CLOSE:
+                return "DISPOSE_ON_CLOSE";
+            case WindowConstants.EXIT_ON_CLOSE:
+                return "EXIT_ON_CLOSE";
+            default:
+                return "Unrecognized operation";
+        }
+    }
+
+    @Test
+    void testViewerHasExitOnCloseAsDefaultCloseOperation() {
+        CharacterInfoViewer viewer
+                = new CharacterInfoViewer(DEFAULT_TESTING_TEXT);
+        int expected = WindowConstants.EXIT_ON_CLOSE;
+        int actual = viewer.getDefaultCloseOperation();
+        String message = "Default close operation should be EXIT_ON_CLOSE, got "
+                + defaultCloseOperationText(actual);
+        assertEquals(expected, actual, message);
+    }
 
     @Test
     void testGetGlyphString() {
