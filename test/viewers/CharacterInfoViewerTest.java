@@ -39,6 +39,9 @@ import javax.swing.filechooser.FileFilter;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+import static randomness.ExtendedRandom.alphanumeric;
+import static randomness.ExtendedRandom.nextInt;
+
 class CharacterInfoViewerTest {
 
     @Test
@@ -51,5 +54,17 @@ class CharacterInfoViewerTest {
             assertEquals(expected, actual);
         }
     }
+
+    @Test
+    void testGlyphStringChopsOffSecondCharAndLater() {
+        int length = nextInt(28) + 2;
+        String s = alphanumeric(length);
+        CharacterInfoViewer viewer = new CharacterInfoViewer(s);
+        String expected = s.substring(0, 1);
+        String actual = viewer.getGlyphString();
+        assertEquals(expected, actual);
+    }
+
+    // TODO: Test glyph string for surrogate pairs
 
 }
