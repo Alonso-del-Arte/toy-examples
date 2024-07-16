@@ -9,8 +9,12 @@ import numerics.ComplexNumber;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,9 +39,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileFilter;
 
-public class CharacterInfoViewer extends JFrame implements ActionListener {
+public class CharacterInfoViewer extends JFrame implements ActionListener,
+        DocumentListener {
 
     private static final boolean MAC_OS_FLAG = System.getProperty("os.name")
             .equals("Mac OS X");
@@ -55,7 +63,22 @@ public class CharacterInfoViewer extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent event) {
-        //
+        // TODO: Determine if ActionListener is necessary
+    }
+
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        // TODO: Write tests for this
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        // TODO: Write tests for this
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+        // TODO: Write tests for this
     }
 
     public CharacterInfoViewer(String s) {
