@@ -39,6 +39,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -93,6 +94,7 @@ public class CharacterInfoViewer extends JFrame implements ActionListener,
         this.glyphString = s.substring(0, 1);
         this.infoPanel = new InfoPanel('?', '?');
         this.input = new JTextField("???");
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.pack();
     }
 
