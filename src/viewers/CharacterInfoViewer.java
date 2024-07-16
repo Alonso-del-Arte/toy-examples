@@ -139,9 +139,7 @@ public class CharacterInfoViewer extends JFrame implements ActionListener,
             Dimension dimension = new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
             this.setPreferredSize(dimension);
             this.add(new JLabel("Character name: "));
-            System.out.println(CharacterInfoViewer.this.codePoint);
             this.nameField = new JTextField(Character.getName(CharacterInfoViewer.this.codePoint));
-            System.out.println(this.nameField.getText());
             this.add(this.nameField);
             this.add(new JLabel("???: "));
             this.add(new JTextField());
