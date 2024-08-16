@@ -45,5 +45,6 @@ requests. These toy examples are not worth putting up with Maven headaches or
 Gradle headaches or sbt headaches. If you're using IntelliJ, it's probably 
 easiest to just use IntelliJ's built-in build tool.
 
-The only dependency for this Java 8 project is JUnit. If JDK 8 doesn't provide 
-something you need, consider writing it from scratch.
+The only dependency for this Java 8 project is JUnit. If the Java Development 
+Kit (JDK) for Java 8 doesn't provide something you need, consider writing it 
+from scratch.
