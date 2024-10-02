@@ -1,10 +1,9 @@
-This project might be open to Hacktoberfest 2024.
+This project is now open to Hacktoberfest 2024.
 
 # Contribution Guidelines
 
-This project is now closed to Hacktoberfest 2023. This year I wanted to be 
-absolutely clear that I don't want to deal with Maven. I think it's obnoxious, 
-obtrusive and adds way too much of its own complexity to the project.
+I don't want to deal with Maven. I think it's obnoxious, obtrusive and adds way 
+too much of its own complexity to the project.
 
 However, I now realize I needed to insist on something far more basic: don't 
 make a pull request if you haven't verified that what you wrote compiles and 
@@ -12,7 +11,8 @@ passes the relevant tests.
 
 And even more basic: actually read the issue you want to work on and make sure 
 you understand what is being asked. If you don't understand the issue, comment 
-to request clarification or move on to some other issue.
+to request clarification or move on to some other issue, or maybe move on to 
+some other Hacktoberfest repository.
 
 And don't make pull requests just to impose your own opinions on things, such as  
 that this project should use Maven, after my having written precisely not that.
