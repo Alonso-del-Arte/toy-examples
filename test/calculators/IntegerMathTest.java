@@ -54,6 +54,13 @@ class IntegerMathTest {
     }
 
     @Test
+    void testIntMinValueIsNotPowerOfTwo() {
+        int n = Integer.MIN_VALUE;
+        String msg = "Number " + n + " should not be considered a power of 2";
+        assert !IntegerMath.isPowerOfTwo(n) : msg;
+    }
+
+    @Test
     void testIsNotPowerOfTwo() {
         int bound = Short.MAX_VALUE;
         for (int n = 3; n < bound; n += 2) {
