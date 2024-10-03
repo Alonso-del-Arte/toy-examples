@@ -32,5 +32,6 @@ src/secrets
 test/secrets
 
 # Strictly for drafting
+scratchpad.txt
 src/draft
 test/draft
