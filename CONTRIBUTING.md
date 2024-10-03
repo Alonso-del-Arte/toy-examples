@@ -14,7 +14,7 @@ you understand what is being asked. If you don't understand the issue, comment
 to request clarification or move on to some other issue, or maybe move on to 
 some other Hacktoberfest repository.
 
-And don't make pull requests just to impose your own opinions on things, such as  
+And don't make pull requests just to impose your own opinions on things, such as 
 that this project should use Maven, after my having written precisely not that.
 
 Maven is overkill for this project, because this project is not supposed to have 
