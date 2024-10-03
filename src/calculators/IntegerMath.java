@@ -16,7 +16,7 @@ import randomness.ExtendedRandom;
 public class IntegerMath {
 
     public static boolean isPowerOfTwo(int n) {
-        if (n == 0) return false;
+        if (n < 1) return false;
         return n == Integer.highestOneBit(n);
     }
 
