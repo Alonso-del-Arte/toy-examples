@@ -19,7 +19,7 @@ public class FrequencyCounter<K> {
 
     // TODO: Write tests for this
     public boolean isEmpty() {
-        return false;
+        return true;
     }
 
     // TODO: Write tests for this
