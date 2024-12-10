@@ -24,7 +24,7 @@ public class FrequencyCounter<K> {
 
     // TODO: Write tests for this
     public int size() {
-        return Integer.MIN_VALUE;
+        return 0;
     }
 
     // TODO: Write tests for this
