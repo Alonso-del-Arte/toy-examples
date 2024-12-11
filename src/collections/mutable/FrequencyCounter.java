@@ -45,6 +45,11 @@ public class FrequencyCounter<K> {
     }
 
     // TODO: Write tests for this
+    boolean has(K key) {
+        return true;
+    }
+
+    // TODO: Write tests for this
     public int getCountOf(K key) {
         return Integer.MAX_VALUE;
     }
