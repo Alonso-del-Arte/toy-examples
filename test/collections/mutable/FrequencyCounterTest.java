@@ -23,12 +23,20 @@ class FrequencyCounterTest {
     }
 
     @Test
-    void testIsNotEmpty() {
+    void testIsNotEmptyAfterSpecifiedIncrementAdd() {
+        FrequencyCounter<LocalDate> instance = new FrequencyCounter<>();
+        LocalDate today = LocalDate.now();
+        int incr = ExtendedRandom.nextInt(28) + 2;
+        instance.increment(today, incr);
+        String msg = "Instance should not be empty after incrementing " + today;
+        assert !instance.isEmpty() : msg;
+    }
+
+    @Test
+    void testIsNotEmptyAfterDefaultIncrementAdd() {
         FrequencyCounter<LocalDate> instance = new FrequencyCounter<>();
         LocalDate today = LocalDate.now();
         instance.increment(today);
-        int incr = ExtendedRandom.nextInt(28) + 2;
-        instance.increment(today, incr);
         String msg = "Instance should not be empty after incrementing " + today;
         assert !instance.isEmpty() : msg;
     }
