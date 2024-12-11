@@ -31,12 +31,12 @@ public class FrequencyCounter<K> {
 
     // TODO: Write tests for this
     public void increment(K key, int incr) {
-//        this.empty = false;
+        this.empty = false;
     }
 
     // TODO: Write tests for this
     public void increment(K key) {
-//        this.empty = false;
+        this.empty = false;
     }
 
     // TODO: Write tests for this
