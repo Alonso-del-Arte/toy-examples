@@ -2,6 +2,8 @@ package collections.mutable;
 
 import java.time.LocalDate;
 
+import randomness.ExtendedRandom;
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +20,17 @@ class FrequencyCounterTest {
         FrequencyCounter<LocalDate> instance = new FrequencyCounter<>();
         assertEquals(0, instance.size(),
                 "Collection should have size 0 at first");
+    }
+
+    @Test
+    void testIsNotEmpty() {
+        FrequencyCounter<LocalDate> instance = new FrequencyCounter<>();
+        LocalDate today = LocalDate.now();
+        instance.increment(today);
+        int incr = ExtendedRandom.nextInt(28) + 2;
+        instance.increment(today, incr);
+        String msg = "Instance should not be empty after incrementing " + today;
+        assert !instance.isEmpty() : msg;
     }
 
 }
