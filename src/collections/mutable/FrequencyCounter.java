@@ -38,6 +38,11 @@ public class FrequencyCounter<K> {
     }
 
     // TODO: Write tests for this
+    public void reset(K key) {
+        //
+    }
+
+    // TODO: Write tests for this
     public int getCountOf(K key) {
         return Integer.MAX_VALUE;
     }
