@@ -17,9 +17,11 @@ import java.util.Map;
  */
 public class FrequencyCounter<K> {
 
+    private boolean empty = true;
+
     // TODO: Write tests for this
     public boolean isEmpty() {
-        return true;
+        return this.empty;
     }
 
     // TODO: Write tests for this
@@ -29,12 +31,12 @@ public class FrequencyCounter<K> {
 
     // TODO: Write tests for this
     public void increment(K key, int incr) {
-        //
+        this.empty = false;
     }
 
     // TODO: Write tests for this
     public void increment(K key) {
-        //
+        this.empty = false;
     }
 
     // TODO: Write tests for this
