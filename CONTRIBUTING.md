@@ -1,4 +1,7 @@
-This project is now open to Hacktoberfest 2024.
+This project might be open to Hacktoberfest 2025.
+
+I'll try to have some interesting so-called "non-code" contribution 
+opportunities.
 
 # Contribution Guidelines
 
