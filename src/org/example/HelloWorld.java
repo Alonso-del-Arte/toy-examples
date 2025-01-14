@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.Locale;
 import java.util.NoSuchElementException;
+import java.util.ResourceBundle;
 
 import textops.LocaleParser;
 
@@ -20,28 +21,9 @@ public class HelloWorld {
      * dependencies.
      */
     static String greeting(Locale locale) {
-        switch (locale.getISO3Language()) {
-            case "deu":
-                return "Hallo Welt!";
-            case "eng":
-                return "Hello, world!";
-            case "fra":
-                return "Bonjour le monde!";
-            case "ita":
-                return "Ciao mondo!";
-            case "jpn":
-                return "\u3053\u3093\u306B\u3061\u306F\u4E16\u754C\uFF01";
-            case "kor":
-                return "\uC548\uB155\uD558\uC138\uC694, "
-                        + "\uC138\uACC4\uC785\uB2C8\uB2E4!";
-            case "spa":
-                return "\u00A1Hola, mundo!";
-            case "zho":
-                return "\u4F60\u597D\u4E16\u754C\uFF01";
-            default:
-                return "Greeting for " + locale.getDisplayLanguage()
-                        + " language not on file yet";
-        }
+        ResourceBundle bundle = ResourceBundle.getBundle("i18n/HelloWorld",
+                locale);
+        return bundle.getString("greeting");
     }
 
     public static void main(String[] args) {
