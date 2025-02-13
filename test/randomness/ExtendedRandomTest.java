@@ -332,6 +332,20 @@ class ExtendedRandomTest {
     }
 
     @Test
+    void testChooseBMPBlockOtherThanNullCausesException() {
+        String message = "Choosing block other than null should cause NPE";
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            Character.UnicodeBlock badBlock
+                    = ExtendedRandom.chooseBMPBlockOtherThan(null);
+            System.out.println(message + ", not given " + badBlock.toString());
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isEmpty() : "Exception message should not be empty";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
     void testNextObject() {
         System.out.println("nextObject");
         int capacity = RANDOM.nextInt(32) + 8;
