@@ -3,6 +3,7 @@ package randomness;
 import collections.immutable.Range;
 import fractions.Fraction;
 
+import static java.lang.Character.UnicodeBlock;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -116,23 +117,22 @@ public class ExtendedRandom {
     }
 
     // TODO: Write tests for this
-    public Character.UnicodeBlock chooseBMPBlock() {
-        return Character.UnicodeBlock.AEGEAN_NUMBERS;
+    public UnicodeBlock chooseBMPBlock() {
+        return UnicodeBlock.AEGEAN_NUMBERS;
     }
 
     // TODO: Write tests for this
-    public Character.UnicodeBlock
-    chooseBMPBlockOtherThan(Character.UnicodeBlock block) {
+    public UnicodeBlock chooseBMPBlockOtherThan(UnicodeBlock block) {
         return block;
     }
 
     // TODO: Write tests for this
-    public char chooseCharacterFromBlock(Character.UnicodeBlock block) {
+    public char chooseCharacterFromBlock(UnicodeBlock block) {
         return '?';
     }
 
     // TODO: Write tests for this
-    public String makeStringWithBlockCharacters(Character.UnicodeBlock block) {
+    public String makeStringWithBlockCharacters(UnicodeBlock block) {
         return "SORRY, NOT IMPLEMENTED YET";
     }
 
