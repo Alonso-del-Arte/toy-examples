@@ -62,7 +62,6 @@ class ExtendedRandomTest {
             MEETEI_MAYEK_EXTENSIONS, ETHIOPIC_EXTENDED_A, MEETEI_MAYEK,
             HANGUL_SYLLABLES, HANGUL_JAMO_EXTENDED_B};
 
-
     @Test
     void testNextInt() {
         System.out.println("nextInt");
@@ -287,6 +286,23 @@ class ExtendedRandomTest {
                 + " distinct, gave " + actual + " distinct";
         System.out.println(msg);
         assert actual >= expected : msg;
+    }
+
+    @Test
+    void testChooseBMPBlock() {
+        System.out.println("chooseBMPBlock");
+        int numberOfBlocks = UNICODE_BLOCKS.length;
+        int totalNumberOfCalls = 16 * numberOfBlocks;
+        Set<Character.UnicodeBlock> blocks = new HashSet<>(numberOfBlocks);
+        for (int i = 0; i < totalNumberOfCalls; i++) {
+            blocks.add(ExtendedRandom.chooseBMPBlock());
+        }
+        int minimum = 3 * numberOfBlocks / 5;
+        int actual = blocks.size();
+        String msg = "After " + totalNumberOfCalls + " calls to choose from "
+                + numberOfBlocks + " Unicode blocks, set should have at least "
+                + minimum + ", got " + actual;
+        assert actual >= minimum : msg;
     }
 
     @Test
