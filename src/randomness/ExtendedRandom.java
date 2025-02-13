@@ -121,6 +121,12 @@ public class ExtendedRandom {
     }
 
     // TODO: Write tests for this
+    public Character.UnicodeBlock
+    chooseBMPBlockOtherThan(Character.UnicodeBlock block) {
+        return block;
+    }
+
+    // TODO: Write tests for this
     public char chooseCharacterFromBlock(Character.UnicodeBlock block) {
         return '?';
     }
