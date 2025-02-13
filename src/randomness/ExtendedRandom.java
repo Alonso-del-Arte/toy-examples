@@ -145,11 +145,36 @@ public class ExtendedRandom {
         return new String(asciiChars);
     }
 
+    /**
+     * Chooses a Unicode block from the Basic Multilingual Plane (BMP).
+     * @return A block from the BMP. For example, Bengali. Since this is a Java
+     * 8 project rather than a Java 21 project, seven blocks are missing from
+     * the set of possible outputs for this function, namely:
+     * <ul>
+     *     <li>Syriac Supplement</li>
+     *     <li>Arabic Extended B</li>
+     *     <li>Cyrillic Extended C</li>
+     *     <li>Georgian Extended</li>
+     *     <li>Myanmar Extended B</li>
+     *     <li>Latin Extended E</li>
+     *     <li>Cherokee Supplement</li>
+     * </ul>
+     */
     public static UnicodeBlock chooseBMPBlock() {
         int index = RANDOM.nextInt(NUMBER_OF_BLOCKS);
         return UNICODE_BLOCKS[index];
     }
 
+    /**
+     * Chooses a Unicode block from the Basic Multilingual Plane (BMP) other
+     * than a specified block.
+     * @param block The block not to choose. For example, Basic Latin. It should
+     *              not be null, but other than that there are no requirements.
+     *              Though if this block is not from the BMP, it would make more
+     *              sense to call {@link #chooseBMPBlock()} instad.
+     * @return A block other than {@code block}. For example, Glagolitic.
+     * @throws NullPointerException If {@code block} is null.
+     */
     public static UnicodeBlock chooseBMPBlockOtherThan(UnicodeBlock block) {
         if (block == null) {
             String excMsg = "Block should not be null";
