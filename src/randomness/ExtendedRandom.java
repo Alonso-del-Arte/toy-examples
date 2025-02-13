@@ -4,6 +4,8 @@ import collections.immutable.Range;
 import fractions.Fraction;
 
 import static java.lang.Character.UnicodeBlock;
+import static java.lang.Character.UnicodeBlock.*;
+
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -17,6 +19,33 @@ import numerics.ComplexNumber;
 public class ExtendedRandom {
 
     private static final Random RANDOM = new Random();
+
+    private static final Character.UnicodeBlock[] UNICODE_BLOCKS
+            = {BASIC_LATIN, LATIN_1_SUPPLEMENT, LATIN_EXTENDED_A,
+            LATIN_EXTENDED_B, IPA_EXTENSIONS, GREEK, CYRILLIC,
+            CYRILLIC_SUPPLEMENTARY, ARMENIAN, HEBREW, ARABIC, SYRIAC,
+            ARABIC_SUPPLEMENT, THAANA, NKO, SAMARITAN, MANDAIC,
+            ARABIC_EXTENDED_A, DEVANAGARI, BENGALI, GURMUKHI, GUJARATI, ORIYA,
+            TAMIL, TELUGU, KANNADA, MALAYALAM, SINHALA, THAI, LAO, TIBETAN,
+            MYANMAR, GEORGIAN, HANGUL_JAMO, ETHIOPIC, ETHIOPIC_SUPPLEMENT,
+            CHEROKEE, UNIFIED_CANADIAN_ABORIGINAL_SYLLABICS, OGHAM, RUNIC,
+            TAGALOG, HANUNOO, BUHID, TAGBANWA, KHMER, MONGOLIAN,
+            UNIFIED_CANADIAN_ABORIGINAL_SYLLABICS_EXTENDED, LIMBU, TAI_LE,
+            NEW_TAI_LUE, BUGINESE, TAI_THAM, BALINESE, SUNDANESE, BATAK,
+            LEPCHA, OL_CHIKI, SUNDANESE_SUPPLEMENT, VEDIC_EXTENSIONS,
+            LATIN_EXTENDED_ADDITIONAL, GREEK_EXTENDED, GLAGOLITIC,
+            LATIN_EXTENDED_C, COPTIC, GEORGIAN_SUPPLEMENT, TIFINAGH,
+            ETHIOPIC_EXTENDED, CYRILLIC_EXTENDED_A, HIRAGANA, KATAKANA,
+            BOPOMOFO, KANBUN, BOPOMOFO_EXTENDED,
+            CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A, CJK_UNIFIED_IDEOGRAPHS,
+            YI_SYLLABLES, LISU, VAI, CYRILLIC_EXTENDED_B, BAMUM,
+            LATIN_EXTENDED_D, SYLOTI_NAGRI, PHAGS_PA, SAURASHTRA,
+            DEVANAGARI_EXTENDED, KAYAH_LI, REJANG, HANGUL_JAMO_EXTENDED_A,
+            JAVANESE, CHAM, MYANMAR_EXTENDED_A, TAI_VIET,
+            MEETEI_MAYEK_EXTENSIONS, ETHIOPIC_EXTENDED_A, MEETEI_MAYEK,
+            HANGUL_SYLLABLES, HANGUL_JAMO_EXTENDED_B};
+
+    private static final int NUMBER_OF_BLOCKS = UNICODE_BLOCKS.length;
 
     /**
      * Gives a pseudorandomly chosen integer. May be positive or negative, or
@@ -116,9 +145,9 @@ public class ExtendedRandom {
         return new String(asciiChars);
     }
 
-    // TODO: Write tests for this
     public static UnicodeBlock chooseBMPBlock() {
-        return UnicodeBlock.AEGEAN_NUMBERS;
+        int index = RANDOM.nextInt(NUMBER_OF_BLOCKS);
+        return UNICODE_BLOCKS[index];
     }
 
     // TODO: Write tests for this
