@@ -150,9 +150,12 @@ public class ExtendedRandom {
         return UNICODE_BLOCKS[index];
     }
 
-    // TODO: Write tests for this
     public static UnicodeBlock chooseBMPBlockOtherThan(UnicodeBlock block) {
-        return block;
+        UnicodeBlock propBlock = block;
+        while (propBlock.equals(block)) {
+            propBlock = chooseBMPBlock();
+        }
+        return propBlock;
     }
 
     // TODO: Write tests for this
