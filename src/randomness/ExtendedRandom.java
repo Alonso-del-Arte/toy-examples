@@ -117,22 +117,22 @@ public class ExtendedRandom {
     }
 
     // TODO: Write tests for this
-    public UnicodeBlock chooseBMPBlock() {
+    public static UnicodeBlock chooseBMPBlock() {
         return UnicodeBlock.AEGEAN_NUMBERS;
     }
 
     // TODO: Write tests for this
-    public UnicodeBlock chooseBMPBlockOtherThan(UnicodeBlock block) {
+    public static UnicodeBlock chooseBMPBlockOtherThan(UnicodeBlock block) {
         return block;
     }
 
     // TODO: Write tests for this
-    public char chooseCharacterFromBlock(UnicodeBlock block) {
+    public static char chooseCharacterFromBlock(UnicodeBlock block) {
         return '?';
     }
 
     // TODO: Write tests for this
-    public String makeStringWithBlockCharacters(UnicodeBlock block) {
+    public static String makeStringWithBlockCharacters(UnicodeBlock block) {
         return "SORRY, NOT IMPLEMENTED YET";
     }
 
