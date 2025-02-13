@@ -115,6 +115,21 @@ public class ExtendedRandom {
         return new String(asciiChars);
     }
 
+    // TODO: Write tests for this
+    public Character.UnicodeBlock chooseBMPBlock() {
+        return Character.UnicodeBlock.AEGEAN_NUMBERS;
+    }
+
+    // TODO: Write tests for this
+    public char chooseCharacterFromBlock(Character.UnicodeBlock block) {
+        return '?';
+    }
+
+    // TODO: Write tests for this
+    public String makeStringWithBlockCharacters(Character.UnicodeBlock block) {
+        return "SORRY, NOT IMPLEMENTED YET";
+    }
+
     /**
      * Pseudorandomly chooses an element from an array.
      * @param array The array of elements to choose from. For example, an array
