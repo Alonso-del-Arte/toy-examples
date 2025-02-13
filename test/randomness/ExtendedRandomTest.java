@@ -62,7 +62,7 @@ class ExtendedRandomTest {
             MEETEI_MAYEK_EXTENSIONS, ETHIOPIC_EXTENDED_A, MEETEI_MAYEK,
             HANGUL_SYLLABLES, HANGUL_JAMO_EXTENDED_B};
 
-    public static final int NUMBER_OF_BLOCKS = UNICODE_BLOCKS.length;
+    private static final int NUMBER_OF_BLOCKS = UNICODE_BLOCKS.length;
 
     @Test
     void testNextInt() {
@@ -318,6 +318,17 @@ class ExtendedRandomTest {
                 + " Unicode blocks, set should have at least " + minimum
                 + ", got " + actual;
         assert actual >= minimum : msg;
+    }
+
+    @Test
+    void testChooseBMPBlockOtherThan() {
+        System.out.println("chooseBMPBlockOtherThan");
+        for (Character.UnicodeBlock block : UNICODE_BLOCKS) {
+            Character.UnicodeBlock other
+                    = ExtendedRandom.chooseBMPBlockOtherThan(block);
+            String msg = other.toString() + " should not be " + block.toString();
+            assert !block.equals(other) : msg;
+        }
     }
 
     @Test
