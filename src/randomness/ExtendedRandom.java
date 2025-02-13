@@ -151,6 +151,10 @@ public class ExtendedRandom {
     }
 
     public static UnicodeBlock chooseBMPBlockOtherThan(UnicodeBlock block) {
+        if (block == null) {
+            String excMsg = "Block should not be null";
+            throw new NullPointerException(excMsg);
+        }
         UnicodeBlock propBlock = block;
         while (propBlock.equals(block)) {
             propBlock = chooseBMPBlock();
