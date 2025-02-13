@@ -62,6 +62,8 @@ class ExtendedRandomTest {
             MEETEI_MAYEK_EXTENSIONS, ETHIOPIC_EXTENDED_A, MEETEI_MAYEK,
             HANGUL_SYLLABLES, HANGUL_JAMO_EXTENDED_B};
 
+    public static final int NUMBER_OF_BLOCKS = UNICODE_BLOCKS.length;
+
     @Test
     void testNextInt() {
         System.out.println("nextInt");
@@ -288,20 +290,33 @@ class ExtendedRandomTest {
         assert actual >= expected : msg;
     }
 
+    private static void assertBlockIsFromBMP(Character.UnicodeBlock block) {
+        boolean found = false;
+        int index = 0;
+        while (!found && index < NUMBER_OF_BLOCKS) {
+            found = block.equals(UNICODE_BLOCKS[index]);
+            index++;
+        }
+        String msg = "Block " + block.toString() + " should come from BMP";
+        assert found : msg;
+    }
+
     @Test
     void testChooseBMPBlock() {
         System.out.println("chooseBMPBlock");
-        int numberOfBlocks = UNICODE_BLOCKS.length;
-        int totalNumberOfCalls = 16 * numberOfBlocks;
-        Set<Character.UnicodeBlock> blocks = new HashSet<>(numberOfBlocks);
+        int totalNumberOfCalls = 16 * NUMBER_OF_BLOCKS;
+        Set<Character.UnicodeBlock> blocks = new HashSet<>(NUMBER_OF_BLOCKS);
         for (int i = 0; i < totalNumberOfCalls; i++) {
-            blocks.add(ExtendedRandom.chooseBMPBlock());
+            Character.UnicodeBlock block = ExtendedRandom.chooseBMPBlock();
+            assertBlockIsFromBMP(block);
+            blocks.add(block);
         }
-        int minimum = 3 * numberOfBlocks / 5;
+        int minimum = 3 * NUMBER_OF_BLOCKS / 5;
         int actual = blocks.size();
         String msg = "After " + totalNumberOfCalls + " calls to choose from "
-                + numberOfBlocks + " Unicode blocks, set should have at least "
-                + minimum + ", got " + actual;
+                + NUMBER_OF_BLOCKS
+                + " Unicode blocks, set should have at least " + minimum
+                + ", got " + actual;
         assert actual >= minimum : msg;
     }
 
