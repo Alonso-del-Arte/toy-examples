@@ -146,10 +146,12 @@ public class ExtendedRandom {
     }
 
     /**
-     * Chooses a Unicode block from the Basic Multilingual Plane (BMP).
+     * Chooses a Unicode block from the Basic Multilingual Plane (BMP). The
+     * blocks of high and low surrogates are deliberately excluded.
      * @return A block from the BMP. For example, Bengali. Since this is a Java
      * 8 project rather than a Java 21 project, seven blocks are missing from
-     * the set of possible outputs for this function, namely:
+     * the set of possible outputs for this function, but this was not
+     * intentional. Namely:
      * <ul>
      *     <li>Syriac Supplement</li>
      *     <li>Arabic Extended B</li>
