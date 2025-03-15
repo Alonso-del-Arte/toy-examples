@@ -8,7 +8,7 @@ public class Native2ASCII {
 
     // TODO: Write tests for this
     public static String processLine(String line) {
-        return "SORRY, NOT IMPLEMENTED YET";
+        return line;
     }
 
     public static void main(String[] args) {
