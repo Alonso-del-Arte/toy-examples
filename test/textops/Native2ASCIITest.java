@@ -19,9 +19,4 @@ class Native2ASCIITest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    void placeholder() {
-        fail("HAVEN'T WRITTEN TESTS YET");
-    }
-
 }
