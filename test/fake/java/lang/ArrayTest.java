@@ -60,4 +60,16 @@ class ArrayTest {
         assertEquals(instance, obj);
     }
 
+    @Test
+    void testNotEqualsNull() {
+        int capacity = nextInt(16) + 4;
+        BigInteger[] bigInts = new BigInteger[capacity];
+        for (int i = 0; i < capacity; i++) {
+            bigInts[i] = nextBigInt(32 + i);
+        }
+        Array<BigInteger> instance = new Array<>(bigInts);
+        Object obj = passThrough(null);
+        assertNotEquals(instance, obj);
+    }
+
 }
