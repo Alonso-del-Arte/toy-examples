@@ -17,6 +17,18 @@ public class Array<E> {
         return s.toString().replace(", ]", "]");
     }
 
+    // TODO: Write tests for this
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+
     @SafeVarargs
     public Array(E... elems) {
         this.length = elems.length;
