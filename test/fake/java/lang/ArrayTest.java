@@ -44,4 +44,20 @@ class ArrayTest {
         assertEquals(expected, actual);
     }
 
+    private static Object passThrough(Object obj) {
+        return obj;
+    }
+
+    @Test
+    void testReferentialEquality() {
+        int capacity = nextInt(8) + 2;
+        String[] alphaNumSeqs = new String[capacity];
+        for (int i = 0; i < capacity; i++) {
+            alphaNumSeqs[i] = alphanumeric(i + 1);
+        }
+        Array<String> instance = new Array<>(alphaNumSeqs);
+        Object obj = passThrough(instance);
+        assertEquals(instance, obj);
+    }
+
 }
