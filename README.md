@@ -1,5 +1,8 @@
 # Toy Examples
 
+NOTE: The `collections` package has become unwieldy and not exactly a toy 
+example. I'm thinking of removing it.
+
 Just a random assortment of classic object-oriented programming (OOP) toy 
 examples, some more fleshed out than others, to illustrate basic concepts of 
 OOP.
