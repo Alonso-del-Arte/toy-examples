@@ -4,9 +4,23 @@ public class Array<E> {
 
     public final int length;
 
+    private final Object[] elements;
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder("[");
+        for (int i = 0; i < this.length; i++) {
+            s.append(this.elements[i].toString());
+            s.append(", ");
+        }
+        s.append(']');
+        return s.toString().replace(", ]", "]");
+    }
+
     @SafeVarargs
     public Array(E... elems) {
         this.length = elems.length;
+        this.elements = elems;
     }
 
 }
