@@ -72,4 +72,18 @@ class ArrayTest {
         assertNotEquals(instance, obj);
     }
 
+    @Test
+    void testNotEqualsDiffClass() {
+        int capacity = nextInt(8) + 2;
+        String[] alphaNumSeqs = new String[capacity];
+        for (int i = 0; i < capacity; i++) {
+            alphaNumSeqs[i] = alphanumeric(i + 3);
+        }
+        Array<String> instance = new Array<>(alphaNumSeqs);
+        for (String s : alphaNumSeqs) {
+            Object obj = passThrough(s);
+            assertNotEquals(instance, obj);
+        }
+    }
+
 }
