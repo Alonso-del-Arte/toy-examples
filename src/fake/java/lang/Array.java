@@ -20,7 +20,7 @@ public class Array<E> {
     // TODO: Write tests for this
     @Override
     public boolean equals(Object obj) {
-        return obj != null;
+        return obj instanceof Array;
     }
 
     // TODO: Write tests for this
