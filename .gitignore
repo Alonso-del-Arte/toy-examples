@@ -27,6 +27,9 @@ hs_err_pid*
 out/
 *.iml
 
+# Vim
+*.swp
+
 # Files and directories with API keys, IAM usernames and passwords, etc.
 src/secrets
 test/secrets
