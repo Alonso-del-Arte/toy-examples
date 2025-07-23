@@ -2,7 +2,6 @@ package caches;
 
 import java.util.regex.Pattern;
 
-import caches.Cache;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
