@@ -1,4 +1,4 @@
-package collections.caches;
+package caches;
 
 /**
  * A fixed-capacity least recently used cache. When the cache is full and a new

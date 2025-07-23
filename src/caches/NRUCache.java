@@ -1,4 +1,4 @@
-package collections.caches;
+package caches;
 
 // TODO: Implement not recently used cache.
 // It should be weighted so that creates award two points in the recency score

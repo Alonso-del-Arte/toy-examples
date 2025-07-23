@@ -1,4 +1,4 @@
-package collections.caches;
+package caches;
 
 public abstract class Cache<N, V> {
 
