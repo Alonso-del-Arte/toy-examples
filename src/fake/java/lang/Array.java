@@ -36,12 +36,10 @@ public class Array<E> {
         int index = 0;
         while (elemsSameSoFar && index < this.length) {
             if (this.elements[index] == null) {
-                if (other.elements[index] == null) {
-                    continue;
-                } else {
+                if (other.elements[index] != null) {
                     elemsSameSoFar = false;
-                    continue;
                 }
+                continue;
             }
             elemsSameSoFar = this.elements[index].equals(other.elements[index]);
             index++;
