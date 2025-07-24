@@ -17,10 +17,18 @@ public class Array<E> {
         return s.toString().replace(", ]", "]");
     }
 
-    // TODO: Write tests for this
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof Array;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!this.getClass().equals(obj.getClass())) {
+            return false;
+        }
+        return this.length == ((Array<?>) obj).length;
     }
 
     // TODO: Write tests for this
