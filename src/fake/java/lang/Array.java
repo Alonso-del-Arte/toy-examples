@@ -35,6 +35,14 @@ public class Array<E> {
         boolean elemsSameSoFar = true;
         int index = 0;
         while (elemsSameSoFar && index < this.length) {
+            if (this.elements[index] == null) {
+                if (other.elements[index] == null) {
+                    continue;
+                } else {
+                    elemsSameSoFar = false;
+                    continue;
+                }
+            }
             elemsSameSoFar = this.elements[index].equals(other.elements[index]);
             index++;
         }
