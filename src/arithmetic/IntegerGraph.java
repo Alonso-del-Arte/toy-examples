@@ -1,6 +1,6 @@
 package arithmetic;
 
-import collections.immutable.Range;
+//import collections.immutable.Range;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,9 +38,9 @@ public class IntegerGraph {
         return Integer.MIN_VALUE;
     }
 
-    public void scan(Range range) {
-        // TODO: Write tests for this
-    }
+//    public void scan(Range range) {
+//        // TODO: Write tests for this
+//    }
 
     // TODO: Write tests for this
     public Optional<List<Integer>> path(int from) {

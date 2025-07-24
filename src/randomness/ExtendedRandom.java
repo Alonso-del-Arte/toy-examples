@@ -1,6 +1,5 @@
 package randomness;
 
-import collections.immutable.Range;
 import fractions.Fraction;
 
 import static java.lang.Character.UnicodeBlock;
@@ -79,10 +78,9 @@ public class ExtendedRandom {
         return RANDOM.nextInt(bound) * signAdjust;
     }
 
-    // TODO: Write tests for this
-    public static int nextInt(Range range) {
-        return 0;
-    }
+//    public static int nextInt(Range range) {
+//        return 0;
+//    }
 
     /**
      * Gives a pseudorandomly chosen <code>BigInteger</code> instance
