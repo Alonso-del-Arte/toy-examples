@@ -1,5 +1,7 @@
 package fake.java.lang;
 
+import java.util.Arrays;
+
 public class Array<E> {
 
     public final int length;
@@ -32,19 +34,7 @@ public class Array<E> {
         if (this.length != other.length) {
             return false;
         }
-        boolean elemsSameSoFar = true;
-        int index = 0;
-        while (elemsSameSoFar && index < this.length) {
-            if (this.elements[index] == null) {
-                if (other.elements[index] != null) {
-                    elemsSameSoFar = false;
-                }
-                continue;
-            }
-            elemsSameSoFar = this.elements[index].equals(other.elements[index]);
-            index++;
-        }
-        return elemsSameSoFar;
+        return Arrays.equals(this.elements, other.elements);
     }
 
     // TODO: Write tests for this
