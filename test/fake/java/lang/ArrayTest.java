@@ -158,4 +158,21 @@ class ArrayTest {
         });
     }
 
+    @Test
+    void testConstructorCopiesArrayValues() {
+        int capacity = nextInt(8) + 2;
+        String[] strings = new String[capacity];
+        String[] copied = new String[capacity];
+        for (int i = 0; i < capacity; i++) {
+            String s = alphanumeric(5 + i);
+            strings[i] = s;
+            copied[i] = s;
+        }
+        Array<String> expected = new Array<>(strings);
+        Array<String> actual = new Array<>(copied);
+        int changeIndex = nextInt(capacity);
+        copied[changeIndex] = strings[changeIndex].toUpperCase() + " changed";
+        assertEquals(expected, actual);
+    }
+
 }
