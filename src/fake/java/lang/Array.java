@@ -46,7 +46,10 @@ public class Array<E> {
     @SafeVarargs
     public Array(E... elems) {
         this.length = elems.length;
-        this.elements = elems;
+        this.elements = new Object[this.length];
+        for (int i = 0; i < this.length; i++) {
+            this.elements[i] = elems[i];
+        }
     }
 
 }
