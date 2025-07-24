@@ -17,6 +17,30 @@ public class Array<E> {
         return s.toString().replace(", ]", "]");
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!this.getClass().equals(obj.getClass())) {
+            return false;
+        }
+        Array<?> other = (Array<?>) obj;
+        if (this.length != other.length) {
+            return false;
+        }
+        boolean elemsSameSoFar = true;
+        int index = 0;
+        while (elemsSameSoFar && index < this.length) {
+            elemsSameSoFar = this.elements[index].equals(other.elements[index]);
+            index++;
+        }
+        return elemsSameSoFar;
+    }
+
     // TODO: Write tests for this
     @Override
     public int hashCode() {
