@@ -125,4 +125,17 @@ class ArrayTest {
         assertNotEquals(arrayA, arrayB);
     }
 
+    @Test
+    void testEquals() {
+        System.out.println("equals");
+        int capacity = nextInt(8) + 2;
+        String[] strings = new String[capacity];
+        for (int i = 0; i < capacity; i++) {
+            strings[i] = alphanumeric(4 + i);
+        }
+        Array<String> someArray = new Array<>(strings);
+        Array<String> sameArray = new Array<>(strings);
+        assertEquals(someArray, sameArray);
+    }
+
 }
