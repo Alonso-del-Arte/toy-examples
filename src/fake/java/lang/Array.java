@@ -47,9 +47,7 @@ public class Array<E> {
     public Array(E... elems) {
         this.length = elems.length;
         this.elements = new Object[this.length];
-        for (int i = 0; i < this.length; i++) {
-            this.elements[i] = elems[i];
-        }
+        System.arraycopy(elems, 0, this.elements, 0, this.length);
     }
 
 }
