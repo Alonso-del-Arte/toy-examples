@@ -2,6 +2,7 @@ package fake.java.lang;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
@@ -84,6 +85,27 @@ class ArrayTest {
             Object obj = passThrough(s);
             assertNotEquals(instance, obj);
         }
+    }
+
+    @Test
+    void testNotEqualsDiffLength() {
+        int capacityA = nextInt(8) + 2;
+        BigInteger[] bigIntsA = new BigInteger[capacityA];
+        int capacityB = capacityA + nextInt(8) + 1;
+        BigInteger[] bigIntsB = new BigInteger[capacityB];
+        Random random = new Random();
+        for (int i = 0; i < capacityA; i++) {
+            BigInteger num = new BigInteger(64 + i, random);
+            bigIntsA[i] = num;
+            bigIntsB[i] = num;
+        }
+        for (int j = capacityA; j < capacityB; j++) {
+            BigInteger num = new BigInteger(64 + j, random);
+            bigIntsB[j] = num;
+        }
+        Array<BigInteger> arrayA = new Array<>(bigIntsA);
+        Array<BigInteger> arrayB = new Array<>(bigIntsB);
+        assertNotEquals(arrayA, arrayB);
     }
 
 }
