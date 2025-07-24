@@ -108,4 +108,21 @@ class ArrayTest {
         assertNotEquals(arrayA, arrayB);
     }
 
+    @Test
+    void testNotEqualsDiffElems() {
+        int capacity = nextInt(8) + 2;
+        String[] stringsA = new String[capacity];
+        String[] stringsB = new String[capacity];
+        for (int i = 0; i < capacity; i++) {
+            String s = alphanumeric(4 + i);
+            stringsA[i] = s;
+            stringsB[i] = s;
+        }
+        int changeIndex = nextInt(capacity);
+        stringsB[changeIndex] = "CHANGED " + stringsA[changeIndex];
+        Array<String> arrayA = new Array<>(stringsA);
+        Array<String> arrayB = new Array<>(stringsB);
+        assertNotEquals(arrayA, arrayB);
+    }
+
 }
