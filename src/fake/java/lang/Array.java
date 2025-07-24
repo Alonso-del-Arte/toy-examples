@@ -17,20 +17,6 @@ public class Array<E> {
         return s.toString().replace(", ]", "]");
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (!this.getClass().equals(obj.getClass())) {
-            return false;
-        }
-        return this.length == ((Array<?>) obj).length;
-    }
-
     // TODO: Write tests for this
     @Override
     public int hashCode() {
