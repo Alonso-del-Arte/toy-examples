@@ -138,4 +138,24 @@ class ArrayTest {
         assertEquals(someArray, sameArray);
     }
 
+    @Test
+    void testNullElemEqualsThrowsNoException() {
+        assertDoesNotThrow(() -> {
+            int capacity = nextInt(8) + 2;
+            BigInteger[] bigIntsA = new BigInteger[capacity];
+            BigInteger[] bigIntsB = new BigInteger[capacity];
+            Random random = new Random();
+            for (int i = 0; i < capacity; i++) {
+                BigInteger num = new BigInteger(64 + i, random);
+                bigIntsA[i] = num;
+                bigIntsB[i] = num;
+            }
+            int changeIndex = nextInt(capacity);
+            bigIntsA[changeIndex] = null;
+            Array<BigInteger> arrayA = new Array<>(bigIntsA);
+            Array<BigInteger> arrayB = new Array<>(bigIntsB);
+            assertNotEquals(arrayA, arrayB);
+        });
+    }
+
 }
