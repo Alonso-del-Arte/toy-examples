@@ -2,7 +2,6 @@ package randomness;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Random;
 
 public class RandomBabbleOutputStream extends InputStream {
