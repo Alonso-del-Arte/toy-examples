@@ -1,6 +1,5 @@
 package randomness;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Random;
 
@@ -10,7 +9,7 @@ public class RandomBabbleOutputStream extends InputStream {
 
     // TODO: Write tests for this
     @Override
-    public int read() throws IOException {
+    public int read() {
         return RANDOM.nextInt(95) + 32;
     }
 
