@@ -20,4 +20,9 @@ public class RandomBabbleOutputStream extends InputStream {
         throw new IOException(excMsg);
     }
 
+    @Override
+    public boolean markSupported() {
+        return true;
+    }
+
 }
