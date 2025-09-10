@@ -6,10 +6,10 @@ package caches;
  * removed to make room.
  * @param <N> The type for the names. Preferably a type for which instances are
  *           in some sense inexpensive to compute, like
- *           <code>java.lang.String</code>.
+ *           {@code java.lang.String}.
  * @param <V> The type for the values. It should generally be a value that is in
  *           some sense expensive to compute and thus easier to retrieve from a
- *           cache. For example, <code>java.util.regex.Pattern</code>.
+ *           cache. For example, {@code java.util.regex.Pattern}.
  */
 public abstract class LRUCache<N, V> extends Cache<N, V> {
 
@@ -43,8 +43,8 @@ public abstract class LRUCache<N, V> extends Cache<N, V> {
      * at index 1 is moved to index 2, etc.
      * @param objects The array of objects.
      * @param position A nonnegative integer, preferably positive.
-     * @throws ArrayIndexOutOfBoundsException If <code>position</code> is
-     * negative, equal to or greater than <code>objects.length</code>.
+     * @throws ArrayIndexOutOfBoundsException If {@code position} is negative,
+     * equal to or greater than {@code objects.length}.
      */
     private static void moveToFront(Object[] objects, int position) {
         Object mostRecent = objects[position];
@@ -86,8 +86,8 @@ public abstract class LRUCache<N, V> extends Cache<N, V> {
      *             changed after construction. It should be at least {@link
      *             Cache#MINIMUM_CAPACITY}, at most {@link
      *             Cache#MAXIMUM_CAPACITY}.
-     * @throws IllegalArgumentException If <code>size</code> is less than
-     * <code>MINIMUM_CAPACITY</code> or more than <code>MAXIMUM_CAPACITY</code>.
+     * @throws IllegalArgumentException If {@code size} is less than {@code
+     * MINIMUM_CAPACITY} or more than {@code MAXIMUM_CAPACITY}.
      */
     public LRUCache(int size) {
         super(size);
