@@ -51,4 +51,11 @@ class RandomBabbleOutputStreamTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
+    @Test
+    public void testMarkSupported() {
+        System.out.println("markSupported");
+        InputStream instance = new RandomBabbleOutputStream();
+        assert instance.markSupported() : "Mark should be supported";
+    }
+
 }
