@@ -47,8 +47,8 @@ public abstract class Cache<N, V> {
      * @param size How many slots the cache should have. This value can't be
      *             changed after construction. It should be at least {@link
      *             #MINIMUM_CAPACITY}, at most {@link #MAXIMUM_CAPACITY}.
-     * @throws IllegalArgumentException If <code>size</code> is less than
-     * <code>MINIMUM_CAPACITY</code> or more than <code>MAXIMUM_CAPACITY</code>.
+     * @throws IllegalArgumentException If {@code size} is less than {@code
+     * MINIMUM_CAPACITY} or more than {@code MAXIMUM_CAPACITY}.
      */
     public Cache(int size) {
         if (size < MINIMUM_CAPACITY || size > MAXIMUM_CAPACITY) {
