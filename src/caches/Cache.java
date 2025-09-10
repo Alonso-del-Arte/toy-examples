@@ -1,5 +1,14 @@
 package caches;
 
+/**
+ * Abstract base class for caches.
+ * @param <N> The type for the names. Preferably a type for which instances are
+ *           in some sense inexpensive to compute, like
+ *           {@code java.lang.String}.
+ * @param <V> The type for the values. It should generally be a value that is in
+ *           some sense expensive to compute and thus easier to retrieve from a
+ *           cache. For example, {@code java.util.regex.Pattern}.
+ */
 public abstract class Cache<N, V> {
 
     /**
