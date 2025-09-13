@@ -20,6 +20,11 @@ public class RandomBabbleOutputStream extends InputStream {
         throw new IOException(excMsg);
     }
 
+    /**
+     * Indicates that this stream supports marking.
+     * @return Always true, since this stream supports marking.
+     */
+    // TODO: Write test for marking
     @Override
     public boolean markSupported() {
         return true;
