@@ -2,13 +2,20 @@ package textops;
 
 public class WordCounter {
 
-    // TODO: Write tests for this
+    private final String text;
+
     public int wordCount() {
-        return 0;
+        int spaceCount = 0;
+        int index = 0;
+        while (index > -1) {
+            index = this.text.indexOf(" ", index + 1);
+            spaceCount++;
+        }
+        return spaceCount - 1;
     }
 
     public WordCounter(String s) {
-        //
+        this.text = s;
     }
 
 }
