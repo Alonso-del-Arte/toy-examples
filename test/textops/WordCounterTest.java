@@ -42,4 +42,16 @@ class WordCounterTest {
         assertEquals(expected, actual, message);
     }
 
+    @Test
+    void testWordCountPhraseEndsWithPeriod() {
+        int expected = ExtendedRandom.nextInt(8) + 2;
+        String prelimPhrase = makePhrase(expected);
+        String phrase = prelimPhrase.substring(0, prelimPhrase.length() - 1)
+                + '.';
+        WordCounter instance = new WordCounter(phrase);
+        int actual = instance.wordCount();
+        String message = "Counting words in \"" + phrase + "\"";
+        assertEquals(expected, actual, message);
+    }
+
 }
