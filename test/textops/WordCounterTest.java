@@ -52,6 +52,17 @@ class WordCounterTest {
     }
 
     @Test
+    void testWordCountExtraSpaces() {
+        int expected = ExtendedRandom.nextInt(16) + 4;
+        String replacement = makeConsecutiveSpaces();
+        String phrase = makePhrase(expected).replace(" ", replacement);
+        WordCounter instance = new WordCounter(phrase);
+        int actual = instance.wordCount();
+        String message = "Counting words in \"" + phrase + "\"";
+        assertEquals(expected, actual, message);
+    }
+
+    @Test
     void testWordCountPhraseEndsWithPeriod() {
         int expected = ExtendedRandom.nextInt(8) + 2;
         String prelimPhrase = makePhrase(expected);
