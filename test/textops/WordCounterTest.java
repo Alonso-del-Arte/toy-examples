@@ -42,6 +42,15 @@ class WordCounterTest {
         assertEquals(expected, actual, message);
     }
 
+    private static String makeConsecutiveSpaces() {
+        int len = ExtendedRandom.nextInt(8) + 2;
+        char[] spaces = new char[len];
+        for (int i = 0; i < len; i++) {
+            spaces[i] = ' ';
+        }
+        return new String(spaces);
+    }
+
     @Test
     void testWordCountPhraseEndsWithPeriod() {
         int expected = ExtendedRandom.nextInt(8) + 2;
