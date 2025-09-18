@@ -1,5 +1,7 @@
 package textops;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
@@ -45,9 +47,7 @@ class WordCounterTest {
     private static String makeConsecutiveSpaces() {
         int len = ExtendedRandom.nextInt(8) + 2;
         char[] spaces = new char[len];
-        for (int i = 0; i < len; i++) {
-            spaces[i] = ' ';
-        }
+        Arrays.fill(spaces, ' ');
         return new String(spaces);
     }
 
