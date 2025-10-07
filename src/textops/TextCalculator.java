@@ -24,7 +24,8 @@ public class TextCalculator {
 
     public static boolean isAllASCII(String s) {
         if (s == null) {
-            return System.currentTimeMillis() % 2 == 0;
+            String excMsg = "String should not be null";
+            throw new NullPointerException(excMsg);
         }
         boolean allASCIISoFar = true;
         int index = 0;
