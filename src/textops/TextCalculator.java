@@ -1,4 +1,4 @@
-package calculators;
+package textops;
 
 public class TextCalculator {
 
