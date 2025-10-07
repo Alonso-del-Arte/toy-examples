@@ -27,8 +27,7 @@ public class TextCalculator {
         int index = 0;
         char[] characters = s.toCharArray();
         while (allASCIISoFar && index < s.length()) {
-            allASCIISoFar = Character.UnicodeBlock.of(characters[index])
-                    .equals(Character.UnicodeBlock.BASIC_LATIN);
+            allASCIISoFar = characters[index] < 128;
             index++;
         }
         return allASCIISoFar;
