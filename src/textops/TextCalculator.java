@@ -27,18 +27,25 @@ public class TextCalculator {
      * characters or not.
      * @param s The {@code String} for which to make the determination.
      *          Examples: "Anton&amp;iacute;n Dvo&amp;#x159;&amp;aacute;k",
-     *          "Anton&iacute;n Dvo&#x159;&aacute;k".
-     * @return True if {@code s} consists of ASCII characters only, false
-     * otherwise. In the examples: true for the first one, since the non-ASCII
-     * characters have been replaced with HTML entities; false for the second
-     * one because '&iacute;', '&#x159' and '&aacute;' are not ASCII characters.
+     *          "Anton&iacute;n Dvo&#x159;&aacute;k" and "" (the empty {@code
+     *          String}.
+     * @return True if {@code s} consists of ASCII characters only or is empty,
+     * false otherwise. In the examples: true for the first one, since the
+     * non-ASCII characters have been replaced with HTML entities; false for the
+     * second one because '&iacute;', '&#x159' and '&aacute;' are not ASCII
+     * characters (though evaluation stops on finding the first non-ASCII
+     * character); and true for the empty {@code String} because it doesn't
+     * contain any non-ASCII characters even though it doesn't contain any ASCII
+     * characters either.
      * @throws NullPointerException If {@code s} is null. An argument could be
-     * made that this function should return true when {@code s} is null.
+     * made that this function should return true when {@code s} is null, by
+     * analogy to the empty {@code String}. But if a {@code String} needs to be
+     * queried for containing non-ASCII characters, there might be a need for
+     * further processing, so if this function gave a result instead of throwing
+     * an exception, that would postpone the exception to a point where it is
+     * harder to diagnose the problem.
      */
     public static boolean isAllASCII(String s) {
-        if (s.isEmpty()) {
-            return true;
-        }
         boolean allASCIISoFar = true;
         int index = 0;
         char[] characters = s.toCharArray();
