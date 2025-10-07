@@ -92,6 +92,20 @@ class TextCalculatorTest {
     }
 
     @Test
+    void testIsAllASCIIRejectsNullString() {
+        String message = "Null String should cause NPE";
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            boolean result = TextCalculator.isAllASCII(null);
+            System.out.println(message + ", not given result " + result);
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println(message);
+        System.out.println("\"" + excMsg + "\"");
+    }
+
+    @Test
     void testIsAllASCII() {
         System.out.println("isAllASCII");
         int len = ExtendedRandom.nextInt(16) + 4;
