@@ -22,9 +22,16 @@ public class TextCalculator {
         return ch > '\uDBFF' && ch < '\uE000';
     }
 
-    // TODO: Write tests for this
     public static boolean isAllASCII(String s) {
-        return true;
+        boolean allASCIISoFar = true;
+        int index = 0;
+        char[] characters = s.toCharArray();
+        while (allASCIISoFar && index < s.length()) {
+            allASCIISoFar = Character.UnicodeBlock.of(characters[index])
+                    .equals(Character.UnicodeBlock.BASIC_LATIN);
+            index++;
+        }
+        return allASCIISoFar;
     }
 
     // TODO: Write tests for this
