@@ -143,6 +143,7 @@ public class ExtendedRandom {
         return new String(asciiChars);
     }
 
+    // TODO: Update according to most recent LTS JDK version we can use
     /**
      * Chooses a Unicode block from the Basic Multilingual Plane (BMP). The
      * blocks of high and low surrogates are deliberately excluded.
