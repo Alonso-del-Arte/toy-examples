@@ -1,6 +1,5 @@
 package viewers;
 
-import calculators.TextCalculator;
 import clipboardops.ImageSelection;
 import fileops.FileChooserWithOverwriteGuard;
 import fileops.PNGFileFilter;
