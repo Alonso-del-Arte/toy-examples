@@ -37,7 +37,7 @@ public class TextCalculator {
      */
     public static boolean isAllASCII(String s) {
         if (s.isEmpty()) {
-            return false;
+            return true;
         }
         boolean allASCIISoFar = true;
         int index = 0;
