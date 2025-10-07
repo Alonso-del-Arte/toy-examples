@@ -23,7 +23,8 @@
 hs_err_pid*
 
 # IntelliJ IDEA
-.idea/
+.idea/dictionaries/
+.idea/.gitignore
 out/
 *.iml
 
