@@ -24,7 +24,7 @@ public class TextCalculator {
 
     // TODO: Write tests for this
     public static boolean isAllASCII(String s) {
-        return false;
+        return true;
     }
 
     // TODO: Write tests for this
