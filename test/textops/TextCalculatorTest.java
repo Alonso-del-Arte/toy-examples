@@ -7,7 +7,9 @@ import randomness.ExtendedRandom;
 
 class TextCalculatorTest {
 
-    private final static String[] ADJECTIVES = {"Associated", "Ballistic",
+    private static final int POST_ASCII_TEST_CHAR_BOUND = '\u4E00' - 128;
+
+    private static final String[] ADJECTIVES = {"Associated", "Ballistic",
             "Consolidated", "Diversified", "Equestrian", "Federal", "Global",
             "Historical", "International", "Local", "National", "State"};
 
@@ -101,6 +103,31 @@ class TextCalculatorTest {
         String msg = "String \"" + example
                 + "\" should be found to be all ASCII";
         assert TextCalculator.isAllASCII(example) : msg;
+    }
+
+    private char choosePostASCIIChar() {
+        int index = ExtendedRandom.nextInt(POST_ASCII_TEST_CHAR_BOUND) + 128;
+        while (!Character.isDefined(index)) {
+            index++;
+        }
+        return (char) index;
+    }
+
+    @Test
+    void testIsNotAllASCII() {
+        int len = ExtendedRandom.nextInt(16) + 4;
+        char[] chars = new char[len];
+        for (int i = 0; i < len; i++) {
+            chars[i] = (char) ExtendedRandom.nextInt(128);
+        }
+        char changer = choosePostASCIIChar();
+        int changeIndex = ExtendedRandom.nextInt(len);
+        chars[changeIndex] = changer;
+        String example = new String(chars);
+        String msg = "String \"" + example + "\", which includes character "
+                + Character.getName(changer)
+                + " should not be found to be all ASCII";
+        assert !TextCalculator.isAllASCII(example) : msg;
     }
 
 }
