@@ -23,6 +23,9 @@ public class TextCalculator {
     }
 
     public static boolean isAllASCII(String s) {
+        if (s == null) {
+            return false;
+        }
         boolean allASCIISoFar = true;
         int index = 0;
         char[] characters = s.toCharArray();
