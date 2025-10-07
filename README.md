@@ -17,6 +17,10 @@ Follow those guidelines to ensure not just that your contribution is accepted
 for Hacktoberfest, but also that it persists in the main branch after 
 Hacktoberfest.
 
+I've decided that this project should not be on the latest long term support 
+(LTS) version of Java, but it shouldn't be too far behind either. So it's on 
+Java 21 for the JDK and Java 17 for language features.
+
 ## The four pillars of OOP
 
 * **Abstraction** &mdash; FINISH WRITING
