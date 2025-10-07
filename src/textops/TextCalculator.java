@@ -23,8 +23,23 @@ public class TextCalculator {
     }
 
     // TODO: Write tests for this
+    public static boolean isAllASCII(String s) {
+        return false;
+    }
+
+    // TODO: Write tests for this
     public static boolean isOutsideBMP(String s) {
         return false;
+    }
+
+    // TODO: Write tests for this
+    public static String convertASCIIToEBCDIC(String s) {
+        return "SORRY, NOT IMPLEMENTED YET";
+    }
+
+    // TODO: Write tests for this
+    public static String convertEBCDICToASCII(String s) {
+        return "SORRY, NOT IMPLEMENTED YET";
     }
 
     // TODO: Write tests for this
