@@ -106,6 +106,12 @@ class TextCalculatorTest {
     }
 
     @Test
+    void testEmptyStringIsAllASCII() {
+        String message = "Empty String should be considered all ASCII";
+        assert TextCalculator.isAllASCII("") : message;
+    }
+
+    @Test
     void testIsAllASCII() {
         System.out.println("isAllASCII");
         int len = ExtendedRandom.nextInt(16) + 4;
