@@ -23,10 +23,6 @@ public class TextCalculator {
     }
 
     public static boolean isAllASCII(String s) {
-        if (s == null) {
-            String excMsg = "String should not be null";
-            throw new NullPointerException(excMsg);
-        }
         boolean allASCIISoFar = true;
         int index = 0;
         char[] characters = s.toCharArray();
