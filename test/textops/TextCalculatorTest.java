@@ -89,4 +89,18 @@ class TextCalculatorTest {
         assert !TextCalculator.isLowSurrogate(ch) : msg;
     }
 
+    @Test
+    void testIsAllASCII() {
+        System.out.println("isAllASCII");
+        int len = ExtendedRandom.nextInt(16) + 4;
+        char[] chars = new char[len];
+        for (int i = 0; i < len; i++) {
+            chars[i] = (char) ExtendedRandom.nextInt(128);
+        }
+        String example = new String(chars);
+        String msg = "String \"" + example
+                + "\" should be found to be all ASCII";
+        assert TextCalculator.isAllASCII(example) : msg;
+    }
+
 }
