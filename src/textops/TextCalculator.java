@@ -36,6 +36,9 @@ public class TextCalculator {
      * made that this function should return true when {@code s} is null.
      */
     public static boolean isAllASCII(String s) {
+        if (s.isEmpty()) {
+            return false;
+        }
         boolean allASCIISoFar = true;
         int index = 0;
         char[] characters = s.toCharArray();
