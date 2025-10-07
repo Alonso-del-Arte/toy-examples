@@ -95,6 +95,7 @@ class TextCalculatorTest {
     void testIsAllASCIIRejectsNullString() {
         String message = "Null String should cause NPE";
         Throwable t = assertThrows(NullPointerException.class, () -> {
+            @SuppressWarnings("ConstantConditions")
             boolean result = TextCalculator.isAllASCII(null);
             System.out.println(message + ", not given result " + result);
         }, message);
