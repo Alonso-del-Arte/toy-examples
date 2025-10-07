@@ -22,6 +22,19 @@ public class TextCalculator {
         return ch > '\uDBFF' && ch < '\uE000';
     }
 
+    /**
+     * Determines whether a {@code String} instance consists entirely of ASCII
+     * characters or not.
+     * @param s The {@code String} for which to make the determination.
+     *          Examples: "Anton&amp;iacute;n Dvo&amp;#x159;&amp;aacute;k",
+     *          "Anton&iacute;n Dvo&#x159;&aacute;k".
+     * @return True if {@code s} consists of ASCII characters only, false
+     * otherwise. In the examples: true for the first one, since the non-ASCII
+     * characters have been replaced with HTML entities; false for the second
+     * one because '&iacute;', '&#x159' and '&aacute;' are not ASCII characters.
+     * @throws NullPointerException If {@code s} is null. An argument could be
+     * made that this function should return true when {@code s} is null.
+     */
     public static boolean isAllASCII(String s) {
         boolean allASCIISoFar = true;
         int index = 0;
