@@ -2,7 +2,7 @@ package graphics;
 
 import java.awt.Color;
 
-public class DownsampledColor {
+public final class DownsampledColor {
 
     private final byte colorByte;
 
