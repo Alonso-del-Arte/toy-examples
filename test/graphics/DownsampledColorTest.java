@@ -40,4 +40,16 @@ class DownsampledColorTest {
         assertEquals(instance, obj, msg);
     }
 
+    private static Object provideNull() {
+        return null;
+    }
+
+    @Test
+    void testNotEqualsNull() {
+        byte b = (byte) nextInt(256);
+        DownsampledColor instance = new DownsampledColor(b);
+        String msg = "Instance " + instance + " should not equal null";
+        assert !instance.equals(provideNull()) : msg;
+    }
+
 }
