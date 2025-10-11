@@ -5,6 +5,7 @@ import fractions.Fraction;
 import static java.lang.Character.UnicodeBlock;
 import static java.lang.Character.UnicodeBlock.*;
 
+import java.awt.Color;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -259,6 +260,11 @@ public class ExtendedRandom {
             curr++;
         }
         return iterator.next();
+    }
+
+    // TODO: Write tests for this
+    public static Color nextColor() {
+        return Color.WHITE;
     }
 
 }
