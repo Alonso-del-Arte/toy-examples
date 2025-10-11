@@ -21,6 +21,17 @@ public class DownsampledColor {
                 + alpha + "]";
     }
 
+    // TODO: Write tests for this
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+
+    // TODO: Write tests for this
+    public int hashCode() {
+        return -1;
+    }
+
     DownsampledColor(byte b) {
         this.colorByte = b;
     }
