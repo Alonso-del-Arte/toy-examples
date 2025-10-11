@@ -6,6 +6,11 @@ public class DownsampledColor {
 
     private final byte colorByte;
 
+    // TODO: Write tests for this
+    public Color upsample() {
+        return Color.WHITE;
+    }
+
     @Override
     public String toString() {
         int red = (this.colorByte & 48) >> 4;
