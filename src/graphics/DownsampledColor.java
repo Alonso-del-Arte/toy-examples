@@ -21,10 +21,9 @@ public final class DownsampledColor {
                 + alpha + "]";
     }
 
-    // TODO: Write tests for this
     @Override
     public boolean equals(Object obj) {
-        return obj != null;
+        return obj instanceof DownsampledColor;
     }
 
     // TODO: Write tests for this
