@@ -4,8 +4,8 @@ import java.awt.Color;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import randomness.ExtendedRandom;
 
+import static randomness.ExtendedRandom.nextColor;
 import static randomness.ExtendedRandom.nextInt;
 
 class DownsampledColorTest {
@@ -50,6 +50,25 @@ class DownsampledColorTest {
         DownsampledColor instance = new DownsampledColor(b);
         String msg = "Instance " + instance + " should not equal null";
         assert !instance.equals(provideNull()) : msg;
+    }
+
+    private static byte downsample(Color color) {
+        int value = color.getRGB();
+        int r = (color.getRed() / 64) << 4;
+        int g = (color.getGreen() / 64) << 2;
+        int b = (color.getBlue() / 64);
+        int a = (color.getAlpha() / 64) << 6;
+        return  (byte) (a + r + g + b);
+    }
+
+    @Test
+    void testNotEqualsDiffClass() {
+        Color color = nextColor();
+        byte b = downsample(color);
+        DownsampledColor instance = new DownsampledColor(b);
+        String msg = instance + " should not equal " + color;
+        Object obj = passThrough(color);
+        assert !instance.equals(obj) : msg;
     }
 
 }
