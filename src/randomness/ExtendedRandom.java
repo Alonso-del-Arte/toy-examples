@@ -262,9 +262,9 @@ public class ExtendedRandom {
         return iterator.next();
     }
 
-    // TODO: Write tests for this
     public static Color nextColor() {
-        return Color.WHITE;
+        int rgba = nextInt();
+        return new Color(rgba, true);
     }
 
 }
