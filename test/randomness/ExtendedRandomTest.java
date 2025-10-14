@@ -451,4 +451,21 @@ class ExtendedRandomTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
+    @Test
+    void testNextColor() {
+        System.out.println("nextColor");
+        int initialCapacity = 1024;
+        Set<Color> colors = new HashSet<>(initialCapacity);
+        for (int i = 0; i < initialCapacity; i++) {
+            Color color = ExtendedRandom.nextColor();
+            colors.add(color);
+        }
+        int minimum = 15 * initialCapacity / 16;
+        int actual = colors.size();
+        String message = "After " + initialCapacity
+                + " calls, there should be at least " + minimum
+                + " distinct colors";
+        assert actual >= minimum : message;
+    }
+
 }
