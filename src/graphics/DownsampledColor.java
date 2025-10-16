@@ -21,6 +21,19 @@ public final class DownsampledColor {
                 + alpha + "]";
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (obj instanceof DownsampledColor) {
+            return this.colorByte == ((DownsampledColor) obj).colorByte;
+        } else return false;
+    }
+
     // TODO: Write tests for this
     public int hashCode() {
         return -1;
