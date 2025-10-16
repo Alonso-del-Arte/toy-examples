@@ -81,4 +81,14 @@ class DownsampledColorTest {
         assertNotEquals(colorA, colorB, message);
     }
 
+    @Test
+    void testEquals() {
+        System.out.println("equals");
+        Color color = nextColor();
+        byte b = downsample(color);
+        DownsampledColor someColor = new DownsampledColor(b);
+        DownsampledColor sameColor = new DownsampledColor(b);
+        assertEquals(someColor, sameColor);
+    }
+
 }
