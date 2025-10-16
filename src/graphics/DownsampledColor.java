@@ -21,11 +21,6 @@ public final class DownsampledColor {
                 + alpha + "]";
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return this == obj;
-    }
-
     // TODO: Write tests for this
     public int hashCode() {
         return -1;
