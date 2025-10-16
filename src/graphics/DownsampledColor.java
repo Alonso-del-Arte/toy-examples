@@ -23,7 +23,7 @@ public final class DownsampledColor {
 
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof DownsampledColor;
+        return this == obj;
     }
 
     // TODO: Write tests for this
