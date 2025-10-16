@@ -71,4 +71,14 @@ class DownsampledColorTest {
         assert !instance.equals(obj) : msg;
     }
 
+    @Test
+    void testNotEqualsDiffColor() {
+        Color color = nextColor();
+        byte b = downsample(color);
+        DownsampledColor colorA = new DownsampledColor(b);
+        DownsampledColor colorB = new DownsampledColor((byte) (~b));
+        String message = colorA + " should not equal " + colorB;
+        assertNotEquals(colorA, colorB, message);
+    }
+
 }
