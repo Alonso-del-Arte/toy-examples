@@ -55,7 +55,6 @@ class DownsampledColorTest {
     }
 
     private static byte downsample(Color color) {
-        int value = color.getRGB();
         int r = (color.getRed() / 64) << 4;
         int g = (color.getGreen() / 64) << 2;
         int b = (color.getBlue() / 64);
