@@ -110,4 +110,27 @@ class DownsampledColorTest {
         assertEquals(expected, actual, msg);
     }
 
+    @Test
+    void testDownsamplingConstructor() {
+        for (int floorA = 0; floorA < 256; floorA += 64) {
+            for (int floorR = 0; floorR < 256; floorR += 64) {
+                for (int floorG = 0; floorG < 256; floorG += 64) {
+                    for (int floorB = 0; floorB < 256; floorB += 64) {
+                        int a = floorA + nextInt(64);
+                        int r = floorR + nextInt(64);
+                        int g = floorG + nextInt(64);
+                        int b = floorB + nextInt(64);
+                        Color fullColor = new Color(r, g, b, a);
+                        DownsampledColor expected
+                                = new DownsampledColor(downsample(fullColor));
+                        DownsampledColor actual
+                                = new DownsampledColor(fullColor);
+                        String msg = "Downsampling " + fullColor;
+                        assertEquals(expected, actual, msg);
+                    }
+                }
+            }
+        }
+    }
+
 }
