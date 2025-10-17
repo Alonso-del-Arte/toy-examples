@@ -1,6 +1,8 @@
 package graphics;
 
 import java.awt.Color;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
@@ -89,6 +91,24 @@ class DownsampledColorTest {
         DownsampledColor someColor = new DownsampledColor(b);
         DownsampledColor sameColor = new DownsampledColor(b);
         assertEquals(someColor, sameColor);
+    }
+
+    @Test
+    void testHashCode() {
+        System.out.println("hashCode");
+        int expected = 256;
+        Set<DownsampledColor> colors = new HashSet<>(expected);
+        Set<Integer> hashes = new HashSet<>(expected);
+        for (int i = Byte.MIN_VALUE; i < 128; i++) {
+            byte b = (byte) i;
+            DownsampledColor instance = new DownsampledColor(b);
+            colors.add(instance);
+            hashes.add(instance.hashCode());
+        }
+        int actual = hashes.size();
+        String msg = "Given " + colors.size()
+                + " colors, there should be as many hashes";
+        assertEquals(expected, actual, msg);
     }
 
 }
