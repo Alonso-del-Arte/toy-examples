@@ -43,8 +43,12 @@ public final class DownsampledColor {
     }
 
     public DownsampledColor(Color color) {
-        // TODO: Write tests for this
-        this.colorByte = 0;
+        int red = (color.getRed() / 64) << 4;
+        int green = (color.getGreen() / 64) << 2;
+        int blue = (color.getBlue() / 64);
+        int alpha = (color.getAlpha() / 64) << 6;
+        byte b = (byte) (alpha + red + green + blue);
+        this.colorByte = b;
     }
 
 }
