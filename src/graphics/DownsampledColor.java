@@ -34,9 +34,8 @@ public final class DownsampledColor {
         } else return false;
     }
 
-    // TODO: Write tests for this
     public int hashCode() {
-        return -1;
+        return ((int) this.colorByte) << 8;
     }
 
     DownsampledColor(byte b) {
