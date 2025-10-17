@@ -35,7 +35,7 @@ public final class DownsampledColor {
     }
 
     public int hashCode() {
-        return ((int) this.colorByte) << 8;
+        return this.colorByte << 8;
     }
 
     DownsampledColor(byte b) {
