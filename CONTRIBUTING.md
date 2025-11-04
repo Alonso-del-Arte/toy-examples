@@ -1,4 +1,4 @@
-This project might be open to Hacktoberfest 2025.
+This project will be open to Hacktoberfest 2026.
 
 I'll try to have some interesting so-called "non-code" contribution 
 opportunities.
