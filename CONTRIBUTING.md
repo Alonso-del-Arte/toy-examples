@@ -5,6 +5,11 @@ opportunities.
 
 # Contribution Guidelines
 
+This is a Java project. I didn't think it needed to be said that this is _not_ a 
+Python project, then Hacktoberfest 2025 happened. Now I have a separate 
+repository, toy-examples-python, for those of you who want to work on toy 
+examples in Python.
+
 I don't want to deal with Maven. I think it's obnoxious, obtrusive and adds way 
 too much of its own complexity to the project.
 
