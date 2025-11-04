@@ -133,4 +133,29 @@ class DownsampledColorTest {
         }
     }
 
+    @Test
+    void testUpsample() {
+        System.out.println("upsample");
+        for (int a = 0; a < 256; a += 64) {
+            for (int r = 0; r < 256; r += 64) {
+                for (int g = 0; g < 256; g += 64) {
+                    for (int b = 0; b < 256; b += 64) {
+                        int adjA = nextInt(64);
+                        int adjR = nextInt(64);
+                        int adjG = nextInt(64);
+                        int adjB = nextInt(64);
+                        Color color = new Color(r + adjR, g + adjG, b + adjB,
+                                a + adjA);
+                        DownsampledColor instance = new DownsampledColor(color);
+                        Color expected = new Color(r, g, b, a);
+                        Color actual = instance.upsample();
+                        String message = "Expecting " + instance + " from "
+                                + color + " to upsample to " + expected;
+                        assertEquals(expected, actual, message);
+                    }
+                }
+            }
+        }
+    }
+
 }
