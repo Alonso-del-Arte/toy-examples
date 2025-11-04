@@ -3,9 +3,9 @@
 NOTE: The `collections` package had become unwieldy and not exactly a toy 
 example. On July 22, 2025, I decided to remove it.
 
-Just a random assortment of classic object-oriented programming (OOP) toy 
-examples, some more fleshed out than others, to illustrate basic concepts of 
-OOP.
+This repository is a random assortment of classic object-oriented programming 
+(OOP) toy examples, some more fleshed out than others, to illustrate basic 
+concepts of OOP.
 
 If you fork this repository, be sure to add a FOREX_API_KEY environment variable 
 to your local machine, with that name, and a placeholder for a value if you 
