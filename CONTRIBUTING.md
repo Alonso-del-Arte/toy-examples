@@ -14,7 +14,8 @@ So you need to have Java 17 or later for both the runtime and the development
 kit.
 
 Also, you should have an integrated development environment (IDE) for Java, 
-preferably IntelliJ IDEA. It's available in Community Edition, which is free.
+preferably JetBrains IntelliJ IDEA. It's available in Community Edition, which 
+is free.
 
 I don't want to deal with Maven. I think it's obnoxious, obtrusive and adds way 
 too much of its own complexity to the project.
