@@ -47,8 +47,7 @@ public final class DownsampledColor {
         int green = (color.getGreen() / 64) << 2;
         int blue = (color.getBlue() / 64);
         int alpha = (color.getAlpha() / 64) << 6;
-        byte b = (byte) (alpha + red + green + blue);
-        this.colorByte = b;
+        this.colorByte = (byte) (alpha + red + green + blue);
     }
 
 }
