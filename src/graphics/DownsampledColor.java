@@ -8,7 +8,7 @@ public final class DownsampledColor {
 
     // TODO: Write tests for this
     public Color upsample() {
-        return Color.BLACK;
+        return new Color(0, 0, 0, 0);
     }
 
     @Override
