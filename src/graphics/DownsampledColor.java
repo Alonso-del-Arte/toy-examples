@@ -6,9 +6,12 @@ public final class DownsampledColor {
 
     private final byte colorByte;
 
-    // TODO: Write tests for this
     public Color upsample() {
-        return new Color(0, 0, 0, 0);
+        int r = (this.colorByte & 48) << 2;
+        int g = (this.colorByte & 12) << 4;
+        int b = (this.colorByte & 3) << 6;
+        int a = this.colorByte & 192;
+        return new Color(r, g, b, a);
     }
 
     @Override
