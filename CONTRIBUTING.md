@@ -10,6 +10,9 @@ Python project, then Hacktoberfest 2025 happened. Now I have a separate
 repository, toy-examples-python, for those of you who want to work on toy 
 examples in Python.
 
+So you need to have Java 17 or later for both the runtime and the development 
+kit.
+
 I don't want to deal with Maven. I think it's obnoxious, obtrusive and adds way 
 too much of its own complexity to the project.
 
