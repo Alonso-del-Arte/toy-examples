@@ -28,7 +28,7 @@ public class TextCalculator {
      * @param s The {@code String} for which to make the determination.
      *          Examples: "Anton&amp;iacute;n Dvo&amp;#x159;&amp;aacute;k",
      *          "Anton&iacute;n Dvo&#x159;&aacute;k" and "" (the empty {@code
-     *          String}.
+     *          String}).
      * @return True if {@code s} consists of ASCII characters only or is empty,
      * false otherwise. In the examples: true for the first one, since the
      * non-ASCII characters have been replaced with HTML entities; false for the
