@@ -155,7 +155,7 @@ class TextCalculatorTest {
     void testIsOutsideBMPRejectsNullString() {
         String message = "Null String should cause NPE";
         Throwable t = assertThrows(NullPointerException.class, () -> {
-//            @SuppressWarnings("ConstantConditions")
+            @SuppressWarnings("ConstantConditions")
             boolean result = TextCalculator.isOutsideBMP(null);
             System.out.println(message + ", not given result " + result);
         }, message);
