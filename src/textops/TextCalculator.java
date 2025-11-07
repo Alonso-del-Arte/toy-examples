@@ -61,7 +61,7 @@ public class TextCalculator {
         if (s == null) {
             throw new NullPointerException("Parameter s should not be null");
         }
-        return true;
+        return false;
     }
 
     // TODO: Write tests for this
