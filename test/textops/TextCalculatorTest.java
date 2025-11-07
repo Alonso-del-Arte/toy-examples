@@ -166,4 +166,12 @@ class TextCalculatorTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
+    @Test
+    void testIsNotOutsideBMP() {
+        int len = ExtendedRandom.nextInt(16) + 4;
+        String s = ExtendedRandom.alphanumeric(len);
+        String msg = "\"" + s + "\" should not be considered outside BMP";
+        assert !TextCalculator.isOutsideBMP(s) : msg;
+    }
+
 }
