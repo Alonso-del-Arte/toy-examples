@@ -56,12 +56,20 @@ public class TextCalculator {
         return allASCIISoFar;
     }
 
-    // TODO: Write tests for this
     public static boolean isOutsideBMP(String s) {
         if (s == null) {
             throw new NullPointerException("Parameter s should not be null");
         }
-        return false;
+        char[] array = s.toCharArray();
+        boolean found = false;
+        int index = 0;
+        int max = array.length;
+        while (index < max && !found) {
+            found = isHighSurrogate(array[index])
+                    && isLowSurrogate(array[index + 1]);
+            index++;
+        }
+        return found;
     }
 
     // TODO: Write tests for this
