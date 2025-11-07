@@ -151,4 +151,19 @@ class TextCalculatorTest {
         assert !TextCalculator.isAllASCII(example) : msg;
     }
 
+    @Test
+    void testIsOutsideBMPRejectsNullString() {
+        String message = "Null String should cause NPE";
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+//            @SuppressWarnings("ConstantConditions")
+            boolean result = TextCalculator.isOutsideBMP(null);
+            System.out.println(message + ", not given result " + result);
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println(message);
+        System.out.println("\"" + excMsg + "\"");
+    }
+
 }
