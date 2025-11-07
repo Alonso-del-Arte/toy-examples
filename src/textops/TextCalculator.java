@@ -58,6 +58,9 @@ public class TextCalculator {
 
     // TODO: Write tests for this
     public static boolean isOutsideBMP(String s) {
+        if (s == null) {
+            throw new NullPointerException("Parameter s should not be null");
+        }
         return false;
     }
 
