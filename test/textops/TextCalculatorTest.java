@@ -174,4 +174,33 @@ class TextCalculatorTest {
         assert !TextCalculator.isOutsideBMP(s) : msg;
     }
 
+    private static int chooseSMPChar() {
+        int propChar;
+        do {
+            propChar = 65536 + ExtendedRandom.nextInt(0x7B);
+        } while (!Character.isDefined(propChar));
+        return propChar;
+    }
+
+    @Test
+    void testIsOutsideBMP() {
+        System.out.println("isOutsideBMP");
+        int bound = 5;
+        int prefixLength = ExtendedRandom.nextInt(bound);
+        String prefix = (prefixLength == 0) ? ""
+                : ExtendedRandom.alphanumeric(prefixLength);
+        int codePoint = chooseSMPChar();
+        char[] surrogates = {Character.highSurrogate(codePoint),
+                Character.lowSurrogate(codePoint)};
+        String nonSMPChar = new String(surrogates);
+        int suffixLength = ExtendedRandom.nextInt(bound);
+        String suffix = (suffixLength == 0) ? ""
+                : ExtendedRandom.alphanumeric(suffixLength);
+        String s = prefix + nonSMPChar + suffix;
+        String msg = "\"" + s
+                + "\" should be found to be outside BMP on account of '"
+                + nonSMPChar + "', " + Character.getName(codePoint);
+        assert TextCalculator.isOutsideBMP(s) : msg;
+    }
+
 }
