@@ -57,9 +57,6 @@ public class TextCalculator {
     }
 
     public static boolean isOutsideBMP(String s) {
-        if (s == null) {
-            throw new NullPointerException("Parameter s should not be null");
-        }
         char[] array = s.toCharArray();
         boolean found = false;
         int index = 0;
