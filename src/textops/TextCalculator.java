@@ -57,6 +57,9 @@ public class TextCalculator {
     }
 
     public static boolean isOutsideBMP(String s) {
+        if (s.isEmpty()) {
+            return true;
+        }
         char[] array = s.toCharArray();
         boolean found = false;
         int index = 0;
