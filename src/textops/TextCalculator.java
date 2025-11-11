@@ -56,6 +56,19 @@ public class TextCalculator {
         return allASCIISoFar;
     }
 
+    /**
+     * Determines whether a {@code String} instance contains any characters
+     * outside Unicode's Basic Multilingual Plane (BMP).
+     * @param s The {@code String} to check. Examples: "e&#x1078E;",
+     *          "e&#x0259;", the empty {@code String}.
+     * @return True if {@code s} contains at least one character outside the
+     * BMP. In the examples, true for "e&#x1078E;" since the second character is
+     * from the Supplementary Multilingual Plane (SMP) rather than the BMP,
+     * false for "e&#x0259;" since the schwa is from the BMP, and false in the
+     * case of the empty  {@code String}, even though it doesn't contain any BMP
+     * characters.
+     * @throws NullPointerException If {@code s} is null.
+     */
     public static boolean isOutsideBMP(String s) {
         char[] array = s.toCharArray();
         boolean found = false;
