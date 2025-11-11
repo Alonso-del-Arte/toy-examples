@@ -174,6 +174,12 @@ class TextCalculatorTest {
         assert !TextCalculator.isOutsideBMP(s) : msg;
     }
 
+    @Test
+    void testEmptyStringIsNotOutsideBMP() {
+        String msg = "Empty String should not be considered outside BMP";
+        assert !TextCalculator.isOutsideBMP("") : msg;
+    }
+
     private static int chooseSMPChar() {
         int propChar;
         do {
