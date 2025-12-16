@@ -94,6 +94,10 @@ public class TextCalculator {
 
     // TODO: Write tests for this
     public static String padWithSpacesLeft(String s, int length) {
+        if (length < 0) {
+            String excMsg = "Length " + length + " is not valid";
+            throw new IllegalArgumentException(excMsg);
+        }
         return "SORRY, NOT IMPLEMENTED YET";
     }
 
