@@ -231,7 +231,7 @@ class TextCalculatorTest {
     @Test
     void testPadWithSpacesRightRejectsNegativeLength() {
         int badLength = ExtendedRandom.nextInt() | Integer.MIN_VALUE;
-        String message = "padWithSpacesLeft() should reject length "
+        String message = "padWithSpacesRight() should reject length "
                 + badLength;
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
             String badResult = TextCalculator.padWithSpacesRight(message,
@@ -252,8 +252,7 @@ class TextCalculatorTest {
         int badLength = ExtendedRandom.nextInt() | Integer.MIN_VALUE;
         Character.UnicodeBlock block = ExtendedRandom.chooseBMPBlock();
         char c = ExtendedRandom.chooseCharacterFromBlock(block);
-        String message = "padWithSpacesLeft() should reject length "
-                + badLength;
+        String message = "padLeft() should reject length " + badLength;
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
             String badResult = TextCalculator.padLeft(message, badLength, c);
             System.out.println(message + ", not given result " + badResult);
