@@ -247,4 +247,24 @@ class TextCalculatorTest {
         assert excMsg.contains(numStr) : containsMsg;
     }
 
+    @Test
+    void testPadLeftRejectsNegativeLength() {
+        int badLength = ExtendedRandom.nextInt() | Integer.MIN_VALUE;
+        Character.UnicodeBlock block = ExtendedRandom.chooseBMPBlock();
+        char c = ExtendedRandom.chooseCharacterFromBlock(block);
+        String message = "padWithSpacesLeft() should reject length "
+                + badLength;
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            String badResult = TextCalculator.padLeft(message, badLength, c);
+            System.out.println(message + ", not given result " + badResult);
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        String numStr = Integer.toString(badLength);
+        String containsMsg = "Exception message should contain \"" + numStr
+                + "\"";
+        assert excMsg.contains(numStr) : containsMsg;
+    }
+
 }
