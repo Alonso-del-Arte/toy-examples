@@ -98,6 +98,9 @@ public class TextCalculator {
             String excMsg = "Length " + length + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
+        if (length < s.length()) {
+            return s;
+        }
         return "SORRY, NOT IMPLEMENTED YET";
     }
 
