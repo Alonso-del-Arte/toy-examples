@@ -365,4 +365,16 @@ class TextCalculatorTest {
         assertEquals(expected, actual, message);
     }
 
+    @Test
+    void testPadRightDoesNotChangeEqualLengthString() {
+        int length = ExtendedRandom.nextInt(16) + 4;
+        Character.UnicodeBlock block = ExtendedRandom.chooseBMPBlock();
+        char c = ExtendedRandom.chooseCharacterFromBlock(block);
+        String expected = ExtendedRandom.alphanumeric(length);
+        String actual = TextCalculator.padRight(expected, length, c);
+        String message = "Trying to pad String of " + length
+                + " characters to length " + length + " should not change it";
+        assertEquals(expected, actual, message);
+    }
+
 }
