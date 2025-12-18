@@ -269,6 +269,17 @@ class TextCalculatorTest {
     }
 
     @Test
+    void testPadWithSpacesRightDoesNotChangeLongerString() {
+        int strLen = ExtendedRandom.nextInt(16) + 4;
+        String expected = ExtendedRandom.alphanumeric(strLen);
+        int length = ExtendedRandom.nextInt(strLen);
+        String actual = TextCalculator.padWithSpacesRight(expected, length);
+        String message = "Trying to pad String of " + strLen
+                + " characters to length " + length + " should not change it";
+        assertEquals(expected, actual, message);
+    }
+
+    @Test
     void testPadLeftRejectsNegativeLength() {
         int badLength = ExtendedRandom.nextInt() | Integer.MIN_VALUE;
         Character.UnicodeBlock block = ExtendedRandom.chooseBMPBlock();
