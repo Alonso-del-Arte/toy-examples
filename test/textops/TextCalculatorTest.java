@@ -352,4 +352,17 @@ class TextCalculatorTest {
         assert excMsg.contains(numStr) : containsMsg;
     }
 
+    @Test
+    void testPadRightDoesNotChangeLongerString() {
+        int strLen = ExtendedRandom.nextInt(16) + 4;
+        String expected = ExtendedRandom.alphanumeric(strLen);
+        int length = ExtendedRandom.nextInt(strLen);
+        Character.UnicodeBlock block = ExtendedRandom.chooseBMPBlock();
+        char c = ExtendedRandom.chooseCharacterFromBlock(block);
+        String actual = TextCalculator.padRight(expected, length, c);
+        String message = "Trying to pad String of " + strLen
+                + " characters to length " + length + " should not change it";
+        assertEquals(expected, actual, message);
+    }
+
 }
