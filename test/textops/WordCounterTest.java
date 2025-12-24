@@ -14,15 +14,6 @@ class WordCounterTest {
 
     private static final int NUMBER_OF_WORDS = WORDS.length;
 
-    @Test
-    void testWordCountZeroForEmptyString() {
-        WordCounter instance = new WordCounter("");
-        int expected = 0;
-        int actual = instance.wordCount();
-        String message = "Word count for empty String should be 0";
-        assertEquals(expected, actual, message);
-    }
-
     private static String makePhrase(int len) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < len; i++) {
@@ -31,6 +22,15 @@ class WordCounterTest {
             builder.append(' ');
         }
         return builder.toString();
+    }
+
+    @Test
+    void testWordCountZeroForEmptyString() {
+        WordCounter instance = new WordCounter("");
+        int expected = 0;
+        int actual = instance.wordCount();
+        String message = "Word count for empty String should be 0";
+        assertEquals(expected, actual, message);
     }
 
     @Test
