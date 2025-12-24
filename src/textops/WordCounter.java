@@ -4,6 +4,11 @@ public class WordCounter {
 
     private final String text;
 
+    // TODO: Write tests for this
+    public String getText() {
+        return "SORRY, NOT IMPLEMENTED YET";
+    }
+
     public int wordCount() {
         int spaceCount = 0;
         int index = 0;
