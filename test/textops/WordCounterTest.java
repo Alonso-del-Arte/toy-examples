@@ -25,6 +25,16 @@ class WordCounterTest {
     }
 
     @Test
+    void testGetText() {
+        System.out.println("getText");
+        int len = ExtendedRandom.nextInt(8) + 2;
+        String expected = makePhrase(len);
+        WordCounter instance = new WordCounter(expected);
+        String actual = instance.getText();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testWordCountZeroForEmptyString() {
         WordCounter instance = new WordCounter("");
         int expected = 0;
