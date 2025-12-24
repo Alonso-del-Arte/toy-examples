@@ -4,9 +4,8 @@ public class SyllableCounter {
 
     private final String text;
 
-    // TODO: Write tests for this
     public String getText() {
-        return "SORRY, NOT IMPLEMENTED YET";
+        return this.text;
     }
 
     // TODO: Write tests for this
@@ -15,7 +14,7 @@ public class SyllableCounter {
     }
 
     public SyllableCounter(String s) {
-        this.text = "SORRY, NOT IMPLEMENTED YET";
+        this.text = s;
     }
 
 }
