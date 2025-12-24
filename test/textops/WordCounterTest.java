@@ -14,7 +14,7 @@ class WordCounterTest {
 
     private static final int NUMBER_OF_WORDS = WORDS.length;
 
-    private static String makePhrase(int len) {
+    static String makePhrase(int len) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < len; i++) {
             int index = (i * ExtendedRandom.nextInt(128)) % NUMBER_OF_WORDS;
