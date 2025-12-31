@@ -14,6 +14,10 @@ public class SyllableCounter {
     }
 
     public SyllableCounter(String s) {
+        if (s == null) {
+            String excMsg = "Text should not be null";
+            throw new NullPointerException((excMsg));
+        }
         this.text = s;
     }
 
