@@ -64,6 +64,23 @@ class ExtendedRandomTest {
 
     private static final int NUMBER_OF_BLOCKS = UNICODE_BLOCKS.length;
 
+    public static final Set<Character.UnicodeBlock>
+            BLOCKS_WITH_UNASSIGNED_CHARACTERS = new HashSet<>();
+
+    static {
+        Character.UnicodeBlock currBlock = Character.UnicodeBlock.BASIC_LATIN;
+        for (char ch = ' '; ch < '\u4E00'; ch++) {
+            if (Character.isDefined(ch)) {
+                currBlock = Character.UnicodeBlock.of(ch);
+            } else {
+                if (BLOCKS_WITH_UNASSIGNED_CHARACTERS.add(currBlock)) {
+                    System.out.println("Recognized " + currBlock.toString()
+                            + " as block w/ at least one unassigned character");
+                }
+            }
+        }
+    }
+
     @Test
     void testNextInt() {
         System.out.println("nextInt");
