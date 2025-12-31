@@ -363,6 +363,20 @@ class ExtendedRandomTest {
     }
 
     @Test
+    void testChooseCharacterFromBlock() {
+        System.out.println("chooseCharacterFromBlock");
+        for (Character.UnicodeBlock expected
+                : BLOCKS_WITH_UNASSIGNED_CHARACTERS) {
+            char ch = ExtendedRandom.chooseCharacterFromBlock(expected);
+            String msg = "Character '" + ch + "' (" + Integer.toString(ch, 16)
+                    + ") should be defined and of block " + expected.toString();
+            assert Character.isDefined(ch) : msg;
+            Character.UnicodeBlock actual = of(ch);
+            assertEquals(expected, actual, msg);
+        }
+    }
+
+    @Test
     void testNextObject() {
         System.out.println("nextObject");
         int capacity = RANDOM.nextInt(32) + 8;
