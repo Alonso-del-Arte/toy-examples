@@ -80,8 +80,13 @@ public class ExtendedRandom {
     }
 
 //    public static int nextInt(Range range) {
-//        return 0;
+//        return Integer.MIN_VALUE;
 //    }
+
+    // TODO: Write tests for this
+    public static int nextInt(int origin, int bound) {
+        return Integer.MAX_VALUE;
+    }
 
     /**
      * Gives a pseudorandomly chosen <code>BigInteger</code> instance
