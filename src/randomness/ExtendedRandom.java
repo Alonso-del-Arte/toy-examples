@@ -83,15 +83,14 @@ public class ExtendedRandom {
 //        return Integer.MIN_VALUE;
 //    }
 
-    // TODO: Write tests for this
+    // TODO: Write tests for negative origin, bound
     public static int nextInt(int origin, int bound) {
         if (bound < origin) {
             String excMsg = "Combination of origin " + origin + " and bound "
                     + bound + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
-        int length = bound - origin;
-        return origin + RANDOM.nextInt(length);
+        return RANDOM.nextInt(origin, bound);
     }
 
     /**
