@@ -176,6 +176,7 @@ class ExtendedRandomTest {
                 + "\" and \"" + boundStr + "\"";
         assert excMsg.contains(originStr) : containsMsg;
         assert excMsg.contains(boundStr) : containsMsg;
+        System.out.println("\"" + excMsg + "\"");
     }
 
     @Test
