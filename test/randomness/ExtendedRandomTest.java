@@ -161,8 +161,21 @@ class ExtendedRandomTest {
     }
 
     @Test
-    void testNextIntFromRange() {
-        fail("RESUME WORK HERE");
+    void testNextIntFromRangeUnwrappedRejectsBadOriginBound() {
+        int origin = RANDOM.nextInt(Short.MAX_VALUE);
+        int bound = origin - RANDOM.nextInt(Short.MAX_VALUE);
+        String message = "Origin " + origin + " with bad bound " + bound
+                + " should cause exception";
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {}, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        String originStr = Integer.toString(origin);
+        String boundStr = Integer.toString(bound);
+        String containsMsg = "Exception message should contain \"" + originStr
+                + "\" and \"" + boundStr + "\"";
+        assert excMsg.contains(originStr) : containsMsg;
+        assert excMsg.contains(boundStr) : containsMsg;
     }
 
     @Test
