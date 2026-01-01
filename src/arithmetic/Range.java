@@ -27,7 +27,7 @@ public class Range implements Iterable<Integer> {
     // TODO: Write tests for this
     @Override
     public Iterator<Integer> iterator() {
-        return new Iterator<Integer>() {
+        return new Iterator<>() {
 
             @Override
             public boolean hasNext() {
@@ -38,7 +38,7 @@ public class Range implements Iterable<Integer> {
             public Integer next() {
                 return -1;
             }
-            
+
         };
     }
 
