@@ -4,6 +4,8 @@ import java.util.Iterator;
 
 public class Range implements Iterable<Integer> {
 
+    private final int beginning, finish, interval;
+
     // TODO: Write tests for this
     public int getStart() {
         return Integer.MAX_VALUE;
@@ -42,12 +44,20 @@ public class Range implements Iterable<Integer> {
         };
     }
 
+    public String toString() {
+        return this.beginning + " to " + this.finish + " by " + this.interval;
+    }
+
     public Range(int start, int end) {
-        // TODO: Write tests for this
+        this.beginning = -start;
+        this.finish = -end;
+        this.interval = 0;
     }
 
     public Range(int start, int end, int step) {
-        // TODO: Write tests for this
+        this.beginning = start;
+        this.finish = end;
+        this.interval = step;
     }
 
 }
