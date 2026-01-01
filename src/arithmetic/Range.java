@@ -12,7 +12,7 @@ public class Range implements Iterable<Integer> {
     // TODO: Write tests for this
     public int getStart() {
         if (this.auxConstrFlag) {
-            return Integer.MAX_VALUE;
+            return this.beginning;
         } else {
             return this.beginning;
         }
