@@ -180,6 +180,31 @@ class ExtendedRandomTest {
         assert excMsg.contains(boundStr) : containsMsg;
         System.out.println("\"" + excMsg + "\"");
     }
+    
+    @Test
+    void testNextIntFromRangeUnwrapped() {
+        int origin = RANDOM.nextInt(Short.MAX_VALUE) + 1;
+        int bound = origin + RANDOM.nextInt(Byte.MAX_VALUE) + 32;
+        int capacity = bound - origin;
+        Set<Integer> numbers = new HashSet<>(capacity);
+        String msgPart = " should be at least " + origin + " but less than "
+                + bound;
+        int numberOfCalls = capacity << 2;
+        for (int i = 0; i < numberOfCalls; i++) {
+            int number = ExtendedRandom.nextInt(origin, bound);
+            String msg = number + msgPart;
+            assert origin <= number && number < bound : msg;
+            numbers.add(number);
+        }
+        int minimum = 11 * capacity / 20;
+        int actual = numbers.size();
+        String msg = "After " + numberOfCalls + " should've gotten at least "
+                + minimum + " numbers out of range " + origin + " to "
+                + (bound - 1) + " (" + capacity + " available integers); got "
+                + actual;
+        assert actual >= minimum : msg;
+        System.out.println(msg);
+    }
 
     @Test
     void testNextBigInt() {
