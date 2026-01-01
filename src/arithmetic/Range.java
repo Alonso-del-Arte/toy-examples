@@ -9,13 +9,8 @@ public class Range implements Iterable<Integer> {
     // TODO: Refactor this flag out once all functions are tested
     private final boolean auxConstrFlag;
 
-    // TODO: Write tests for this
     public int getStart() {
-        if (this.auxConstrFlag) {
-            return this.beginning;
-        } else {
-            return this.beginning;
-        }
+        return this.beginning;
     }
 
     // TODO: Write tests for this
