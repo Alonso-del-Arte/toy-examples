@@ -163,7 +163,7 @@ class ExtendedRandomTest {
     @Test
     void testNextIntFromRangeUnwrappedRejectsBadOriginBound() {
         int origin = RANDOM.nextInt(Short.MAX_VALUE);
-        int bound = origin - RANDOM.nextInt(Short.MAX_VALUE);
+        int bound = origin - RANDOM.nextInt(Short.MAX_VALUE) - 1;
         String message = "Origin " + origin + " with bad bound " + bound
                 + " should cause exception";
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {}, message);
