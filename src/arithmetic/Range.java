@@ -17,6 +17,11 @@ public class Range {
         return 0;
     }
 
+    // TODO: Write tests for this
+    public int get(int index) {
+        return 0;
+    }
+
     public Range(int start, int end) {
         // TODO: Write tests for this
     }
