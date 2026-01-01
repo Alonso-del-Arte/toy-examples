@@ -6,6 +6,9 @@ public class Range implements Iterable<Integer> {
 
     private final int beginning, finish, interval;
 
+    // TODO: Refactor this flag out once all functions are tested
+    private final boolean auxConstrFlag;
+
     // TODO: Write tests for this
     public int getStart() {
         return Integer.MAX_VALUE;
@@ -45,19 +48,24 @@ public class Range implements Iterable<Integer> {
     }
 
     public String toString() {
+        if (this.auxConstrFlag) {
+            return this.beginning + " to " + this.finish;
+        }
         return this.beginning + " to " + this.finish + " by " + this.interval;
     }
 
     public Range(int start, int end) {
-        this.beginning = -start;
-        this.finish = -end;
+        this.beginning = start;
+        this.finish = end;
         this.interval = 0;
+        this.auxConstrFlag = true;
     }
 
     public Range(int start, int end, int step) {
         this.beginning = start;
         this.finish = end;
         this.interval = step;
+        this.auxConstrFlag = false;
     }
 
 }
