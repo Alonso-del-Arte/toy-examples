@@ -22,4 +22,18 @@ class RangeTest {
         assertEquals(expected, actual);
     }
 
+    // begin separator
+    // TODO: Remove this separator once all functions are tested
+    // end separator
+
+    @Test
+    void testToStringAuxConstructor() {
+        int start = RANDOM.nextInt(Byte.MAX_VALUE) + 1;
+        int end = start + RANDOM.nextInt(1, 128);
+        Range instance = new Range(start, end);
+        String expected = start + " to " + end;
+        String actual = instance.toString();
+        assertEquals(expected, actual);
+    }
+
 }
