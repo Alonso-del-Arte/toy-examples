@@ -1,6 +1,8 @@
 package arithmetic;
 
-public class Range {
+import java.util.Iterator;
+
+public class Range implements Iterable<Integer> {
 
     // TODO: Write tests for this
     public int getStart() {
@@ -20,6 +22,24 @@ public class Range {
     // TODO: Write tests for this
     public int get(int index) {
         return 0;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public Iterator<Integer> iterator() {
+        return new Iterator<Integer>() {
+
+            @Override
+            public boolean hasNext() {
+                return false;
+            }
+
+            @Override
+            public Integer next() {
+                return -1;
+            }
+            
+        };
     }
 
     public Range(int start, int end) {
