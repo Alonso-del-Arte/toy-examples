@@ -73,12 +73,11 @@ class ExtendedRandomTest {
             if (Character.isDefined(ch)) {
                 currBlock = Character.UnicodeBlock.of(ch);
             } else {
-                if (BLOCKS_WITH_UNASSIGNED_CHARACTERS.add(currBlock)) {
-                    System.out.println("Recognized " + currBlock.toString()
-                            + " as block w/ at least one unassigned character");
-                }
+                BLOCKS_WITH_UNASSIGNED_CHARACTERS.add(currBlock);
             }
         }
+        System.out.println("Recognized " + BLOCKS_WITH_UNASSIGNED_CHARACTERS.size()
+                + " blocks with unassigned characters");
     }
 
     @Test
