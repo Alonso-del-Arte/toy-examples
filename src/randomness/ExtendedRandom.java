@@ -90,7 +90,8 @@ public class ExtendedRandom {
                     + bound + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
-        return Integer.MAX_VALUE;
+        int length = bound - origin;
+        return origin + RANDOM.nextInt(length);
     }
 
     /**
