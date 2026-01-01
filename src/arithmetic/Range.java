@@ -11,7 +11,11 @@ public class Range implements Iterable<Integer> {
 
     // TODO: Write tests for this
     public int getStart() {
-        return Integer.MAX_VALUE;
+        if (this.auxConstrFlag) {
+            return Integer.MAX_VALUE;
+        } else {
+            return this.beginning;
+        }
     }
 
     // TODO: Write tests for this
