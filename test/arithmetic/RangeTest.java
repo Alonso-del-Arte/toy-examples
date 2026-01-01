@@ -22,9 +22,22 @@ class RangeTest {
         assertEquals(expected, actual);
     }
 
-    // begin separator
+    @Test
+    void testGetStart() {
+        System.out.println("getStart");
+        int expected = RANDOM.nextInt(Byte.MAX_VALUE) + 1;
+        int step = RANDOM.nextInt(2, 128);
+        int multiplier = RANDOM.nextInt(2, 128);
+        int end = expected + multiplier * step;
+        Range instance = new Range(expected, end, step);
+        int actual = instance.getStart();
+        String message = "Getting start of " + instance;
+        assertEquals(expected, actual, message);
+    }
+
+    // begin separator -----------------------------------------
     // TODO: Remove this separator once all functions are tested
-    // end separator
+    // ------------------------------------------- end separator
 
     @Test
     void testToStringAuxConstructor() {
@@ -35,5 +48,12 @@ class RangeTest {
         String actual = instance.toString();
         assertEquals(expected, actual);
     }
+
+    // TODO: Test toString() equivalence for aux constructor and main
+    //  constructor with explicit step 1
+
+    // TODO: Test equals()
+
+    // TODO: Test hashCode()
 
 }
