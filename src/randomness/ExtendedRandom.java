@@ -85,6 +85,11 @@ public class ExtendedRandom {
 
     // TODO: Write tests for this
     public static int nextInt(int origin, int bound) {
+        if (bound < origin) {
+            String excMsg = "Combination of origin " + origin + " and bound "
+                    + bound + " is not valid";
+            throw new IllegalArgumentException(excMsg);
+        }
         return Integer.MAX_VALUE;
     }
 
