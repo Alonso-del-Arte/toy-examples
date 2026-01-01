@@ -166,7 +166,10 @@ class ExtendedRandomTest {
         int bound = origin - RANDOM.nextInt(Short.MAX_VALUE) - 1;
         String message = "Origin " + origin + " with bad bound " + bound
                 + " should cause exception";
-        Throwable t = assertThrows(IllegalArgumentException.class, () -> {}, message);
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            int badResult = ExtendedRandom.nextInt(origin, bound);
+            System.out.println(message + ", not given result " + badResult);
+        }, message);
         String excMsg = t.getMessage();
         assert excMsg != null : "Exception message should not be null";
         assert !excMsg.isBlank() : "Exception message should not be blank";
