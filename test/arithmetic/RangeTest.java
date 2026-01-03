@@ -95,6 +95,18 @@ class RangeTest {
         assertEquals(expected, actual, message);
     }
 
+    @Test
+    void testGetStepAuxConstructor() {
+        int start = RANDOM.nextInt(Byte.MAX_VALUE) + 1;
+        int end = start + RANDOM.nextInt(1, 128);
+        Range instance = new Range(start, end);
+        int expected = 1;
+        int actual = instance.getStep();
+        String message = "Getting step of " + instance
+                + " (implicitly step of 1)";
+        assertEquals(expected, actual, message);
+    }
+
     // TODO: Test toString() equivalence for aux constructor and main
     //  constructor with explicit step 1
 
