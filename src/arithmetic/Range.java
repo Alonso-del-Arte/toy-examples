@@ -18,11 +18,7 @@ public class Range implements Iterable<Integer> {
     }
 
     public int getStep() {
-        if (this.auxConstrFlag) {
-            return 1;
-        } else {
-            return this.interval;
-        }
+        return this.interval;
     }
 
     // TODO: Write tests for this
@@ -58,7 +54,7 @@ public class Range implements Iterable<Integer> {
     public Range(int start, int end) {
         this.beginning = start;
         this.finish = end;
-        this.interval = 0;
+        this.interval = 1;
         this.auxConstrFlag = true;
     }
 
