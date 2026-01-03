@@ -45,7 +45,7 @@ public class Range implements Iterable<Integer> {
     }
 
     public String toString() {
-        if (this.auxConstrFlag) {
+        if (this.interval == 1) {
             return this.beginning + " to " + this.finish;
         }
         return this.beginning + " to " + this.finish + " by " + this.interval;
