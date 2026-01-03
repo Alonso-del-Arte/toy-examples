@@ -13,13 +13,8 @@ public class Range implements Iterable<Integer> {
         return this.beginning;
     }
 
-    // TODO: Write tests for this
     public int getEnd() {
-        if (this.auxConstrFlag) {
-            return this.finish;
-        } else {
-            return this.finish;
-        }
+        return this.finish;
     }
 
     // TODO: Write tests for this
