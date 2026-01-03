@@ -16,7 +16,7 @@ public class Range implements Iterable<Integer> {
     // TODO: Write tests for this
     public int getEnd() {
         if (this.auxConstrFlag) {
-            return Integer.MIN_VALUE;
+            return this.finish;
         } else {
             return this.finish;
         }
