@@ -17,10 +17,9 @@ public class Range implements Iterable<Integer> {
         return this.finish;
     }
 
-    // TODO: Write tests for this
     public int getStep() {
         if (this.auxConstrFlag) {
-            return 0;
+            return 1;
         } else {
             return this.interval;
         }
