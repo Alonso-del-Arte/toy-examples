@@ -19,7 +19,11 @@ public class Range implements Iterable<Integer> {
 
     // TODO: Write tests for this
     public int getStep() {
-        return 0;
+        if (this.auxConstrFlag) {
+            return 0;
+        } else {
+            return this.interval;
+        }
     }
 
     // TODO: Write tests for this
