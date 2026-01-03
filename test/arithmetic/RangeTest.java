@@ -61,10 +61,6 @@ class RangeTest {
         assertEquals(expected, actual, message);
     }
 
-    // begin separator -----------------------------------------
-    // TODO: Remove this separator once all functions are tested
-    // ------------------------------------------- end separator
-
     @Test
     void testToStringAuxConstructor() {
         int start = RANDOM.nextInt(Byte.MAX_VALUE) + 1;
@@ -107,8 +103,15 @@ class RangeTest {
         assertEquals(expected, actual, message);
     }
 
-    // TODO: Test toString() equivalence for aux constructor and main
-    //  constructor with explicit step 1
+    @Test
+    void testToStringStep1MainConstructor() {
+        int start = RANDOM.nextInt(Byte.MAX_VALUE) + 1;
+        int end = start + RANDOM.nextInt(2, 128);
+        Range instance = new Range(start, end, 1);
+        String expected = start + " to " + end;
+        String actual = instance.toString();
+        assertEquals(expected, actual);
+    }
 
     // TODO: Test equals()
 
