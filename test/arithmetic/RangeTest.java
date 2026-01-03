@@ -48,6 +48,19 @@ class RangeTest {
         assertEquals(expected, actual, message);
     }
 
+    @Test
+    void testGetStep() {
+        System.out.println("getStep");
+        int start = RANDOM.nextInt(Byte.MAX_VALUE) + 1;
+        int expected = RANDOM.nextInt(2, 128);
+        int multiplier = RANDOM.nextInt(2, 128);
+        int end = start + multiplier * expected;
+        Range instance = new Range(start, end, expected);
+        int actual = instance.getStep();
+        String message = "Getting step of " + instance;
+        assertEquals(expected, actual, message);
+    }
+
     // begin separator -----------------------------------------
     // TODO: Remove this separator once all functions are tested
     // ------------------------------------------- end separator
