@@ -72,6 +72,16 @@ class RangeTest {
         assertEquals(expected, actual, message);
     }
 
+    @Test
+    void testGetEndAuxConstructor() {
+        int start = RANDOM.nextInt(Byte.MAX_VALUE) + 1;
+        int expected = start + RANDOM.nextInt(1, 128);
+        Range instance = new Range(start, expected);
+        int actual = instance.getEnd();
+        String message = "Getting end of " + instance;
+        assertEquals(expected, actual, message);
+    }
+
     // TODO: Test toString() equivalence for aux constructor and main
     //  constructor with explicit step 1
 
