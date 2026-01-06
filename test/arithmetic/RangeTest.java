@@ -113,8 +113,41 @@ class RangeTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testGet() {
+        System.out.println("get");
+        int start = RANDOM.nextInt(Byte.MAX_VALUE) + 1;
+        int end = start + RANDOM.nextInt(1, 128);
+        Range instance = new Range(start, end);
+        int stop = end - start + 2;
+        for (int index = 0; index < stop; index++) {
+            int expected = start + index;
+            int actual = instance.get(index);
+            String message = "Getting element " + index + " of " + instance;
+            assertEquals(expected, actual, message);
+        }
+    }
+
+    @Test
+    void testGetExplicitStep1() {
+        int start = RANDOM.nextInt(Byte.MAX_VALUE) + 1;
+        int end = start + RANDOM.nextInt(1, 128);
+        Range instance = new Range(start, end, 1);
+        int stop = end - start + 2;
+        for (int index = 0; index < stop; index++) {
+            int expected = start + index;
+            int actual = instance.get(index);
+            String message = "Getting element " + index + " of " + instance;
+            assertEquals(expected, actual, message);
+        }
+    }
+
     // TODO: Test equals()
 
     // TODO: Test hashCode()
+
+    // TODO: Test constructor rejects wrong direction (negative) step
+
+    // TODO: Test constructor rejects wrong direction (positive) step
 
 }
