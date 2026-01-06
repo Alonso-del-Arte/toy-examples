@@ -49,9 +49,7 @@ public class Range implements Iterable<Integer> {
     }
 
     public Range(int start, int end) {
-        this.beginning = start;
-        this.finish = end;
-        this.interval = 1;
+        this(start, end, 1);
     }
 
     public Range(int start, int end, int step) {
