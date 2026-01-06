@@ -6,9 +6,6 @@ public class Range implements Iterable<Integer> {
 
     private final int beginning, finish, interval;
 
-    // TODO: Refactor this flag out once all functions are tested
-    private final boolean auxConstrFlag;
-
     public int getStart() {
         return this.beginning;
     }
@@ -55,14 +52,12 @@ public class Range implements Iterable<Integer> {
         this.beginning = start;
         this.finish = end;
         this.interval = 1;
-        this.auxConstrFlag = true;
     }
 
     public Range(int start, int end, int step) {
         this.beginning = start;
         this.finish = end;
         this.interval = step;
-        this.auxConstrFlag = false;
     }
 
 }
