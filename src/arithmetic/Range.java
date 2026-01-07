@@ -20,7 +20,10 @@ public class Range implements Iterable<Integer> {
 
     // TODO: Write tests for this
     public int get(int index) {
-        return this.beginning + index;
+        if (this.interval < 0) {
+            return this.beginning + this.interval * index;
+        }
+        return this.beginning + this.interval * index;
     }
 
     // TODO: Write tests for this
