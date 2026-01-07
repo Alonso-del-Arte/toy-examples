@@ -142,6 +142,36 @@ class RangeTest {
         }
     }
 
+    @Test
+    void testGetNegativeStep() {
+        int end = RANDOM.nextInt(Byte.MAX_VALUE) + 1;
+        int step = -RANDOM.nextInt(2, 8);
+        int start = end - step * RANDOM.nextInt(1, 128);
+        Range instance = new Range(start, end, step);
+        int stop = (end - start) / step + 2;
+        for (int index = 0; index < stop; index++) {
+            int expected = start + step * index;
+            int actual = instance.get(index);
+            String message = "Getting element " + index + " of " + instance;
+            assertEquals(expected, actual, message);
+        }
+    }
+
+    @Test
+    void testGetPositiveStepMoreThan1() {
+        int start = RANDOM.nextInt(Byte.MAX_VALUE) + 1;
+        int step = RANDOM.nextInt(2, 8);
+        int end = start + step * RANDOM.nextInt(1, 8);
+        Range instance = new Range(start, end, step);
+        int stop = (end - start) / step + 2;
+        for (int index = 0; index < stop; index++) {
+            int expected = start + step * index;
+            int actual = instance.get(index);
+            String message = "Getting element " + index + " of " + instance;
+            assertEquals(expected, actual, message);
+        }
+    }
+
     // TODO: Test equals()
 
     // TODO: Test hashCode()
