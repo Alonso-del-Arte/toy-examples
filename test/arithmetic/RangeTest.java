@@ -26,7 +26,7 @@ class RangeTest {
         int start = RANDOM.nextInt(128) + 2;
         int step = RANDOM.nextInt(2, 64);
         int end = start + RANDOM.nextInt(128) + 2;
-        return new Range(start, end);
+        return new Range(start, end, step);
     }
 
     @Test
@@ -214,6 +214,25 @@ class RangeTest {
     @Test
     void testGetRangeImplicitStep1RejectsNegativeIndex() {
         Range instance = makeRangeWithImplicitStep1();
+        int badIndex = -RANDOM.nextInt(1, 64);
+        String message = "Trying to get element " + badIndex + " of " + instance
+                + " should cause exception";
+        Throwable t = assertThrows(IndexOutOfBoundsException.class, () -> {
+            int badResult = instance.get(badIndex);
+            System.out.println(message + " not given result " + badResult);
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        String numStr = Integer.toString(badIndex);
+        String containsMsg = "Exception message should contain \"" + numStr
+                + "\"";
+        assert excMsg.contains(numStr) : containsMsg;
+    }
+
+    @Test
+    void testGetRangePositiveStepRejectsNegativeIndex() {
+        Range instance = makeRangeWithPositiveStep();
         int badIndex = -RANDOM.nextInt(1, 64);
         String message = "Trying to get element " + badIndex + " of " + instance
                 + " should cause exception";
