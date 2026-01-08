@@ -10,9 +10,9 @@ class RangeTest {
     public static final Random RANDOM = new Random(~System.currentTimeMillis());
 
     private static Range makeRangeWithNegativeStep() {
-        int end = RANDOM.nextInt(128) + 2;
+        int start = RANDOM.nextInt(128) + 2;
         int step = -RANDOM.nextInt(1, 64);
-        int start = end + step * RANDOM.nextInt(128);
+        int end = start + step * RANDOM.nextInt(1,128);
         return new Range(start, end, step);
     }
 
@@ -190,6 +190,25 @@ class RangeTest {
             String message = "Getting element " + index + " of " + instance;
             assertEquals(expected, actual, message);
         }
+    }
+
+    @Test
+    void testGetRangeNegativeStepRejectsNegativeIndex() {
+        Range instance = makeRangeWithNegativeStep();
+        int badIndex = -RANDOM.nextInt(1, 64);
+        String message = "Trying to get element " + badIndex + " of " + instance
+                + " should cause exception";
+        Throwable t = assertThrows(IndexOutOfBoundsException.class, () -> {
+            int badResult = instance.get(badIndex);
+            System.out.println(message + " not given result " + badResult);
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        String numStr = Integer.toString(badIndex);
+        String containsMsg = "Exception message should contain \"" + numStr
+                + "\"";
+        assert excMsg.contains(numStr) : containsMsg;
     }
 
     // TODO: Test equals()
