@@ -9,6 +9,26 @@ class RangeTest {
 
     public static final Random RANDOM = new Random(~System.currentTimeMillis());
 
+    private static Range makeRangeWithNegativeStep() {
+        int end = RANDOM.nextInt(128) + 2;
+        int step = -RANDOM.nextInt(1, 64);
+        int start = end + step * RANDOM.nextInt(128);
+        return new Range(start, end, step);
+    }
+
+    private static Range makeRangeWithImplicitStep1() {
+        int start = RANDOM.nextInt(128) + 2;
+        int end = start + RANDOM.nextInt(128) + 2;
+        return new Range(start, end);
+    }
+
+    private static Range makeRangeWithPositiveStep() {
+        int start = RANDOM.nextInt(128) + 2;
+        int step = RANDOM.nextInt(2, 64);
+        int end = start + RANDOM.nextInt(128) + 2;
+        return new Range(start, end);
+    }
+
     @Test
     void testToString() {
         System.out.println("toString");
