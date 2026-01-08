@@ -20,6 +20,10 @@ public class Range implements Iterable<Integer> {
 
     // TODO: Write tests for this
     public int get(int index) {
+        if (index < 0) {
+            String excMsg = "Index " + index + " is not valid";
+            throw new IndexOutOfBoundsException(excMsg);
+        }
         return this.beginning + this.interval * index;
     }
 
