@@ -1,9 +1,12 @@
 package arithmetic;
 
+import java.time.LocalDateTime;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+
+import randomness.ExtendedRandom;
 
 class RangeTest {
 
@@ -282,6 +285,20 @@ class RangeTest {
         Object obj = provideNull();
         String msg = instance.toString() + " should not equal null";
         assert !instance.equals(obj) : msg;
+    }
+
+    @Test
+    void testNotEqualsDiffClass() {
+        Range instance = makeRange();
+        Object[] objects = {ExtendedRandom.chooseBMPBlock(),
+                ExtendedRandom.nextBigInt(72), ExtendedRandom.nextFraction(),
+                ExtendedRandom.nextColor(), ExtendedRandom.nextComplex(),
+                LocalDateTime.now()};
+        for (Object obj : objects) {
+            String msg = instance.toString() + " should not equal "
+                    + obj.toString();
+            assert !instance.equals(obj) : msg;
+        }
     }
 
     // TODO: Test hashCode()
