@@ -312,6 +312,17 @@ class RangeTest {
         assertNotEquals(rangeA, rangeB, message);
     }
 
+    @Test
+    void testNotEqualsDiffStartBothExplicitStep1() {
+        int startA = RANDOM.nextInt(256) - 128;
+        int startB = startA + RANDOM.nextInt(256) + 4;
+        int end = startB + RANDOM.nextInt(128) + 2;
+        Range rangeA = new Range(startA, end, 1);
+        Range rangeB = new Range(startB, end, 1);
+        String message = rangeA + " should not equal " + rangeB;
+        assertNotEquals(rangeA, rangeB, message);
+    }
+
     // TODO: Test hashCode()
 
     // TODO: Test constructor rejects wrong direction (negative) step
