@@ -52,6 +52,18 @@ public class Range implements Iterable<Integer> {
         return this.beginning + " to " + this.finish + " by " + this.interval;
     }
 
+    // TODO: Write tests for this
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public int hashCode() {
+        return super.hashCode() & 3;
+    }
+
     public Range(int start, int end) {
         this(start, end, 1);
     }
