@@ -29,6 +29,18 @@ class RangeTest {
         return new Range(start, end, step);
     }
 
+    private static Range makeRange() {
+        int selector = RANDOM.nextInt() & Integer.MAX_VALUE;
+        switch (selector % 3) {
+            case 0:
+                return makeRangeWithPositiveStep();
+            case 1:
+                return makeRangeWithImplicitStep1();
+            default:
+                return makeRangeWithNegativeStep();
+        }
+    }
+
     @Test
     void testToString() {
         System.out.println("toString");
@@ -249,7 +261,23 @@ class RangeTest {
         assert excMsg.contains(numStr) : containsMsg;
     }
 
-    // TODO: Test equals()
+    // TODO: Test get() rejects excessive index
+
+    private static Object passThrough(Object obj) {
+        return obj;
+    }
+
+    private static Object provideNull() {
+        return null;
+    }
+
+    @Test
+    void testReferentialEquality() {
+        Range instance = makeRange();
+        Object obj = passThrough(instance);
+        String message = instance.toString() + " should be equal to itself";
+        assertEquals(instance, obj, message);
+    }
 
     // TODO: Test hashCode()
 
