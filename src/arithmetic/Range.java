@@ -55,7 +55,7 @@ public class Range implements Iterable<Integer> {
     // TODO: Write tests for this
     @Override
     public boolean equals(Object obj) {
-        return obj != null;
+        return obj instanceof Range;
     }
 
     // TODO: Write tests for this
