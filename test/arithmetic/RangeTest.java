@@ -334,6 +334,18 @@ class RangeTest {
         assertNotEquals(rangeA, rangeB, message);
     }
 
+    @Test
+    void testNotEqualsDiffStart() {
+        int startA = RANDOM.nextInt(256) - 128;
+        int step = RANDOM.nextInt(2, 10);
+        int startB = startA + step * (RANDOM.nextInt(32) + 8);
+        int end = startB + step * (RANDOM.nextInt(16) + 4);
+        Range rangeA = new Range(startA, end, step);
+        Range rangeB = new Range(startB, end, step);
+        String message = rangeA + " should not equal " + rangeB;
+        assertNotEquals(rangeA, rangeB, message);
+    }
+
     // TODO: Test hashCode()
 
     // TODO: Test constructor rejects wrong direction (negative) step
