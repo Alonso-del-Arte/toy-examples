@@ -279,6 +279,14 @@ class RangeTest {
         assertEquals(instance, obj, message);
     }
 
+    @Test
+    void testNotEqualsNull() {
+        Range instance = makeRange();
+        Object obj = provideNull();
+        String msg = instance.toString() + " should not equal null";
+        assert !instance.equals(obj) : msg;
+    }
+
     // TODO: Test hashCode()
 
     // TODO: Test constructor rejects wrong direction (negative) step
