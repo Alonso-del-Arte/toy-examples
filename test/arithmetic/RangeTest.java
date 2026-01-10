@@ -31,14 +31,11 @@ class RangeTest {
 
     private static Range makeRange() {
         int selector = RANDOM.nextInt() & Integer.MAX_VALUE;
-        switch (selector % 3) {
-            case 0:
-                return makeRangeWithPositiveStep();
-            case 1:
-                return makeRangeWithImplicitStep1();
-            default:
-                return makeRangeWithNegativeStep();
-        }
+        return switch (selector % 3) {
+            case 0 -> makeRangeWithPositiveStep();
+            case 1 -> makeRangeWithImplicitStep1();
+            default -> makeRangeWithNegativeStep();
+        };
     }
 
     @Test
