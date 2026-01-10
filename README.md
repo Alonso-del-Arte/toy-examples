@@ -7,11 +7,6 @@ This repository is a random assortment of classic object-oriented programming
 (OOP) toy examples, some more fleshed out than others, to illustrate basic 
 concepts of OOP.
 
-If you fork this repository, be sure to add a FOREX_API_KEY environment variable 
-to your local machine, with that name, and a placeholder for a value if you 
-don't have an API key for an online currency exchange rate API. If you do have 
-such an API key, make sure it is not quoted in any file watched by Git.
-
 For information regarding Hacktoberfest, see [CONTRIBUTING.md](CONTRIBUTING.md). 
 Follow those guidelines to ensure not just that your contribution is accepted 
 for Hacktoberfest, but also that it persists in the main branch after 
