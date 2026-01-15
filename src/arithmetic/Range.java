@@ -52,7 +52,6 @@ public class Range implements Iterable<Integer> {
         return this.beginning + " to " + this.finish + " by " + this.interval;
     }
 
-    // TODO: Write tests for this
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -63,7 +62,8 @@ public class Range implements Iterable<Integer> {
         }
         if (obj instanceof Range other) {
             return this.beginning == other.beginning
-                    && this.finish == other.finish;
+                    && this.finish == other.finish
+                    && this.interval == other.interval;
         } else return false;
     }
 
