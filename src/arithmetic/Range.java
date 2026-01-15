@@ -54,6 +54,21 @@ public class Range implements Iterable<Integer> {
 
     // TODO: Write tests for this
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Range)) {
+            return false;
+        }
+        return this.beginning == ((Range) obj).beginning;
+    }
+
+    // TODO: Write tests for this
+    @Override
     public int hashCode() {
         return super.hashCode() & 3;
     }
