@@ -384,6 +384,51 @@ class RangeTest {
         assertEquals(someRange, sameRange);
     }
 
+    @Test
+    void testNotEqualsDiffEndBothImplicitStep1() {
+        int start = RANDOM.nextInt(256) - 128;
+        int endA = start + RANDOM.nextInt(256) + 4;
+        int endB = endA + RANDOM.nextInt(128) + 2;
+        Range rangeA = new Range(start, endA);
+        Range rangeB = new Range(start, endB);
+        String message = rangeA + " should not equal " + rangeB;
+        assertNotEquals(rangeA, rangeB, message);
+    }
+
+    @Test
+    void testNotEqualsDiffEndBothExplicitStep1() {
+        int start = RANDOM.nextInt(256) - 128;
+        int endA = start + RANDOM.nextInt(256) + 4;
+        int endB = endA + RANDOM.nextInt(128) + 2;
+        Range rangeA = new Range(start, endA, 1);
+        Range rangeB = new Range(start, endB, 1);
+        String message = rangeA + " should not equal " + rangeB;
+        assertNotEquals(rangeA, rangeB, message);
+    }
+
+    @Test
+    void testNotEqualsDiffEndOneImplicitStep1() {
+        int start = RANDOM.nextInt(256) - 128;
+        int endA = start + RANDOM.nextInt(256) + 4;
+        int endB = endA + RANDOM.nextInt(128) + 2;
+        Range rangeA = new Range(start, endA);
+        Range rangeB = new Range(start, endB, 1);
+        String message = rangeA + " should not equal " + rangeB;
+        assertNotEquals(rangeA, rangeB, message);
+    }
+
+    @Test
+    void testNotEqualsDiffEnd() {
+        int start = RANDOM.nextInt(256) - 128;
+        int step = RANDOM.nextInt(2, 10);
+        int endA = start + step * (RANDOM.nextInt(32) + 8);
+        int endB = endA + step * (RANDOM.nextInt(16) + 4);
+        Range rangeA = new Range(start, endA, step);
+        Range rangeB = new Range(start, endB, step);
+        String message = rangeA + " should not equal " + rangeB;
+        assertNotEquals(rangeA, rangeB, message);
+    }
+
     // TODO: Test hashCode()
 
     // TODO: Test constructor rejects wrong direction (negative) step
