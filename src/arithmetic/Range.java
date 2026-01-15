@@ -61,10 +61,10 @@ public class Range implements Iterable<Integer> {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof Range other)) {
-            return false;
-        }
-        return this.beginning == other.beginning && this.finish == other.finish;
+        if (obj instanceof Range other) {
+            return this.beginning == other.beginning
+                    && this.finish == other.finish;
+        } else return false;
     }
 
     // TODO: Write tests for this
