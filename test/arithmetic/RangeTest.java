@@ -346,6 +346,44 @@ class RangeTest {
         assertNotEquals(rangeA, rangeB, message);
     }
 
+    @Test
+    void testEqualsBothImplicitStep1() {
+        int start = RANDOM.nextInt(256) - 128;
+        int end = start + RANDOM.nextInt(128) + 2;
+        Range someRange = new Range(start, end);
+        Range sameRange = new Range(start, end);
+        assertEquals(someRange, sameRange);
+    }
+
+    @Test
+    void testEqualsStartBothExplicitStep1() {
+        int start = RANDOM.nextInt(256) - 128;
+        int end = start + RANDOM.nextInt(128) + 2;
+        Range someRange = new Range(start, end, 1);
+        Range sameRange = new Range(start, end, 1);
+        assertEquals(someRange, sameRange);
+    }
+
+    @Test
+    void testEqualsOneImplicitStep1() {
+        int start = RANDOM.nextInt(256) - 128;
+        int end = start + RANDOM.nextInt(128) + 2;
+        Range someRange = new Range(start, end);
+        Range sameRange = new Range(start, end, 1);
+        assertEquals(someRange, sameRange);
+    }
+
+    @Test
+    void testEquals() {
+        System.out.println("equals");
+        int start = RANDOM.nextInt(256) - 128;
+        int step = RANDOM.nextInt(2, 10);
+        int end = start + step * (RANDOM.nextInt(16) + 4);
+        Range someRange = new Range(start, end, step);
+        Range sameRange = new Range(start, end, step);
+        assertEquals(someRange, sameRange);
+    }
+
     // TODO: Test hashCode()
 
     // TODO: Test constructor rejects wrong direction (negative) step
