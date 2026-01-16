@@ -1,7 +1,9 @@
 package arithmetic;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
@@ -463,7 +465,23 @@ class RangeTest {
         assertNotEquals(rangeA, rangeB, message);
     }
 
-    // TODO: Test hashCode()
+    @Test
+    void testHashCode() {
+        System.out.println("hashCode");
+        int capacity = RANDOM.nextInt(64, 256);
+        Set<Range> ranges = new HashSet<>(capacity);
+        Set<Integer> hashes = new HashSet<>(capacity);
+        for (int i = 0; i < capacity; i++) {
+            Range range = makeRange();
+            ranges.add(range);
+            hashes.add(range.hashCode());
+        }
+        int expected = ranges.size();
+        int actual = hashes.size();
+        String message = "For " + expected
+                + " distinct ranges there should be as many hash codes";
+        assertEquals(expected, actual, message);
+    }
 
     // TODO: Test constructor rejects wrong direction (negative) step
 
