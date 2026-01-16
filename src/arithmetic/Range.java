@@ -67,10 +67,11 @@ public class Range implements Iterable<Integer> {
         } else return false;
     }
 
-    // TODO: Write tests for this
     @Override
     public int hashCode() {
-        return super.hashCode() & 3;
+        int hash = this.beginning << 22;
+        hash += (this.finish << 12);
+        return hash + this.interval;
     }
 
     public Range(int start, int end) {
