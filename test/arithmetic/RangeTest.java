@@ -287,6 +287,29 @@ class RangeTest {
         assert excMsg.contains(numStr) : containsMsg;
     }
 
+    @Test
+    void testGetRangeImplicitStep1RejectsExcessiveIndex() {
+        int start = RANDOM.nextInt(128) + 2;
+        int size = RANDOM.nextInt(3, 8);
+        int end = start + size - 1;
+        Range instance = new Range(start, end);
+        int badIndex = size + RANDOM.nextInt(1, 9);
+        String message = "Trying to get element " + badIndex + " of " + instance
+                + " should cause exception as there are only " + size
+                + " elements";
+        Throwable t = assertThrows(IndexOutOfBoundsException.class, () -> {
+            int badResult = instance.get(badIndex);
+            System.out.println(message + " not given result " + badResult);
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        String numStr = Integer.toString(badIndex);
+        String containsMsg = "Exception message should contain \"" + numStr
+                + "\"";
+        assert excMsg.contains(numStr) : containsMsg;
+    }
+
     // TODO: Write other tests for get() rejects excessive index
 
     private static Object passThrough(Object obj) {
