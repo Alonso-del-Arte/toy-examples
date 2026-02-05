@@ -17,7 +17,7 @@ class RangeTest {
     private static Range makeRangeWithNegativeStep() {
         int start = RANDOM.nextInt(128) + 2;
         int step = -RANDOM.nextInt(1, 64);
-        int end = start + step * RANDOM.nextInt(1,128);
+        int end = start + step * RANDOM.nextInt(1, 128);
         return new Range(start, end, step);
     }
 
