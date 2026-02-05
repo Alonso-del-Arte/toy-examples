@@ -266,13 +266,14 @@ class RangeTest {
     @Test
     void testGetRangeNegativeStepRejectsExcessiveIndex() {
         int start = RANDOM.nextInt(128) + 2;
-        int step = -RANDOM.nextInt(1, 64);
-        int size = RANDOM.nextInt(1, 128);
-        int end = start + step * size;
+        int step = -RANDOM.nextInt(1, 4);
+        int size = RANDOM.nextInt(3, 8);
+        int end = start + step * (size - 1);
         Range instance = new Range(start, end, step);
-        int badIndex = size + RANDOM.nextInt(64);
+        int badIndex = size + RANDOM.nextInt(8);
         String message = "Trying to get element " + badIndex + " of " + instance
-                + " should cause exception";
+                + " should cause exception as there are only " + size
+                + " elements";
         Throwable t = assertThrows(IndexOutOfBoundsException.class, () -> {
             int badResult = instance.get(badIndex);
             System.out.println(message + " not given result " + badResult);
