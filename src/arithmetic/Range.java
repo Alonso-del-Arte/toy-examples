@@ -18,9 +18,13 @@ public class Range implements Iterable<Integer> {
         return this.interval;
     }
 
-    // TODO: Write tests for this
     public int get(int index) {
         if (index < 0) {
+            String excMsg = "Index " + index + " is not valid";
+            throw new IndexOutOfBoundsException(excMsg);
+        }
+        int size = (this.finish - this.beginning) / this.interval + 1;
+        if (index > size) {
             String excMsg = "Index " + index + " is not valid";
             throw new IndexOutOfBoundsException(excMsg);
         }
