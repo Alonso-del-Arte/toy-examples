@@ -270,7 +270,7 @@ class RangeTest {
         int size = RANDOM.nextInt(3, 8);
         int end = start + step * (size - 1);
         Range instance = new Range(start, end, step);
-        int badIndex = size + RANDOM.nextInt(8);
+        int badIndex = size + RANDOM.nextInt(1, 9);
         String message = "Trying to get element " + badIndex + " of " + instance
                 + " should cause exception as there are only " + size
                 + " elements";
