@@ -214,7 +214,7 @@ class RangeTest {
                 + " should cause exception";
         Throwable t = assertThrows(IndexOutOfBoundsException.class, () -> {
             int badResult = instance.get(badIndex);
-            System.out.println(message + " not given result " + badResult);
+            System.out.println(message + ", not given result " + badResult);
         }, message);
         String excMsg = t.getMessage();
         assert excMsg != null : "Exception message should not be null";
@@ -233,7 +233,7 @@ class RangeTest {
                 + " should cause exception";
         Throwable t = assertThrows(IndexOutOfBoundsException.class, () -> {
             int badResult = instance.get(badIndex);
-            System.out.println(message + " not given result " + badResult);
+            System.out.println(message + ", not given result " + badResult);
         }, message);
         String excMsg = t.getMessage();
         assert excMsg != null : "Exception message should not be null";
@@ -252,7 +252,7 @@ class RangeTest {
                 + " should cause exception";
         Throwable t = assertThrows(IndexOutOfBoundsException.class, () -> {
             int badResult = instance.get(badIndex);
-            System.out.println(message + " not given result " + badResult);
+            System.out.println(message + ", not given result " + badResult);
         }, message);
         String excMsg = t.getMessage();
         assert excMsg != null : "Exception message should not be null";
@@ -276,7 +276,7 @@ class RangeTest {
                 + " elements";
         Throwable t = assertThrows(IndexOutOfBoundsException.class, () -> {
             int badResult = instance.get(badIndex);
-            System.out.println(message + " not given result " + badResult);
+            System.out.println(message + ", not given result " + badResult);
         }, message);
         String excMsg = t.getMessage();
         assert excMsg != null : "Exception message should not be null";
@@ -299,7 +299,7 @@ class RangeTest {
                 + " elements";
         Throwable t = assertThrows(IndexOutOfBoundsException.class, () -> {
             int badResult = instance.get(badIndex);
-            System.out.println(message + " not given result " + badResult);
+            System.out.println(message + ", not given result " + badResult);
         }, message);
         String excMsg = t.getMessage();
         assert excMsg != null : "Exception message should not be null";
@@ -323,7 +323,7 @@ class RangeTest {
                 + " elements";
         Throwable t = assertThrows(IndexOutOfBoundsException.class, () -> {
             int badResult = instance.get(badIndex);
-            System.out.println(message + " not given result " + badResult);
+            System.out.println(message + ", not given result " + badResult);
         }, message);
         String excMsg = t.getMessage();
         assert excMsg != null : "Exception message should not be null";
