@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 public class Range implements Iterable<Integer> {
 
-    private final int beginning, finish, interval;
+    private final int beginning, finish, interval, numberOfElements;
 
     public int getStart() {
         return this.beginning;
@@ -35,14 +35,17 @@ public class Range implements Iterable<Integer> {
     public Iterator<Integer> iterator() {
         return new Iterator<>() {
 
+            private int counter = 0;
+
             @Override
             public boolean hasNext() {
-                return false;
+                return this.counter < Range.this.numberOfElements;
             }
 
             @Override
             public Integer next() {
-                return -1;
+                return Range.this.beginning + Range.this.interval
+                        * this.counter++;
             }
 
         };
@@ -85,6 +88,8 @@ public class Range implements Iterable<Integer> {
         this.beginning = start;
         this.finish = end;
         this.interval = step;
+        this.numberOfElements = (this.finish - this.beginning) / this.interval
+                + 1;
     }
 
 }
