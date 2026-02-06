@@ -19,18 +19,17 @@ public class Range implements Iterable<Integer> {
     }
 
     public int size() {
-        return (this.finish - this.beginning) / this.interval + 1;
+        return this.numberOfElements;
     }
 
     public int get(int index) {
-        if (index < 0 || index > this.size()) {
+        if (index < 0 || index > this.numberOfElements) {
             String excMsg = "Index " + index + " is not valid";
             throw new IndexOutOfBoundsException(excMsg);
         }
         return this.beginning + this.interval * index;
     }
 
-    // TODO: Write tests for this
     @Override
     public Iterator<Integer> iterator() {
         return new Iterator<>() {
