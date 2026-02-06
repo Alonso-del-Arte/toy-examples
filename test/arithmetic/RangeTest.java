@@ -409,6 +409,24 @@ class RangeTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testIteratorPositiveStep() {
+        int start = RANDOM.nextInt(128) + 2;
+        int step = RANDOM.nextInt(2, 8);
+        int capacity = RANDOM.nextInt(3, 8);
+        int end = start + step * (capacity - 1);
+        Range instance = new Range(start, end, step);
+        List<Integer> expected = new ArrayList<>(capacity);
+        for (int num = start; num <= end; num += step) {
+            expected.add(num);
+        }
+        List<Integer> actual = new ArrayList<>(capacity);
+        for (Integer integer : instance) {
+            actual.add(integer);
+        }
+        assertEquals(expected, actual);
+    }
+
     private static Object passThrough(Object obj) {
         return obj;
     }
