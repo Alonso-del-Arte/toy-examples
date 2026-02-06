@@ -391,6 +391,24 @@ class RangeTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testIterator() {
+        System.out.println("iterator");
+        int start = RANDOM.nextInt(128) + 2;
+        int capacity = RANDOM.nextInt(3, 8);
+        int end = start + capacity - 1;
+        Range instance = new Range(start, end);
+        List<Integer> expected = new ArrayList<>(capacity);
+        for (int num = start; num <= end; num++) {
+            expected.add(num);
+        }
+        List<Integer> actual = new ArrayList<>(capacity);
+        for (Integer integer : instance) {
+            actual.add(integer);
+        }
+        assertEquals(expected, actual);
+    }
+
     private static Object passThrough(Object obj) {
         return obj;
     }
