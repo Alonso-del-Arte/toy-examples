@@ -1,7 +1,10 @@
 package arithmetic;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -368,6 +371,24 @@ class RangeTest {
         int actual = instance.size();
         String message = "Getting size of " + instance;
         assertEquals(expected, actual, message);
+    }
+
+    @Test
+    void testIteratorNegativeStep() {
+        int start = RANDOM.nextInt(128) + 2;
+        int step = -RANDOM.nextInt(1, 4);
+        int capacity = RANDOM.nextInt(3, 8);
+        int end = start + step * (capacity - 1);
+        Range instance = new Range(start, end, step);
+        List<Integer> expected = new ArrayList<>(capacity);
+        for (int num = start; num >= end; num += step) {
+            expected.add(num);
+        }
+        List<Integer> actual = new ArrayList<>(capacity);
+        for (Integer integer : instance) {
+            actual.add(integer);
+        }
+        assertEquals(expected, actual);
     }
 
     private static Object passThrough(Object obj) {
