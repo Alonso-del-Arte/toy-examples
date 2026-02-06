@@ -23,8 +23,7 @@ public class Range implements Iterable<Integer> {
     }
 
     public int get(int index) {
-        int size = (this.finish - this.beginning) / this.interval + 1;
-        if (index < 0 || index > size) {
+        if (index < 0 || index > this.size()) {
             String excMsg = "Index " + index + " is not valid";
             throw new IndexOutOfBoundsException(excMsg);
         }
