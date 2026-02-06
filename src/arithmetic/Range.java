@@ -18,9 +18,8 @@ public class Range implements Iterable<Integer> {
         return this.interval;
     }
 
-    // TODO: Write tests for this
     public int size() {
-        return -1;
+        return (this.finish - this.beginning) / this.interval + 1;
     }
 
     public int get(int index) {
