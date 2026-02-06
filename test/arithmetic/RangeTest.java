@@ -346,6 +346,18 @@ class RangeTest {
         assertEquals(expected, actual, message);
     }
 
+    @Test
+    void testSize() {
+        System.out.println("size");
+        int start = RANDOM.nextInt(128) + 2;
+        int expected = RANDOM.nextInt(3, 8);
+        int end = start + expected - 1;
+        Range instance = new Range(start, end);
+        int actual = instance.size();
+        String message = "Getting size of " + instance;
+        assertEquals(expected, actual, message);
+    }
+
     private static Object passThrough(Object obj) {
         return obj;
     }
