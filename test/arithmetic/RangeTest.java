@@ -358,6 +358,18 @@ class RangeTest {
         assertEquals(expected, actual, message);
     }
 
+    @Test
+    void testSizePositiveStep() {
+        int start = RANDOM.nextInt(128) + 2;
+        int step = RANDOM.nextInt(2, 8);
+        int expected = RANDOM.nextInt(3, 8);
+        int end = start + step * (expected - 1);
+        Range instance = new Range(start, end, step);
+        int actual = instance.size();
+        String message = "Getting size of " + instance;
+        assertEquals(expected, actual, message);
+    }
+
     private static Object passThrough(Object obj) {
         return obj;
     }
