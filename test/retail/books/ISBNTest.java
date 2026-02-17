@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ISBNTest {
 
-    public static final Random RANDOM = new Random();
+    static final Random RANDOM = new Random(System.currentTimeMillis() >>> 3);
 
     @Test
     void testToString() {
