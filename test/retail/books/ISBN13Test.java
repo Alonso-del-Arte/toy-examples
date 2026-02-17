@@ -12,4 +12,11 @@ class ISBN13Test {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testSecondPrefixConstant() {
+        short expected = 979;
+        short actual = ISBN13.SECOND_ISBN_13_PREFIX;
+        assertEquals(expected, actual);
+    }
+
 }
