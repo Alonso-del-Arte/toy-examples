@@ -4,13 +4,13 @@ package retail.books;
  * Represents an International Standard Book Number (ISBN).
  * @author Alonso del Arte
  */
-public class ISBN {
+public abstract class ISBN {
 
     public static final long serialVersionUID = 4553372319738311680L;
 
     // TODO: Write tests for this
     public static ISBN parseISBN(String s) {
-        return new ISBN(978_0_00000_000L);
+        return new ISBN(978_0_00000_000L) {};
     }
 
     @Override
