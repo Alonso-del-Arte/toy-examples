@@ -7,7 +7,7 @@ package retail;
  * constructors take a check digit.
  * @author Alonso del Arte
  */
-public class ISBN extends BarcodeNumberWithCheckDigit {
+public class ISBN {
 
     public static final long serialVersionUID = 4553372319738311680L;
 
@@ -18,13 +18,7 @@ public class ISBN extends BarcodeNumberWithCheckDigit {
 
     @Override
     public String toString() {
-        String digits = Long.toString(this.digits) + this.checkDigit;
-        StringBuilder intermediate = new StringBuilder(digits);
-        intermediate.insert(12, '-');
-        intermediate.insert(9, '-');
-        intermediate.insert(4, '-');
-        intermediate.insert(3, '-');
-        return intermediate.toString();
+        return "intermediate.toString()";
     }
 
     /**
@@ -36,7 +30,6 @@ public class ISBN extends BarcodeNumberWithCheckDigit {
      *            this example.
      */
     public ISBN(long num) {
-        super(num);
     }
 
 }
