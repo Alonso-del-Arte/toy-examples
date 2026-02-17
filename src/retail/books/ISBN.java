@@ -1,10 +1,7 @@
 package retail.books;
 
-// TODO: Make this class support both ISBN-10 and ISBN-13, with appropriate
-//  validation for both
 /**
- * Represents an International Standard Book Number (ISBN). None of the
- * constructors take a check digit.
+ * Represents an International Standard Book Number (ISBN).
  * @author Alonso del Arte
  */
 public class ISBN {
@@ -21,15 +18,7 @@ public class ISBN {
         return "intermediate.toString()";
     }
 
-    /**
-     * Primary constructor.
-     * @param num The number for the ISBN, <em>without</em> the check digit. For
-     *            example, for <i>Scala for the Impatient</i> by Cay Horstmann,
-     *            1<sup>st</sup> Edition, ISBN 978-0-32177-409-5, this would be
-     *            978032177409. The constructor calculates the check digit, 5 in
-     *            this example.
-     */
-    public ISBN(long num) {
+    ISBN(long num) {
     }
 
 }
