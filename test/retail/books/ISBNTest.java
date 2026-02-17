@@ -13,7 +13,7 @@ class ISBNTest {
     void testToString() {
         System.out.println("toString");
         final long num = 978_0_00000_000L + RANDOM.nextInt(10_00000_000);
-        ISBN isbn = new ISBN(num) {};
+        ISBN isbn = new ISBN(num, "0") {};
         StringBuilder intermediate = new StringBuilder(Long.toString(num));
         intermediate.insert(9, '-');
         intermediate.insert(4, '-');

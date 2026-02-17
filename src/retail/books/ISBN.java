@@ -10,7 +10,7 @@ public abstract class ISBN {
 
     // TODO: Write tests for this
     public static ISBN parseISBN(String s) {
-        return new ISBN(978_0_00000_000L) {};
+        return new ISBN(978_0_00000_000L, "0") {};
     }
 
     @Override
@@ -18,7 +18,8 @@ public abstract class ISBN {
         return "intermediate.toString()";
     }
 
-    ISBN(long num) {
+    // TODO: Write tests for this
+    ISBN(long num, String humanReadableForm) {
     }
 
 }
