@@ -1,12 +1,13 @@
-package retail;
+package retail.books;
+
+import java.util.Random;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
-import static retail.BarcodeNumberWithCheckDigitTest.RANDOM;
-
 class ISBNTest {
+
+    public static final Random RANDOM = new Random();
 
     @Test
     void testToString() {
@@ -17,9 +18,10 @@ class ISBNTest {
         intermediate.insert(9, '-');
         intermediate.insert(4, '-');
         intermediate.insert(3, '-');
-        String expected = intermediate.toString() + '-' + isbn.getCheckDigit();
-        String actual = isbn.toString();
-        assertEquals(expected, actual);
+        fail("REWRITE THIS TEST");
+//        String expected = intermediate.toString() + '-' + isbn.getCheckDigit();
+//        String actual = isbn.toString();
+//        assertEquals(expected, actual);
     }
 
 }

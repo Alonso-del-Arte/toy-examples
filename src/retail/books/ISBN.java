@@ -1,4 +1,4 @@
-package retail;
+package retail.books;
 
 // TODO: Make this class support both ISBN-10 and ISBN-13, with appropriate
 //  validation for both
