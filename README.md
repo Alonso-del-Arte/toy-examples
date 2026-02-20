@@ -4,7 +4,7 @@ NOTE: The `collections` package had become unwieldy and not exactly a toy
 example. On July 22, 2025, I decided to remove it.
 
 NOTE: On January 12, 2026, I have decided to remove the `bankaccounts` package 
-before February.
+before February. As of February 19, I still haven't done it, it slipped my mind.
 
 This repository is a random assortment of classic object-oriented programming 
 (OOP) toy examples, some more fleshed out than others, to illustrate basic 
