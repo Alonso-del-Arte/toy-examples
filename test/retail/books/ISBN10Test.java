@@ -6,6 +6,8 @@ import static retail.books.ISBNTest.RANDOM;
 
 class ISBN10Test {
 
+    private static final int MAX_ISBN_10_NO_CHECK_DIGIT = 987654321;
+
     private static byte reckonCheckDigit(int digits) {
         int sum = 0;
         int curr = digits;
@@ -18,6 +20,12 @@ class ISBN10Test {
         return (byte) sum;
     }
 
-//    private static long chooseDigits(byte checkDigit)
+    private static int chooseDigits(byte checkDigit) {
+        int propNum = RANDOM.nextInt(MAX_ISBN_10_NO_CHECK_DIGIT);
+        while (reckonCheckDigit(propNum) != checkDigit) {
+            propNum++;
+        }
+        return propNum;
+    }
 
 }
