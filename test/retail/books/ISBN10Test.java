@@ -18,7 +18,7 @@ class ISBN10Test {
             sum += weighted;
             curr /= 10;
         }
-        return (byte) sum;
+        return (byte) (sum % 11);
     }
 
     private static int chooseDigits(byte checkDigit) {
