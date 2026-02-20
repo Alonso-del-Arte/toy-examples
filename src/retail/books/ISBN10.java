@@ -3,6 +3,11 @@ package retail.books;
 public class ISBN10 extends ISBN {
 
     // TODO: Write tests for this
+    static byte checkDigit(long num) {
+        return 12;
+    }
+    
+    // TODO: Write tests for this
     static boolean isValid(String s) {
         return false;
     }
