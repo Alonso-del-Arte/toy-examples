@@ -119,4 +119,13 @@ class ISBN10Test {
         assertEquals(expected, actual, message);
     }
 
+    @Test
+    void testCheckDigitX() {
+        byte expected = 10;
+        int num = chooseDigits(expected);
+        byte actual = ISBN10.checkDigit(num);
+        String message = "Getting check digit for " + num;
+        assertEquals(expected, actual, message);
+    }
+
 }
