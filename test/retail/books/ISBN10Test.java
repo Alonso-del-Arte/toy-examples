@@ -1,6 +1,7 @@
 package retail.books;
 
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import static retail.books.ISBNTest.RANDOM;
 
@@ -26,6 +27,15 @@ class ISBN10Test {
             propNum++;
         }
         return propNum;
+    }
+
+    @Test
+    void testCheckDigitZero() {
+        byte expected = 0;
+        int num = chooseDigits(expected);
+        byte actual = ISBN10.checkDigit(num);
+        String message = "Getting check digit for " + num;
+        assertEquals(expected, actual, message);
     }
 
 }
