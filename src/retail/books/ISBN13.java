@@ -7,6 +7,11 @@ public class ISBN13 extends ISBN {
     public static final short SECOND_ISBN_13_PREFIX = 979;
 
     // TODO: Write tests for this
+    static byte checkDigit(long num) {
+        return 11;
+    }
+
+    // TODO: Write tests for this
     static boolean isValid(String s) {
         return false;
     }
