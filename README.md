@@ -16,7 +16,9 @@ for Hacktoberfest, but also that it persists in the main branch after
 Hacktoberfest.
 
 This repository is for toy examples in Java. If you want to contribute toy 
-examples in Python, I have a repository for that. Other languages, not.
+examples in Python, I have a repository for that. Other languages, not. As for 
+overly complicated programs in Java, check out my Rube Goldberg machines 
+repository.
 
 I've decided that this project should not be on the latest long term support
 (LTS) version of Java, but it shouldn't be too far behind either. So it's on 
