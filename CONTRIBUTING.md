@@ -10,6 +10,10 @@ Python project, then Hacktoberfest 2025 happened. Now I have a separate
 repository, toy-examples-python, for those of you who want to work on toy 
 examples in Python.
 
+These are toy examples, but you should strive for efficiency. For amusingly 
+overly complicated Java programs, check out my Rube-Goldberg-machines 
+repository.
+
 So you need to have Java 17 or later for both the runtime and the development 
 kit.
 
