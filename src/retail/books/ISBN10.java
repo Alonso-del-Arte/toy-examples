@@ -20,12 +20,10 @@ public class ISBN10 extends ISBN {
      */
     static byte checkDigit(int num) {
         int sum = 0;
-        int curr = num;
         for (int i = 9; i > 0; i--) {
-            int digit = curr % 10;
-            int weighted = digit * i;
+            int weighted = (num % 10) * i;
             sum += weighted;
-            curr /= 10;
+            num /= 10;
         }
         return (byte) (sum % 11);
     }
