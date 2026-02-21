@@ -51,4 +51,13 @@ class ISBN13Test {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testCheckDigitZero() {
+        byte expected = 0;
+        long num = chooseDigits(expected);
+        byte actual = ISBN13.checkDigit(num);
+        String message = "Getting check digit for " + num;
+        assertEquals(expected, actual, message);
+    }
+
 }
