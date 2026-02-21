@@ -8,7 +8,7 @@ public class ISBN13 extends ISBN {
 
     // TODO: Write tests for this
     static byte checkDigit(long num) {
-        return 11;
+        return 0;
     }
 
     // TODO: Write tests for this
