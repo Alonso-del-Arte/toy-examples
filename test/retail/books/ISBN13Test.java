@@ -3,6 +3,8 @@ package retail.books;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+import static retail.books.ISBNTest.RANDOM;
+
 class ISBN13Test {
 
     private static final long MIN_ISBN_13_NO_CHECK_DIGIT = 978000000000L;
@@ -24,6 +26,15 @@ class ISBN13Test {
             return 0;
         }
         return (byte) (10 - remainder);
+    }
+
+    private static long chooseDigits(byte checkDigit) {
+        long propNum = RANDOM.nextLong(MIN_ISBN_13_NO_CHECK_DIGIT,
+                MAX_ISBN_13_NO_CHECK_DIGIT);
+        while (reckonCheckDigit(propNum) != checkDigit) {
+            propNum++;
+        }
+        return propNum;
     }
 
     @Test
