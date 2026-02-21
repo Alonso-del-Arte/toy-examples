@@ -8,10 +8,9 @@ public class ISBN13 extends ISBN {
 
     static byte checkDigit(long num) {
         int sum = 0;
-        long curr = num;
         int weight = 3;
-        while (curr > 0) {
-            long digit = curr % 10;
+        while (num > 0) {
+            long digit = num % 10;
             long weighted = digit * weight;
             sum += weighted;
             if (weight == 3) {
@@ -19,7 +18,7 @@ public class ISBN13 extends ISBN {
             } else {
                 weight = 3;
             }
-            curr /= 10;
+            num /= 10;
         }
         int remainder = sum % 10;
         if (remainder == 0) {
