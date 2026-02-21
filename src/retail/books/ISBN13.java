@@ -10,8 +10,7 @@ public class ISBN13 extends ISBN {
         int sum = 0;
         int weight = 3;
         while (num > 0) {
-            long digit = num % 10;
-            long weighted = digit * weight;
+            long weighted = (num % 10) * weight;
             sum += weighted;
             if (weight == 3) {
                 weight = 1;
