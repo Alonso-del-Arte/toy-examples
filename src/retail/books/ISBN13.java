@@ -9,11 +9,16 @@ public class ISBN13 extends ISBN {
     static byte checkDigit(long num) {
         int sum = 0;
         long curr = num;
-        for (int i = 12; i > 0; i--) {
+        int weight = 3;
+        while (curr > 0) {
             long digit = curr % 10;
-            int weight = (i % 2 == 0) ? 3 : 1;
             long weighted = digit * weight;
             sum += weighted;
+            if (weight == 3) {
+                weight = 1;
+            } else {
+                weight = 3;
+            }
             curr /= 10;
         }
         int remainder = sum % 10;
