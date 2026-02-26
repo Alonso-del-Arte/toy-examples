@@ -384,7 +384,7 @@ class ExtendedRandomTest {
         for (Character.UnicodeBlock block : UNICODE_BLOCKS) {
             Character.UnicodeBlock other
                     = ExtendedRandom.chooseBMPBlockOtherThan(block);
-            String msg = other.toString() + " should not be " + block.toString();
+            String msg = other.toString() + " should not be " + block;
             assert !block.equals(other) : msg;
         }
     }
