@@ -141,6 +141,11 @@ public class TextCalculator {
     }
 
     // TODO: Write tests for this
+    public static String removeChar(char ch, String s) {
+        return "SORRY, NOT IMPLEMENTED YET";
+    }
+
+    // TODO: Write tests for this
     public static String makeAcronym(String s) {
         return "SORRY, NOT IMPLEMENTED YET";
     }
