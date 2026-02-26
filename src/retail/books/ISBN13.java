@@ -34,7 +34,7 @@ public class ISBN13 extends ISBN {
     // TODO: Write tests for this
     ISBN13(short prefix, int registrationGroup, int registrant, int publication,
            byte checkDigit) {
-        super(-1, "?");
+        super(-1, (byte) 13, "?");
     }
 
 }
