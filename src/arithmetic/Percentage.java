@@ -17,6 +17,10 @@ public class Percentage {
 
     // TODO: Write tests for this
     public Percentage(double value) {
+        if (Double.isNaN(value)) {
+            String excMsg = "Value " + value + " is not valid";
+            throw new IllegalArgumentException(excMsg);
+        }
         this.num = -1;
     }
 
