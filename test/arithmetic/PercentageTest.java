@@ -16,4 +16,18 @@ class PercentageTest {
         }
     }
 
+    @Test
+    void testConstructorRejectsNaN() {
+        double value = Double.NaN;
+        String message = "Constructor should reject " + value;
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> {
+            Percentage badInstance = new Percentage(value);
+            System.out.println(message + ", not given " + badInstance);
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
 }
