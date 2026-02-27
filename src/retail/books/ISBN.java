@@ -18,6 +18,11 @@ public abstract class ISBN {
         return "intermediate.toString()";
     }
 
+    ISBN(long num, byte check) {
+        // TODO: Write tests for this, such as that this constructor sets human-
+        //  readable form as simple Long.toString()
+    }
+
     // TODO: Write tests for this
     ISBN(long num, byte check, String humanReadableForm) {
     }
