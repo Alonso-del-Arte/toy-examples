@@ -26,7 +26,7 @@ public class Percentage {
 
     // TODO: Write tests for this
     public Percentage(BigDecimal value) {
-        this.num = -2;
+        this.num = value.intValue();
     }
 
 }
