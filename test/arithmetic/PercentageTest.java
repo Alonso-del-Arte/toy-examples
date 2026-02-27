@@ -1,9 +1,14 @@
 package arithmetic;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+// TODO: Figure out why next import is an error
+//import java.math.RoundingMode;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+
+import randomness.ExtendedRandom;
 
 class PercentageTest {
 
@@ -27,6 +32,13 @@ class PercentageTest {
             String actual = instance.toString();
             assertEquals(expected, actual);
         }
+    }
+
+    @Test
+    void testToStringFromBigDecimalTenths() {
+        // TODO: Address warning, don't suppress
+        BigDecimal tenth = BigDecimal.ONE.divide(BigDecimal.TEN);
+        fail("FINISH WRITING THIS TEST");
     }
 
     @Test
