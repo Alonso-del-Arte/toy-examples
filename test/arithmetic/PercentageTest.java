@@ -1,5 +1,7 @@
 package arithmetic;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
@@ -10,6 +12,17 @@ class PercentageTest {
         System.out.println("toString");
         for (int i = 0; i < 101; i++) {
             Percentage instance = new Percentage(i);
+            String expected = i + "%";
+            String actual = instance.toString();
+            assertEquals(expected, actual);
+        }
+    }
+
+    @Test
+    void testToStringIntegersThroughBigDecimal() {
+        for (int i = 0; i < 101; i++) {
+            BigDecimal value = BigDecimal.valueOf(i);
+            Percentage instance = new Percentage(value);
             String expected = i + "%";
             String actual = instance.toString();
             assertEquals(expected, actual);
