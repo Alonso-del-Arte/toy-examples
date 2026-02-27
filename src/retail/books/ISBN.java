@@ -10,8 +10,14 @@ public abstract class ISBN {
 
     // TODO: Write tests for this
     public static ISBN parseISBN(String s) {
-        return new ISBN(978_0_00000_000L, (byte) 11, "0") {};
+        return new ISBN10(0, 0, 0, (byte) 0);
     }
+
+    public abstract boolean isConvertibleToISBN10();
+
+    public abstract ISBN10 convertToISBN10();
+
+    public abstract ISBN13 convertToISBN13();
 
     @Override
     public String toString() {

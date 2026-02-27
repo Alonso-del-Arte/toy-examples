@@ -32,6 +32,24 @@ public class ISBN13 extends ISBN {
     }
 
     // TODO: Write tests for this
+    @Override
+    public boolean isConvertibleToISBN10() {
+        return true;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public ISBN10 convertToISBN10() {
+        return new ISBN10(0, 0, 0, (byte) 0);
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public ISBN13 convertToISBN13() {
+        return new ISBN13((short) 999, 0, 0, 0, (byte) 0);
+    }
+
+    // TODO: Write tests for this
     ISBN13(short prefix, int registrationGroup, int registrant, int publication,
            byte checkDigit) {
         super(-1, (byte) 13, "?");
