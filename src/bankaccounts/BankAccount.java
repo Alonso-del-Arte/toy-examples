@@ -1,7 +1,6 @@
 package bankaccounts;
 
 import bankaccounts.transactions.*;
-import bankaccounts.transactions.fees.Fee;
 import currency.CurrencyAmount;
 import entities.Entity;
 
