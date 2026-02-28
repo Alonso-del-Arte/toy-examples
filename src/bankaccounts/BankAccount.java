@@ -80,9 +80,9 @@ public abstract class BankAccount {
 //        this.accountHistory.add(fee);
 //    }
 
-    public void processComment(Comment comment) {
-        this.accountHistory.add(comment);
-    }
+//    public void processComment(Comment comment) {
+//        this.accountHistory.add(comment);
+//    }
 
     public BankAccount(Entity primary, Entity secondary, String label, Deposit initialDeposit) {
         this.accountBalance = INITIALIZATION_ACCOUNT_BALANCE;
