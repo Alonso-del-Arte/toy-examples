@@ -76,10 +76,10 @@ public abstract class BankAccount {
         }
     }
 
-    void processFee(Fee fee) {
-        this.accountBalance = this.accountBalance.plus(fee.getTransactionAmount());
-        this.accountHistory.add(fee);
-    }
+//    void processFee(Fee fee) {
+//        this.accountBalance = this.accountBalance.plus(fee.getTransactionAmount());
+//        this.accountHistory.add(fee);
+//    }
 
     public void processComment(Comment comment) {
         this.accountHistory.add(comment);
