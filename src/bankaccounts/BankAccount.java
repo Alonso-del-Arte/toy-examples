@@ -54,26 +54,20 @@ public abstract class BankAccount {
         }
     }
 
-    /**
-     * Processes withdrawal of the specified amount.
-     * @param withdrawal Transaction object with the withdrawal amount with date.
-     * @return True if the withdrawal succeeds, false if the balance is insufficient.
-     * @throws currency.CurrencyConversionNeededException If the withdrawal amount is in a different currency.
-     */
-    public boolean processWithdrawal(Withdrawal withdrawal) {
-        if (this.accountHistory.contains(withdrawal)) {
-            return false;
-        } else {
-            CurrencyAmount projectedBalance = this.accountBalance.plus(withdrawal.getTransactionAmount());
-            if (projectedBalance.compareTo(INITIALIZATION_ACCOUNT_BALANCE) < 0) {
-                return false;
-            } else {
-                this.accountBalance = projectedBalance;
-                this.accountHistory.add(withdrawal);
-                return true;
-            }
-        }
-    }
+//    public boolean processWithdrawal(Withdrawal withdrawal) {
+//        if (this.accountHistory.contains(withdrawal)) {
+//            return false;
+//        } else {
+//            CurrencyAmount projectedBalance = this.accountBalance.plus(withdrawal.getTransactionAmount());
+//            if (projectedBalance.compareTo(INITIALIZATION_ACCOUNT_BALANCE) < 0) {
+//                return false;
+//            } else {
+//                this.accountBalance = projectedBalance;
+//                this.accountHistory.add(withdrawal);
+//                return true;
+//            }
+//        }
+//    }
 
 //    void processFee(Fee fee) {
 //        this.accountBalance = this.accountBalance.plus(fee.getTransactionAmount());
