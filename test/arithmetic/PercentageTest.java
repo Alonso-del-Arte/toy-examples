@@ -33,6 +33,20 @@ class PercentageTest {
         }
     }
 
+    @Test
+    void testToStringSixteenthsThroughFloatingPoint() {
+        int floor = ExtendedRandom.nextInt(100);
+        double sixteenth = 1.0 / 16;
+        int stop = floor + 1;
+        for (double value = floor + sixteenth; value < stop;
+             value += sixteenth) {
+            Percentage instance = new Percentage(value);
+            String expected = value + "%";
+            String actual = instance.toString();
+            assertEquals(expected, actual);
+        }
+    }
+
     @Test @org.junit.jupiter.api.Disabled
     void testToStringFromBigDecimalTenths() {
         BigDecimal tenth = BigDecimal.ONE.divide(BigDecimal.TEN,
