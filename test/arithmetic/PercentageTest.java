@@ -2,8 +2,7 @@ package arithmetic;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-// TODO: Figure out why next import is an error
-//import java.math.RoundingMode;
+import java.math.RoundingMode;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
@@ -36,8 +35,8 @@ class PercentageTest {
 
     @Test @org.junit.jupiter.api.Disabled
     void testToStringFromBigDecimalTenths() {
-        // TODO: Address warning, don't suppress
-        BigDecimal tenth = BigDecimal.ONE.divide(BigDecimal.TEN);
+        BigDecimal tenth = BigDecimal.ONE.divide(BigDecimal.TEN,
+                RoundingMode.HALF_DOWN);
         fail("FINISH WRITING THIS TEST");
     }
 
