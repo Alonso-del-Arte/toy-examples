@@ -8,6 +8,9 @@ public class Percentage {
 
     @Override
     public String toString() {
+        if (this.num == Math.floor(this.num)) {
+            return Double.toString(this.num).replace(".0", "") + "%";
+        }
         return this.num + "%";
     }
 
@@ -15,7 +18,6 @@ public class Percentage {
         this.num = value;
     }
 
-    // TODO: Write tests for this
     public Percentage(double value) {
         if (Double.isInfinite(value) || Double.isNaN(value)) {
             String excMsg = "Value " + value + " is not valid";
