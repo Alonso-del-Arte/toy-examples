@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class Percentage {
 
-    private final long num;
+    private final double num;
 
     @Override
     public String toString() {
@@ -21,7 +21,7 @@ public class Percentage {
             String excMsg = "Value " + value + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
-        this.num = -1;
+        this.num = value;
     }
 
     // TODO: Write tests for this
