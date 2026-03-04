@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class CheckingAccount extends BankAccount {
 
-    private ArrayList<Check> checksList;
+//    private ArrayList<Check> checksList;
 
     private SavingsAccount assocSav;
 
@@ -53,7 +53,6 @@ public class CheckingAccount extends BankAccount {
 
     public CheckingAccount(Entity primary, Entity secondary, String label, Deposit initialDeposit) {
         super(primary, secondary, label, initialDeposit);
-        this.checksList = new ArrayList<>();
         this.assocSav = null;
     }
 
