@@ -1,6 +1,5 @@
 package bankaccounts.transactions;
 
-import bankaccounts.BankAccount;
 import currency.CurrencyAmount;
 
 import java.time.LocalDateTime;
