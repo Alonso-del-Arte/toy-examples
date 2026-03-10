@@ -21,7 +21,7 @@ public class BigFraction implements Comparable<BigFraction> {
 
     // TODO: Write tests for this
     public BigInteger getDenominator() {
-        return this.numerator;
+        return this.denominator;
     }
 
     // TODO: Write tests for this
