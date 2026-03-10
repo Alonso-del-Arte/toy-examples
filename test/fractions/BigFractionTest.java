@@ -18,6 +18,24 @@ class BigFractionTest {
         return new BigInteger(72, RANDOM).add(BigInteger.ONE);
     }
 
+    private static BigInteger nextCoprime(BigInteger number) {
+        BigInteger propNum = number.add(BigInteger.TWO);
+        while (number.gcd(propNum).compareTo(BigInteger.ONE) > 0) {
+            propNum = propNum.add(BigInteger.ONE);
+        }
+        return propNum;
+    }
+
+    @Test
+    void testToStringAlreadyInLowestTerms() {
+        BigInteger numer = getPositiveInteger();
+        BigInteger denom = nextCoprime(numer);
+        BigFraction instance = new BigFraction(numer, denom);
+        String expected = numer + "/" + denom;
+        String actual = instance.toString();
+        assertEquals(expected, actual);
+    }
+
     @Test  @org.junit.jupiter.api.Disabled
     void testCompareTo() {
         fail("Haven't written test yet");
