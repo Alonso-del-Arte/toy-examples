@@ -24,8 +24,8 @@ class BigFractionTest {
     }
 
     /**
-     * Constructor test. If the numerator is null, a
-     * <code>NullPointerException</code> should be thrown.
+     * Constructor test. If the numerator is null, a {@code
+     * NullPointerException} should be thrown.
      */
     @Test
     void testConstructorRejectsNullNumerator() {
@@ -44,8 +44,8 @@ class BigFractionTest {
     /**
      * Constructor test. In addition to ensuring the denominator is not 0, the
      * constructor must also ensure the denominator is not null. If the
-     * denominator is null, the constructor should throw a
-     * <code>NullPointerException</code>.
+     * denominator is null, the constructor should throw a {@code
+     * NullPointerException}.
      */
     @Test
     void testConstructorRejectsNullDenominator() {
