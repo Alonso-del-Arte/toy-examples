@@ -69,6 +69,21 @@ class BigFractionTest {
         fail("Haven't written test yet");
     }
 
+    @Test
+    void testConstructorRejectsDenomZero() {
+        BigInteger numer = getPositiveInteger();
+        String message = "Numerator " + numer
+                + " and denominator 0 should've caused exception";
+        Throwable t = assertThrows(ArithmeticException.class, () -> {
+            BigFraction badResult = new BigFraction(numer, BigInteger.ZERO);
+            System.out.println(message + ", not given " + badResult);
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
     /**
      * Constructor test. If the numerator is null, a {@code
      * NullPointerException} should be thrown.
