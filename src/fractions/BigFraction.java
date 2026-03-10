@@ -106,6 +106,10 @@ public class BigFraction implements Comparable<BigFraction> {
             String excMsg = "Neither numerator nor denominator may be null";
             throw new NullPointerException(excMsg);
         }
+        if (denom.equals(BigInteger.ZERO)) {
+            String excMsg = "Denominator 0 is not valid";
+            throw new ArithmeticException(excMsg);
+        }
         this.numerator = numer;
         this.denominator = denom;
     }
