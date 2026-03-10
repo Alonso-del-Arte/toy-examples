@@ -46,6 +46,17 @@ class PercentageTest {
         }
     }
 
+    @Test
+    void testToStringIntegersThroughFloatingPoint() {
+        for (int i = 0; i < 101; i++) {
+            double x = i;
+            Percentage instance = new Percentage(x);
+            String expected = i + "%";
+            String actual = instance.toString();
+            assertEquals(expected, actual);
+        }
+    }
+
     @Test @org.junit.jupiter.api.Disabled
     void testToStringFromBigDecimalTenths() {
         BigDecimal tenth = BigDecimal.ONE.divide(BigDecimal.TEN,
