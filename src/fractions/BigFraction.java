@@ -16,7 +16,7 @@ public class BigFraction implements Comparable<BigFraction> {
 
     // TODO: Write tests for this
     public BigInteger getNumerator() {
-        return this.numerator;
+        return this.numerator.negate();
     }
 
     // TODO: Write tests for this
