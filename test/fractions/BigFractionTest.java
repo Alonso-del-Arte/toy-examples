@@ -36,6 +36,19 @@ class BigFractionTest {
         assertEquals(expected, actual);
     }
 
+    // TODO: Write test for toString() not in lowest terms
+
+    // TODO: Write test for toString() with negative denominator
+
+    @Test
+    void testGetNumeratorAlreadyInLowestTerms() {
+        BigInteger expected = getPositiveInteger();
+        BigInteger denom = nextCoprime(expected);
+        BigFraction instance = new BigFraction(expected, denom);
+        BigInteger actual = instance.getNumerator();
+        assertEquals(expected, actual);
+    }
+
     @Test  @org.junit.jupiter.api.Disabled
     void testCompareTo() {
         fail("Haven't written test yet");
