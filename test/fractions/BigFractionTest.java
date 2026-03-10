@@ -46,7 +46,8 @@ class BigFractionTest {
         BigInteger denom = nextCoprime(expected);
         BigFraction instance = new BigFraction(expected, denom);
         BigInteger actual = instance.getNumerator();
-        assertEquals(expected, actual);
+        String message = "Getting numerator of " + instance;
+        assertEquals(expected, actual, message);
     }
 
     // TODO: Write test for getNumerator() not in lowest terms
