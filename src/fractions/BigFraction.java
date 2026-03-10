@@ -85,6 +85,11 @@ public class BigFraction implements Comparable<BigFraction> {
         return 0;
     }
 
+    @Override
+    public String toString() {
+        return this.numerator + "/" + this.denominator;
+    }
+
     // TODO: Write tests for this
     public BigFraction(Fraction fraction) {
         this(BigInteger.valueOf(fraction.getDenominator()),
