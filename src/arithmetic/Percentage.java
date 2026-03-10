@@ -2,7 +2,7 @@ package arithmetic;
 
 import java.math.BigDecimal;
 
-public class Percentage {
+public class Percentage implements Comparable<Percentage> {
 
     private final double num;
 
@@ -12,6 +12,12 @@ public class Percentage {
             return Double.toString(this.num).replace(".0", "") + "%";
         }
         return this.num + "%";
+    }
+
+    // TODO: Write tests for test
+    @Override
+    public int compareTo(Percentage other) {
+        return 0;
     }
 
     public Percentage(long value) {
