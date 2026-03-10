@@ -8,9 +8,9 @@ public class Percentage implements Comparable<Percentage> {
 
     @Override
     public String toString() {
-        if (this.num == Math.floor(this.num)) {
-            return Double.toString(this.num).replace(".0", "") + "%";
-        }
+//        if (this.num == Math.floor(this.num)) {
+//            return Double.toString(this.num).replace(".0", "") + "%";
+//        }
         return this.num + "%";
     }
 
