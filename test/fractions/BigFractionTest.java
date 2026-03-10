@@ -64,6 +64,10 @@ class BigFractionTest {
         assertEquals(expected, actual, message);
     }
 
+    // TODO: Write test for getDenominator() not in lowest terms
+
+    // TODO: Write test for getDenominator() with negative denominator
+
     @Test  @org.junit.jupiter.api.Disabled
     void testCompareTo() {
         fail("Haven't written test yet");
