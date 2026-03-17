@@ -1,10 +1,12 @@
 # Metric prefix correlations table
 
-Given	Milli	Centi	Deci	No prefix	Deka	Hecto	Kilo
-Milli	1	0.1	0.01	0.001	0.0001	0.00001	0.000001
-Centi	10	1	0.1	0.01	0.001	0.0001	0.00001
-Deci	100	10	1	0.1	0.01	0.001	0.0001
-No prefix	1000	100	10	1	0.1	0.01	0.001
-Deka	10000	1000	100	10	1	0.1	0.01
-Hecto	100000	10000	1000	100	10	1	0.1
-Kilo	1000000	100000	10000	1000	100	10	1
+Given Milli Centi Deci No prefix Deka Hecto Kilo
+Milli 1 0.1 0.01 0.001 0.0001 0.00001 0.000001
+Centi 10 1 0.1 0.01 0.001 0.0001 0.00001
+Deci 100 10 1 0.1 0.01 0.001 0.0001
+No prefix 1000 100 10 1 0.1 0.01 0.001
+Deka 10000 1000 100 10 1 0.1 0.01
+Hecto 100000 10000 1000 100 10 1 0.1
+Kilo 1000000 100000 10000 1000 100 10 1
+
+This chart comes from Kelly's 1973 book, Table 2-6 on page 26.
