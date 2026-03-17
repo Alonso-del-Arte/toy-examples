@@ -2,7 +2,7 @@
 
 I have not yet read the *ISBN Users' Manual* from the International ISBN Agency, 
 though I do have the Sixth Edition as a PDF and will list it in 
-the bibliography.
+[the bibliography](bibliography.bib).
 
 The International Standard Book Number (ISBN) format allows each book published 
 anywhere in the world to be uniquely identified by a 10- or 13-digit number. 
