@@ -270,7 +270,7 @@ public final class MandelbrotJuliaViewer extends JPanel
         int fcRet = fileChooser.showSaveDialog(this);
         String msg;
         switch (fcRet) {
-            case JFileChooser.APPROVE_OPTION:
+            case JFileChooser.APPROVE_OPTION -> {
                 diagramFile = fileChooser.getSelectedFile();
                 String filePath = diagramFile.getAbsolutePath();
                 prevSavePathname = filePath.substring(0,
@@ -283,18 +283,19 @@ public final class MandelbrotJuliaViewer extends JPanel
                             + ioe.getMessage();
                     JOptionPane.showMessageDialog(this.frame, msg);
                 }
-                break;
-            case JFileChooser.CANCEL_OPTION:
+            }
+            case JFileChooser.CANCEL_OPTION -> {
                 msg = "File save canceled";
                 JOptionPane.showMessageDialog(this.frame, msg);
-                break;
-            case JFileChooser.ERROR_OPTION:
+            }
+            case JFileChooser.ERROR_OPTION -> {
                 msg = "An error occurred trying to choose a file to save to";
                 JOptionPane.showMessageDialog(this.frame, msg);
-                break;
-            default:
+            }
+            default -> {
                 msg = "Unexpected option " + fcRet + " from file chooser";
                 JOptionPane.showMessageDialog(this.frame, msg);
+            }
         }
     }
 
