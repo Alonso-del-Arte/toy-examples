@@ -484,77 +484,36 @@ public final class MandelbrotJuliaViewer extends JPanel
     public void actionPerformed(ActionEvent ae) {
         String cmd = ae.getActionCommand();
         switch (cmd) {
-            case "saveDiagramAs":
-                this.saveDiagramAs();
-                break;
-            case "close":
-                this.frame.dispose();
-                break;
-            case "exit":
-                System.exit(0);
-                break;
-            case "copyReadouts":
-                this.copyReadoutsToClipboard();
-                break;
-            case "copyDiagram":
-                this.copyDiagramToClipboard();
-                break;
-            case "mjToggle":
-                this.toggleJuliaFlag();
-                break;
-            case "zoomIn":
-                this.zoomIn();
-                break;
-            case "zoomOut":
-                this.zoomOut();
-                break;
-            case "decreaseZoomStep":
+            case "saveDiagramAs" -> this.saveDiagramAs();
+            case "close" -> this.frame.dispose();
+            case "exit" -> System.exit(0);
+            case "copyReadouts" -> this.copyReadoutsToClipboard();
+            case "copyDiagram" -> this.copyDiagramToClipboard();
+            case "mjToggle" -> this.toggleJuliaFlag();
+            case "zoomIn" -> this.zoomIn();
+            case "zoomOut" -> this.zoomOut();
+            case "decreaseZoomStep" -> {
 //                this.decreaseZoomStep();
-                break;
-            case "increaseZoomStep":
+            }
+            case "increaseZoomStep" -> {
 //                this.increaseZoomStep();
-                break;
-            case "decreaseNudge":
-                this.decreaseNudge();
-                break;
-            case "increaseNudge":
-                this.increaseNudge();
-                break;
-            case "nudgeReMinus":
-                this.nudgeDiagramReMinus();
-                break;
-            case "nudgeRePlus":
-                this.nudgeDiagramRePlus();
-                break;
-            case "nudgeImMinus":
-                this.nudgeDiagramImMinus();
-                break;
-            case "nudgeImPlus":
-                this.nudgeDiagramImPlus();
-                break;
-            case "nudgeJuliaReMinus":
-                this.nudgeJuliaPointReMinus();
-                break;
-            case "nudgeJuliaRePlus":
-                this.nudgeJuliaPointRePlus();
-                break;
-            case "nudgeJuliaImMinus":
-                this.nudgeJuliaPointImMinus();
-                break;
-            case "nudgeJuliaImPlus":
-                this.nudgeJuliaPointImPlus();
-                break;
-            case "toggleReadOuts":
-                this.setToggleReadoutsEnabled();
-                break;
-            case "showUserManual":
+            }
+            case "decreaseNudge" -> this.decreaseNudge();
+            case "increaseNudge" -> this.increaseNudge();
+            case "nudgeReMinus" -> this.nudgeDiagramReMinus();
+            case "nudgeRePlus" -> this.nudgeDiagramRePlus();
+            case "nudgeImMinus" -> this.nudgeDiagramImMinus();
+            case "nudgeImPlus" -> this.nudgeDiagramImPlus();
+            case "nudgeJuliaReMinus" -> this.nudgeJuliaPointReMinus();
+            case "nudgeJuliaRePlus" -> this.nudgeJuliaPointRePlus();
+            case "nudgeJuliaImMinus" -> this.nudgeJuliaPointImMinus();
+            case "nudgeJuliaImPlus" -> this.nudgeJuliaPointImPlus();
+            case "toggleReadOuts" -> this.setToggleReadoutsEnabled();
+            case "showUserManual" -> {
 //                this.showUserManual();
-                break;
-            case "about":
-                this.showAboutBox();
-                break;
-            default:
-                System.err.println("Command " + cmd + " not recognized");
+            }
+            case "about" -> this.showAboutBox();
+            default -> System.err.println("Command " + cmd + " not recognized");
         }
     }
 
