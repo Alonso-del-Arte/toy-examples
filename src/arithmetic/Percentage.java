@@ -4,12 +4,12 @@ import java.math.BigDecimal;
 
 public class Percentage implements Comparable<Percentage> {
 
-    private final double num;
+    private final BigDecimal num;
 
     @Override
     public String toString() {
-        if (this.num == Math.floor(this.num)) {
-            return Double.toString(this.num).replace(".0", "") + "%";
+        if (this.num.stripTrailingZeros().scale() < 1) {
+            return this.num.toString().replace(".0", "") + "%";
         }
         return this.num + "%";
     }
@@ -21,7 +21,7 @@ public class Percentage implements Comparable<Percentage> {
     }
 
     public Percentage(long value) {
-        this.num = value;
+        this.num = BigDecimal.valueOf(value);
     }
 
     public Percentage(double value) {
@@ -29,12 +29,12 @@ public class Percentage implements Comparable<Percentage> {
             String excMsg = "Value " + value + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
-        this.num = value;
+        this.num = BigDecimal.valueOf(value);
     }
 
     // TODO: Write tests for this
     public Percentage(BigDecimal value) {
-        this.num = value.intValue();
+        this.num = value;
     }
 
 }
