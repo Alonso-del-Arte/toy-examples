@@ -57,11 +57,19 @@ class PercentageTest {
         }
     }
 
-    @Test @org.junit.jupiter.api.Disabled
+    @Test
     void testToStringFromBigDecimalTenths() {
-        BigDecimal tenth = BigDecimal.ONE.divide(BigDecimal.TEN,
+        BigDecimal tenth = BigDecimal.ONE.divide(BigDecimal.TEN, 1,
                 RoundingMode.HALF_DOWN);
-        fail("FINISH WRITING THIS TEST");
+        int startFloor = ExtendedRandom.nextInt(100);
+        BigDecimal stop = BigDecimal.valueOf(startFloor + 1);
+        for (BigDecimal value = tenth.add(BigDecimal.valueOf(startFloor));
+             value.compareTo(stop) < 0; value = tenth.add(value)) {
+            Percentage instance = new Percentage(value);
+            String expected = value.toString() + '%';
+            String actual = instance.toString();
+            assertEquals(expected, actual);
+        }
     }
 
     @Test
