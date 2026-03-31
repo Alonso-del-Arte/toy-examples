@@ -41,6 +41,15 @@ class BigFractionTest {
     // TODO: Write test for toString() with negative denominator
 
     @Test
+    public void testToStringOmitsDenomOne() {
+        BigInteger numerator = new BigInteger(72, RANDOM);
+        BigFraction instance = new BigFraction(numerator, BigInteger.ONE);
+        String expected = numerator.toString();
+        String actual = instance.toString();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testGetNumeratorAlreadyInLowestTerms() {
         BigInteger expected = getPositiveInteger();
         BigInteger denom = nextCoprime(expected);
