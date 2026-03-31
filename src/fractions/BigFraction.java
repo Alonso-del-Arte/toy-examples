@@ -94,6 +94,16 @@ public class BigFraction implements Comparable<BigFraction> {
     }
 
     // TODO: Write tests for this
+    public String toHTMLString() {
+        return "SORRY, NOT IMPLEMENTED YET";
+    }
+
+    // TODO: Write tests for this
+    public String toTeXString() {
+        return "SORRY, NOT IMPLEMENTED YET";
+    }
+
+    // TODO: Write tests for this
     public BigFraction(Fraction fraction) {
         this(BigInteger.valueOf(fraction.getDenominator()),
                 BigInteger.valueOf(fraction.getNumerator()));
