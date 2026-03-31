@@ -70,7 +70,7 @@ class BigFractionTest {
 
     @Test  @org.junit.jupiter.api.Disabled
     void testCompareTo() {
-        fail("Haven't written test yet");
+        fail("HAVEN'T WRITTEN TEST YET");
     }
 
     @Test
