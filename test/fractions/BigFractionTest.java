@@ -39,6 +39,16 @@ class BigFractionTest {
     // TODO: Write test for toString() not in lowest terms
 
     // TODO: Write test for toString() with negative denominator
+// TODO: Write test for toHTMLString()
+    // TODO: Write test for toHTMLString() not in lowest terms
+
+    // TODO: Write test for toHTMLString() with negative denominator
+
+    // TODO: Write test for toTeXString()
+
+    // TODO: Write test for toTeXString() not in lowest terms
+
+    // TODO: Write test for toTeXString() with negative denominator
 
     @Test
     public void testToStringOmitsDenomOne() {
