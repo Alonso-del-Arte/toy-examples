@@ -85,6 +85,7 @@ public class BigFraction implements Comparable<BigFraction> {
         return 0;
     }
 
+    // TODO: Write more tests for this
     @Override
     public String toString() {
         if (this.denominator.equals(BigInteger.ONE)) {
@@ -93,9 +94,10 @@ public class BigFraction implements Comparable<BigFraction> {
         return this.numerator + "/" + this.denominator;
     }
 
-    // TODO: Write tests for this
+    // TODO: Write more tests for this
     public String toHTMLString() {
-        return "SORRY, NOT IMPLEMENTED YET";
+        return "<sup>" + this.numerator + "</sup>&frasl;<sub>"
+                + this.denominator + "</sub>";
     }
 
     // TODO: Write tests for this
