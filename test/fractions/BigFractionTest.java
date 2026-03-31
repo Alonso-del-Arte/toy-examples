@@ -39,7 +39,18 @@ class BigFractionTest {
     // TODO: Write test for toString() not in lowest terms
 
     // TODO: Write test for toString() with negative denominator
-// TODO: Write test for toHTMLString()
+
+    @Test
+    void testToHTMLStringAlreadyInLowestTerms() {
+        BigInteger numer = getPositiveInteger();
+        BigInteger denom = nextCoprime(numer);
+        BigFraction instance = new BigFraction(numer, denom);
+        String expected = "<sup>" + numer + "</sup>&frasl;<sub>" + denom
+                + "</sub>";
+        String actual = instance.toHTMLString();
+        assertEquals(expected, actual);
+    }
+
     // TODO: Write test for toHTMLString() not in lowest terms
 
     // TODO: Write test for toHTMLString() with negative denominator
