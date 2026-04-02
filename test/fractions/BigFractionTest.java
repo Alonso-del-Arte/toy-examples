@@ -14,7 +14,7 @@ class BigFractionTest {
 
     private static final Random RANDOM = new Random();
 
-    private static BigInteger getPositiveInteger() {
+    private static BigInteger choosePositiveInteger() {
         return new BigInteger(72, RANDOM).add(BigInteger.ONE);
     }
 
@@ -28,7 +28,7 @@ class BigFractionTest {
 
     @Test
     void testToStringAlreadyInLowestTerms() {
-        BigInteger numer = getPositiveInteger();
+        BigInteger numer = choosePositiveInteger();
         BigInteger denom = nextCoprime(numer);
         BigFraction instance = new BigFraction(numer, denom);
         String expected = numer + "/" + denom;
@@ -42,7 +42,7 @@ class BigFractionTest {
 
     @Test
     void testToHTMLStringAlreadyInLowestTerms() {
-        BigInteger numer = getPositiveInteger();
+        BigInteger numer = choosePositiveInteger();
         BigInteger denom = nextCoprime(numer);
         BigFraction instance = new BigFraction(numer, denom);
         String expected = "<sup>" + numer + "</sup>&frasl;<sub>" + denom
@@ -72,7 +72,7 @@ class BigFractionTest {
 
     @Test
     void testGetNumeratorAlreadyInLowestTerms() {
-        BigInteger expected = getPositiveInteger();
+        BigInteger expected = choosePositiveInteger();
         BigInteger denom = nextCoprime(expected);
         BigFraction instance = new BigFraction(expected, denom);
         BigInteger actual = instance.getNumerator();
@@ -86,7 +86,7 @@ class BigFractionTest {
 
     @Test
     void testGetDenominatorAlreadyInLowestTerms() {
-        BigInteger numer = getPositiveInteger();
+        BigInteger numer = choosePositiveInteger();
         BigInteger expected = nextCoprime(numer);
         BigFraction instance = new BigFraction(numer, expected);
         BigInteger actual = instance.getDenominator();
@@ -105,7 +105,7 @@ class BigFractionTest {
 
     @Test
     void testConstructorRejectsDenomZero() {
-        BigInteger numer = getPositiveInteger();
+        BigInteger numer = choosePositiveInteger();
         String message = "Numerator " + numer
                 + " and denominator 0 should've caused exception";
         Throwable t = assertThrows(ArithmeticException.class, () -> {
@@ -124,7 +124,7 @@ class BigFractionTest {
      */
     @Test
     void testConstructorRejectsNullNumerator() {
-        BigInteger denominator = getPositiveInteger();
+        BigInteger denominator = choosePositiveInteger();
         Throwable t = assertThrows(NullPointerException.class, () -> {
             BigFraction badFraction = new BigFraction(null, denominator);
             System.out.println("Should not have been able to create "
@@ -144,7 +144,7 @@ class BigFractionTest {
      */
     @Test
     void testConstructorRejectsNullDenominator() {
-        BigInteger numerator = getPositiveInteger();
+        BigInteger numerator = choosePositiveInteger();
         Throwable t = assertThrows(NullPointerException.class, () -> {
             BigFraction badFraction = new BigFraction(numerator, null);
             System.out.println("Should not have been able to create "
