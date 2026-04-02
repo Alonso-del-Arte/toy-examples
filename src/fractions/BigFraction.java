@@ -25,6 +25,10 @@ public class BigFraction implements Comparable<BigFraction> {
 
     // TODO: Write tests for this
     public BigInteger getDenominator() {
+        BigInteger gcd = this.numerator.gcd(this.denominator);
+        if (!gcd.equals(BigInteger.ONE)) {
+            return this.denominator.divide(gcd);
+        }
         return this.denominator;
     }
 
