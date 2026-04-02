@@ -36,7 +36,19 @@ class BigFractionTest {
         assertEquals(expected, actual);
     }
 
-    // TODO: Write test for toString() not in lowest terms
+    @Test
+    public void testToString() {
+        System.out.println("toString");
+        BigInteger expNumer = choosePositiveInteger();
+        BigInteger expDenom = nextCoprime(expNumer);
+        BigInteger multiplier = new BigInteger(8, RANDOM).add(BigInteger.TWO);
+        BigInteger numer = expNumer.multiply(multiplier);
+        BigInteger denom = expDenom.multiply(multiplier);
+        BigFraction instance = new BigFraction(numer, denom);
+        String expected = expNumer.toString() + "/" + expDenom.toString();
+        String actual = instance.toString();
+        assertEquals(expected, actual);
+    }
 
     // TODO: Write test for toString() with negative denominator
 
