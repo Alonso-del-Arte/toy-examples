@@ -112,8 +112,18 @@ public class BigFraction implements Comparable<BigFraction> {
 
     // TODO: Write more tests for this
     public String toHTMLString() {
-        return "<sup>" + this.numerator + "</sup>&frasl;<sub>"
-                + this.denominator + "</sub>";
+            BigInteger gcd = this.numerator.gcd(this.denominator);
+            if (!gcd.equals(BigInteger.ONE)) {
+                BigInteger numer = this.numerator.divide(gcd);
+                BigInteger denom = this.denominator.divide(gcd);
+                String str = "<sup>" + numer.toString() + "</sup>&frasl;<sub>"
+                        + denom.toString() + "</sub>";
+                return str.replace("<sup>-", "&minus;<sup>");
+            }
+            return "<sup>" + this.numerator.toString()
+                    + "</sup>&frasl;<sub>" + this.denominator.toString()
+                    + "</sub>";
+//            return str.replace("<sup>-", "&minus;<sup>");
     }
 
     // TODO: Write tests for this
