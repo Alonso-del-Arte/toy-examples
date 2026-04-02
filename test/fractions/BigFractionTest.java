@@ -80,7 +80,20 @@ class BigFractionTest {
         assertEquals(expected, actual, message);
     }
 
-    // TODO: Write test for getNumerator() not in lowest terms
+    @Test
+    public void testGetNumerator() {
+        System.out.println("getNumerator");
+        BigInteger expected = choosePositiveInteger();
+        BigInteger expDenom = nextCoprime(expected);
+        BigInteger multiplier = new BigInteger(8, RANDOM).add(BigInteger.TWO);
+        BigInteger numer = expected.multiply(multiplier);
+        BigInteger denom = expDenom.multiply(multiplier);
+        BigFraction instance = new BigFraction(numer, denom);
+        BigInteger actual = instance.getNumerator();
+        String message = "Getting numerator of " + numer.toString() + "/"
+                + denom.toString();
+        assertEquals(expected, actual, message);
+    }
 
     // TODO: Write test for getNumerator() with negative denominator
 
