@@ -96,10 +96,18 @@ public class BigFraction implements Comparable<BigFraction> {
     // TODO: Write more tests for this
     @Override
     public String toString() {
+        String numerStr = this.numerator.toString();
         if (this.denominator.equals(BigInteger.ONE)) {
-            return this.numerator.toString();
+            return numerStr;
+        } else {
+            BigInteger gcd = this.numerator.gcd(this.denominator);
+            if (!gcd.equals(BigInteger.ONE)) {
+                BigInteger numer = this.numerator.divide(gcd);
+                BigInteger denom = this.denominator.divide(gcd);
+                return numer.toString() + "/" + denom.toString();
+            }
+            return numerStr + "/" + this.denominator.toString();
         }
-        return this.numerator + "/" + this.denominator;
     }
 
     // TODO: Write more tests for this
