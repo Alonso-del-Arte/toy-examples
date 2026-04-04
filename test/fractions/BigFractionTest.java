@@ -77,7 +77,20 @@ class BigFractionTest {
         assertEquals(expected, actual);
     }
 
-    // TODO: Write test for toHTMLString() with negative denominator
+    @Test
+    public void testToHTMLString() {
+        System.out.println("toHTMLString");
+        BigInteger expNumer = choosePositiveInteger();
+        BigInteger expDenom = nextCoprime(expNumer);
+        BigInteger multiplier = new BigInteger(8, RANDOM).add(BigInteger.TWO);
+        BigInteger numer = expNumer.multiply(multiplier).negate();
+        BigInteger denom = expDenom.multiply(multiplier);
+        BigFraction instance = new BigFraction(numer, denom);
+        String expected = "&minus;<sup>" + expNumer + "</sup>&frasl;<sub>"
+                + expDenom + "</sub>";
+        String actual = instance.toHTMLString();
+        assertEquals(expected, actual);
+    }
 
     // TODO: Write test for toTeXString()
 
