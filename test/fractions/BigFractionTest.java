@@ -45,7 +45,7 @@ class BigFractionTest {
         BigInteger numer = expNumer.multiply(multiplier);
         BigInteger denom = expDenom.multiply(multiplier);
         BigFraction instance = new BigFraction(numer, denom);
-        String expected = expNumer.toString() + "/" + expDenom.toString();
+        String expected = expNumer + "/" + expDenom;
         String actual = instance.toString();
         assertEquals(expected, actual);
     }
@@ -71,8 +71,8 @@ class BigFractionTest {
         BigInteger numer = expNumer.multiply(multiplier);
         BigInteger denom = expDenom.multiply(multiplier);
         BigFraction instance = new BigFraction(numer, denom);
-        String expected = "<sup>" + expNumer.toString() + "</sup>&frasl;<sub>"
-                + expDenom.toString() + "</sub>";
+        String expected = "<sup>" + expNumer + "</sup>&frasl;<sub>" + expDenom
+                + "</sub>";
         String actual = instance.toHTMLString();
         assertEquals(expected, actual);
     }
@@ -114,8 +114,7 @@ class BigFractionTest {
         BigInteger denom = expDenom.multiply(multiplier);
         BigFraction instance = new BigFraction(numer, denom);
         BigInteger actual = instance.getNumerator();
-        String message = "Getting numerator of " + numer.toString() + "/"
-                + denom.toString();
+        String message = "Getting numerator of " + numer + "/" + denom;
         assertEquals(expected, actual, message);
     }
 
@@ -141,8 +140,7 @@ class BigFractionTest {
         BigInteger denom = expected.multiply(multiplier);
         BigFraction instance = new BigFraction(numer, denom);
         BigInteger actual = instance.getDenominator();
-        String message = "Getting denominator of " + numer.toString() + "/"
-                + denom.toString();
+        String message = "Getting denominator of " + numer + "/" + denom;
         assertEquals(expected, actual, message);
     }
 
