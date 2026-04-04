@@ -104,6 +104,15 @@ class BigFractionTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void testToHTMLStringOmitsDenomOne() {
+        BigInteger numer = choosePositiveInteger();
+        BigFraction instance = new BigFraction(numer, BigInteger.ONE);
+        String expected = numer.toString();
+        String actual = instance.toHTMLString();
+        assertEquals(expected, actual);
+    }
+
     // TODO: Write test for toTeXString()
 
     // TODO: Write test for toTeXString() not in lowest terms
