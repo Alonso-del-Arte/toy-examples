@@ -92,6 +92,18 @@ class BigFractionTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void testToHTMLStringNegativeButAlreadyInLowestTerms() {
+        BigInteger posNumer = choosePositiveInteger();
+        BigInteger numer = posNumer.negate();
+        BigInteger denom = nextCoprime(posNumer);
+        BigFraction instance = new BigFraction(numer, denom);
+        String expected = "&minus;<sup>" + posNumer + "</sup>&frasl;<sub>"
+                + denom + "</sub>";
+        String actual = instance.toHTMLString().replace(" ", "");
+        assertEquals(expected, actual);
+    }
+
     // TODO: Write test for toTeXString()
 
     // TODO: Write test for toTeXString() not in lowest terms
