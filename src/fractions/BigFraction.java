@@ -118,7 +118,7 @@ public class BigFraction implements Comparable<BigFraction> {
                 BigInteger denom = this.denominator.divide(gcd);
                 String str = "<sup>" + numer.toString() + "</sup>&frasl;<sub>"
                         + denom.toString() + "</sub>";
-                return str;//.replace("<sup>-", "&minus;<sup>");
+                return str.replace("<sup>-", "&minus;<sup>");
             }
             return "<sup>" + this.numerator.toString()
                     + "</sup>&frasl;<sub>" + this.denominator.toString()
