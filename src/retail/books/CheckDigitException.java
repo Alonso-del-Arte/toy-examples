@@ -18,7 +18,7 @@ public class CheckDigitException extends RuntimeException {
 
     // TODO: Write tests for this
     public CheckDigitException(byte badCheckDigit, long num) {
-        this.msg = Byte.toString(badCheckDigit) + " is not valid for " + Long.toString(num);
+        this.msg = badCheckDigit + " is not valid for " + num;
     }
 
     // TODO: Write tests for this
