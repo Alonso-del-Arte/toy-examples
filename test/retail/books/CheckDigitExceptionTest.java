@@ -21,4 +21,15 @@ class CheckDigitExceptionTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testGetMessage3ParamConstructorB() {
+        byte badCheckDigit = (byte) nextInt();
+        String numStr = Integer.toString(nextInt());
+        String expected = alphanumeric(DEFAULT_TEST_MESSAGE_LENGTH);
+        Throwable instance = new CheckDigitException(badCheckDigit, numStr,
+                expected);
+        String actual = instance.getMessage();
+        assertEquals(expected, actual);
+    }
+
 }
