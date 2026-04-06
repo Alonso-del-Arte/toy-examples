@@ -43,4 +43,15 @@ class CheckDigitExceptionTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testGetMessagePrimaryConstructorB() {
+        byte badCheckDigit = (byte) nextInt();
+        String numStr = Integer.toString(nextInt());
+        Throwable instance = new CheckDigitException(badCheckDigit, numStr);
+        String expected = badCheckDigit + " is not valid for \"" + numStr
+                + "\"";
+        String actual = instance.getMessage();
+        assertEquals(expected, actual);
+    }
+
 }
