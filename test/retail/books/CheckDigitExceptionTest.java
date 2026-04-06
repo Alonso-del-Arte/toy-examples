@@ -32,4 +32,15 @@ class CheckDigitExceptionTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testGetMessage() {
+        System.out.println("getMessage");
+        byte badCheckDigit = (byte) nextInt();
+        int num = nextInt();
+        Throwable instance = new CheckDigitException(badCheckDigit, num);
+        String expected = badCheckDigit + " is not valid for " + num;
+        String actual = instance.getMessage();
+        assertEquals(expected, actual);
+    }
+
 }
