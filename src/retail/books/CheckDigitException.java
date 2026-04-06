@@ -4,7 +4,6 @@ public class CheckDigitException extends RuntimeException {
 
     private String msg = "SORRY, NOT IMPLEMENTED YET";
 
-    // TODO: Write tests for this
     @Override
     public String getMessage() {
         return this.msg;
@@ -17,7 +16,9 @@ public class CheckDigitException extends RuntimeException {
     }
 
     // TODO: Write tests for this
-    public CheckDigitException(String numStr) {}
+    public CheckDigitException(String numStr) {
+        this.msg = numStr + " does not have a valid check digit";
+    }
 
     // TODO: Write tests for this
     public CheckDigitException(byte badCheckDigit, long num) {
