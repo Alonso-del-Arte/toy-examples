@@ -28,6 +28,8 @@ public class CheckDigitException extends RuntimeException {
     }
 
     // TODO: Write tests for this
-    public CheckDigitException(byte badCheckDigit, String numStr, String message) {}
+    public CheckDigitException(byte badCheckDigit, String numStr, String message) {
+        this.msg = message;
+    }
 
 }
