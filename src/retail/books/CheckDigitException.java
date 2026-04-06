@@ -3,6 +3,12 @@ package retail.books;
 public class CheckDigitException extends RuntimeException {
 
     // TODO: Write tests for this
+    @Override
+    public String getMessage() {
+        return "SORRY, NOT IMPLEMENTED YET";
+    }
+
+    // TODO: Write tests for this
     public CheckDigitException(long num) {}
 
     // TODO: Write tests for this
