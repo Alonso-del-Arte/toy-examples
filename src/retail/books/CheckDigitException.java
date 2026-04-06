@@ -2,10 +2,12 @@ package retail.books;
 
 public class CheckDigitException extends RuntimeException {
 
+    private String msg = "SORRY, NOT IMPLEMENTED YET";
+
     // TODO: Write tests for this
     @Override
     public String getMessage() {
-        return "SORRY, NOT IMPLEMENTED YET";
+        return this.msg;
     }
 
     // TODO: Write tests for this
@@ -21,7 +23,9 @@ public class CheckDigitException extends RuntimeException {
     public CheckDigitException(byte badCheckDigit, String numStr) {}
 
     // TODO: Write tests for this
-    public CheckDigitException(byte badCheckDigit, long num, String message) {}
+    public CheckDigitException(byte badCheckDigit, long num, String message) {
+        this.msg = message;
+    }
 
     // TODO: Write tests for this
     public CheckDigitException(byte badCheckDigit, String numStr, String message) {}
