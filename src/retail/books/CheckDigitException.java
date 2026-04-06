@@ -22,7 +22,9 @@ public class CheckDigitException extends RuntimeException {
     }
 
     // TODO: Write tests for this
-    public CheckDigitException(byte badCheckDigit, String numStr) {}
+    public CheckDigitException(byte badCheckDigit, String numStr) {
+        this.msg = badCheckDigit + " is not valid for \"" + numStr + "\"";
+    }
 
     // TODO: Write tests for this
     public CheckDigitException(byte badCheckDigit, long num, String message) {
