@@ -11,7 +11,10 @@ public class CheckDigitException extends RuntimeException {
     }
 
     // TODO: Write tests for this
-    public CheckDigitException(long num) {}
+    public CheckDigitException(long num) {
+        this.msg = "%s does not have a valid check digit"
+                .formatted(Long.toString(num));
+    }
 
     // TODO: Write tests for this
     public CheckDigitException(String numStr) {}
