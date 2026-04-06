@@ -3,6 +3,16 @@ package retail.books;
 public class CheckDigitException extends RuntimeException {
 
     // TODO: Write tests for this
+    public byte getBadCheckDigit() {
+        return -1;
+    }
+
+    // TODO: Write tests for this
+    public String getNumericString() {
+        return "SORRY, NOT IMPLEMENTED YET";
+    }
+
+    // TODO: Write tests for this
     public CheckDigitException(long num) {
         super("%s does not have a valid check digit"
                 .formatted(Long.toString(num)));
@@ -29,7 +39,8 @@ public class CheckDigitException extends RuntimeException {
     }
 
     // TODO: Write tests for this
-    public CheckDigitException(byte badCheckDigit, String numStr, String message) {
+    public CheckDigitException(byte badCheckDigit, String numStr,
+                               String message) {
         super(message);
     }
 
