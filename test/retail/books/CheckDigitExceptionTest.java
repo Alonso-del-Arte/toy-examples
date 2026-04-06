@@ -54,4 +54,14 @@ class CheckDigitExceptionTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testGetMessageAuxConstructorA() {
+        int num = nextInt();
+        Throwable instance = new CheckDigitException(num);
+        String expected = "%s does not have a valid check digit"
+                .formatted(Integer.toString(num));
+        String actual = instance.getMessage();
+        assertEquals(expected, actual);
+    }
+
 }
