@@ -45,6 +45,10 @@ examples. These toy examples are about illustrating concepts of object-oriented
 programming, not demonstrating that there's a third party library for every 
 purpose.
 
+Don't deliberately use "artificial intelligence," though it is difficult to 
+avoid these days. If you feel you need A.I. for this project, then these toy 
+examples are way too complicated.
+
 I will only consider pull requests pertaining to open issues or To Do comments. 
 You need to have an integrated development environment (IDE) like IntelliJ IDEA 
 or Apache NetBeans, with JUnit.
