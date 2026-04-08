@@ -18,8 +18,8 @@ So you need to have Java 17 or later for both the runtime and the development
 kit.
 
 Also, you should have an integrated development environment (IDE) for Java, 
-preferably JetBrains IntelliJ IDEA. It's available in Community Edition, which 
-is free.
+preferably JetBrains IntelliJ IDEA. Although Community Edition doesn't exist as 
+such anymore, IntelliJ IDEA without Ultimate is free to use. 
 
 I don't want to deal with Maven. I think it's obnoxious, obtrusive and adds way 
 too much of its own complexity to the project.
@@ -45,7 +45,7 @@ examples. These toy examples are about illustrating concepts of object-oriented
 programming, not demonstrating that there's a third party library for every 
 purpose.
 
-I will only consider pull requests pertaining to open issues or TODO comments. 
+I will only consider pull requests pertaining to open issues or To Do comments. 
 You need to have an integrated development environment (IDE) like IntelliJ IDEA 
 or Apache NetBeans, with JUnit.
 
