@@ -57,4 +57,12 @@ public class ISBN10 extends ISBN {
         super(-1, (byte) 12, "?");
     }
 
+    ISBN10(int num) {
+        super(-2, (byte) 11, "?");
+    }
+
+    ISBN10(String s) {
+        super(-3, (byte) 13, "?");
+    }
+
 }
