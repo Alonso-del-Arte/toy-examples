@@ -7,7 +7,7 @@ public class ISBN13 extends ISBN {
     public static final short SECOND_ISBN_13_PREFIX = 979;
 
     static byte checkDigit(long num) {
-        int sum = 0;
+        long sum = 0;
         int weight = 3;
         while (num > 0) {
             long weighted = (num % 10) * weight;
@@ -19,7 +19,7 @@ public class ISBN13 extends ISBN {
             }
             num /= 10;
         }
-        int remainder = sum % 10;
+        int remainder = (int) (sum % 10);
         if (remainder == 0) {
             return 0;
         }
