@@ -28,7 +28,7 @@ public class ISBN13 extends ISBN {
 
     // TODO: Write tests for this
     static boolean isValid(String s) {
-        return false;
+        return true;
     }
 
     // TODO: Write tests for this
