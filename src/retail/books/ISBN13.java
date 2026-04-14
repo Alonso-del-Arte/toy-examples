@@ -34,7 +34,7 @@ public class ISBN13 extends ISBN {
     // TODO: Write tests for this
     @Override
     public boolean isConvertibleToISBN10() {
-        return true;
+        return false;
     }
 
     // TODO: Write tests for this
