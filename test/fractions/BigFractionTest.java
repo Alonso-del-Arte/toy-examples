@@ -113,6 +113,15 @@ class BigFractionTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void testToHTMLStringNegativeInteger() {
+        BigInteger numer = choosePositiveInteger();
+        BigFraction instance = new BigFraction(numer.negate(), BigInteger.ONE);
+        String expected = "&minus;" + numer.toString();
+        String actual = instance.toHTMLString();
+        assertEquals(expected, actual);
+    }
+
     // TODO: Write test for toTeXString()
 
     // TODO: Write test for toTeXString() not in lowest terms
