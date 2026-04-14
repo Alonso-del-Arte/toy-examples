@@ -110,11 +110,10 @@ public class BigFraction implements Comparable<BigFraction> {
         }
     }
 
-    // TODO: Write more tests for this
     public String toHTMLString() {
         if (this.denominator.equals(BigInteger.ONE)) {
             if (this.numerator.compareTo(BigInteger.ZERO) < 0) {
-                return "&minus;" + this.numerator.negate().toString();
+                return "&minus;" + this.numerator.negate();
             }
             return this.numerator.toString();
         } else {
