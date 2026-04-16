@@ -119,7 +119,7 @@ public class TextCalculator {
     // TODO: Write tests for this
     public static String padLeft(String s, int length, char ch) {
         if (s == null) {
-            return "TEMP FAILING TEST";
+            throw new NullPointerException("Can't pad null String");
         }
         if (length < 0) {
             String excMsg = "Length " + length + " is not valid";
