@@ -117,7 +117,7 @@ public class TextCalculator {
     }
 
     // TODO: Write tests for this
-    public static String padLeft(String s, int length, char c) {
+    public static String padLeft(String s, int length, char ch) {
         if (length < 0) {
             String excMsg = "Length " + length + " is not valid";
             throw new IllegalArgumentException(excMsg);
