@@ -118,6 +118,9 @@ public class TextCalculator {
 
     // TODO: Write tests for this
     public static String padLeft(String s, int length, char ch) {
+        if (s == null) {
+            return "TEMP FAILING TEST";
+        }
         if (length < 0) {
             String excMsg = "Length " + length + " is not valid";
             throw new IllegalArgumentException(excMsg);
