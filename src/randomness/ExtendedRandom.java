@@ -199,9 +199,17 @@ public class ExtendedRandom {
         return propBlock;
     }
 
-    // TODO: Write tests for this
+    // TODO: Write more tests for this, including non-BMP blocks, null block
     public static char chooseCharacterFromBlock(UnicodeBlock block) {
-        return '?';
+        if (block == null) {
+            return 'X';
+        }
+        char propChar = '\uFEFF';
+        while (!Character.isDefined(propChar)
+                || !block.equals(Character.UnicodeBlock.of(propChar))) {
+            propChar = (char) RANDOM.nextInt(0xFE00);
+        }
+        return propChar;
     }
 
     // TODO: Write tests for this
