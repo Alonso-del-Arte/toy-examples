@@ -290,6 +290,23 @@ class TextCalculatorTest {
     }
 
     @Test
+    void testPadLeftRejectsNullString() {
+        int length = ExtendedRandom.nextInt(16) + 4;
+        Character.UnicodeBlock block = ExtendedRandom.chooseBMPBlock();
+        char ch = ExtendedRandom.chooseCharacterFromBlock(block);
+        String message = "Trying to pad null String with '" + ch
+                + "' to length " + length + " should cause NPE";
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            String badResult = TextCalculator.padLeft(null, length, ch);
+            System.out.println(message + " not given result \"" + badResult
+                    + "\"");
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+    }
+
+    @Test
     void testPadLeftRejectsNegativeLength() {
         int badLength = ExtendedRandom.nextInt() | Integer.MIN_VALUE;
         Character.UnicodeBlock block = ExtendedRandom.chooseBMPBlock();
