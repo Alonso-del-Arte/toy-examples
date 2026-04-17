@@ -9,7 +9,7 @@ public class UUID implements Comparable<UUID> {
 
     // TODO: Write tests for this
     @Override
-    public int compareTo(UUID o) {
+    public int compareTo(UUID other) {
         return 0;
     }
 
