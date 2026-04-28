@@ -223,6 +223,38 @@ class ExtendedRandomTest {
     }
 
     @Test
+    void testNextPowerOfTwo() {
+        System.out.println("nextPowerOfTwo");
+        int capacity = 63;
+        Set<Long> expected = new HashSet<>(capacity);
+        Set<Long> actual = new HashSet<>(capacity);
+        Set<Long> diffs = new HashSet<>(capacity);
+        Set<Integer> signums = new HashSet<>();
+        for (long curr = 1L; curr > 0; curr <<= 1L) {
+            expected.add(curr);
+        }
+        int numberOfCalls = 8192;
+        long prev = 1L;
+        for (int i = 0; i < numberOfCalls; i++) {
+            long next = ExtendedRandom.nextPowerOfTwo();
+            actual.add(next);
+            long diff = next - prev;
+            diffs.add(diff);
+            signums.add(Long.signum(diff));
+        }
+        assertEquals(expected, actual);
+        int minimum = 80;
+        int size = diffs.size();
+        String diffMsg = "Differences should contain at least " + minimum
+                + ", got " + size;
+        assert size >= minimum : diffMsg;
+        String signumMsg = "Signums should have positive, negative, maybe 0: "
+                + signums;
+        assert signums.contains(-1) : signumMsg;
+        assert signums.contains(1) : signumMsg;
+    }
+
+    @Test
     void testNextBigInt() {
         System.out.println("nextBigInt");
         int capacity = 64;
