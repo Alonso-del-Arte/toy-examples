@@ -97,15 +97,9 @@ public class ExtendedRandom {
         return RANDOM.nextLong();
     }
 
-    private static long lastPowerOfTwo = 1L;
-
     public static long nextPowerOfTwo() {
-        long curr = lastPowerOfTwo;
-        lastPowerOfTwo <<= 1;
-        if (lastPowerOfTwo < 0) {
-            lastPowerOfTwo = 1L;
-        }
-        return curr;
+        int shift = RANDOM.nextInt(63);
+        return 1L << shift;
     }
 
     /**
