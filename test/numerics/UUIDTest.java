@@ -64,4 +64,16 @@ class UUIDTest {
         assert !instance.equals(obj) : msg;
     }
 
+    @Test
+    void testNotEqualsDiffClass() {
+        long highBits = nextLong();
+        long lowBits = nextLong();
+        UUID instance = new UUID(highBits, lowBits);
+        UUID instanceDiffClass = new UUID(highBits, lowBits) {};
+        String msg = instance + " of class " + instance.getClass().getName()
+                + " should not equal " + instanceDiffClass + " of class "
+                + instanceDiffClass.getClass().getName();
+        assert !instance.equals(instanceDiffClass) : msg;
+    }
+
 }
