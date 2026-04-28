@@ -12,6 +12,11 @@ public class UUID implements Comparable<UUID> {
     private final long high, low;
 
     // TODO: Write tests for this
+    public static UUID parseUUID(String s) {
+        return new UUID(0L, 0L);
+    }
+
+    // TODO: Write tests for this
     @Override
     public int compareTo(UUID other) {
         return 0;
