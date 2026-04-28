@@ -3,7 +3,8 @@ package numerics;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import static randomness.ExtendedRandom.nextInt;
+import static randomness.ExtendedRandom.nextLong;
+import static randomness.ExtendedRandom.nextPowerOfTwo;
 import static textops.TextCalculator.padLeft;
 
 class UUIDTest {
@@ -19,7 +20,26 @@ class UUIDTest {
     @Test
     void testToStringFullUUID() {
         UUID instance = new UUID(-1L, -1L);
+        //                 01234567 8901 2345 6789 012345678901
         String expected = "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF";
+        String actual = instance.toString();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testToString() {
+        System.out.println("toString");
+        long mask = nextPowerOfTwo() + nextPowerOfTwo();
+        long highBits = nextLong() ^ mask;
+        long lowBits = nextLong() ^ mask;
+        UUID instance = new UUID(highBits, lowBits);
+        String highStr = padLeft(Long.toHexString(highBits).toUpperCase(), 16,
+                '0');
+        String lowStr = padLeft(Long.toHexString(lowBits).toUpperCase(), 16,
+                '0');
+        String expected = highStr.substring(0, 8) + "-"
+                + highStr.substring(8, 12) + "-" + highStr.substring(12, 16)
+                + "-" + lowStr.substring(0, 4) + "-" + lowStr.substring(4);
         String actual = instance.toString();
         assertEquals(expected, actual);
     }
