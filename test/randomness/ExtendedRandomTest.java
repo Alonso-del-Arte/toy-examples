@@ -207,6 +207,22 @@ class ExtendedRandomTest {
     }
 
     @Test
+    void testNextLong() {
+        System.out.println("nextLong");
+        int capacity = 4096;
+        Set<Long> numbers = new HashSet<>(capacity);
+        for (int i = 0; i < capacity; i++) {
+            numbers.add(ExtendedRandom.nextLong());
+        }
+        int expected = 15 * capacity / 16;
+        int actual = numbers.size();
+        String msg = "Expected at least " + expected
+                + " distinct integers out of " + capacity + ", got " + actual;
+        System.out.println(msg);
+        assert actual >= expected : msg;
+    }
+
+    @Test
     void testNextBigInt() {
         System.out.println("nextBigInt");
         int capacity = 64;
