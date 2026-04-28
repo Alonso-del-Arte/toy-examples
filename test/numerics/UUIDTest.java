@@ -1,10 +1,14 @@
 package numerics;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static org.example.NullProvider.provideNull;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+import static randomness.ExtendedRandom.nextInt;
 import static randomness.ExtendedRandom.nextLong;
 import static randomness.ExtendedRandom.nextPowerOfTwo;
 import static textops.TextCalculator.padLeft;
@@ -106,6 +110,28 @@ class UUIDTest {
         UUID uuidB = new UUID(highBits, lowBitsB);
         String msg = uuidA + " should not equal " + uuidB;
         assert !uuidA.equals(uuidB) : msg;
+    }
+
+    @Test
+    void testHashCode() {
+        System.out.println("hashCode");
+        int capacity = nextInt(256, 4096);
+        Set<UUID> uuids = new HashSet<>(capacity);
+        Set<Integer> hashes = new HashSet<>(capacity);
+        for (int i = 0; i < capacity; i++) {
+            long highBits = nextLong();
+            long lowBits = nextLong();
+            UUID instance = new UUID(highBits, lowBits);
+            uuids.add(instance);
+            hashes.add(instance.hashCode());
+        }
+        int size = uuids.size();
+        int minimum = 11 * size / 20;
+        int actual = hashes.size();
+        String msg = "Having generated " + size + " UUIDs, expected at least "
+                + minimum + " distinct hash codes; got " + actual;
+        assert actual >= minimum : msg;
+        System.out.println(msg);
     }
 
 }
