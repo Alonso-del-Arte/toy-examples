@@ -93,9 +93,8 @@ public class ExtendedRandom {
         return RANDOM.nextInt(origin, bound);
     }
 
-    // TODO: Write tests for this
     public static long nextLong() {
-        return 0L;
+        return RANDOM.nextLong();
     }
 
     /**
