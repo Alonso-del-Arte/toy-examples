@@ -20,10 +20,16 @@ public class UUID implements Comparable<UUID> {
     // TODO: Write tests for this
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj == null) {
             return false;
         }
-        return this.getClass().equals(obj.getClass());
+        if (!this.getClass().equals(obj.getClass())) {
+            return false;
+        }
+        return this.high == ((UUID) obj).high;
     }
 
     // TODO: Write tests for this
