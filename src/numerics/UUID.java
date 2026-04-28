@@ -7,6 +7,8 @@ package numerics;
  */
 public class UUID implements Comparable<UUID> {
 
+    private final long high, low;
+
     // TODO: Write tests for this
     @Override
     public int compareTo(UUID other) {
@@ -15,11 +17,16 @@ public class UUID implements Comparable<UUID> {
 
     @Override
     public String toString() {
-        return "00000000-0000-0000-0000-000000000000";
+        if (this.high + this.low == 0L) {
+            return "00000000-0000-0000-0000-000000000000";
+        } else {
+            return "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF";
+        }
     }
 
     public UUID(long highBits, long lowBits) {
-        //
+        this.high = highBits;
+        this.low = lowBits;
     }
 
 }
