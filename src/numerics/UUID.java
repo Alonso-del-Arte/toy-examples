@@ -35,10 +35,13 @@ public class UUID implements Comparable<UUID> {
         return this.low == other.low;
     }
 
-    // TODO: Write tests for this
     @Override
     public int hashCode() {
-        return 0;
+        int octetA = (int) (this.high >> 32) & 0xFF000000;
+        int octetB = (int) (this.high >> 16) & 0x00FF0000;
+        int octetC = (int) (this.low >> 48) & 0x0000FF00;
+        int octetD = (int) (this.low >> 16) & 0x000000FF;
+        return octetA + octetB + octetC + octetD;
     }
 
     @Override
