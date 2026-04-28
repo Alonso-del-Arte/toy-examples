@@ -97,6 +97,11 @@ public class ExtendedRandom {
         return RANDOM.nextLong();
     }
 
+    // TODO: Write tests for this
+    public static long nextPowerOfTwo() {
+        return -1L;
+    }
+
     /**
      * Gives a pseudorandomly chosen <code>BigInteger</code> instance
      * corresponding to 0 or a positive integer. This is a static wrapper for
