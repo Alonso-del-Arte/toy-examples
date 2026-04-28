@@ -1,5 +1,7 @@
 package textops;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -347,6 +349,25 @@ class TextCalculatorTest {
         String actual = TextCalculator.padLeft(expected, length, c);
         String message = "Trying to pad String of " + length
                 + " characters to length " + length + " should not change it";
+        assertEquals(expected, actual, message);
+    }
+
+    @Test
+    void testPadLeft() {
+        System.out.println("padLeft");
+        int originalLength = ExtendedRandom.nextInt(16) + 4;
+        int paddingLength = ExtendedRandom.nextInt(9) + 1;
+        int length = originalLength + paddingLength;
+        String s = ExtendedRandom.alphanumeric(originalLength);
+        Character.UnicodeBlock block = ExtendedRandom.chooseBMPBlock();
+        char ch = ExtendedRandom.chooseCharacterFromBlock(block);
+        char[] paddingChars = new char[paddingLength];
+        Arrays.fill(paddingChars, ch);
+        String padding = new String(paddingChars);
+        String expected = padding + s;
+        String actual = TextCalculator.padLeft(s, length, ch);
+        String message = "Padding \"" + s + "\" to length " + length + " with '"
+                + ch + "'";
         assertEquals(expected, actual, message);
     }
 
