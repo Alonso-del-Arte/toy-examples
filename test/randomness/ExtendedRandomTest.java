@@ -241,6 +241,7 @@ class ExtendedRandomTest {
             long diff = next - prev;
             diffs.add(diff);
             signums.add(Long.signum(diff));
+            prev = next;
         }
         assertEquals(expected, actual);
         int minimum = 80;
@@ -248,10 +249,12 @@ class ExtendedRandomTest {
         String diffMsg = "Differences should contain at least " + minimum
                 + ", got " + size;
         assert size >= minimum : diffMsg;
+        System.out.println(diffMsg);
         String signumMsg = "Signums should have positive, negative, maybe 0: "
                 + signums;
         assert signums.contains(-1) : signumMsg;
         assert signums.contains(1) : signumMsg;
+        System.out.println(signumMsg);
     }
 
     @Test
