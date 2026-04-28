@@ -86,4 +86,15 @@ class UUIDTest {
         assertEquals(someUUID, sameUUID);
     }
 
+    @Test
+    void testNotEqualDiffHighBits() {
+        long highBitsA = nextLong();
+        long highBitsB = (highBitsA >> 32) + (highBitsA << 32);
+        long lowBits = nextLong();
+        UUID uuidA = new UUID(highBitsA, lowBits);
+        UUID uuidB = new UUID(highBitsB, lowBits);
+        String msg = uuidA + " should not equal " + uuidB;
+        assert !uuidA.equals(uuidB) : msg;
+    }
+
 }
