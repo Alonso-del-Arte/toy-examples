@@ -1,5 +1,7 @@
 package numerics;
 
+import static org.example.NullProvider.provideNull;
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
@@ -50,6 +52,16 @@ class UUIDTest {
         long lowBits = nextLong();
         UUID instance = new UUID(highBits, lowBits);
         assertEquals(instance, instance);
+    }
+
+    @Test
+    void testNotEqualsNull() {
+        long highBits = nextLong();
+        long lowBits = nextLong();
+        UUID instance = new UUID(highBits, lowBits);
+        Object obj = provideNull();
+        String msg = instance + " should not equal null";
+        assert !instance.equals(obj) : msg;
     }
 
 }
