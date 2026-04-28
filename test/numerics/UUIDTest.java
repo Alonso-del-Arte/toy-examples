@@ -44,4 +44,12 @@ class UUIDTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testReferentialEquality() {
+        long highBits = nextLong();
+        long lowBits = nextLong();
+        UUID instance = new UUID(highBits, lowBits);
+        assertEquals(instance, instance);
+    }
+
 }
