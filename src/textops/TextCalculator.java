@@ -1,5 +1,7 @@
 package textops;
 
+import java.util.Arrays;
+
 public class TextCalculator {
 
     /**
@@ -116,7 +118,6 @@ public class TextCalculator {
         return "SORRY, NOT IMPLEMENTED YET";
     }
 
-    // TODO: Write tests for this
     public static String padLeft(String s, int length, char ch) {
         if (s == null) {
             throw new NullPointerException("Can't pad null String");
@@ -128,7 +129,11 @@ public class TextCalculator {
         if (s.length() >= length) {
             return s;
         }
-        return "SORRY, NOT IMPLEMENTED YET";
+        int len = length - s.length();
+        char[] chars = new char[len];
+        Arrays.fill(chars, ch);
+        String padding = new String(chars);
+        return padding + s;
     }
 
     // TODO: Write tests for this
