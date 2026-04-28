@@ -17,7 +17,6 @@ public class UUID implements Comparable<UUID> {
         return 0;
     }
 
-    // TODO: Write tests for this
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -29,7 +28,11 @@ public class UUID implements Comparable<UUID> {
         if (!this.getClass().equals(obj.getClass())) {
             return false;
         }
-        return this.high == ((UUID) obj).high;
+        UUID other = (UUID) obj;
+        if (this.high != other.high) {
+            return false;
+        }
+        return this.low == other.low;
     }
 
     // TODO: Write tests for this
