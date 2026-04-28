@@ -13,6 +13,11 @@ public class UUID implements Comparable<UUID> {
         return 0;
     }
 
+    @Override
+    public String toString() {
+        return "00000000-0000-0000-0000-000000000000";
+    }
+
     public UUID(long highBits, long lowBits) {
         //
     }
