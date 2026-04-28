@@ -93,6 +93,11 @@ public class ExtendedRandom {
         return RANDOM.nextInt(origin, bound);
     }
 
+    // TODO: Write tests for this
+    public static long nextLong() {
+        return 0L;
+    }
+
     /**
      * Gives a pseudorandomly chosen <code>BigInteger</code> instance
      * corresponding to 0 or a positive integer. This is a static wrapper for
