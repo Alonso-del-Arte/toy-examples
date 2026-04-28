@@ -76,4 +76,14 @@ class UUIDTest {
         assert !instance.equals(instanceDiffClass) : msg;
     }
 
+    @Test
+    void testEquals() {
+        System.out.println("equals");
+        long highBits = nextLong();
+        long lowBits = nextLong();
+        UUID someUUID = new UUID(highBits, lowBits);
+        UUID sameUUID = new UUID(highBits, lowBits);
+        assertEquals(someUUID, sameUUID);
+    }
+
 }
