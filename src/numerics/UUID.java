@@ -19,6 +19,15 @@ public class UUID implements Comparable<UUID> {
 
     // TODO: Write tests for this
     @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        return this.getClass().equals(obj.getClass());
+    }
+
+    // TODO: Write tests for this
+    @Override
     public int hashCode() {
         return 0;
     }
