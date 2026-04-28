@@ -17,6 +17,18 @@ public class UUID implements Comparable<UUID> {
         return 0;
     }
 
+    // TODO: Write tests for this
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+
+    // TODO: Write tests for this
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+
     @Override
     public String toString() {
         String highStr = padLeft(Long.toHexString(this.high).toUpperCase(), 16,
