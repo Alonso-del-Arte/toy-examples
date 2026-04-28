@@ -16,4 +16,12 @@ class UUIDTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testToStringFullUUID() {
+        UUID instance = new UUID(-1L, -1L);
+        String expected = "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF";
+        String actual = instance.toString();
+        assertEquals(expected, actual);
+    }
+
 }
