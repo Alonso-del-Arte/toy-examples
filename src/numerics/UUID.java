@@ -20,7 +20,7 @@ public class UUID implements Comparable<UUID> {
     // TODO: Write tests for this
     @Override
     public boolean equals(Object obj) {
-        return obj != null;
+        return this == obj;
     }
 
     // TODO: Write tests for this
