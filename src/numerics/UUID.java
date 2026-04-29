@@ -1,5 +1,8 @@
 package numerics;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static textops.TextCalculator.padLeft;
 
 /**
@@ -8,6 +11,10 @@ import static textops.TextCalculator.padLeft;
  * @author Alonso del Arte
  */
 public class UUID implements Comparable<UUID> {
+
+    // TODO: Write tests for this
+    public static final Pattern REGULAR_EXPRESSION
+            = Pattern.compile("SORRY, NOT IMPLEMENTED YET");
 
     private final long high, low;
 
