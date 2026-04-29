@@ -10,6 +10,7 @@ import static org.example.NullProvider.provideNull;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+import static randomness.ExtendedRandom.alphanumeric;
 import static randomness.ExtendedRandom.nextInt;
 import static randomness.ExtendedRandom.nextLong;
 import static randomness.ExtendedRandom.nextPowerOfTwo;
@@ -141,6 +142,18 @@ class UUIDTest {
                 + minimum + " distinct hash codes; got " + actual;
         assert actual >= minimum : msg;
         System.out.println(msg);
+    }
+
+    @Test
+    void testParseUUIDRejectsEmptyString() {
+        String message = "String \"\" should cause an exception";
+        Throwable t = assertThrows(NumberFormatException.class, () -> {
+            UUID badResult = UUID.parseUUID("");
+            System.out.println(message + ", not given result " + badResult);
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
     }
 
 }
