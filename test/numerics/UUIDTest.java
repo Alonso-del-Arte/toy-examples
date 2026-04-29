@@ -19,9 +19,8 @@ class UUIDTest {
 
     @Test
     void testRegularExpressionConstant() {
-        String regex = "[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}";
-        Pattern expected = Pattern.compile(regex);
-        Pattern actual = UUID.REGULAR_EXPRESSION;
+        String expected = "[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}";
+        String actual = UUID.REGULAR_EXPRESSION.toString();
         assertEquals(expected, actual);
     }
 
