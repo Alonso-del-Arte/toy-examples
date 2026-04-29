@@ -1,5 +1,6 @@
 package numerics;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -149,6 +150,22 @@ class UUIDTest {
         String message = "String \"\" should cause an exception";
         Throwable t = assertThrows(NumberFormatException.class, () -> {
             UUID badResult = UUID.parseUUID("");
+            System.out.println(message + ", not given result " + badResult);
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+    }
+
+    @Test
+    void testParseUUIDRejectsBlankString() {
+        int len = nextInt(4, 16);
+        char[] spaces = new char[len];
+        Arrays.fill(spaces, ' ');
+        String s = new String(spaces);
+        String message = "String \"" + s + "\" should cause an exception";
+        Throwable t = assertThrows(NumberFormatException.class, () -> {
+            UUID badResult = UUID.parseUUID(s);
             System.out.println(message + ", not given result " + badResult);
         }, message);
         String excMsg = t.getMessage();
