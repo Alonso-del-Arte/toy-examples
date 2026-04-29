@@ -17,11 +17,12 @@ import static textops.TextCalculator.padLeft;
 
 class UUIDTest {
 
+    public static final String UUID_REG_EXP
+            = "[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}";
+
     @Test
     void testRegularExpressionConstant() {
-        String expected = "[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}";
-        String actual = UUID.REGULAR_EXPRESSION.toString();
-        assertEquals(expected, actual);
+        assertEquals(UUID_REG_EXP, UUID.REGULAR_EXPRESSION.toString());
     }
 
     @Test
