@@ -2,6 +2,8 @@ package numerics;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.example.NullProvider.provideNull;
 
@@ -16,6 +18,14 @@ import static textops.TextCalculator.padLeft;
 class UUIDTest {
 
     @Test
+    void testRegularExpressionConstant() {
+        String regex = "[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}";
+        Pattern expected = Pattern.compile(regex);
+        Pattern actual = UUID.REGULAR_EXPRESSION;
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testToStringNullUUID() {
         UUID instance = new UUID(0L, 0L);
         String expected = "00000000-0000-0000-0000-000000000000";
@@ -26,7 +36,6 @@ class UUIDTest {
     @Test
     void testToStringFullUUID() {
         UUID instance = new UUID(-1L, -1L);
-        //                 01234567 8901 2345 6789 012345678901
         String expected = "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF";
         String actual = instance.toString();
         assertEquals(expected, actual);
