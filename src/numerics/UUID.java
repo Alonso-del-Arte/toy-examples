@@ -12,9 +12,10 @@ import static textops.TextCalculator.padLeft;
  */
 public class UUID implements Comparable<UUID> {
 
-    // TODO: Write tests for this
-    public static final Pattern REGULAR_EXPRESSION
-            = Pattern.compile("SORRY, NOT IMPLEMENTED YET");
+    private static final String REG_EXP_STR
+            = "[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}";
+
+    public static final Pattern REGULAR_EXPRESSION = Pattern.compile(REG_EXP_STR);
 
     private final long high, low;
 
