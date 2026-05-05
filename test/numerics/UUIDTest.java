@@ -3,15 +3,12 @@ package numerics;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static org.example.NullProvider.provideNull;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import static randomness.ExtendedRandom.alphanumeric;
 import static randomness.ExtendedRandom.nextInt;
 import static randomness.ExtendedRandom.nextLong;
 import static randomness.ExtendedRandom.nextPowerOfTwo;
@@ -146,10 +143,10 @@ class UUIDTest {
     }
 
     @Test
-    void testParseUUIDRejectsEmptyString() {
+    void testParseRejectsEmptyString() {
         String message = "String \"\" should cause an exception";
         Throwable t = assertThrows(NumberFormatException.class, () -> {
-            UUID badResult = UUID.parseUUID("");
+            UUID badResult = UUID.parse("");
             System.out.println(message + ", not given result " + badResult);
         }, message);
         String excMsg = t.getMessage();
@@ -158,14 +155,14 @@ class UUIDTest {
     }
 
     @Test
-    void testParseUUIDRejectsBlankString() {
+    void testParseRejectsBlankString() {
         int len = nextInt(4, 16);
         char[] spaces = new char[len];
         Arrays.fill(spaces, ' ');
         String s = new String(spaces);
         String message = "String \"" + s + "\" should cause an exception";
         Throwable t = assertThrows(NumberFormatException.class, () -> {
-            UUID badResult = UUID.parseUUID(s);
+            UUID badResult = UUID.parse(s);
             System.out.println(message + ", not given result " + badResult);
         }, message);
         String excMsg = t.getMessage();

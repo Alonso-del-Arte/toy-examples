@@ -1,6 +1,5 @@
 package numerics;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static textops.TextCalculator.padLeft;
@@ -20,7 +19,7 @@ public class UUID implements Comparable<UUID> {
     private final long high, low;
 
     // TODO: Write tests for this
-    public static UUID parseUUID(String s) {
+    public static UUID parse(String s) {
         if (s.isBlank()) {
             String excMsg = "Not a valid UUID";
             throw new NumberFormatException(excMsg);
