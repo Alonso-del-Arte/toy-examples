@@ -170,4 +170,15 @@ class UUIDTest {
         assert !excMsg.isBlank() : "Exception message should not be blank";
     }
 
+    @Test
+    void testParse() {
+        System.out.println("parse");
+        long highBits = nextLong();
+        long lowBits = nextLong();
+        UUID expected = new UUID(highBits, lowBits);
+        String s = expected.toString();
+        UUID actual = UUID.parse(s);
+        assertEquals(expected, actual);
+    }
+
 }
