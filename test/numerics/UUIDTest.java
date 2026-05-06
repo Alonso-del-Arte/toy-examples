@@ -181,4 +181,14 @@ class UUIDTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testParseLowercase() {
+        long highBits = nextLong();
+        long lowBits = nextLong();
+        UUID expected = new UUID(highBits, lowBits);
+        String s = expected.toString().toLowerCase();
+        UUID actual = UUID.parse(s);
+        assertEquals(expected, actual);
+    }
+
 }
