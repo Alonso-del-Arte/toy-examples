@@ -1,6 +1,5 @@
 package numerics;
 
-import java.math.BigInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,13 +25,14 @@ public class UUID implements Comparable<UUID> {
             String excMsg = "Not a valid UUID";
             throw new NumberFormatException(excMsg);
         }
-        Matcher matcher = REGULAR_EXPRESSION.matcher(s.toUpperCase());
+        String preprocessed = s.toUpperCase();
+        Matcher matcher = REGULAR_EXPRESSION.matcher(preprocessed);
         if (matcher.matches()) {
-            String intermediate = s.replace("-", "");
-            BigInteger high = new BigInteger(intermediate.substring(0, 16), 16);
-            BigInteger low = new BigInteger(intermediate.substring(16), 16);
-            long highBits = high.longValue();
-            long lowBits = low.longValue();
+            String intermediate = preprocessed.replace("-", "");
+            long highBits
+                    = Long.parseUnsignedLong(intermediate.substring(0, 16), 16);
+            long lowBits
+                    = Long.parseUnsignedLong(intermediate.substring(16), 16);
             return new UUID(highBits, lowBits);
         }
         return new UUID(0L, 0L);
