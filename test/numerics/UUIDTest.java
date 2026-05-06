@@ -171,10 +171,30 @@ class UUIDTest {
     }
 
     @Test
+    void testParseNegativeHigh() {
+        long highBits = nextLong() | Long.MIN_VALUE;
+        long lowBits = nextLong() & Long.MAX_VALUE;
+        UUID expected = new UUID(highBits, lowBits);
+        String s = expected.toString();
+        UUID actual = UUID.parse(s);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testParseNegativeLow() {
+        long highBits = nextLong() & Long.MAX_VALUE;
+        long lowBits = nextLong() | Long.MIN_VALUE;
+        UUID expected = new UUID(highBits, lowBits);
+        String s = expected.toString();
+        UUID actual = UUID.parse(s);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testParse() {
         System.out.println("parse");
-        long highBits = nextLong();
-        long lowBits = nextLong();
+        long highBits = nextLong() & Long.MAX_VALUE;
+        long lowBits = nextLong() & Long.MAX_VALUE;
         UUID expected = new UUID(highBits, lowBits);
         String s = expected.toString();
         UUID actual = UUID.parse(s);
