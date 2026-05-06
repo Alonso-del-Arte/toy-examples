@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -29,17 +30,22 @@ public final class KeystrokeReporter extends JFrame implements ActionListener,
 
     @Override
     public void keyReleased(KeyEvent event) {
+        this.keyId.setText(KeyEvent.getKeyText(event.getKeyCode()));
         this.eventId.setText("A key has been released");
+        this.modifiers.setText(InputEvent.getModifiersExText(event.getModifiersEx()));
     }
 
     @Override
     public void keyPressed(KeyEvent event) {
+        this.keyId.setText(KeyEvent.getKeyText(event.getKeyCode()));
         this.eventId.setText("A key has been pressed");
     }
 
     @Override
     public void keyTyped(KeyEvent event) {
+        this.keyId.setText(KeyEvent.getKeyText(event.getKeyCode()));
         this.eventId.setText("A key has been typed");
+        this.modifiers.setText(InputEvent.getModifiersExText(event.getModifiersEx()));
     }
 
     public KeystrokeReporter() {
