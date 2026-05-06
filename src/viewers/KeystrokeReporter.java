@@ -17,11 +17,11 @@ public final class KeystrokeReporter extends JFrame implements ActionListener,
 
     private static final int DEFAULT_COLUMNS = 20;
 
-    private JLabel keyId = new JLabel();
+    private final JLabel keyId = new JLabel();
 
-    private JLabel eventId = new JLabel();
+    private final JLabel eventId = new JLabel();
 
-    private JLabel modifiers = new JLabel();
+    private final JLabel modifiers = new JLabel();
 
     @Override
     public void actionPerformed(ActionEvent event) {
