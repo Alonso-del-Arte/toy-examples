@@ -26,7 +26,7 @@ public class UUID implements Comparable<UUID> {
             String excMsg = "Not a valid UUID";
             throw new NumberFormatException(excMsg);
         }
-        Matcher matcher = REGULAR_EXPRESSION.matcher(s);
+        Matcher matcher = REGULAR_EXPRESSION.matcher(s.toUpperCase());
         if (matcher.matches()) {
             String intermediate = s.replace("-", "");
             BigInteger high = new BigInteger(intermediate.substring(0, 16), 16);
