@@ -18,6 +18,8 @@ public final class KeystrokeReporter extends JFrame implements ActionListener,
 
     private JLabel keyId = new JLabel();
 
+    private JLabel eventId = new JLabel();
+
     private JLabel modifiers = new JLabel();
 
     @Override
@@ -27,21 +29,22 @@ public final class KeystrokeReporter extends JFrame implements ActionListener,
 
     @Override
     public void keyReleased(KeyEvent event) {
-        this.keyId.setText("A key has been released");
+        this.eventId.setText("A key has been released");
     }
 
     @Override
     public void keyPressed(KeyEvent event) {
-        this.keyId.setText("A key has been pressed");
+        this.eventId.setText("A key has been pressed");
     }
 
     @Override
     public void keyTyped(KeyEvent event) {
-        this.keyId.setText("A key has been typed");
+        this.eventId.setText("A key has been typed");
     }
 
     public KeystrokeReporter() {
         this.add(this.keyId, BorderLayout.PAGE_START);
+        this.add(this.eventId, BorderLayout.CENTER);
         this.add(this.modifiers, BorderLayout.PAGE_END);
     }
 
