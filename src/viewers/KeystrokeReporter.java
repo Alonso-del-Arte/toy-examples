@@ -17,35 +17,42 @@ public final class KeystrokeReporter extends JFrame implements ActionListener,
 
     private static final int DEFAULT_COLUMNS = 20;
 
-    private final JLabel keyId = new JLabel();
+    final JLabel keyId = new JLabel();
 
-    private final JLabel eventId = new JLabel();
+    final JLabel eventId = new JLabel();
 
-    private final JLabel modifiers = new JLabel();
+    final JLabel modifiers = new JLabel();
 
     @Override
     public void actionPerformed(ActionEvent event) {
         //
     }
 
+    // TODO: Write tests for this
     @Override
     public void keyReleased(KeyEvent event) {
-        this.keyId.setText(KeyEvent.getKeyText(event.getKeyCode()));
+        this.keyId.setText(KeyEvent.getKeyText(event.getKeyCode()) + " ???");
         this.eventId.setText("A key has been released");
-        this.modifiers.setText(InputEvent.getModifiersExText(event.getModifiersEx()));
+        this.modifiers.setText(InputEvent.getModifiersExText(event
+                .getModifiersEx()) + " ???");
     }
 
+    // TODO: Write tests for this
     @Override
     public void keyPressed(KeyEvent event) {
-        this.keyId.setText(KeyEvent.getKeyText(event.getKeyCode()));
+        this.keyId.setText(KeyEvent.getKeyText(event.getKeyCode()) + " ???");
         this.eventId.setText("A key has been pressed");
+        this.modifiers.setText(InputEvent.getModifiersExText(event
+                .getModifiersEx()) + " ???");
     }
 
+    // TODO: Write tests for this
     @Override
     public void keyTyped(KeyEvent event) {
         this.keyId.setText(KeyEvent.getKeyText(event.getKeyCode()));
         this.eventId.setText("A key has been typed");
-        this.modifiers.setText(InputEvent.getModifiersExText(event.getModifiersEx()));
+        this.modifiers.setText(InputEvent.getModifiersExText(event
+                .getModifiersEx()) + " ???");
     }
 
     public KeystrokeReporter() {
