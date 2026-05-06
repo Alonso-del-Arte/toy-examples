@@ -26,15 +26,15 @@ public class UUID implements Comparable<UUID> {
             String excMsg = "Not a valid UUID";
             throw new NumberFormatException(excMsg);
         }
-//        Matcher matcher = REGULAR_EXPRESSION.matcher(s.toUpperCase());
-//        if (matcher.matches()) {
-//            String intermediate = s.replace("-", "");
-//            BigInteger high = new BigInteger(intermediate.substring(0, 16), 16);
-//            BigInteger low = new BigInteger(intermediate.substring(16), 16);
-//            long highBits = high.longValue();
-//            long lowBits = low.longValue();
-//            return new UUID(highBits, lowBits);
-//        }
+        Matcher matcher = REGULAR_EXPRESSION.matcher(s.toUpperCase());
+        if (matcher.matches()) {
+            String intermediate = s.replace("-", "");
+            BigInteger high = new BigInteger(intermediate.substring(0, 16), 16);
+            BigInteger low = new BigInteger(intermediate.substring(16), 16);
+            long highBits = high.longValue();
+            long lowBits = low.longValue();
+            return new UUID(highBits, lowBits);
+        }
         return new UUID(0L, 0L);
     }
 
