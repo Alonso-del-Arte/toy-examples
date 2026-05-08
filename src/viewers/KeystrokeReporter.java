@@ -32,7 +32,7 @@ public final class KeystrokeReporter extends JFrame implements ActionListener,
     @Override
     public void keyReleased(KeyEvent event) {
         this.keyId.setText(KeyEvent.getKeyText(event.getKeyCode()) + " ???");
-        this.eventId.setText("A key has been released");
+        this.eventId.setText("A key has been released ???");
         this.modifiers.setText(InputEvent.getModifiersExText(event
                 .getModifiersEx()) + " ???");
     }
@@ -41,7 +41,7 @@ public final class KeystrokeReporter extends JFrame implements ActionListener,
     @Override
     public void keyPressed(KeyEvent event) {
         this.keyId.setText(KeyEvent.getKeyText(event.getKeyCode()) + " ???");
-        this.eventId.setText("A key has been pressed");
+        this.eventId.setText("A key has been pressed ???");
         this.modifiers.setText(InputEvent.getModifiersExText(event
                 .getModifiersEx()) + " ???");
     }
@@ -50,7 +50,7 @@ public final class KeystrokeReporter extends JFrame implements ActionListener,
     @Override
     public void keyTyped(KeyEvent event) {
         this.keyId.setText(KeyEvent.getKeyText(event.getKeyCode()));
-        this.eventId.setText("A key has been typed");
+        this.eventId.setText("A key has been typed ???");
         this.modifiers.setText(InputEvent.getModifiersExText(event
                 .getModifiersEx()) + " ???");
     }
