@@ -8,7 +8,7 @@ public class TextCalculator {
 
     // TODO: Write tests for this
     public static Range blockRange(Character.UnicodeBlock block) {
-        return new Range(0, 1);
+        return new Range(32, 126);
     }
 
     /**
