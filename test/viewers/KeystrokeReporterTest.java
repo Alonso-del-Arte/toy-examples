@@ -28,12 +28,8 @@ class KeystrokeReporterTest {
         int keyCode = 0;
         char keyChar
                 = chooseCharacterFromBlock(Character.UnicodeBlock.BASIC_LATIN);
-        return new KeyEvent(new MockComponent(), keyEventType, when, modifiers,
+        return new KeyEvent(new Component() {}, keyEventType, when, modifiers,
                 keyCode, keyChar);
-    }
-
-    private static class MockComponent extends Component {
-
     }
 
 }
