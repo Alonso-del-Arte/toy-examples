@@ -3,10 +3,9 @@ package randomness;
 import arithmetic.Range;
 import fractions.Fraction;
 
+import java.awt.Color;
 import static java.lang.Character.UnicodeBlock;
 import static java.lang.Character.UnicodeBlock.*;
-
-import java.awt.Color;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Iterator;
