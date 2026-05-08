@@ -1,8 +1,15 @@
 package textops;
 
+import arithmetic.Range;
+
 import java.util.Arrays;
 
 public class TextCalculator {
+
+    // TODO: Write tests for this
+    public static Range blockRange(Character.UnicodeBlock block) {
+        return new Range(0, 1);
+    }
 
     /**
      * Checks whether a character is a Unicode high surrogate.
