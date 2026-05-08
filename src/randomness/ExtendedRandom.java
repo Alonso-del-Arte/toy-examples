@@ -1,5 +1,6 @@
 package randomness;
 
+import arithmetic.Range;
 import fractions.Fraction;
 
 import static java.lang.Character.UnicodeBlock;
@@ -80,9 +81,10 @@ public class ExtendedRandom {
         return RANDOM.nextInt(bound) * signAdjust;
     }
 
-//    public static int nextInt(Range range) {
-//        return Integer.MIN_VALUE;
-//    }
+    // TODO: Write tests for this
+    public static int nextInt(Range range) {
+        return Integer.MIN_VALUE;
+    }
 
     // TODO: Write tests for negative origin, bound
     public static int nextInt(int origin, int bound) {
@@ -146,7 +148,7 @@ public class ExtendedRandom {
     public static UUID nextUUID() {
         return new UUID(0L, 0L);
     }
-    
+
     public static String alphanumeric(int length) {
         if (length < 1) {
             String excMsg = "Length " + length + " is not valid";
