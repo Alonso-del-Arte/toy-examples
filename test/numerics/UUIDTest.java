@@ -143,6 +143,18 @@ class UUIDTest {
     }
 
     @Test
+    void testParseRejectsNullString() {
+        String message = "Null String should cause an exception";
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            UUID badResult = UUID.parse(null);
+            System.out.println(message + ", not give result " + badResult);
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+    }
+
+    @Test
     void testParseRejectsEmptyString() {
         String message = "String \"\" should cause an exception";
         Throwable t = assertThrows(NumberFormatException.class, () -> {
