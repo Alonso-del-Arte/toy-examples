@@ -8,6 +8,9 @@ public class TextCalculator {
 
     // TODO: Write tests for this
     public static Range blockRange(Character.UnicodeBlock block) {
+        if (block.equals(Character.UnicodeBlock.LATIN_1_SUPPLEMENT)) {
+            return new Range(160, 255);
+        }
         return new Range(32, 126);
     }
 
