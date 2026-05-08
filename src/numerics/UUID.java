@@ -22,7 +22,7 @@ public class UUID implements Comparable<UUID> {
     // TODO: Write tests for this
     public static UUID parse(String s) {
         if (s == null) {
-            return new UUID(-1L, -1L);
+            throw new NullPointerException("Null String is not valid");
         }
         if (s.isBlank()) {
             String excMsg = "Not a valid UUID";
