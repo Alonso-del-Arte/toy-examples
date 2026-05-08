@@ -21,6 +21,9 @@ public class UUID implements Comparable<UUID> {
 
     // TODO: Write tests for this
     public static UUID parse(String s) {
+        if (s == null) {
+            return new UUID(-1L, -1L);
+        }
         if (s.isBlank()) {
             String excMsg = "Not a valid UUID";
             throw new NumberFormatException(excMsg);
