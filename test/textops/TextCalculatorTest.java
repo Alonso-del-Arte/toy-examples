@@ -1,5 +1,7 @@
 package textops;
 
+import arithmetic.Range;
+
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
@@ -20,6 +22,15 @@ class TextCalculatorTest {
 
     public static final String[] PLURAL_NOUNS = {"Armadillos", "Bullfrogs",
             "Clerks", "Investigations", "Jokes", "Kangaroos", "Llamas"};
+
+    @Test
+    void testBlockRange() {
+        System.out.println("blockRange");
+        Character.UnicodeBlock block = Character.UnicodeBlock.BASIC_LATIN;
+        Range expected = new Range(0x0020, 0x007E);
+        Range actual = TextCalculator.blockRange(block);
+        assertEquals(expected, actual);
+    }
 
     @Test
     void testIsHighSurrogate() {
