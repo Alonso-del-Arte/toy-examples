@@ -15,6 +15,7 @@ import java.util.Random;
 import java.util.Set;
 
 import numerics.ComplexNumber;
+import numerics.UUID;
 
 public class ExtendedRandom {
 
@@ -141,6 +142,11 @@ public class ExtendedRandom {
         return new ComplexNumber(0.0, 0.0);
     }
 
+    // TODO: Write tests for this
+    public static UUID nextUUID() {
+        return new UUID(0L, 0L);
+    }
+    
     public static String alphanumeric(int length) {
         if (length < 1) {
             String excMsg = "Length " + length + " is not valid";
