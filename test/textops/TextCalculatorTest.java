@@ -51,6 +51,15 @@ class TextCalculatorTest {
     }
 
     @Test
+    void testBlockRangeLatinExtendedB() {
+        Character.UnicodeBlock block
+                = Character.UnicodeBlock.LATIN_EXTENDED_B;
+        Range expected = new Range(0x0180, 0x024F);
+        Range actual = TextCalculator.blockRange(block);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testIsHighSurrogate() {
         System.out.println("isHighSurrogate");
         int span = 0xDC00 - 0xD800;
