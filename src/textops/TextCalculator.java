@@ -3,19 +3,27 @@ package textops;
 import arithmetic.Range;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TextCalculator {
 
+    private static Map<Character.UnicodeBlock, Range> BLOCK_RANGES
+            = new HashMap<>();
+
+    static {
+        BLOCK_RANGES.put(Character.UnicodeBlock.LATIN_1_SUPPLEMENT,
+                new Range(160, 255));
+        BLOCK_RANGES.put(Character.UnicodeBlock.LATIN_EXTENDED_A,
+                new Range(256, 383));
+        BLOCK_RANGES.put(Character.UnicodeBlock.LATIN_EXTENDED_B,
+                new Range(384, 591));
+    }
+
     // TODO: Write tests for this
     public static Range blockRange(Character.UnicodeBlock block) {
-        if (block.equals(Character.UnicodeBlock.LATIN_EXTENDED_B)) {
-            return new Range(384, 591);
-        }
-        if (block.equals(Character.UnicodeBlock.LATIN_EXTENDED_A)) {
-            return new Range(256, 383);
-        }
-        if (block.equals(Character.UnicodeBlock.LATIN_1_SUPPLEMENT)) {
-            return new Range(160, 255);
+        if (BLOCK_RANGES.containsKey(block)) {
+            return BLOCK_RANGES.get(block);
         }
         return new Range(32, 126);
     }
