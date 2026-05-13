@@ -50,13 +50,14 @@ Temporary Items
 .apdisk
 
 # Files and directories with API keys, IAM usernames and passwords, etc.
-src/secrets
-test/secrets
+src/secrets/
+test/secrets/
 
 # Strictly for drafting
 scratchpad.txt
-src/draft
-test/draft
+src/draft/
+test/draft/
 
 # Miscellaneous
 localdevicenotes.txt
+tempnotes.md
