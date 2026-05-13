@@ -20,6 +20,8 @@ public class TextCalculator {
                 new Range(384, 591));
         BLOCK_RANGES.put(Character.UnicodeBlock.IPA_EXTENSIONS,
                 new Range(592, 687));
+        BLOCK_RANGES.put(Character.UnicodeBlock.SPACING_MODIFIER_LETTERS,
+                new Range(688, 767));
     }
 
     // TODO: Write tests for this
