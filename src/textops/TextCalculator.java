@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class TextCalculator {
 
-    private static Map<Character.UnicodeBlock, Range> BLOCK_RANGES
+    private static final Map<Character.UnicodeBlock, Range> BLOCK_RANGES
             = new HashMap<>();
 
     static {
