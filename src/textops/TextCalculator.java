@@ -18,6 +18,8 @@ public class TextCalculator {
                 new Range(256, 383));
         BLOCK_RANGES.put(Character.UnicodeBlock.LATIN_EXTENDED_B,
                 new Range(384, 591));
+        BLOCK_RANGES.put(Character.UnicodeBlock.IPA_EXTENSIONS,
+                new Range(592, 687));
     }
 
     // TODO: Write tests for this
