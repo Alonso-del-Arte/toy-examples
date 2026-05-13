@@ -22,6 +22,8 @@ public class TextCalculator {
                 new Range(592, 687));
         BLOCK_RANGES.put(Character.UnicodeBlock.SPACING_MODIFIER_LETTERS,
                 new Range(688, 767));
+        BLOCK_RANGES.put(Character.UnicodeBlock.COMBINING_DIACRITICAL_MARKS,
+                new Range(768, 879));
     }
 
     // TODO: Write tests for this
