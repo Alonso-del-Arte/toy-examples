@@ -24,6 +24,7 @@ public class TextCalculator {
                 new Range(688, 767));
         BLOCK_RANGES.put(Character.UnicodeBlock.COMBINING_DIACRITICAL_MARKS,
                 new Range(768, 879));
+        BLOCK_RANGES.put(Character.UnicodeBlock.GREEK, new Range(880, 1023));
     }
 
     // TODO: Write tests for this
