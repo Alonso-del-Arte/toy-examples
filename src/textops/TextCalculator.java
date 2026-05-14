@@ -38,6 +38,8 @@ public class TextCalculator {
                 new Range(1872, 1919));
         BLOCK_RANGES.put(Character.UnicodeBlock.THAANA, new Range(1920, 1969));
         BLOCK_RANGES.put(Character.UnicodeBlock.NKO, new Range(1984, 2047));
+        BLOCK_RANGES.put(Character.UnicodeBlock.SAMARITAN,
+                new Range(2048, 2110));
     }
 
     // TODO: Write tests for this
