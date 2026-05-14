@@ -33,6 +33,7 @@ public class TextCalculator {
                 new Range(1329, 1423));
         BLOCK_RANGES.put(Character.UnicodeBlock.HEBREW, new Range(1425, 1524));
         BLOCK_RANGES.put(Character.UnicodeBlock.ARABIC, new Range(1536, 1791));
+        BLOCK_RANGES.put(Character.UnicodeBlock.SYRIAC, new Range(1792, 1871));
     }
 
     // TODO: Write tests for this
