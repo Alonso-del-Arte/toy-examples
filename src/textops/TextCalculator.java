@@ -41,7 +41,10 @@ public class TextCalculator {
         BLOCK_RANGES.put(Character.UnicodeBlock.SAMARITAN,
                 new Range(2048, 2110));
         BLOCK_RANGES.put(Character.UnicodeBlock.MANDAIC, new Range(2112, 2142));
-        BLOCK_RANGES.put(Character.UnicodeBlock.SYRIAC_SUPPLEMENT, new Range(2144, 2154));
+        BLOCK_RANGES.put(Character.UnicodeBlock.SYRIAC_SUPPLEMENT,
+                new Range(2144, 2154));
+        BLOCK_RANGES.put(Character.UnicodeBlock.ARABIC_EXTENDED_A,
+                new Range(2208, 2303));
     }
 
     // TODO: Write tests for this
