@@ -103,6 +103,15 @@ class TextCalculatorTest {
     }
 
     @Test
+    void testBlockRangeCyrillicSupplement() {
+        Character.UnicodeBlock block
+                = Character.UnicodeBlock.CYRILLIC_SUPPLEMENTARY;
+        Range expected = new Range(0x0500, 0x052F);
+        Range actual = TextCalculator.blockRange(block);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testIsHighSurrogate() {
         System.out.println("isHighSurrogate");
         int span = 0xDC00 - 0xD800;
