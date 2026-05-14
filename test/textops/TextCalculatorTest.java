@@ -192,6 +192,14 @@ class TextCalculatorTest {
     }
 
     @Test
+    void testBlockRangeArabicExtendedB() {
+        Character.UnicodeBlock block = Character.UnicodeBlock.ARABIC_EXTENDED_B;
+        Range expected = new Range(0x0870, 0x089F);
+        Range actual = TextCalculator.blockRange(block);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testBlockRangeArabicExtendedA() {
         Character.UnicodeBlock block = Character.UnicodeBlock.ARABIC_EXTENDED_A;
         Range expected = new Range(0x08A0, 0x08FF);
