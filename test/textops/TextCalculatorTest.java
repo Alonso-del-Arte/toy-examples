@@ -152,6 +152,14 @@ class TextCalculatorTest {
     }
 
     @Test
+    void testBlockRangeThaana() {
+        Character.UnicodeBlock block = Character.UnicodeBlock.THAANA;
+        Range expected = new Range(0x0780, 0x07B1);
+        Range actual = TextCalculator.blockRange(block);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testIsHighSurrogate() {
         System.out.println("isHighSurrogate");
         int span = 0xDC00 - 0xD800;
