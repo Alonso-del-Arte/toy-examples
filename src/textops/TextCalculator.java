@@ -36,6 +36,7 @@ public class TextCalculator {
         BLOCK_RANGES.put(Character.UnicodeBlock.SYRIAC, new Range(1792, 1871));
         BLOCK_RANGES.put(Character.UnicodeBlock.ARABIC_SUPPLEMENT,
                 new Range(1872, 1919));
+        BLOCK_RANGES.put(Character.UnicodeBlock.THAANA, new Range(1920, 1969));
     }
 
     // TODO: Write tests for this
