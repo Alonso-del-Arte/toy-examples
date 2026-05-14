@@ -120,6 +120,14 @@ class TextCalculatorTest {
     }
 
     @Test
+    void testBlockRangeHebrew() {
+        Character.UnicodeBlock block = Character.UnicodeBlock.HEBREW;
+        Range expected = new Range(0x0591, 0x05F4);
+        Range actual = TextCalculator.blockRange(block);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testIsHighSurrogate() {
         System.out.println("isHighSurrogate");
         int span = 0xDC00 - 0xD800;
