@@ -40,6 +40,7 @@ public class TextCalculator {
         BLOCK_RANGES.put(Character.UnicodeBlock.NKO, new Range(1984, 2047));
         BLOCK_RANGES.put(Character.UnicodeBlock.SAMARITAN,
                 new Range(2048, 2110));
+        BLOCK_RANGES.put(Character.UnicodeBlock.MANDAIC, new Range(2112, 2142));
     }
 
     // TODO: Write tests for this
