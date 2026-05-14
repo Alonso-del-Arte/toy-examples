@@ -27,6 +27,8 @@ public class TextCalculator {
         BLOCK_RANGES.put(Character.UnicodeBlock.GREEK, new Range(880, 1023));
         BLOCK_RANGES.put(Character.UnicodeBlock.CYRILLIC,
                 new Range(1024, 1279));
+        BLOCK_RANGES.put(Character.UnicodeBlock.CYRILLIC_SUPPLEMENTARY,
+                new Range(1280, 1327));
     }
 
     // TODO: Write tests for this
