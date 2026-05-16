@@ -224,6 +224,14 @@ class TextCalculatorTest {
     }
 
     @Test
+    void testBlockRangeGurmukhi() {
+        Character.UnicodeBlock block = Character.UnicodeBlock.GURMUKHI;
+        Range expected = new Range(0x0A01, 0x0A76);
+        Range actual = TextCalculator.blockRange(block);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testIsHighSurrogate() {
         System.out.println("isHighSurrogate");
         int span = 0xDC00 - 0xD800;
