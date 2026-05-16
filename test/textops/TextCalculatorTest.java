@@ -208,6 +208,14 @@ class TextCalculatorTest {
     }
 
     @Test
+    void testBlockRangeDevanagari() {
+        Character.UnicodeBlock block = Character.UnicodeBlock.DEVANAGARI;
+        Range expected = new Range(0x0900, 0x097F);
+        Range actual = TextCalculator.blockRange(block);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testIsHighSurrogate() {
         System.out.println("isHighSurrogate");
         int span = 0xDC00 - 0xD800;
