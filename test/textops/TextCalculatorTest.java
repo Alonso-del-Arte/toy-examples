@@ -232,6 +232,14 @@ class TextCalculatorTest {
     }
 
     @Test
+    void testBlockRangeGujarati() {
+        Character.UnicodeBlock block = Character.UnicodeBlock.GUJARATI;
+        Range expected = new Range(0x0A81, 0x0AFF);
+        Range actual = TextCalculator.blockRange(block);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testIsHighSurrogate() {
         System.out.println("isHighSurrogate");
         int span = 0xDC00 - 0xD800;
