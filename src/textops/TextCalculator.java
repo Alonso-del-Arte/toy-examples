@@ -50,6 +50,8 @@ public class TextCalculator {
         BLOCK_RANGES.put(Character.UnicodeBlock.DEVANAGARI,
                 new Range(2304, 2431));
         BLOCK_RANGES.put(Character.UnicodeBlock.BENGALI, new Range(2432, 2558));
+        BLOCK_RANGES.put(Character.UnicodeBlock.GURMUKHI,
+                new Range(2561, 2678));
     }
 
     // TODO: Write tests for this
