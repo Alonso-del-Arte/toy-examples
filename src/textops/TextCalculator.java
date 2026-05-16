@@ -49,6 +49,7 @@ public class TextCalculator {
                 new Range(2208, 2303));
         BLOCK_RANGES.put(Character.UnicodeBlock.DEVANAGARI,
                 new Range(2304, 2431));
+        BLOCK_RANGES.put(Character.UnicodeBlock.BENGALI, new Range(2432, 2558));
     }
 
     // TODO: Write tests for this
