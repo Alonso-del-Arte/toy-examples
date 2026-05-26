@@ -20,6 +20,16 @@ public class UUID implements Comparable<UUID> {
     private final long high, low;
 
     // TODO: Write tests for this
+    public long getHighBits() {
+        return (this.high >> 7);
+    }
+
+    // TODO: Write tests for this
+    public long getLowBits() {
+        return (this.low >> 8);
+    }
+
+    // TODO: Write tests for this
     public static UUID parse(String s) {
         if (s == null) {
             throw new NullPointerException("Null String is not valid");
