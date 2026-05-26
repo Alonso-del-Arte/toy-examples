@@ -153,6 +153,16 @@ class UUIDTest {
     }
 
     @Test
+    public void testGetLowBits() {
+        System.out.println("getLowBits");
+        long expected = nextLong();
+        UUID instance = new UUID(nextLong(), expected);
+        long actual = instance.getLowBits();
+        String message = "Getting low bits of " + instance;
+        assertEquals(expected, actual, message);
+    }
+
+    @Test
     void testParseRejectsNullString() {
         String message = "Null String should cause an exception";
         Throwable t = assertThrows(NullPointerException.class, () -> {
