@@ -145,7 +145,7 @@ public class ExtendedRandom {
 
     // TODO: Write tests for this
     public static UUID nextUUID() {
-        return new UUID(0L, 0L);
+        return new UUID(16384L, 0L);
     }
 
     public static String alphanumeric(int length) {
