@@ -19,9 +19,8 @@ public class UUID implements Comparable<UUID> {
 
     private final long high, low;
 
-    // TODO: Write tests for this
     public long getHighBits() {
-        return (this.high >> 7);
+        return this.high;
     }
 
     // TODO: Write tests for this
