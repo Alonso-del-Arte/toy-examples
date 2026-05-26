@@ -332,6 +332,22 @@ class ExtendedRandomTest {
     }
 
     @Test
+    void testNextUUID() {
+        System.out.println("nextUUID");
+        int capacity = 1024;
+        Set<UUID> uuids = new HashSet<>(capacity);
+        for (int i = 0; i < capacity; i++) {
+            uuids.add(ExtendedRandom.nextUUID());
+        }
+        int minimum = 9 * capacity / 10;
+        int actual = uuids.size();
+        String msg = "Expected at least " + minimum + " distinct UUIDs out of "
+                + capacity + ", got " + actual;
+        System.out.println(msg);
+        assert actual >= minimum : msg;
+    }
+
+    @Test
     void testAlphanumericRejectsNegativeLength() {
         int badLength = -RANDOM.nextInt(1024) - 1;
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
