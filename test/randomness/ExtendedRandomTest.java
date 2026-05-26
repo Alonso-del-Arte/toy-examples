@@ -16,6 +16,7 @@ import java.util.Set;
 
 import javax.naming.ldap.Rdn;
 
+import numerics.UUID;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -314,6 +315,20 @@ class ExtendedRandomTest {
                 + " distinct fractions out of " + capacity + ", got " + actual;
         System.out.println(msg);
         assert actual >= expected : msg;
+    }
+
+    @Test
+    void testUUIDsAreVersion4() {
+        int numberOfCalls = 1024;
+        int counter = 0;
+        while (counter < numberOfCalls) {
+            UUID uuid = ExtendedRandom.nextUUID();
+            long expected = 16384L;
+            long actual = uuid.getHighBits() & 61440L;
+            String message = "UUID " + uuid + " should be version 4";
+            assertEquals(expected, actual, message);
+            counter++;
+        }
     }
 
     @Test
