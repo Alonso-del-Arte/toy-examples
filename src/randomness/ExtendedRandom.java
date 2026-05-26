@@ -144,8 +144,8 @@ public class ExtendedRandom {
     }
 
     public static UUID nextUUID() {
-        long highBits = (((long) RANDOM.nextInt()) << 32) + 16384
-                + RANDOM.nextInt(2048);
+        long highBits = (((long) RANDOM.nextInt()) << 32)
+                + (RANDOM.nextInt(32768) << 16) + 16384 + RANDOM.nextInt(2048);
         long lowBits = RANDOM.nextLong();
         return new UUID(highBits, lowBits);
     }
