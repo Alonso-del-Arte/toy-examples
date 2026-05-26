@@ -51,10 +51,10 @@ public class ExtendedRandom {
     /**
      * Gives a pseudorandomly chosen integer. May be positive or negative, or
      * it could even be 0. This function is essentially a static wrapper for
-     * <code>java.util.Random</code>'s <code>nextInt()</code>.
-     * @return A pseudorandomly chosen integer, at least
-     * <code>Integer.MIN_VALUE</code>, at most <code>Integer.MAX_VALUE</code>.
-     * For example, &minus;2038868420.
+     * {@code java.util.Random}'s {@code nextInt()}.
+     * @return A pseudorandomly chosen integer, at least {@code
+     * Integer.MIN_VALUE}, at most {@code Integer.MAX_VALUE}. For example,
+     * &minus;2038868420.
      */
     public static int nextInt() {
         return RANDOM.nextInt();
@@ -63,16 +63,16 @@ public class ExtendedRandom {
     /**
      * Gives a pseudorandomly chosen integer as specified by the bound. This
      * function is essentially a static wrapper for
-     * <code>java.util.Random</code>'s one-parameter <code>nextInt()</code>.
+     * {@code java.util.Random}'s one-parameter {@code nextInt()}.
      * @param bound A lower or upper bound for the pseudorandomly chosen
      *              integer. The other bound is 0. The farther away from 0 that
      *              this parameter is, the likelier it is for repeated calls to
      *              give a decent distribution of values. Examples: 1024,
      *              &minus;1024.
      * @return A pseudorandomly chosen integer, may be 0 or any integer between
-     * 0 and <code>bound</code>. For example, given a bound of 1024, this
-     * function might return 743. Given a bound of &minus;1024, this function
-     * might return &minus;692.
+     * 0 and {@code bound}. For example, given a bound of 1024, this function
+     * might return 743. Given a bound of &minus;1024, this function might
+     * return &minus;692.
      */
     public static int nextInt(int bound) {
         int signAdjust = bound < 0 ? -1 : 1;
@@ -105,16 +105,16 @@ public class ExtendedRandom {
     }
 
     /**
-     * Gives a pseudorandomly chosen <code>BigInteger</code> instance
-     * corresponding to 0 or a positive integer. This is a static wrapper for
-     * one of the <code>BigInteger</code> constructors.
+     * Gives a pseudorandomly chosen {@code BigInteger} instance corresponding
+     * to 0 or a positive integer. This is a static wrapper for one of the
+     * {@code BigInteger} constructors.
      * @param bitLength How many significant bits the integer should have at
      *                  most. For example, 72.
-     * @return A pseudorandomly chosen <code>BigInteger</code> instance, at
-     * least <code>BigInteger.ZERO</code>, at most
-     * 2<sup><code>bitLength</code></sup> &minus; 1. But it's likelier to be
-     * closer to the latter than to the former. For example, given a
-     * <code>bitLength</code> of 72, the result might be 1617975039218359439262.
+     * @return A pseudorandomly chosen {@code BigInteger} instance, at
+     * least {@code BigInteger.ZERO}, at most 2<sup>{@code bitLength}</sup>
+     * &minus; 1. But it's likelier to be closer to the latter than to the
+     * former. For example, given a {@code bitLength} of 72, the result might be
+     * 1617975039218359439262.
      */
     public static BigInteger nextBigInt(int bitLength) {
         return new BigInteger(bitLength, RANDOM);
@@ -129,8 +129,8 @@ public class ExtendedRandom {
      * Gives a pseudorandomly chosen fraction. May be positive or negative, or
      * it could even be 0.
      * @return A fraction with a pseudorandom signed 32-bit integer for the
-     * numerator and a denominator of at least 1 and at most
-     * <code>Integer.MAX_VALUE</code>.
+     * numerator and a denominator of at least 1 and at most {@code
+     * Integer.MAX_VALUE}.
      */
     public static Fraction nextFraction() {
         int numer = RANDOM.nextInt();
@@ -240,7 +240,7 @@ public class ExtendedRandom {
      * @param <E> The type of the elements in the array. This will be the return
      *           type.
      * @return An element from the array. For example, Thursday.
-     * @throws NoSuchElementException If <code>array</code> is empty.
+     * @throws NoSuchElementException If {@code array} is empty.
      */
     public static <E> E nextObject(E[] array) {
         if (array.length == 0) {
@@ -259,7 +259,7 @@ public class ExtendedRandom {
      * @param <E> The type of the elements in the list. This will be the return
      *           type.
      * @return An element from the list. For example, cyan.
-     * @throws NoSuchElementException If <code>list</code> is empty.
+     * @throws NoSuchElementException If {@code list} is empty.
      */
     public static <E> E nextObject(List<E> list) {
         int size = list.size();
@@ -278,7 +278,7 @@ public class ExtendedRandom {
      * @param <E> The type of the elements in the set. This will be the return
      *           type.
      * @return An element from the set. For example, Canadian dollars.
-     * @throws NoSuchElementException If <code>set</code> is empty.
+     * @throws NoSuchElementException If {@code set} is empty.
      */
     public static <E> E nextObject(Set<E> set) {
         int size = set.size();
