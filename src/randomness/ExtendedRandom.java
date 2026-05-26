@@ -143,9 +143,10 @@ public class ExtendedRandom {
         return new ComplexNumber(0.0, 0.0);
     }
 
-    // TODO: Write tests for this
     public static UUID nextUUID() {
-        return new UUID(16384L, 0L);
+        long highBits = RANDOM.nextLong() & -45057L;
+        long lowBits = RANDOM.nextLong();
+        return new UUID(highBits, lowBits);
     }
 
     public static String alphanumeric(int length) {
