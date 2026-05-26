@@ -143,6 +143,12 @@ public class ExtendedRandom {
         return new ComplexNumber(0.0, 0.0);
     }
 
+    /**
+     * Generates a random universally unique identifier (UUID).
+     * @return A Version 4 UUID of the form
+     * xxxxxxxx-xxxx-4xxx-xxxx-xxxxxxxxxxxx. For example,
+     * 9B562DEA-005A-47FF-9510-426F39BD3642.
+     */
     public static UUID nextUUID() {
         long highBits = (((long) RANDOM.nextInt()) << 32)
                 + (RANDOM.nextInt(32768) << 16) + 16384 + RANDOM.nextInt(2048);
