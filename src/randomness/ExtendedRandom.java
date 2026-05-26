@@ -144,9 +144,9 @@ public class ExtendedRandom {
     }
 
     public static UUID nextUUID() {
-        long highBits = RANDOM.nextLong() & -45057L;
-        long lowBits = RANDOM.nextLong();
-        return new UUID(highBits, lowBits);
+//        long highBits = RANDOM.nextLong() & -45057L;
+//        long lowBits = RANDOM.nextLong();
+        return new UUID(-1L, -1L);
     }
 
     public static String alphanumeric(int length) {
