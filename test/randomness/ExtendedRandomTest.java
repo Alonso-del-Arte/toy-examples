@@ -348,6 +348,21 @@ class ExtendedRandomTest {
     }
 
     @Test
+    void testUUIDsHaveDistinctHighBits() {
+        int capacity = 1024;
+        Set<Long> highs = new HashSet<>(capacity);
+        for (int i = 0; i < capacity; i++) {
+            highs.add(ExtendedRandom.nextUUID().getHighBits());
+        }
+        int minimum = 3 * capacity / 5;
+        int actual = highs.size();
+        String msg = "Expected at least " + minimum + " distinct highs out of "
+                + capacity + ", got " + actual;
+        System.out.println(msg);
+        assert actual >= minimum : msg;
+    }
+
+    @Test
     void testAlphanumericRejectsNegativeLength() {
         int badLength = -RANDOM.nextInt(1024) - 1;
         Throwable t = assertThrows(IllegalArgumentException.class, () -> {
