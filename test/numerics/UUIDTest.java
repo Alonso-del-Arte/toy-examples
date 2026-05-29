@@ -9,6 +9,7 @@ import static org.example.NullProvider.provideNull;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+import static randomness.ExtendedRandom.alphanumeric;
 import static randomness.ExtendedRandom.nextInt;
 import static randomness.ExtendedRandom.nextLong;
 import static randomness.ExtendedRandom.nextPowerOfTwo;
@@ -241,6 +242,22 @@ class UUIDTest {
         String s = expected.toString().toLowerCase();
         UUID actual = UUID.parse(s);
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void testParseRejectsRightDashesWrongDigits() {
+        String s = alphanumeric(8) + "-" + alphanumeric(4) + "-"
+                + alphanumeric(4) + "-" + alphanumeric(12);
+        String message = "Invalid UUID \"" + s + "\" should cause an exception";
+        Throwable t = assertThrows(NumberFormatException.class, () -> {
+            UUID badUUID = UUID.parse(s);
+            System.out.println(message + ", not give result " + badUUID);
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        assert !excMsg.isBlank() : "Message should not be blank";
+        String containsMsg = "Message should contain \"" + s + "\"";
+        assert excMsg.contains(s) : containsMsg;
     }
 
 }
