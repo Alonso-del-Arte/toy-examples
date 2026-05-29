@@ -244,10 +244,30 @@ class UUIDTest {
         assertEquals(expected, actual);
     }
 
+    private static boolean noInvalidUUIDDigits(String s) {
+        boolean noneFound = true;
+        char ch = 'G';
+        String preprocessed = s.toUpperCase();
+        while (noneFound && ch < '[') {
+            noneFound = preprocessed.indexOf(ch) < 0;
+            ch++;
+        }
+        return noneFound;
+    }
+
+    private static String cobbleTogetherInvalidUUID() {
+        String propStr = "";
+        do {
+            propStr = alphanumeric(8) + "-" + alphanumeric(4) + "-"
+                    + alphanumeric(4) + "-" + alphanumeric(4) + "-"
+                    + alphanumeric(12);
+        } while (noInvalidUUIDDigits(propStr));
+        return propStr;
+    }
+
     @Test
     void testParseRejectsRightDashesWrongDigits() {
-        String s = alphanumeric(8) + "-" + alphanumeric(4) + "-"
-                + alphanumeric(4) + "-" + alphanumeric(12);
+        String s = cobbleTogetherInvalidUUID();
         String message = "Invalid UUID \"" + s + "\" should cause an exception";
         Throwable t = assertThrows(NumberFormatException.class, () -> {
             UUID badUUID = UUID.parse(s);
@@ -258,6 +278,7 @@ class UUIDTest {
         assert !excMsg.isBlank() : "Message should not be blank";
         String containsMsg = "Message should contain \"" + s + "\"";
         assert excMsg.contains(s) : containsMsg;
+        System.out.println("\"" + excMsg + "\"");
     }
 
 }
