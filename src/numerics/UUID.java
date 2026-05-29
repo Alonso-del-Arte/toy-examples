@@ -45,8 +45,10 @@ public class UUID implements Comparable<UUID> {
             long lowBits
                     = Long.parseUnsignedLong(intermediate.substring(16), 16);
             return new UUID(highBits, lowBits);
+        } else {
+            String excMsg = "\"" + s + "\" is not valid";
+            throw new NumberFormatException(excMsg);
         }
-        return new UUID(0L, 0L);
     }
 
     // TODO: Write tests for this
