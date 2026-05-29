@@ -8,6 +8,11 @@ import static textops.TextCalculator.padLeft;
 /**
  * Holds a universally unique identifier (UUID). This one really is a toy
  * example because Java has had {@code java.util.UUID} since Java 1.5.
+ * <p>UUIDs are essentially 128-bit unsigned integers. The human-readable
+ * presentation consists of 32 hexadecimal digits separated with dashes in the
+ * pattern 8-4-4-4-12. For example, 1AF0C360-2FFE-471E-78B2-0436144CAE67.</p>
+ * <p>To generate pseudorandom UUIDs, you can use {@link
+ * randomness.ExtendedRandom#nextUUID()}.</p>
  * @author Alonso del Arte
  */
 public class UUID implements Comparable<UUID> {
@@ -27,7 +32,23 @@ public class UUID implements Comparable<UUID> {
         return this.low;
     }
 
-    // TODO: Write tests for this
+    /**
+     * Parses text for a UUID with the correct formatting.
+     * @param s The text to parse. The hexadecimal digits A, B, C, D, E and F
+     *          may be in uppercase or lowercase. Consistency should be
+     *          preferred but is not required. Two examples:
+     *          "E3D4FAE7-C6D0-6C92-05B9-3BB36E06D7D3",
+     *          "e3d4fae7-c6d0-6c92-05b9-3bb36e06d7d3".
+     * @return The UUID. For both examples, this would be
+     * E3D4FAE7-C6D0-6C92-05B9-3BB36E06D7D3.
+     * @throws NumberFormatException If {@code s} is not formatted in the
+     * pattern 8-4-4-4-12, or if it contains characters not recognized as
+     * hexadecimal digits. Both "e3d4fae7c6d06c9205b93bb36e06d7d3" and
+     * "6q4k7A76-Y65p-0py8-65M8-74ifv64IBh9i" would cause this exception, the
+     * former because it's missing the dashes, the latter because it contains
+     * the characters 'q', 'k', 'Y', etc., which are not recognized as
+     * hexadecimal digits.
+     */
     public static UUID parse(String s) {
         if (s == null) {
             throw new NullPointerException("Null String is not valid");
