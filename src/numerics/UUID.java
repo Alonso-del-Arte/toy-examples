@@ -32,6 +32,11 @@ public class UUID implements Comparable<UUID> {
         return this.low;
     }
 
+    // TODO: Write tests for this
+    public byte getVersionID() {
+        return -1;
+    }
+
     /**
      * Parses text for a UUID with the correct formatting.
      * @param s The text to parse. The hexadecimal digits A, B, C, D, E and F
