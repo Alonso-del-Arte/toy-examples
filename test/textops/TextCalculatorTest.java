@@ -256,6 +256,14 @@ class TextCalculatorTest {
     }
 
     @Test
+    void testBlockRangeTelugu() {
+        Character.UnicodeBlock block = Character.UnicodeBlock.TELUGU;
+        Range expected = new Range(0x0C00, 0x0C7F);
+        Range actual = TextCalculator.blockRange(block);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testIsHighSurrogate() {
         System.out.println("isHighSurrogate");
         int span = 0xDC00 - 0xD800;
