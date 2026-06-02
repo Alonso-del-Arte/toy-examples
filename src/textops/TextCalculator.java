@@ -57,6 +57,7 @@ public class TextCalculator {
         BLOCK_RANGES.put(Character.UnicodeBlock.ORIYA, new Range(2817, 2935));
         BLOCK_RANGES.put(Character.UnicodeBlock.TAMIL, new Range(2946, 3066));
         BLOCK_RANGES.put(Character.UnicodeBlock.TELUGU, new Range(3072, 3199));
+        BLOCK_RANGES.put(Character.UnicodeBlock.KANNADA, new Range(3200, 3315));
     }
 
     // TODO: Write tests for this
