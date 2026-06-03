@@ -280,6 +280,14 @@ class TextCalculatorTest {
     }
 
     @Test
+    void testBlockRangeSinhala() {
+        Character.UnicodeBlock block = Character.UnicodeBlock.SINHALA;
+        Range expected = new Range(0x0D81, 0x0DF4);
+        Range actual = TextCalculator.blockRange(block);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testIsHighSurrogate() {
         System.out.println("isHighSurrogate");
         int span = 0xDC00 - 0xD800;
