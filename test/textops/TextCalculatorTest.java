@@ -321,7 +321,7 @@ class TextCalculatorTest {
 
     @Test
     void testBlockRangeGeorgian() {
-        Character.UnicodeBlock block = Character.UnicodeBlock.MYANMAR;
+        Character.UnicodeBlock block = Character.UnicodeBlock.GEORGIAN;
         Range expected = new Range(0x10A0, 0x10FF);
         Range actual = TextCalculator.blockRange(block);
         assertEquals(expected, actual);
