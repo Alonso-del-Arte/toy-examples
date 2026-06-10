@@ -12,7 +12,7 @@ import static textops.TextCalculator.padLeft;
  * presentation consists of 32 hexadecimal digits separated with dashes in the
  * pattern 8-4-4-4-12. For example, 1AF0C360-2FFE-471E-78B2-0436144CAE67.</p>
  * <p>To generate pseudorandom UUIDs, you can use {@link
- * randomness.ExtendedRandom#nextUUID()}.</p>
+ * randomness.ExtendedRandom#nextUUIDv4()}.</p>
  * @author Alonso del Arte
  */
 public class UUID implements Comparable<UUID> {

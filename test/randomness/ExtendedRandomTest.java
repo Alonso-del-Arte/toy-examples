@@ -322,7 +322,7 @@ class ExtendedRandomTest {
         int numberOfCalls = 1024;
         int counter = 0;
         while (counter < numberOfCalls) {
-            UUID uuid = ExtendedRandom.nextUUID();
+            UUID uuid = ExtendedRandom.nextUUIDv4();
             long expected = 16384L;
             long actual = uuid.getHighBits() & 61440L;
             String message = "UUID " + uuid + " should be version 4";
@@ -332,12 +332,12 @@ class ExtendedRandomTest {
     }
 
     @Test
-    void testNextUUID() {
-        System.out.println("nextUUID");
+    void testNextUUIDv4() {
+        System.out.println("nextUUIDv4");
         int capacity = 1024;
         Set<UUID> uuids = new HashSet<>(capacity);
         for (int i = 0; i < capacity; i++) {
-            uuids.add(ExtendedRandom.nextUUID());
+            uuids.add(ExtendedRandom.nextUUIDv4());
         }
         int minimum = 9 * capacity / 10;
         int actual = uuids.size();
@@ -352,7 +352,7 @@ class ExtendedRandomTest {
         int capacity = 1024;
         Set<Long> highs = new HashSet<>(capacity);
         for (int i = 0; i < capacity; i++) {
-            highs.add(ExtendedRandom.nextUUID().getHighBits());
+            highs.add(ExtendedRandom.nextUUIDv4().getHighBits());
         }
         int minimum = 3 * capacity / 5;
         int actual = highs.size();
@@ -367,7 +367,7 @@ class ExtendedRandomTest {
         int capacity = 1024;
         Set<Long> lows = new HashSet<>(capacity);
         for (int i = 0; i < capacity; i++) {
-            lows.add(ExtendedRandom.nextUUID().getLowBits());
+            lows.add(ExtendedRandom.nextUUIDv4().getLowBits());
         }
         int minimum = 3 * capacity / 5;
         int actual = lows.size();

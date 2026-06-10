@@ -149,7 +149,7 @@ public class ExtendedRandom {
      * xxxxxxxx-xxxx-4xxx-xxxx-xxxxxxxxxxxx. For example,
      * 9B562DEA-005A-47FF-9510-426F39BD3642.
      */
-    public static UUID nextUUID() {
+    public static UUID nextUUIDv4() {
         long highBits = (((long) RANDOM.nextInt()) << 32)
                 + (RANDOM.nextInt(32768) << 16) + 16384 + RANDOM.nextInt(2048);
         long lowBits = RANDOM.nextLong();
