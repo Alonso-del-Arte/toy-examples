@@ -65,7 +65,7 @@ class ExtendedRandomTest {
 
     private static final int NUMBER_OF_BLOCKS = UNICODE_BLOCKS.length;
 
-    public static final Set<Character.UnicodeBlock>
+    private static final Set<Character.UnicodeBlock>
             BLOCKS_WITH_UNASSIGNED_CHARACTERS = new HashSet<>();
 
     private static final long DCE_VARIANT_MASK = -4611686018427387904L;
