@@ -5,7 +5,6 @@ import fractions.Fraction;
 import java.awt.Color;
 import static java.lang.Character.UnicodeBlock.*;
 import java.math.BigInteger;
-import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -554,11 +553,11 @@ class ExtendedRandomTest {
 
     @Test
     void testNextObjectEmptyArrayThrowsException() {
-        Statement[] array = {};
+        Object[] array = {};
         Throwable t = assertThrows(NoSuchElementException.class, () -> {
-            Statement badStatement = ExtendedRandom.nextObject(array);
+            Object badObject = ExtendedRandom.nextObject(array);
             System.out.println("Calling nextObject() on empty array gave "
-                    + badStatement.toString());
+                    + badObject.toString());
         });
         String excMsg = t.getMessage();
         assert excMsg != null : "Message should not be null";
