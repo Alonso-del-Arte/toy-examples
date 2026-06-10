@@ -591,7 +591,7 @@ class ExtendedRandomTest {
         List<Double> list = new ArrayList<>();
         double someNumber = RANDOM.nextDouble();
         list.add(someNumber);
-        list.remove(0);
+        list.removeFirst();
         Throwable t = assertThrows(NoSuchElementException.class, () -> {
             double badNumber = ExtendedRandom.nextObject(list);
             System.out.println("Calling nextObject() on empty list gave "
