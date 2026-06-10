@@ -347,7 +347,7 @@ class ExtendedRandomTest {
     }
 
     @Test
-    void testUUIDsHaveDistinctHighBits() {
+    void testUUIDsVersion4HaveDistinctHighBits() {
         int capacity = 1024;
         Set<Long> highs = new HashSet<>(capacity);
         for (int i = 0; i < capacity; i++) {
@@ -362,7 +362,7 @@ class ExtendedRandomTest {
     }
 
     @Test
-    void testUUIDsHaveDistinctLowBits() {
+    void testUUIDsVersion4HaveDistinctLowBits() {
         int capacity = 1024;
         Set<Long> lows = new HashSet<>(capacity);
         for (int i = 0; i < capacity; i++) {
