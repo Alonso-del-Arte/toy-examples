@@ -68,6 +68,8 @@ class ExtendedRandomTest {
     public static final Set<Character.UnicodeBlock>
             BLOCKS_WITH_UNASSIGNED_CHARACTERS = new HashSet<>();
 
+    private static final long DCE_VARIANT_MASK = -4611686018427387904L;
+
     static {
         Character.UnicodeBlock currBlock = Character.UnicodeBlock.BASIC_LATIN;
         for (char ch = ' '; ch < '\u4E00'; ch++) {
@@ -326,6 +328,20 @@ class ExtendedRandomTest {
             long expected = 16384L;
             long actual = uuid.getHighBits() & 61440L;
             String message = "UUID " + uuid + " should be version 4";
+            assertEquals(expected, actual, message);
+            counter++;
+        }
+    }
+
+    @Test
+    void testUUIDsAreDCEVariant() {
+        int numberOfCalls = 1024;
+        int counter = 0;
+        while (counter < numberOfCalls) {
+            UUID uuid = ExtendedRandom.nextUUIDv4();
+            long expected = Long.MIN_VALUE;
+            long actual = uuid.getLowBits() & DCE_VARIANT_MASK;
+            String message = "UUID " + uuid + " should be DCE variant";
             assertEquals(expected, actual, message);
             counter++;
         }
