@@ -48,6 +48,8 @@ public class ExtendedRandom {
 
     private static final int NUMBER_OF_BLOCKS = UNICODE_BLOCKS.length;
 
+    private static final long DCE_VARIANT_MASK = ~(1L << 62);
+
     /**
      * Gives a pseudorandomly chosen integer. May be positive or negative, or
      * it could even be 0. This function is essentially a static wrapper for
@@ -152,7 +154,7 @@ public class ExtendedRandom {
     public static UUID nextUUIDv4() {
         long highBits = (((long) RANDOM.nextInt()) << 32)
                 + (RANDOM.nextInt(32768) << 16) + 16384 + RANDOM.nextInt(2048);
-        long lowBits = RANDOM.nextLong();
+        long lowBits = (RANDOM.nextLong() | Long.MIN_VALUE) & DCE_VARIANT_MASK;
         return new UUID(highBits, lowBits);
     }
 
