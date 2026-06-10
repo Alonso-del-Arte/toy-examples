@@ -21,7 +21,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ExtendedRandomTest {
 
-    public static final Random RANDOM = new Random(-System.currentTimeMillis());
+    private static final Random RANDOM
+            = new Random(-System.currentTimeMillis());
 
     /**
      * A selection of Unicode blocks from the Basic Multilingual Plane. Since
