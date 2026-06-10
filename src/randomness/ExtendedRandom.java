@@ -158,6 +158,16 @@ public class ExtendedRandom {
         return new UUID(highBits, lowBits);
     }
 
+    // TODO: Write tests for this
+    public static UUID nextUUIDv7() {
+        return new UUID(-1L, -1L);
+    }
+
+    // TODO: Write tests for this
+    public static UUID nextUUID() {
+        return new UUID(0L, 0L);
+    }
+
     public static String alphanumeric(int length) {
         if (length < 1) {
             String excMsg = "Length " + length + " is not valid";
