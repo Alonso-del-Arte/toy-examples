@@ -1,8 +1,18 @@
 package numerics;
 
+import java.util.function.Predicate;
+
 public enum UUIDType {
 
-    UNKNOWN, MAC, SECURITY, MD5, RANDOM, SHA1, MAC_SORTABLE, RANDOM_SORTABLE,
-    CUSTOM
+    UNKNOWN((UUID) -> false), MAC((UUID) -> false), SECURITY((UUID) -> false),
+    MD5((UUID) -> false), RANDOM((UUID) -> false), SHA1((UUID) -> false),
+    MAC_SORTABLE((UUID) -> false), RANDOM_SORTABLE((UUID) -> false),
+    CUSTOM((UUID) -> false);
+
+    private final Predicate<UUID> checker;
+
+    private UUIDType(Predicate<UUID> predicate) {
+        this.checker = predicate;
+    }
 
 }
