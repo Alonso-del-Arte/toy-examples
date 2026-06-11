@@ -11,6 +11,11 @@ public enum UUIDType {
 
     private final Predicate<UUID> checker;
 
+    // TODO: Write tests for this
+    public boolean isOfType(UUID uuid) {
+        return this.checker.test(uuid);
+    }
+
     private UUIDType(Predicate<UUID> predicate) {
         this.checker = predicate;
     }
