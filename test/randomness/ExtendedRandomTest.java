@@ -16,8 +16,9 @@ import java.util.Set;
 import javax.naming.ldap.Rdn;
 
 import numerics.UUID;
-import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class ExtendedRandomTest {
 
