@@ -336,6 +336,14 @@ class TextCalculatorTest {
     }
 
     @Test
+    void testBlockRangeEthiopic() {
+        Character.UnicodeBlock block = Character.UnicodeBlock.ETHIOPIC;
+        Range expected = new Range(0x1200, 0x137C);
+        Range actual = TextCalculator.blockRange(block);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testIsHighSurrogate() {
         System.out.println("isHighSurrogate");
         int span = 0xDC00 - 0xD800;
