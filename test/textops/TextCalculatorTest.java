@@ -361,6 +361,15 @@ class TextCalculatorTest {
     }
 
     @Test
+    void testBlockRangeUnifiedCanadianAboriginalSyllabics() {
+        Character.UnicodeBlock block
+                = Character.UnicodeBlock.UNIFIED_CANADIAN_ABORIGINAL_SYLLABICS;
+        Range expected = new Range(0x1400, 0x167F);
+        Range actual = TextCalculator.blockRange(block);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testIsHighSurrogate() {
         System.out.println("isHighSurrogate");
         int span = 0xDC00 - 0xD800;
