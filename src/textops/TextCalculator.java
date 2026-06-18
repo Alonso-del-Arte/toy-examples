@@ -75,6 +75,9 @@ public class TextCalculator {
                 new Range(4992, 5017));
         BLOCK_RANGES.put(Character.UnicodeBlock.CHEROKEE,
                 new Range(5024, 5117));
+        BLOCK_RANGES.put(Character.UnicodeBlock
+                        .UNIFIED_CANADIAN_ABORIGINAL_SYLLABICS,
+                new Range(5120, 5759));
     }
 
     // TODO: Write tests for this
