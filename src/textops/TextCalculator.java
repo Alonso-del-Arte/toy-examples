@@ -78,6 +78,7 @@ public class TextCalculator {
         BLOCK_RANGES.put(Character.UnicodeBlock
                         .UNIFIED_CANADIAN_ABORIGINAL_SYLLABICS,
                 new Range(5120, 5759));
+        BLOCK_RANGES.put(Character.UnicodeBlock.OGHAM, new Range(5760, 5788));
     }
 
     // TODO: Write tests for this
