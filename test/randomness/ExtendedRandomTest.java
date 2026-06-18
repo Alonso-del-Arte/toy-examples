@@ -25,6 +25,7 @@ class ExtendedRandomTest {
     private static final Random RANDOM
             = new Random(-System.currentTimeMillis());
 
+    // TODO: Update array contents and Javadoc
     /**
      * A selection of Unicode blocks from the Basic Multilingual Plane. Since
      * this project uses Java 8 rather than the latest LTS, the following
