@@ -353,6 +353,14 @@ class TextCalculatorTest {
     }
 
     @Test
+    void testBlockRangeCherokee() {
+        Character.UnicodeBlock block = Character.UnicodeBlock.CHEROKEE;
+        Range expected = new Range(0x13A0, 0x13FD);
+        Range actual = TextCalculator.blockRange(block);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testIsHighSurrogate() {
         System.out.println("isHighSurrogate");
         int span = 0xDC00 - 0xD800;
