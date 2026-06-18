@@ -71,6 +71,8 @@ public class TextCalculator {
                 new Range(4352, 4607));
         BLOCK_RANGES.put(Character.UnicodeBlock.ETHIOPIC,
                 new Range(4608, 4988));
+        BLOCK_RANGES.put(Character.UnicodeBlock.ETHIOPIC_SUPPLEMENT,
+                new Range(4992, 5017));
     }
 
     // TODO: Write tests for this
