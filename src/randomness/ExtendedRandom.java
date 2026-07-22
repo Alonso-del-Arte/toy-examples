@@ -149,7 +149,7 @@ public class ExtendedRandom {
      * Generates a random universally unique identifier (UUID).
      * @return A Version 4 UUID of the form
      * xxxxxxxx-xxxx-4xxx-xxxx-xxxxxxxxxxxx. For example,
-     * 9B562DEA-005A-47FF-9510-426F39BD3642.
+     * 9B562DEA-005A-47FF-9510-426F39BD3642. The variant will be DCE.
      */
     public static UUID nextUUIDv4() {
         long highBits = (((long) RANDOM.nextInt()) << 32)
