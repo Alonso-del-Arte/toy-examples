@@ -24,7 +24,14 @@ public class UUIDTypeTest {
 
     // TODO: Test MD5
 
-    // TODO: Test RANDOM
+    @Test
+    void testIsOfTypeRandomVersion4() {
+        UUID uuid = nextUUIDv4();
+        String msg = "UUID " + uuid + " should be RANDOM, version 4";
+        assert UUIDType.RANDOM.isOfType(uuid) : msg;
+    }
+
+    // TODO: Test is not RANDOM (version 4)
 
     // TODO: Test SHA1
 
