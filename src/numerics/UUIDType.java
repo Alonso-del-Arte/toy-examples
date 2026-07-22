@@ -16,7 +16,7 @@ public enum UUIDType {
         return this.checker.test(uuid);
     }
 
-    private UUIDType(Predicate<UUID> predicate) {
+    UUIDType(Predicate<UUID> predicate) {
         this.checker = predicate;
     }
 
