@@ -7,7 +7,7 @@ public enum UUIDType {
     UNKNOWN((UUID) -> false), MAC((UUID) -> false), SECURITY((UUID) -> false),
     MD5((UUID) -> false),
 
-    RANDOM((UUID uuid) -> (uuid.getHighBits() & 61440L) == 16384L),
+    RANDOM((UUID uuid) -> (uuid.getHighBits() & 61440) == 16384),
 
     SHA1((UUID) -> false),
     MAC_SORTABLE((UUID) -> false), RANDOM_SORTABLE((UUID) -> false),
