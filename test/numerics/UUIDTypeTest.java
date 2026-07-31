@@ -55,6 +55,21 @@ public class UUIDTypeTest {
         }
     }
 
+    @Test
+    void testVersions5To15AreNotVersion4Either() {
+        long propHighBits = version0HighBits();
+        long lowBits = RANDOM.nextLong();
+        long start = 5 * HIGH_BITS_VERSION_INCREMENT;
+        for (long versionBits = start;
+             versionBits < HIGH_BITS_VERSION_THRESHOLD;
+             versionBits += HIGH_BITS_VERSION_INCREMENT) {
+            long highBits = propHighBits + versionBits;
+            UUID uuid = new UUID(highBits, lowBits);
+            String msg = uuid + " should not be Version 4";
+            assert !UUIDType.RANDOM.isOfType(uuid) : msg;
+        }
+    }
+
     // TODO: Test SHA1
 
     // TODO: Test MAC_SORTABLE
