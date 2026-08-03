@@ -28,7 +28,14 @@ public class UUIDTypeTest {
         return RANDOM.nextLong() & HIGH_BITS_VERSION_MASK_OUT;
     }
 
-    // TODO: Test MAC
+    @Test
+    void testIsOfTypeMACVersion1() {
+        long highBits = version0HighBits() + HIGH_BITS_VERSION_INCREMENT;
+        long lowBits = RANDOM.nextLong();
+        UUID uuid = new UUID(highBits, lowBits);
+        String msg = "UUID " + uuid + " should be MAC, version 1";
+        assert UUIDType.MAC.isOfType(uuid) : msg;
+    }
 
     // TODO: Test SECURITY
 
