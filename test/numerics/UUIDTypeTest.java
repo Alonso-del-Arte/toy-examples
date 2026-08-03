@@ -29,6 +29,13 @@ public class UUIDTypeTest {
     }
 
     @Test
+    void testConstantVersionMask() {
+        int expected = 61440;
+        int actual = UUIDType.Constants.VERSION_MASK;
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testIsOfTypeMACVersion1() {
         long highBits = version0HighBits() + HIGH_BITS_VERSION_INCREMENT;
         long lowBits = RANDOM.nextLong();
