@@ -31,8 +31,7 @@ public enum UUIDType {
 
         static final int VERSION_4_BIT = 16384;
 
-        // TODO: Write a test for this
-        static final int VERSION_7_BITS = 28672 | Integer.MIN_VALUE;
+        static final int VERSION_7_BITS = 28672;
 
     }
 
