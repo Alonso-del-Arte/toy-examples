@@ -37,6 +37,15 @@ public class UUIDTypeTest {
         assert UUIDType.MAC.isOfType(uuid) : msg;
     }
 
+    @Test
+    void testVersion0IsNotVersion1() {
+        long highBits = version0HighBits();
+        long lowBits = RANDOM.nextLong();
+        UUID uuid = new UUID(highBits, lowBits);
+        String msg = "UUID " + uuid + " should not be MAC, version 1";
+        assert !UUIDType.MAC.isOfType(uuid) : msg;
+    }
+
     // TODO: Test SECURITY
 
     // TODO: Test MD5
