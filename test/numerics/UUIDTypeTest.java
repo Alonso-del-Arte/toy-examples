@@ -50,6 +50,13 @@ public class UUIDTypeTest {
     }
 
     @Test
+    void testConstantVersion7Bits() {
+        int expected = 7 * UUIDType.Constants.VERSION_1_BIT;
+        int actual = UUIDType.Constants.VERSION_7_BITS;
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testIsOfTypeMACVersion1() {
         long highBits = version0HighBits() + HIGH_BITS_VERSION_INCREMENT;
         long lowBits = RANDOM.nextLong();
