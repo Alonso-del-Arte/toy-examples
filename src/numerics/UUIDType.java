@@ -4,7 +4,13 @@ import java.util.function.Predicate;
 
 public enum UUIDType {
 
-    UNKNOWN((UUID) -> false), MAC((UUID) -> true), SECURITY((UUID) -> false),
+    UNKNOWN((UUID) -> false),
+
+    MAC((UUID uuid) ->
+            (uuid.getHighBits() & Constants.VERSION_MASK)
+                    == Constants.VERSION_1_BIT),
+
+    SECURITY((UUID) -> false),
     MD5((UUID) -> false),
 
     RANDOM((UUID uuid) ->
