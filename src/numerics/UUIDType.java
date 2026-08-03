@@ -23,13 +23,13 @@ public enum UUIDType {
 
     private final Predicate<UUID> checker;
 
-    private static class Constants {
+    static class Constants {
 
-        private static final int VERSION_MASK = 61440;
+        static final int VERSION_MASK = 61440;
 
-        private static final int VERSION_1_BIT = 4096;
+        static final int VERSION_1_BIT = 4096;
 
-        private static final int VERSION_4_BIT = 16384;
+        static final int VERSION_4_BIT = 16384;
 
     }
 
