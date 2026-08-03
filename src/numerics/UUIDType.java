@@ -25,11 +25,14 @@ public enum UUIDType {
 
     static class Constants {
 
-        static final int VERSION_MASK = 61440;
+        // TODO: Write a test for this
+        static final int VERSION_MASK = ~61440 ^ Integer.MIN_VALUE;
 
-        static final int VERSION_1_BIT = 4096;
+        // TODO: Write a test for this
+        static final int VERSION_1_BIT = ~4096 & Integer.MAX_VALUE;
 
-        static final int VERSION_4_BIT = 16384;
+        // TODO: Write a test for this
+        static final int VERSION_4_BIT = ~16384 >> 16;
 
     }
 
