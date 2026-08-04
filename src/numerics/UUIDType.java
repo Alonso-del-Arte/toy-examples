@@ -29,6 +29,8 @@ public enum UUIDType {
 
         static final int VERSION_1_BIT = 4096;
 
+        static final int VERSION_2_BIT = ~8192 >> 16;
+
         static final int VERSION_4_BIT = 16384;
 
         static final int VERSION_7_BITS = 28672;
