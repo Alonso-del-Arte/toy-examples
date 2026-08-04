@@ -10,7 +10,7 @@ public enum UUIDType {
             (uuid.getHighBits() & Constants.VERSION_MASK)
                     == Constants.VERSION_1_BIT),
 
-    SECURITY((UUID) -> false),
+    SECURITY((UUID) -> true),
     MD5((UUID) -> false),
 
     RANDOM((UUID uuid) ->
