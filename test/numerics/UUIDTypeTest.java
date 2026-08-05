@@ -123,7 +123,20 @@ public class UUIDTypeTest {
         assert !UUIDType.SECURITY.isOfType(uuid) : msg;
     }
 
-    // TODO: Test is not of type SECURITY
+    @Test
+    void testVersions3To15AreNotVersion2Either() {
+        long propHighBits = version0HighBits();
+        long lowBits = RANDOM.nextLong();
+        long start = 3 * HIGH_BITS_VERSION_INCREMENT;
+        for (long versionBits = start;
+             versionBits < HIGH_BITS_VERSION_THRESHOLD;
+             versionBits += HIGH_BITS_VERSION_INCREMENT) {
+            long highBits = propHighBits + versionBits;
+            UUID uuid = new UUID(highBits, lowBits);
+            String msg = uuid + " should not be Version 2";
+            assert !UUIDType.SECURITY.isOfType(uuid) : msg;
+        }
+    }
 
     // TODO: Test MD5
 
