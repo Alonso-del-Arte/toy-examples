@@ -15,7 +15,8 @@ public class UUIDTypeTest {
 
     private static final long DCE_VARIANT_MASK = -4611686018427387905L;
 
-    private static final Random RANDOM = new Random(DCE_VARIANT_MASK);
+    private static final Random RANDOM = new Random(DCE_VARIANT_MASK
+            + System.currentTimeMillis());
 
     private static UUID nextUUIDv4() {
         long highBits = (((long) RANDOM.nextInt()) << 32)
