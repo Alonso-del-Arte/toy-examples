@@ -51,6 +51,14 @@ public class UUIDTypeTest {
     }
 
     @Test
+    void testConstantVersion3Bits() {
+        int expected = (UUIDType.Constants.VERSION_1_BIT << 1)
+                + UUIDType.Constants.VERSION_1_BIT;
+        int actual = UUIDType.Constants.VERSION_3_BITS;
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testConstantVersion4Bit() {
         int expected = UUIDType.Constants.VERSION_1_BIT << 2;
         int actual = UUIDType.Constants.VERSION_4_BIT;
