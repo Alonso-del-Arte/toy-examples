@@ -33,6 +33,9 @@ public enum UUIDType {
 
         static final int VERSION_2_BIT = 8192;
 
+        // TODO: Write a test for this
+        static final int VERSION_3_BITS = -7;
+
         static final int VERSION_4_BIT = 16384;
 
         static final int VERSION_7_BITS = 28672;
