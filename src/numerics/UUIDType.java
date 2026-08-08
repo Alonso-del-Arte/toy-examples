@@ -37,6 +37,12 @@ public enum UUIDType {
 
         static final int VERSION_4_BIT = 16384;
 
+        // TODO: Write tests for this
+        static final int VERSION_5_BITS = Short.MAX_VALUE << 8;
+
+        // TODO: Write tests for this
+        static final int VERSION_6_BITS = Short.MAX_VALUE << 7;
+
         static final int VERSION_7_BITS = 28672;
 
     }
