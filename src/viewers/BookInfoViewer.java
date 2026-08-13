@@ -53,6 +53,10 @@ public class BookInfoViewer extends JFrame {
 
     }
 
+    public BookInfoViewer() {
+        this(ISBN.parseISBN("978-0-00-000000-2"));
+    }
+
     public BookInfoViewer(ISBN isbn) {
         //
     }
