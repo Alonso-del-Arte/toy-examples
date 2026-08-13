@@ -44,6 +44,24 @@ public class BookInfoViewer extends JFrame {
 
     final JLabel bookAuthors = new JLabel("no authors");
 
+    private static String makeAPICall(String isbn)
+            throws IOException, URISyntaxException {
+        String queryPath = QUERY_PATH_BEGIN + isbn + QUERY_PATH_END;
+        URI uri = new URI(queryPath);
+        URL queryURL = uri.toURL();
+        HttpURLConnection connection
+                = (HttpURLConnection) queryURL.openConnection();
+        connection.setRequestProperty("User-Agent", USER_AGENT_ID);
+        int responseCode = connection.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            InputStream stream = (InputStream) connection.getContent();
+            Scanner scanner = new Scanner(stream);
+            return scanner.nextLine();
+        }
+        String excMsg = "Got HTTP Status " + responseCode;
+        throw new RuntimeException(excMsg);
+    }
+
     private class ButtonListener implements ActionListener {
 
         @Override
