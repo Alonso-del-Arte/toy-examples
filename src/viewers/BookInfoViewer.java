@@ -54,8 +54,7 @@ public class BookInfoViewer extends JFrame {
     }
 
     public BookInfoViewer() {
-        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-//        this(ISBN.parseISBN("978-0-00-000000-2"));
+        this(ISBN.parseISBN("978-0-00-000000-2"));
     }
 
     public BookInfoViewer(ISBN isbn) {
