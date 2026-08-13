@@ -22,5 +22,43 @@ import javax.swing.WindowConstants;
 
 import retail.books.ISBN;
 
-public class BookInfoViewer {
+public class BookInfoViewer extends JFrame {
+
+    private static final String QUERY_PATH_BEGIN
+            = "https://openlibrary.org/api/books?bibkeys=ISBN:";
+
+    private static final String QUERY_PATH_END = "&jscmd=details&format=json";
+
+    private static final String USER_AGENT_ID
+            = "Book Info Viewer - Java/" + System.getProperty("java.version");
+
+    private static final String JSON_TITLE_TAG = "\"title\":";
+
+    private static final String JSON_AUTHOR_TAG = "\"by_statement\":";
+
+    private static final char STRAIGHT_DOUBLE_QUOTE_CHAR = '"';
+
+    private final JTextField numberField = new JTextField("9780000000002", 18);
+
+    private final JLabel bookTitle = new JLabel("no book scanned yet");
+
+    private final JLabel bookAuthors = new JLabel("no authors");
+
+    private class ButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            //
+        }
+
+    }
+
+    public BookInfoViewer(ISBN isbn) {
+        //
+    }
+
+    public static void main(String[] args) {
+        //
+    }
+
 }
