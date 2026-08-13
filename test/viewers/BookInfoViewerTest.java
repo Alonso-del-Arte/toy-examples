@@ -21,9 +21,21 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import retail.books.ISBN;
 
 class BookInfoViewerTest {
+
+    public static final ISBN DEFAULT_ISBN = ISBN.parseISBN("978-0-00-000000-2");
+
+    @Test
+    void testDefaultCloseOperation() {
+        JFrame instance = new BookInfoViewer(DEFAULT_ISBN);
+        int expected = WindowConstants.EXIT_ON_CLOSE;
+        int actual = instance.getDefaultCloseOperation();
+        String message = "Default close operation should be exit on close";
+        assertEquals(expected, actual, message);
+    }
 
 }
