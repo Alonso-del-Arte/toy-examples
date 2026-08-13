@@ -38,11 +38,11 @@ public class BookInfoViewer extends JFrame {
 
     private static final char STRAIGHT_DOUBLE_QUOTE_CHAR = '"';
 
-    private final JTextField numberField = new JTextField("9780000000002", 18);
+    final JTextField numberField = new JTextField("9780000000002", 18);
 
-    private final JLabel bookTitle = new JLabel("no book scanned yet");
+    final JLabel bookTitle = new JLabel("no book scanned yet");
 
-    private final JLabel bookAuthors = new JLabel("no authors");
+    final JLabel bookAuthors = new JLabel("no authors");
 
     private class ButtonListener implements ActionListener {
 
