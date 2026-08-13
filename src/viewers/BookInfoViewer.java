@@ -58,7 +58,7 @@ public class BookInfoViewer extends JFrame {
     }
 
     public BookInfoViewer(ISBN isbn) {
-        //
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     public static void main(String[] args) {
