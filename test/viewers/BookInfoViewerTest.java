@@ -38,4 +38,13 @@ class BookInfoViewerTest {
         assertEquals(expected, actual, message);
     }
 
+    @Test
+    void testDefaultCloseOperationAuxConstructor() {
+        JFrame instance = new BookInfoViewer();
+        int expected = WindowConstants.EXIT_ON_CLOSE;
+        int actual = instance.getDefaultCloseOperation();
+        String message = "Default close operation should be exit on close";
+        assertEquals(expected, actual, message);
+    }
+
 }
