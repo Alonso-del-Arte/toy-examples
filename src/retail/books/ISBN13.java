@@ -58,6 +58,9 @@ public class ISBN13 extends ISBN {
     // TODO: Write tests for this
     public ISBN13(String num) {
         super(-1, (byte) 13, "???");
+        if (num == null) {
+            throw new NullPointerException("Null number is not valid");
+        }
     }
 
 }
