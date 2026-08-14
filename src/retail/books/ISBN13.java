@@ -55,4 +55,9 @@ public class ISBN13 extends ISBN {
         super(-1, (byte) 13, "?");
     }
 
+    // TODO: Write tests for this
+    public ISBN13(String num) {
+        super(-1, (byte) 13, "???");
+    }
+
 }
