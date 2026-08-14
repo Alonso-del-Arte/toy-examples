@@ -141,4 +141,17 @@ class ISBN13Test {
         assertEquals(expected, actual, message);
     }
 
+    @Test
+    void testStringConstructorRejectsNullString() {
+        String message = "Null String should cause NPE";
+        Throwable t = assertThrows(NullPointerException.class, () -> {
+            ISBN13 badInstance = new ISBN13(null);
+            System.out.println(message + ", not created " + badInstance);
+        }, message);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
 }
