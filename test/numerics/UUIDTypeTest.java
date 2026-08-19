@@ -170,7 +170,15 @@ public class UUIDTypeTest {
         }
     }
 
-    // TODO: Test MD5
+    @Test
+    void testIsOfTypeMD5() {
+        long highBits = version0HighBits() + 2 * HIGH_BITS_VERSION_INCREMENT
+                + HIGH_BITS_VERSION_INCREMENT;
+        long lowBits = RANDOM.nextLong();
+        UUID uuid = new UUID(highBits, lowBits);
+        String msg = "UUID " + uuid + " should be MD5";
+        assert UUIDType.MD5.isOfType(uuid) : msg;
+    }
 
     @Test
     void testIsOfTypeRandomVersion4() {
