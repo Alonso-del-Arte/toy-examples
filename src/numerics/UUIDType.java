@@ -25,8 +25,9 @@ public enum UUIDType {
             (uuid.getHighBits() & Constants.VERSION_MASK)
                     == Constants.VERSION_5_BITS),
 
-    MAC_SORTABLE((UUID) -> false), RANDOM_SORTABLE((UUID) -> false),
-    CUSTOM((UUID) -> false);
+    MAC_SORTABLE((UUID) -> true),
+
+    RANDOM_SORTABLE((UUID) -> false), CUSTOM((UUID) -> false);
 
     private final Predicate<UUID> checker;
 
@@ -52,7 +53,6 @@ public enum UUIDType {
 
     }
 
-    // TODO: Write tests for this
     public boolean isOfType(UUID uuid) {
         return this.checker.test(uuid);
     }
