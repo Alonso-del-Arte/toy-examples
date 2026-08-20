@@ -255,6 +255,20 @@ public class UUIDTypeTest {
         assert UUIDType.SHA1.isOfType(uuid) : msg;
     }
 
+    @Test
+    void testVersions0To4AreNotVersion5() {
+        long propHighBits = version0HighBits();
+        long lowBits = RANDOM.nextLong();
+        long stop = 5 * HIGH_BITS_VERSION_INCREMENT;
+        for (long versionBits = 0L; versionBits < stop;
+             versionBits += HIGH_BITS_VERSION_INCREMENT) {
+            long highBits = propHighBits + versionBits;
+            UUID uuid = new UUID(highBits, lowBits);
+            String msg = uuid + " should not be Version 5";
+            assert !UUIDType.SHA1.isOfType(uuid) : msg;
+        }
+    }
+
     // TODO: Test MAC_SORTABLE
 
     // TODO: Test RANDOM_SORTABLE
