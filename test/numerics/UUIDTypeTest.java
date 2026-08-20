@@ -284,6 +284,15 @@ public class UUIDTypeTest {
         }
     }
 
+    @Test
+    void testIsOfTypeMACVersion6() {
+        long highBits = version0HighBits() + 6 * HIGH_BITS_VERSION_INCREMENT;
+        long lowBits = RANDOM.nextLong();
+        UUID uuid = new UUID(highBits, lowBits);
+        String msg = "UUID " + uuid + " should be MAC, version 6";
+        assert UUIDType.MAC_SORTABLE.isOfType(uuid) : msg;
+    }
+
     // TODO: Test MAC_SORTABLE
 
     // TODO: Test RANDOM_SORTABLE
