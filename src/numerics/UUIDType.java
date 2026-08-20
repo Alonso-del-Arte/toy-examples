@@ -21,7 +21,8 @@ public enum UUIDType {
             (uuid.getHighBits() & Constants.VERSION_MASK)
                     == Constants.VERSION_4_BIT),
 
-    SHA1((UUID) -> false),
+    SHA1((UUID) -> true),
+
     MAC_SORTABLE((UUID) -> false), RANDOM_SORTABLE((UUID) -> false),
     CUSTOM((UUID) -> false);
 
