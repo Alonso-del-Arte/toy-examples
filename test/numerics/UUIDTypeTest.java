@@ -245,7 +245,15 @@ public class UUIDTypeTest {
         }
     }
 
-    // TODO: Test SHA1
+    @Test
+    void testIsOfTypeSHA1() {
+        long highBits = version0HighBits() + 4 * HIGH_BITS_VERSION_INCREMENT
+                + HIGH_BITS_VERSION_INCREMENT;
+        long lowBits = RANDOM.nextLong();
+        UUID uuid = new UUID(highBits, lowBits);
+        String msg = "UUID " + uuid + " should be SHA-1";
+        assert UUIDType.SHA1.isOfType(uuid) : msg;
+    }
 
     // TODO: Test MAC_SORTABLE
 
