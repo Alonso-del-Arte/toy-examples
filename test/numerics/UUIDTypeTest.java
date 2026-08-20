@@ -195,6 +195,21 @@ public class UUIDTypeTest {
     }
 
     @Test
+    void testVersions4To15AreNotVersion3Either() {
+        long propHighBits = version0HighBits();
+        long lowBits = RANDOM.nextLong();
+        long start = 4 * HIGH_BITS_VERSION_INCREMENT;
+        for (long versionBits = start;
+             versionBits < HIGH_BITS_VERSION_THRESHOLD;
+             versionBits += HIGH_BITS_VERSION_INCREMENT) {
+            long highBits = propHighBits + versionBits;
+            UUID uuid = new UUID(highBits, lowBits);
+            String msg = uuid + " should not be Version 3";
+            assert !UUIDType.MD5.isOfType(uuid) : msg;
+        }
+    }
+
+    @Test
     void testIsOfTypeRandomVersion4() {
         UUID uuid = nextUUIDv4();
         String msg = "UUID " + uuid + " should be RANDOM, version 4";
