@@ -27,7 +27,7 @@ public enum UUIDType {
 
     MAC_SORTABLE((UUID uuid) ->
             (uuid.getHighBits() & Constants.VERSION_MASK)
-                    >= Constants.VERSION_6_BITS),
+                    == Constants.VERSION_6_BITS),
 
     RANDOM_SORTABLE((UUID) -> false), CUSTOM((UUID) -> false);
 
