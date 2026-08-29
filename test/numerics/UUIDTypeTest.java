@@ -307,6 +307,21 @@ public class UUIDTypeTest {
         }
     }
 
+    @Test
+    void testVersions7To15AreNotVersion6Either() {
+        long propHighBits = version0HighBits();
+        long lowBits = RANDOM.nextLong();
+        long start = 7 * HIGH_BITS_VERSION_INCREMENT;
+        for (long versionBits = start;
+             versionBits < HIGH_BITS_VERSION_THRESHOLD;
+             versionBits += HIGH_BITS_VERSION_INCREMENT) {
+            long highBits = propHighBits + versionBits;
+            UUID uuid = new UUID(highBits, lowBits);
+            String msg = uuid + " should not be Version 6";
+            assert !UUIDType.MAC_SORTABLE.isOfType(uuid) : msg;
+        }
+    }
+
     // TODO: Test RANDOM_SORTABLE
 
     // TODO: Test UNKNOWN last
