@@ -345,6 +345,21 @@ public class UUIDTypeTest {
         }
     }
 
+    @Test
+    void testVersions8To15AreNotVersion7Either() {
+        long propHighBits = version0HighBits();
+        long lowBits = RANDOM.nextLong();
+        long start = HIGH_BITS_VERSION_INCREMENT << 3;
+        for (long versionBits = start;
+             versionBits < HIGH_BITS_VERSION_THRESHOLD;
+             versionBits += HIGH_BITS_VERSION_INCREMENT) {
+            long highBits = propHighBits + versionBits;
+            UUID uuid = new UUID(highBits, lowBits);
+            String msg = uuid + " should not be Version 7";
+            assert !UUIDType.RANDOM_SORTABLE.isOfType(uuid) : msg;
+        }
+    }
+
     // TODO: Test UNKNOWN last
 
 }
