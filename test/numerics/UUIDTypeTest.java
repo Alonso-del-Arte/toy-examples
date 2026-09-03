@@ -322,7 +322,14 @@ public class UUIDTypeTest {
         }
     }
 
-    // TODO: Test RANDOM_SORTABLE
+    @Test
+    void testIsOfTypeRandomVersion7() {
+        long highBits = version0HighBits() + 7 * HIGH_BITS_VERSION_INCREMENT;
+        long lowBits = RANDOM.nextLong();
+        UUID uuid = new UUID(highBits, lowBits);
+        String msg = "UUID " + uuid + " should be Random, version 7";
+        assert UUIDType.RANDOM_SORTABLE.isOfType(uuid) : msg;
+    }
 
     // TODO: Test UNKNOWN last
 
