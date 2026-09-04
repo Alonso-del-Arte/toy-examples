@@ -369,6 +369,20 @@ public class UUIDTypeTest {
         assert UUIDType.CUSTOM.isOfType(uuid) : msg;
     }
 
+    @Test
+    void testVersions0To7AreNotVersion8() {
+        long propHighBits = version0HighBits();
+        long lowBits = RANDOM.nextLong();
+        long stop = HIGH_BITS_VERSION_INCREMENT << 3;
+        for (long versionBits = 0L; versionBits < stop;
+             versionBits += HIGH_BITS_VERSION_INCREMENT) {
+            long highBits = propHighBits + versionBits;
+            UUID uuid = new UUID(highBits, lowBits);
+            String msg = uuid + " should not be Version 8";
+            assert !UUIDType.CUSTOM.isOfType(uuid) : msg;
+        }
+    }
+
     // TODO: Test UNKNOWN last
 
 }
