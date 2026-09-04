@@ -360,6 +360,15 @@ public class UUIDTypeTest {
         }
     }
 
+    @Test
+    void testIsOfTypeCustom() {
+        long highBits = version0HighBits() + (HIGH_BITS_VERSION_INCREMENT << 3);
+        long lowBits = RANDOM.nextLong();
+        UUID uuid = new UUID(highBits, lowBits);
+        String msg = "UUID " + uuid + " should be Custom";
+        assert UUIDType.CUSTOM.isOfType(uuid) : msg;
+    }
+
     // TODO: Test UNKNOWN last
 
 }
