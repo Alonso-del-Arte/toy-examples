@@ -36,7 +36,7 @@ public enum UUIDType {
 
     CUSTOM(((UUID uuid) ->
             (uuid.getHighBits() & Constants.VERSION_MASK)
-                    >= Constants.VERSION_8_BIT));
+                    == Constants.VERSION_8_BIT));
 
     private final Predicate<UUID> checker;
 
