@@ -421,4 +421,19 @@ public class UUIDTypeTest {
         }
     }
 
+    @Test
+    void testVersions9To15AreUnknown() {
+        long propHighBits = version0HighBits();
+        long lowBits = RANDOM.nextLong();
+        long start = 9 * HIGH_BITS_VERSION_INCREMENT;
+        for (long versionBits = start;
+             versionBits < HIGH_BITS_VERSION_THRESHOLD;
+             versionBits += HIGH_BITS_VERSION_INCREMENT) {
+            long highBits = propHighBits + versionBits;
+            UUID uuid = new UUID(highBits, lowBits);
+            String msg = uuid + " should be unknown";
+            assert UUIDType.UNKNOWN.isOfType(uuid) : msg;
+        }
+    }
+
 }
