@@ -383,6 +383,13 @@ public class UUIDTypeTest {
         }
     }
 
-    // TODO: Test UNKNOWN last
+    @Test
+    void testVersion0IsUnknown() {
+        long highBits = version0HighBits();
+        long lowBits = RANDOM.nextLong();
+        UUID uuid = new UUID(highBits, lowBits);
+        String msg = "UUID " + uuid + " should be unknown Version 0";
+        assert UUIDType.UNKNOWN.isOfType(uuid) : msg;
+    }
 
 }
