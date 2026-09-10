@@ -4,10 +4,7 @@ import java.util.function.Predicate;
 
 public enum UUIDType {
 
-    UNKNOWN((UUID uuid) ->
-            (uuid.getHighBits() & Constants.VERSION_MASK) == 0L
-                    || (uuid.getHighBits() & Constants.VERSION_MASK)
-                    > Constants.VERSION_8_BIT),
+    UNKNOWN((UUID uuid) -> isOfUnknownType(uuid)),
 
     MAC((UUID uuid) ->
             (uuid.getHighBits() & Constants.VERSION_MASK)
@@ -62,6 +59,11 @@ public enum UUIDType {
 
         static final int VERSION_8_BIT = 32768;
 
+    }
+
+    private static boolean isOfUnknownType(UUID uuid) {
+        long versionBits = uuid.getHighBits() & Constants.VERSION_MASK;
+        return versionBits == 0 || versionBits > Constants.VERSION_8_BIT;
     }
 
     public boolean isOfType(UUID uuid) {
