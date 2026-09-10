@@ -4,7 +4,7 @@ import java.util.function.Predicate;
 
 public enum UUIDType {
 
-    UNKNOWN((UUID uuid) -> isOfUnknownType(uuid)),
+    UNKNOWN(UUIDType::isOfUnknownType),
 
     MAC((UUID uuid) ->
             (uuid.getHighBits() & Constants.VERSION_MASK)
