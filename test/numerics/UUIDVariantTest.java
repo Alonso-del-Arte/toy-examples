@@ -31,4 +31,11 @@ class UUIDVariantTest {
         return new UUID(highBits, lowBits);
     }
 
+    @Test
+    void testHighFourBitsMask() {
+        long expected = -1152921504606846976L;
+        long actual = UUIDVariant.Constants.HIGH_FOUR_BITS_MASK;
+        assertEquals(expected, actual);
+    }
+
 }
