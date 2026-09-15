@@ -16,6 +16,10 @@ public enum UUIDVariant {
 
     private final Predicate<UUID> checker;
 
+    static class Constants {
+        
+    }
+
     // TODO: Write tests for this
     public boolean isOfVariant(UUID uuid) {
         return this.checker.test(uuid);
