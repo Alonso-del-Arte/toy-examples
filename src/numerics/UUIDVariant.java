@@ -18,8 +18,7 @@ public enum UUIDVariant {
 
     static class Constants {
         
-        // TODO: Write a test for this
-        static final long HIGH_FOUR_BITS_MASK = 1152921504606846975L;
+        static final long HIGH_FOUR_BITS_MASK = -1152921504606846976L;
 
     }
 
