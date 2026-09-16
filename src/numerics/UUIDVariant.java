@@ -20,7 +20,7 @@ public enum UUIDVariant {
         
         static final long HIGH_FOUR_BITS_MASK = -1152921504606846976L;
 
-        static final long VARIANT_INCREMENT = -1L << 60;
+        static final long VARIANT_INCREMENT = 1152921504606846976L;
 
     }
 
