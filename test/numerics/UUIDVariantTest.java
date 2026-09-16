@@ -17,7 +17,8 @@ class UUIDVariantTest {
 
     private static final long LOW_60_BITS_MASK = (1L << 60) - 1;
 
-    private static final Random RANDOM = new Random(DCE_VARIANT_MASK);
+    private static final Random RANDOM = new Random(DCE_VARIANT_MASK
+            & System.currentTimeMillis());
 
     private static int chooseVersion4BitOrVersion7Bits() {
         if (RANDOM.nextBoolean()) {
