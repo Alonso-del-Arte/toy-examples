@@ -4,7 +4,7 @@ import java.util.function.Predicate;
 
 public enum UUIDVariant {
 
-    NCS_BACKWARD_COMPATIBLE((UUID) -> false),
+    NCS_BACKWARD_COMPATIBLE((UUID) -> true),
 
     DISTRIBUTED_COMPUTING_ENVIRONMENT((UUID) -> false),
 
