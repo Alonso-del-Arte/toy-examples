@@ -40,7 +40,7 @@ class UUIDVariantTest {
 
     @Test
     void testVariantIncrementConstant() {
-        long expected = 1152921504606846976L;
+        long expected = 1L << 60;
         long actual = UUIDVariant.Constants.VARIANT_INCREMENT;
         assertEquals(expected, actual);
     }
