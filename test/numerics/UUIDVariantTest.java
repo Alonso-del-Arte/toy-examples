@@ -61,4 +61,18 @@ class UUIDVariantTest {
         }
     }
 
+    @Test
+    void testIsNotOfVariantNCSBackwardCompatible() {
+        long highBits = chooseVersion4BitOrVersion7Bits();
+        long startingLowBits = (RANDOM.nextLong() >>> 4) | Long.MIN_VALUE;
+        long increment = 1L << 60;
+        for (long lowBits = startingLowBits; lowBits < 0;
+             lowBits += increment) {
+            UUID uuid = new UUID(highBits, lowBits);
+            String msg = "UUID " + uuid
+                    + " should not be NCS backward compatible";
+            assert !UUIDVariant.NCS_BACKWARD_COMPATIBLE.isOfVariant(uuid) : msg;
+        }
+    }
+
 }
