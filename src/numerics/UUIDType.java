@@ -43,7 +43,7 @@ public enum UUIDType {
 
         static final int VERSION_MASK = 61440;
 
-        static final long ALL_BUT_VERSION_BITS_MASK = -61441L;
+        static final long ALL_BUT_VERSION_BITS_MASK = -61441;
 
         static final int VERSION_1_BIT = 4096;
 
