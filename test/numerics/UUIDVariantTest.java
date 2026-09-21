@@ -28,9 +28,9 @@ class UUIDVariantTest {
         }
     }
 
-    private static UUID makeUUID() {
+    private static UUID makeNonNCSUUID() {
         long highBits = chooseVersion4BitOrVersion7Bits();
-        long lowBits = RANDOM.nextLong();
+        long lowBits = (RANDOM.nextLong() >>> 4) | Long.MIN_VALUE;
         return new UUID(highBits, lowBits);
     }
 
