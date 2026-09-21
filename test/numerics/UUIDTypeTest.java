@@ -37,6 +37,15 @@ public class UUIDTypeTest {
     }
 
     @Test
+    void testConstantAllButVersionBitsMask() {
+        long expMask = ~((long) UUIDType.Constants.VERSION_MASK);
+        long actMask = UUIDType.Constants.ALL_BUT_VERSION_BITS_MASK;
+        String expected = Long.toHexString(expMask);
+        String actual = Long.toHexString(actMask);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testConstantVersion1Bit() {
         int expected = 4096;
         int actual = UUIDType.Constants.VERSION_1_BIT;
