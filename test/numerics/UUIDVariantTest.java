@@ -22,12 +22,13 @@ class UUIDVariantTest {
     private static final Random RANDOM = new Random(DCE_VARIANT_MASK
             & System.currentTimeMillis());
 
-    private static int chooseVersion4BitOrVersion7Bits() {
-        if (RANDOM.nextBoolean()) {
-            return UUIDType.Constants.VERSION_4_BIT;
-        } else {
-            return UUIDType.Constants.VERSION_7_BITS;
-        }
+    private static long chooseVersion4BitOrVersion7Bits() {
+        long randomBits = RANDOM.nextLong()
+                & UUIDType.Constants.ALL_BUT_VERSION_BITS_MASK;
+        int versionBits = (RANDOM.nextBoolean())
+                ? UUIDType.Constants.VERSION_4_BIT
+                : UUIDType.Constants.VERSION_7_BITS;
+        return randomBits + versionBits;
     }
 
     private static UUID makeNonNCSUUID() {
