@@ -15,7 +15,9 @@ class UUIDVariantTest {
 
     private static final long DCE_VARIANT_MASK = -4611686018427387905L;
 
-    private static final long LOW_60_BITS_MASK = (1L << 60) - 1;
+    private static final long VAR_INCR = 1L << 60;
+
+    private static final long LOW_60_BITS_MASK = VAR_INCR - 1;
 
     private static final Random RANDOM = new Random(DCE_VARIANT_MASK
             & System.currentTimeMillis());
@@ -52,9 +54,7 @@ class UUIDVariantTest {
     void testIsOfVariantNCSBackwardCompatible() {
         long highBits = chooseVersion4BitOrVersion7Bits();
         long startingLowBits = RANDOM.nextLong() & LOW_60_BITS_MASK;
-        long increment = 1L << 60;
-        for (long lowBits = startingLowBits; lowBits > 0;
-             lowBits += increment) {
+        for (long lowBits = startingLowBits; lowBits > 0; lowBits += VAR_INCR) {
             UUID uuid = new UUID(highBits, lowBits);
             String msg = "UUID " + uuid + " should be NCS backward compatible";
             assert UUIDVariant.NCS_BACKWARD_COMPATIBLE.isOfVariant(uuid) : msg;
@@ -65,9 +65,7 @@ class UUIDVariantTest {
     void testIsNotOfVariantNCSBackwardCompatible() {
         long highBits = chooseVersion4BitOrVersion7Bits();
         long startingLowBits = (RANDOM.nextLong() >>> 4) | Long.MIN_VALUE;
-        long increment = 1L << 60;
-        for (long lowBits = startingLowBits; lowBits < 0;
-             lowBits += increment) {
+        for (long lowBits = startingLowBits; lowBits < 0; lowBits += VAR_INCR) {
             UUID uuid = new UUID(highBits, lowBits);
             String msg = "UUID " + uuid
                     + " should not be NCS backward compatible";
