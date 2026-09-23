@@ -244,7 +244,7 @@ public class TextCalculator {
     }
 
     // TODO: Write tests for this
-    public static String makeAcronym(String s, char c) {
+    public static String makeAcronym(String s, char punctuator) {
         return "SORRY, NOT IMPLEMENTED YET";
     }
 
