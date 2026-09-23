@@ -248,4 +248,9 @@ public class TextCalculator {
         return "SORRY, NOT IMPLEMENTED YET";
     }
 
+    // TODO: Write tests for this
+    public static String convertToHiraganaAndKatakana(String s) {
+        return s;
+    }
+
 }
