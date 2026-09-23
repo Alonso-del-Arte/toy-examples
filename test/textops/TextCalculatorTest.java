@@ -2,8 +2,12 @@ package textops;
 
 import arithmetic.Range;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
@@ -24,6 +28,87 @@ class TextCalculatorTest {
 
     private static final String[] PLURAL_NOUNS = {"Armadillos", "Bullfrogs",
             "Clerks", "Investigations", "Jokes", "Kangaroos", "Llamas"};
+
+    private static final Map<String, String> ROMAJI_HIRAGANA_MAP
+            = new HashMap<>();
+
+    static {
+        ROMAJI_HIRAGANA_MAP.put("a", "あ");
+        ROMAJI_HIRAGANA_MAP.put("i", "い");
+        ROMAJI_HIRAGANA_MAP.put("u", "う");
+        ROMAJI_HIRAGANA_MAP.put("e", "え");
+        ROMAJI_HIRAGANA_MAP.put("o", "お");
+        ROMAJI_HIRAGANA_MAP.put("ka", "か");
+        ROMAJI_HIRAGANA_MAP.put("ki", "き");
+        ROMAJI_HIRAGANA_MAP.put("ku", "く");
+        ROMAJI_HIRAGANA_MAP.put("ke", "け");
+        ROMAJI_HIRAGANA_MAP.put("ko", "こ");
+        ROMAJI_HIRAGANA_MAP.put("ga", "が");
+        ROMAJI_HIRAGANA_MAP.put("gi", "ぎ");
+        ROMAJI_HIRAGANA_MAP.put("gu", "ぐ");
+        ROMAJI_HIRAGANA_MAP.put("ge", "げ");
+        ROMAJI_HIRAGANA_MAP.put("go", "ご");
+        ROMAJI_HIRAGANA_MAP.put("sa", "さ");
+        ROMAJI_HIRAGANA_MAP.put("shi", "し");
+        ROMAJI_HIRAGANA_MAP.put("su", "す");
+        ROMAJI_HIRAGANA_MAP.put("se", "せ");
+        ROMAJI_HIRAGANA_MAP.put("so", "そ");
+        ROMAJI_HIRAGANA_MAP.put("za", "ざ");
+        ROMAJI_HIRAGANA_MAP.put("ji", "じ");
+        ROMAJI_HIRAGANA_MAP.put("zu", "ず");
+        ROMAJI_HIRAGANA_MAP.put("ze", "ぜ");
+        ROMAJI_HIRAGANA_MAP.put("zo", "ぞ");
+        ROMAJI_HIRAGANA_MAP.put("ta", "た");
+        ROMAJI_HIRAGANA_MAP.put("chi", "ち");
+        ROMAJI_HIRAGANA_MAP.put("tsu", "つ");
+        ROMAJI_HIRAGANA_MAP.put("te", "て");
+        ROMAJI_HIRAGANA_MAP.put("to", "と");
+        ROMAJI_HIRAGANA_MAP.put("da", "だ");
+        ROMAJI_HIRAGANA_MAP.put("di", "ぢ");
+        ROMAJI_HIRAGANA_MAP.put("du", "づ");
+        ROMAJI_HIRAGANA_MAP.put("de", "で");
+        ROMAJI_HIRAGANA_MAP.put("do", "ど");
+        ROMAJI_HIRAGANA_MAP.put("na", "な");
+        ROMAJI_HIRAGANA_MAP.put("ni", "に");
+        ROMAJI_HIRAGANA_MAP.put("nu", "ぬ");
+        ROMAJI_HIRAGANA_MAP.put("ne", "ね");
+        ROMAJI_HIRAGANA_MAP.put("no", "の");
+        ROMAJI_HIRAGANA_MAP.put("ha", "は");
+        ROMAJI_HIRAGANA_MAP.put("hi", "ひ");
+        ROMAJI_HIRAGANA_MAP.put("fu", "ふ");
+        ROMAJI_HIRAGANA_MAP.put("he", "へ");
+        ROMAJI_HIRAGANA_MAP.put("ho", "ほ");
+        ROMAJI_HIRAGANA_MAP.put("ba", "ば");
+        ROMAJI_HIRAGANA_MAP.put("bi", "び");
+        ROMAJI_HIRAGANA_MAP.put("bu", "ぶ");
+        ROMAJI_HIRAGANA_MAP.put("be", "べ");
+        ROMAJI_HIRAGANA_MAP.put("bo", "ぼ");
+        ROMAJI_HIRAGANA_MAP.put("pa", "ぱ");
+        ROMAJI_HIRAGANA_MAP.put("pi", "ぴ");
+        ROMAJI_HIRAGANA_MAP.put("pu", "ぷ");
+        ROMAJI_HIRAGANA_MAP.put("pe", "ぺ");
+        ROMAJI_HIRAGANA_MAP.put("po", "ぽ");
+        ROMAJI_HIRAGANA_MAP.put("ma", "ま");
+        ROMAJI_HIRAGANA_MAP.put("mi", "み");
+        ROMAJI_HIRAGANA_MAP.put("mu", "む");
+        ROMAJI_HIRAGANA_MAP.put("me", "め");
+        ROMAJI_HIRAGANA_MAP.put("mo", "も");
+        ROMAJI_HIRAGANA_MAP.put("ya", "や");
+        ROMAJI_HIRAGANA_MAP.put("yu", "ゆ");
+        ROMAJI_HIRAGANA_MAP.put("yo", "よ");
+        ROMAJI_HIRAGANA_MAP.put("ra", "ら");
+        ROMAJI_HIRAGANA_MAP.put("ri", "り");
+        ROMAJI_HIRAGANA_MAP.put("ru", "る");
+        ROMAJI_HIRAGANA_MAP.put("re", "れ");
+        ROMAJI_HIRAGANA_MAP.put("ro", "ろ");
+        Map<String, String> nMap = new HashMap<>(ROMAJI_HIRAGANA_MAP.size());
+        for (Map.Entry<String, String> entry : ROMAJI_HIRAGANA_MAP.entrySet()) {
+            String key = entry.getKey() + "n";
+            String value = entry.getValue() + "ん";
+            nMap.put(key, value);
+        }
+        ROMAJI_HIRAGANA_MAP.putAll(nMap);
+    }
 
     @Test
     void testBlockRange() {
@@ -771,6 +856,25 @@ class TextCalculatorTest {
         String message = "Trying to pad String of " + length
                 + " characters to length " + length + " should not change it";
         assertEquals(expected, actual, message);
+    }
+
+    @Test
+    void testConvertRomajiToHiragana() {
+        System.out.println("convertRomajiToHiragana");
+        Collection<String> c = ROMAJI_HIRAGANA_MAP.keySet();
+        List<String> romaji = new ArrayList<>(c);
+        Collections.shuffle(romaji);
+        int capacity = romaji.size();
+        StringBuilder input = new StringBuilder(3 * capacity);
+        StringBuilder expStr = new StringBuilder(capacity);
+        for (String ji : romaji) {
+            input.append(ji);
+            expStr.append(ROMAJI_HIRAGANA_MAP.get(ji));
+        }
+        String s = input.toString();
+        String expected = expStr.toString();
+        String actual = TextCalculator.convertRomajiToHiragana(s);
+        assertEquals(expected, actual);
     }
 
 }
