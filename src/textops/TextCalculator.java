@@ -249,7 +249,7 @@ public class TextCalculator {
     }
 
     // TODO: Write tests for this
-    public static String convertToHiraganaAndKatakana(String s) {
+    public static String convertRomajiToHiragana(String s) {
         return s;
     }
 
