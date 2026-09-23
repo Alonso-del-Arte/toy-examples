@@ -3,6 +3,8 @@ package textops;
 import arithmetic.Range;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,7 +22,7 @@ class TextCalculatorTest {
     private static final String[] SINGULAR_NOUNS = {"Academy", "Bureau",
             "Chamber", "Department"};
 
-    public static final String[] PLURAL_NOUNS = {"Armadillos", "Bullfrogs",
+    private static final String[] PLURAL_NOUNS = {"Armadillos", "Bullfrogs",
             "Clerks", "Investigations", "Jokes", "Kangaroos", "Llamas"};
 
     @Test
