@@ -19,6 +19,8 @@ class UUIDVariantTest {
 
     private static final long GUID_C = Long.MIN_VALUE + (VAR_INCR << 2);
 
+    private static final long GUID_D = GUID_C + VAR_INCR;
+
     private static final long LOW_60_BITS_MASK = VAR_INCR - 1;
 
     private static final Random RANDOM = new Random(DCE_VARIANT_MASK
@@ -51,6 +53,12 @@ class UUIDVariantTest {
     void testMicrosoftGUIDCLevelConstant() {
         long actual = UUIDVariant.Constants.MICROSOFT_GUID_C_LEVEL;
         assertEquals(GUID_C, actual);
+    }
+
+    @Test
+    void testMicrosoftGUIDDLevelConstant() {
+        long actual = UUIDVariant.Constants.MICROSOFT_GUID_D_LEVEL;
+        assertEquals(GUID_D, actual);
     }
 
     @Test
