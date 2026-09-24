@@ -69,4 +69,17 @@ class UUIDVariantTest {
         }
     }
 
+    @Test
+    void testIsOfVariantDCE() {
+        long highBits = chooseVersion4BitOrVersion7Bits();
+        long startingLowBits = (RANDOM.nextLong() >>> 4) | Long.MIN_VALUE;
+        long stop = VAR_INCR << 2;
+        for (long lowBits = startingLowBits; lowBits < stop; lowBits += VAR_INCR) {
+            UUID uuid = new UUID(highBits, lowBits);
+            String msg = "UUID " + uuid + " should be DCE 1.1";
+            assert UUIDVariant.DISTRIBUTED_COMPUTING_ENVIRONMENT
+                    .isOfVariant(uuid) : msg;
+        }
+    }
+
 }
