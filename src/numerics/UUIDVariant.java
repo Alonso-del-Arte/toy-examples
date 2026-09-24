@@ -6,7 +6,7 @@ public enum UUIDVariant {
 
     NCS_BACKWARD_COMPATIBLE((UUID uuid) -> uuid.getLowBits() > -1L),
 
-    DISTRIBUTED_COMPUTING_ENVIRONMENT((UUID) -> false),
+    DISTRIBUTED_COMPUTING_ENVIRONMENT((UUID) -> true),
 
     MICROSOFT_GUID((UUID) -> false),
 
