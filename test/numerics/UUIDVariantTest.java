@@ -132,6 +132,16 @@ class UUIDVariantTest {
     }
 
     @Test
+    void testReservedForFutureUseIsNotDCE() {
+        long highBits = chooseVersion4BitOrVersion7Bits();
+        long lowBits = (RANDOM.nextLong() >>> 4) | (-2 * VAR_INCR);
+        UUID uuid = new UUID(highBits, lowBits);
+        String msg = "UUID " + uuid + " should not be DCE 1.1";
+        assert !UUIDVariant.DISTRIBUTED_COMPUTING_ENVIRONMENT.isOfVariant(uuid)
+                : msg;
+    }
+
+    @Test
     void testUnknownIsNotDCE() {
         long highBits = chooseVersion4BitOrVersion7Bits();
         long lowBits = (RANDOM.nextLong() >>> 4) | (-VAR_INCR);
