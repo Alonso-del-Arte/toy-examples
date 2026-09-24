@@ -101,6 +101,39 @@ class TextCalculatorTest {
         ROMAJI_HIRAGANA_MAP.put("ru", "る");
         ROMAJI_HIRAGANA_MAP.put("re", "れ");
         ROMAJI_HIRAGANA_MAP.put("ro", "ろ");
+        ROMAJI_HIRAGANA_MAP.put("kya", "きゃ");
+        ROMAJI_HIRAGANA_MAP.put("kyu", "きゅ");
+        ROMAJI_HIRAGANA_MAP.put("kyo", "きょ");
+        ROMAJI_HIRAGANA_MAP.put("gya", "ぎゃ");
+        ROMAJI_HIRAGANA_MAP.put("gyu", "ぎゅ");
+        ROMAJI_HIRAGANA_MAP.put("gyo", "ぎょ");
+        ROMAJI_HIRAGANA_MAP.put("sha", "しゃ");
+        ROMAJI_HIRAGANA_MAP.put("shu", "しゅ");
+        ROMAJI_HIRAGANA_MAP.put("sho", "しょ");
+        ROMAJI_HIRAGANA_MAP.put("ja", "じゃ");
+        ROMAJI_HIRAGANA_MAP.put("ju", "じゅ");
+        ROMAJI_HIRAGANA_MAP.put("jo", "じょ");
+        ROMAJI_HIRAGANA_MAP.put("cha", "ちゃ");
+        ROMAJI_HIRAGANA_MAP.put("chu", "ちゅ");
+        ROMAJI_HIRAGANA_MAP.put("cho", "ちょ");
+        ROMAJI_HIRAGANA_MAP.put("nya", "にゃ");
+        ROMAJI_HIRAGANA_MAP.put("nyu", "にゅ");
+        ROMAJI_HIRAGANA_MAP.put("nyo", "にょ");
+        ROMAJI_HIRAGANA_MAP.put("hya", "ひゃ");
+        ROMAJI_HIRAGANA_MAP.put("hyu", "ひゅ");
+        ROMAJI_HIRAGANA_MAP.put("hyo", "ひょ");
+        ROMAJI_HIRAGANA_MAP.put("bya", "びゃ");
+        ROMAJI_HIRAGANA_MAP.put("byu", "びゅ");
+        ROMAJI_HIRAGANA_MAP.put("byo", "びょ");
+        ROMAJI_HIRAGANA_MAP.put("pya", "ぴゃ");
+        ROMAJI_HIRAGANA_MAP.put("pyu", "ぴゅ");
+        ROMAJI_HIRAGANA_MAP.put("pyo", "ぴょ");
+        ROMAJI_HIRAGANA_MAP.put("mya", "みゃ");
+        ROMAJI_HIRAGANA_MAP.put("myu", "みゅ");
+        ROMAJI_HIRAGANA_MAP.put("myo", "みょ");
+        ROMAJI_HIRAGANA_MAP.put("rya", "りゃ");
+        ROMAJI_HIRAGANA_MAP.put("ryu", "りゅ");
+        ROMAJI_HIRAGANA_MAP.put("ryo", "りょ");
         Map<String, String> nMap = new HashMap<>(ROMAJI_HIRAGANA_MAP.size());
         for (Map.Entry<String, String> entry : ROMAJI_HIRAGANA_MAP.entrySet()) {
             String key = entry.getKey() + "n";
@@ -876,5 +909,7 @@ class TextCalculatorTest {
         String actual = TextCalculator.convertRomajiToHiragana(s);
         assertEquals(expected, actual);
     }
+
+    // TODO: Test convertRomajiToHiragana() for small tsu
 
 }
