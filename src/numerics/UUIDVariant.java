@@ -24,8 +24,7 @@ public enum UUIDVariant {
 
         static final long MICROSOFT_GUID_C_LEVEL = -4611686018427387904L;
 
-        // TODO: Write a test for this
-        static final long MICROSOFT_GUID_D_LEVEL = -4611686018427387904L;
+        static final long MICROSOFT_GUID_D_LEVEL = -3458764513820540928L;
 
     }
 
