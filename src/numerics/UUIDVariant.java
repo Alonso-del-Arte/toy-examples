@@ -4,9 +4,9 @@ import java.util.function.Predicate;
 
 public enum UUIDVariant {
 
-    NCS_BACKWARD_COMPATIBLE((UUID uuid) -> uuid.getLowBits() < -1L),
+    NCS_BACKWARD_COMPATIBLE((UUID uuid) -> uuid.getLowBits() > -1L),
 
-    DISTRIBUTED_COMPUTING_ENVIRONMENT((UUID uuid) -> uuid.getLowBits() > 0L),
+    DISTRIBUTED_COMPUTING_ENVIRONMENT((UUID uuid) -> uuid.getLowBits() < 0L),
 
     MICROSOFT_GUID((UUID) -> false),
 
