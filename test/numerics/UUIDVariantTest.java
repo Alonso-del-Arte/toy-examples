@@ -31,12 +31,6 @@ class UUIDVariantTest {
         return randomBits + versionBits;
     }
 
-    private static UUID makeNonNCSUUID() {
-        long highBits = chooseVersion4BitOrVersion7Bits();
-        long lowBits = (RANDOM.nextLong() >>> 4) | Long.MIN_VALUE;
-        return new UUID(highBits, lowBits);
-    }
-
     @Test
     void testHighFourBitsMask() {
         long expected = -1152921504606846976L;
