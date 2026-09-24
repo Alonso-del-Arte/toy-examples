@@ -23,7 +23,7 @@ public enum UUIDVariant {
         static final long VARIANT_INCREMENT = 1152921504606846976L;
 
         // TODO: Write a test for this
-        static final long MICROSOFT_GUID_C = -3L;
+        static final long MICROSOFT_GUID_C_LEVEL = -3L;
 
     }
 
