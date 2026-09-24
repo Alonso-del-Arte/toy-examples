@@ -14,7 +14,7 @@ These are toy examples, but you should strive for efficiency. For amusingly
 overly complicated Java programs, check out my Rube-Goldberg-machines 
 repository.
 
-So you need to have Java 17 or later for both the runtime and the development 
+So you need to have Java 21 or later for both the runtime and the development 
 kit.
 
 Also, you should have an integrated development environment (IDE) for Java, 
@@ -68,6 +68,6 @@ requests. These toy examples are not worth putting up with Maven headaches or
 Gradle headaches or sbt headaches. If you're using IntelliJ, it's probably 
 easiest to just use IntelliJ's built-in build tool.
 
-The only dependency for this Java 17 project is JUnit. If the Java Development 
-Kit (JDK) for Java 17 doesn't provide something you need, consider writing it 
+The only dependency for this Java 21 project is JUnit. If the Java Development 
+Kit (JDK) for Java 21 doesn't provide something you need, consider writing it 
 from scratch.
