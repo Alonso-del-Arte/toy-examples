@@ -114,8 +114,7 @@ class UUIDVariantTest {
     @Test
     void testMicrosoftGUID_C_IsNotDCE() {
         long highBits = chooseVersion4BitOrVersion7Bits();
-        long lowBits = ((RANDOM.nextLong() >>> 4) | Long.MIN_VALUE)
-                + (VAR_INCR << 2);
+        long lowBits = (RANDOM.nextLong() >>> 4) | GUID_C;
         UUID uuid = new UUID(highBits, lowBits);
         String msg = "UUID " + uuid + " should not be DCE 1.1";
         assert !UUIDVariant.DISTRIBUTED_COMPUTING_ENVIRONMENT.isOfVariant(uuid)
