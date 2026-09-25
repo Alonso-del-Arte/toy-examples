@@ -90,7 +90,8 @@ class UUIDVariantTest {
         long highBits = chooseVersion4BitOrVersion7Bits();
         long startingLowBits = (RANDOM.nextLong() >>> 4) | Long.MIN_VALUE;
         long stop = Long.MIN_VALUE + (VAR_INCR << 2);
-        for (long lowBits = startingLowBits; lowBits < stop; lowBits += VAR_INCR) {
+        for (long lowBits = startingLowBits; lowBits < stop;
+             lowBits += VAR_INCR) {
             UUID uuid = new UUID(highBits, lowBits);
             String msg = "UUID " + uuid + " should be DCE 1.1";
             assert UUIDVariant.DISTRIBUTED_COMPUTING_ENVIRONMENT
@@ -175,6 +176,19 @@ class UUIDVariantTest {
         long startingLowBits = RANDOM.nextLong() & LOW_60_BITS_MASK;
         // noinspection OverflowingLoopIndex
         for (long lowBits = startingLowBits; lowBits > 0; lowBits += VAR_INCR) {
+            UUID uuid = new UUID(highBits, lowBits);
+            String msg = "UUID " + uuid + " should not be Microsoft GUID";
+            assert !UUIDVariant.MICROSOFT_GUID.isOfVariant(uuid) : msg;
+        }
+    }
+
+    @Test
+    void testDCEIsNotMicrosoftGUID() {
+        long highBits = chooseVersion4BitOrVersion7Bits();
+        long startingLowBits = (RANDOM.nextLong() >>> 4) | Long.MIN_VALUE;
+        long stop = Long.MIN_VALUE + (VAR_INCR << 2);
+        for (long lowBits = startingLowBits; lowBits < stop;
+             lowBits += VAR_INCR) {
             UUID uuid = new UUID(highBits, lowBits);
             String msg = "UUID " + uuid + " should not be Microsoft GUID";
             assert !UUIDVariant.MICROSOFT_GUID.isOfVariant(uuid) : msg;
