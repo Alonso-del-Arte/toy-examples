@@ -151,4 +151,13 @@ class UUIDVariantTest {
                 : msg;
     }
 
+    @Test
+    void testMicrosoftGUID_C_IsMicrosoftGUID() {
+        long highBits = chooseVersion4BitOrVersion7Bits();
+        long lowBits = (RANDOM.nextLong() >>> 4) | GUID_C;
+        UUID uuid = new UUID(highBits, lowBits);
+        String msg = "UUID " + uuid + " should be Microsoft GUID";
+        assert UUIDVariant.MICROSOFT_GUID.isOfVariant(uuid) : msg;
+    }
+
 }
