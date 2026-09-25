@@ -181,4 +181,13 @@ class UUIDVariantTest {
         }
     }
 
+    @Test
+    void testUnknownIsNotMicrosoftGUID() {
+        long highBits = chooseVersion4BitOrVersion7Bits();
+        long lowBits = (RANDOM.nextLong() >>> 4) | (-VAR_INCR);
+        UUID uuid = new UUID(highBits, lowBits);
+        String msg = "UUID " + uuid + " should not be Microsoft GUID";
+        assert !UUIDVariant.MICROSOFT_GUID.isOfVariant(uuid) : msg;
+    }
+
 }
