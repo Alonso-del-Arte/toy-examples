@@ -13,7 +13,7 @@ public enum UUIDVariant {
     MICROSOFT_GUID(
             (UUID uuid)
                     -> (uuid.getLowBits() & Constants.HIGH_FOUR_BITS_MASK)
-                    < -Constants.VARIANT_INCREMENT
+                    <= Constants.MICROSOFT_GUID_D_LEVEL
     ),
 
     RESERVED_FOR_FUTURE_USE((UUID) -> false),
