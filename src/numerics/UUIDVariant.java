@@ -12,7 +12,8 @@ public enum UUIDVariant {
 
     MICROSOFT_GUID(
             (UUID uuid)
-                    -> (uuid.getLowBits() & Constants.HIGH_FOUR_BITS_MASK) < 0
+                    -> (uuid.getLowBits() & Constants.HIGH_FOUR_BITS_MASK)
+                    < -Constants.VARIANT_INCREMENT
     ),
 
     RESERVED_FOR_FUTURE_USE((UUID) -> false),
