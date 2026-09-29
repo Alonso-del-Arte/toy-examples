@@ -18,7 +18,8 @@ public enum UUIDVariant {
 
     RESERVED_FOR_FUTURE_USE(
             (UUID uuid)
-                    -> uuid.getLowBits() >= Constants.HIGH_FOUR_BITS_MASK
+                    -> (uuid.getLowBits() & Constants.HIGH_THREE_BITS_MASK)
+                    == Constants.HIGH_THREE_BITS_MASK
     ),
 
     UNKNOWN((UUID) -> false);
