@@ -33,13 +33,13 @@ public class UUID implements Comparable<UUID> {
     }
 
     // TODO: Write tests for this
-    public byte getVersionID() {
-        return -1;
+    public byte getVersionIDBits() {
+        return Byte.MAX_VALUE;
     }
 
     // TODO: Write tests for this
-    public byte getVariantID() {
-        return -1;
+    public byte getVariantIDBits() {
+        return Byte.MIN_VALUE;
     }
 
     /**
