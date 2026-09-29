@@ -24,7 +24,7 @@ public enum UUIDVariant {
 
     UNKNOWN(
             (UUID uuid)
-                    -> uuid.getLowBits() >= Constants.MICROSOFT_GUID_C_LEVEL
+                    -> uuid.getLowBits() >= Constants.MICROSOFT_GUID_D_LEVEL
     );
 
     private final Predicate<UUID> checker;
