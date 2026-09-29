@@ -22,7 +22,7 @@ public enum UUIDVariant {
                     == Constants.HIGH_THREE_BITS_MASK
     ),
 
-    UNKNOWN((UUID) -> false);
+    UNKNOWN((UUID) -> true);
 
     private final Predicate<UUID> checker;
 
