@@ -16,7 +16,10 @@ public enum UUIDVariant {
                     == Constants.MICROSOFT_GUID_C_LEVEL
     ),
 
-    RESERVED_FOR_FUTURE_USE((UUID) -> true),
+    RESERVED_FOR_FUTURE_USE(
+            (UUID uuid)
+                    -> uuid.getLowBits() >= Constants.MICROSOFT_GUID_C_LEVEL
+    ),
 
     UNKNOWN((UUID) -> false);
 
