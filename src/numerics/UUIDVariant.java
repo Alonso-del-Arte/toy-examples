@@ -16,7 +16,7 @@ public enum UUIDVariant {
                     == Constants.MICROSOFT_GUID_C_LEVEL
     ),
 
-    RESERVED_FOR_FUTURE_USE((UUID) -> false),
+    RESERVED_FOR_FUTURE_USE((UUID) -> true),
 
     UNKNOWN((UUID) -> false);
 
