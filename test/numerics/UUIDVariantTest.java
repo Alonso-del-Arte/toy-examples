@@ -229,4 +229,17 @@ class UUIDVariantTest {
         assert UUIDVariant.RESERVED_FOR_FUTURE_USE.isOfVariant(uuid) : msg;
     }
 
+    @Test
+    void testDCEIsNotReserved() {
+        long highBits = chooseVersion4BitOrVersion7Bits();
+        long startingLowBits = (RANDOM.nextLong() >>> 4) | Long.MIN_VALUE;
+        long stop = Long.MIN_VALUE + (VAR_INCR << 2);
+        for (long lowBits = startingLowBits; lowBits < stop;
+             lowBits += VAR_INCR) {
+            UUID uuid = new UUID(highBits, lowBits);
+            String msg = "UUID " + uuid + " should not be reserved";
+            assert !UUIDVariant.RESERVED_FOR_FUTURE_USE.isOfVariant(uuid) : msg;
+        }
+    }
+
 }
