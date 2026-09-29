@@ -22,7 +22,10 @@ public enum UUIDVariant {
                     == Constants.HIGH_THREE_BITS_MASK
     ),
 
-    UNKNOWN((UUID) -> true);
+    UNKNOWN(
+            (UUID uuid)
+                    -> uuid.getLowBits() >= Constants.MICROSOFT_GUID_C_LEVEL
+    );
 
     private final Predicate<UUID> checker;
 
