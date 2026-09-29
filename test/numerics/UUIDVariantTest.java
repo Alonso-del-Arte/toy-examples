@@ -274,4 +274,13 @@ class UUIDVariantTest {
         }
     }
 
+    @Test
+    void testUnknownIsNotReserved() {
+        long highBits = chooseVersion4BitOrVersion7Bits();
+        long lowBits = (RANDOM.nextLong() >>> 4) | (-VAR_INCR);
+        UUID uuid = new UUID(highBits, lowBits);
+        String msg = "UUID " + uuid + " should not be reserved";
+        assert !UUIDVariant.RESERVED_FOR_FUTURE_USE.isOfVariant(uuid) : msg;
+    }
+
 }
