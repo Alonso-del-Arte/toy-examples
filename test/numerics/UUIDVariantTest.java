@@ -242,4 +242,13 @@ class UUIDVariantTest {
         }
     }
 
+    @Test
+    void testMicrosoftGUID_C_IsNotReserved() {
+        long highBits = chooseVersion4BitOrVersion7Bits();
+        long lowBits = (RANDOM.nextLong() >>> 4) | GUID_C;
+        UUID uuid = new UUID(highBits, lowBits);
+        String msg = "UUID " + uuid + " should not be reserved";
+        assert !UUIDVariant.RESERVED_FOR_FUTURE_USE.isOfVariant(uuid) : msg;
+    }
+
 }
