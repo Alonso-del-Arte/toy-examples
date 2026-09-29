@@ -220,4 +220,13 @@ class UUIDVariantTest {
         assert !UUIDVariant.MICROSOFT_GUID.isOfVariant(uuid) : msg;
     }
 
+    @Test
+    void testIsOfVariantReservedForFutureUse() {
+        long highBits = chooseVersion4BitOrVersion7Bits();
+        long lowBits = (RANDOM.nextLong() >>> 4) | (-2 * VAR_INCR);
+        UUID uuid = new UUID(highBits, lowBits);
+        String msg = "UUID " + uuid + " should be reserved for future use";
+        assert UUIDVariant.RESERVED_FOR_FUTURE_USE.isOfVariant(uuid) : msg;
+    }
+
 }
