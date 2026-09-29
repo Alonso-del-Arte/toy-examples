@@ -303,4 +303,13 @@ class UUIDVariantTest {
         }
     }
 
+    @Test
+    void testMicrosoftGUID_C_IsNotUnknown() {
+        long highBits = chooseVersion4BitOrVersion7Bits();
+        long lowBits = (RANDOM.nextLong() >>> 4) | GUID_C;
+        UUID uuid = new UUID(highBits, lowBits);
+        String msg = "UUID " + uuid + " should not be unknown";
+        assert !UUIDVariant.UNKNOWN.isOfVariant(uuid) : msg;
+    }
+
 }
