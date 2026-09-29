@@ -260,4 +260,17 @@ class UUIDVariantTest {
         assert !UUIDVariant.RESERVED_FOR_FUTURE_USE.isOfVariant(uuid) : msg;
     }
 
+    // TODO: Test unknown is not reserved
+
+    @Test
+    void testNCSBackwardCompatibleIsNotReserved() {
+        long highBits = chooseVersion4BitOrVersion7Bits();
+        long startingLowBits = RANDOM.nextLong() & LOW_60_BITS_MASK;
+        for (long lowBits = startingLowBits; lowBits > 0; lowBits += VAR_INCR) {
+            UUID uuid = new UUID(highBits, lowBits);
+            String msg = "UUID " + uuid + " should not be reserved";
+            assert !UUIDVariant.RESERVED_FOR_FUTURE_USE.isOfVariant(uuid) : msg;
+        }
+    }
+
 }
