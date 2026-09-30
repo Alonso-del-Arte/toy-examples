@@ -24,7 +24,8 @@ public enum UUIDVariant {
 
     UNKNOWN(
             (UUID uuid)
-                    -> uuid.getLowBits() >= Constants.HIGH_FOUR_BITS_MASK
+                    -> (uuid.getLowBits() & Constants.HIGH_FOUR_BITS_MASK)
+                    == Constants.HIGH_FOUR_BITS_MASK
     );
 
     private final Predicate<UUID> checker;
