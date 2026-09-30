@@ -321,4 +321,13 @@ class UUIDVariantTest {
         assert !UUIDVariant.UNKNOWN.isOfVariant(uuid) : msg;
     }
 
+    @Test
+    void testReservedForFutureUseIsNotUnknown() {
+        long highBits = chooseVersion4BitOrVersion7Bits();
+        long lowBits = (RANDOM.nextLong() >>> 4) | (-2 * VAR_INCR);
+        UUID uuid = new UUID(highBits, lowBits);
+        String msg = "UUID " + uuid + " should not be unknown";
+        assert !UUIDVariant.UNKNOWN.isOfVariant(uuid) : msg;
+    }
+
 }
