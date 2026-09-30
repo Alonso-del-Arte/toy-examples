@@ -334,6 +334,7 @@ class UUIDVariantTest {
     void testNCSBackwardCompatibleIsNotUnknown() {
         long highBits = chooseVersion4BitOrVersion7Bits();
         long startingLowBits = RANDOM.nextLong() & LOW_60_BITS_MASK;
+        // noinspection OverflowingLoopIndex
         for (long lowBits = startingLowBits; lowBits > 0; lowBits += VAR_INCR) {
             UUID uuid = new UUID(highBits, lowBits);
             String msg = "UUID " + uuid + " should not be unknown";
