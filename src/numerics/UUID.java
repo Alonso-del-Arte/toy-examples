@@ -32,9 +32,8 @@ public class UUID implements Comparable<UUID> {
         return this.low;
     }
 
-    // TODO: Write tests for this
     public byte getVersionIDBits() {
-        return Byte.MAX_VALUE;
+        return (byte) ((this.high & UUIDType.Constants.VERSION_MASK) >> 12);
     }
 
     // TODO: Write tests for this
