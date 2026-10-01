@@ -164,6 +164,18 @@ class UUIDTest {
     }
 
     @Test
+    public void testGetVersionIDBits() {
+        System.out.println("getVersionIDBits");
+        long highBits = nextLong();
+        UUID instance = new UUID(highBits, nextLong());
+        byte expected = (byte) ((highBits & UUIDType.Constants.VERSION_MASK)
+                >> 12);
+        byte actual = instance.getVersionIDBits();
+        String message = "Getting version bits of UUID " + instance;
+        assertEquals(expected, actual, message);
+    }
+
+    @Test
     void testParseRejectsNullString() {
         String message = "Null String should cause an exception";
         Throwable t = assertThrows(NullPointerException.class, () -> {
